@@ -1,0 +1,71 @@
+/*
+ * Portfolio Design System — Design Tokens
+ * Single source of truth. Decide once, apply everywhere.
+ *
+ * Philosophy:
+ *   - Warm neutral base, not cold white.
+ *   - One accent (Deep Moss) does all the work: actions, focus.
+ *   - Vermilion is held back for a single alert state — when it appears, it means something.
+ *   - Hierarchy comes from size, weight and space — almost never from colour.
+ *
+ * These tokens are exposed to Tailwind via @theme (below), so every value is
+ * reachable as a utility (bg-moss, text-ink, rounded-md, font-mono, shadow-card…)
+ * AND as a raw CSS variable (var(--color-ink)) for hand-written CSS.
+ */
+
+@theme {
+  /* ---- Color · base (warm neutrals) ---- */
+  --color-ink: #111111; /* Primary text, titles */
+  --color-charcoal: #1c1c1a; /* Dark surfaces, code */
+  --color-paper: #f7f5f0; /* Main background */
+  --color-ivory: #fbfaf7; /* Cards, raised surfaces */
+  --color-stone: #e6e2d8; /* Borders, dividers */
+  --color-warm-grey: #8a8781; /* Secondary text */
+  --color-muted-grey: #c9c5bc; /* Lines, disabled */
+
+  /* ---- Color · accent (one tint + one alert) ---- */
+  --color-moss: #465242; /* THE accent: actions, focus */
+  --color-moss-dark: #3a463a; /* Accent hover */
+  --color-vermilion: #c84a31; /* Alert state ONLY */
+
+  /* ---- Radius (concentric: inner = outer − padding) ---- */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  /* ---- Elevation (hairline first, shadow only on lift) ---- */
+  --shadow-subtle: 0 1px 2px rgba(17, 17, 17, 0.04);
+  --shadow-card: 0 8px 24px rgba(17, 17, 17, 0.06);
+
+  /* ---- Type ---- */
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ---- Motion ---- */
+  --ease-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --duration-base: 180ms;
+}
+
+/*
+ * Spacing — a 4 / 8 scale gives rhythm; vertical spacing stays on 8px multiples.
+ * Tailwind's default spacing scale (0.25rem base = 4px) already provides this:
+ *   p-1 = 4px · p-2 = 8px · p-3 = 12px · p-4 = 16px · p-6 = 24px
+ *   p-8 = 32px · p-12 = 48px · p-16 = 64px · p-24 = 96px
+ * Exposed below as named CSS variables for documentation and non-Tailwind use.
+ */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* Focus ring tint derived from the accent (Moss @ 16%). */
+  --ring-moss: rgba(70, 82, 66, 0.16);
+}
