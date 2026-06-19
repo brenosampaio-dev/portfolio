@@ -75,7 +75,7 @@ export default function ServiceOperationsCase() {
       </header>
 
       {/* ── Snapshot / TL;DR ─────────────────────────────────── */}
-      <section className="container section--tight" aria-label="Snapshot">
+      <section id="snapshot" data-label="Snapshot" className="container section--tight" aria-label="Snapshot">
         <Reveal className="snapshot">
           <div className="snapshot__row">
             <span className="snapshot__label">Problem</span>
@@ -116,7 +116,7 @@ export default function ServiceOperationsCase() {
       </section>
 
       {/* ── Context & problem ────────────────────────────────── */}
-      <section className="container section case-section" aria-labelledby="ctx">
+      <section id="sec-context" data-label="Context" className="container section case-section" aria-labelledby="ctx">
         <Reveal className="case-section__head">
           <span className="eyebrow eyebrow--accent">01 — Context &amp; problem</span>
           <Text variant="h2" id="ctx">The day doesn&rsquo;t end. It gets handed over.</Text>
@@ -158,7 +158,7 @@ export default function ServiceOperationsCase() {
       <div className="container"><Divider /></div>
 
       {/* ── Role, scope & constraints ────────────────────────── */}
-      <section className="container section case-section" aria-labelledby="scope">
+      <section id="sec-scope" data-label="Scope" className="container section case-section" aria-labelledby="scope">
         <Reveal className="case-section__head">
           <span className="eyebrow eyebrow--accent">02 — Role, scope &amp; constraints</span>
           <Text variant="h2" id="scope">A real problem, an honest proposal.</Text>
@@ -198,7 +198,7 @@ export default function ServiceOperationsCase() {
       <div className="container"><Divider /></div>
 
       {/* ── Process ──────────────────────────────────────────── */}
-      <section className="container section case-section" aria-labelledby="process">
+      <section id="sec-process" data-label="Process" className="container section case-section" aria-labelledby="process">
         <Reveal className="case-section__head">
           <span className="eyebrow eyebrow--accent">03 — Process</span>
           <Text variant="h2" id="process">Evidence I lived, assumptions to validate.</Text>
@@ -251,7 +251,7 @@ export default function ServiceOperationsCase() {
       <div className="container"><Divider /></div>
 
       {/* ── The design & system ──────────────────────────────── */}
-      <section className="container section case-section" aria-labelledby="design">
+      <section id="sec-design" data-label="Design" className="container section case-section" aria-labelledby="design">
         <Reveal className="case-section__head">
           <span className="eyebrow eyebrow--accent">04 — The design &amp; system</span>
           <Text variant="h2" id="design">Operational clarity before pretty reports.</Text>
@@ -347,7 +347,7 @@ export default function ServiceOperationsCase() {
       <div className="container"><Divider /></div>
 
       {/* ── Outcome & reflection ─────────────────────────────── */}
-      <section className="container section case-section" aria-labelledby="outcome">
+      <section id="sec-outcome" data-label="Outcome" className="container section case-section" aria-labelledby="outcome">
         <Reveal className="case-section__head">
           <span className="eyebrow eyebrow--accent">05 — Outcome &amp; reflection</span>
           <Text variant="h2" id="outcome">Hypotheses, not results.</Text>
