@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 /*
  * ScrollProgress — a top hairline that fills as the reader descends, plus a
@@ -15,6 +16,7 @@ export function ScrollProgress() {
   const numRef = useRef(null);
   const totalRef = useRef(null);
   const labelRef = useRef(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const fill = fillRef.current;
@@ -74,7 +76,7 @@ export function ScrollProgress() {
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <>
