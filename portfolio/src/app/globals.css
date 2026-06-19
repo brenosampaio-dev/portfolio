@@ -80,8 +80,8 @@ html {
   will-change: transform;
 }
 
-/* ── Section indicator — “you are advancing” (NN / 07 · label) ── */
-.section-indicator {
+/* ── Section dot indicator (single pulsing dot + label) ─────── */
+.section-dot {
   position: fixed;
   left: var(--space-8);
   bottom: var(--space-8);
@@ -89,34 +89,46 @@ html {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  padding: var(--space-2) var(--space-4) var(--space-2) var(--space-3);
-  background: color-mix(in srgb, var(--paper) 82%, transparent);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--mist);
-  border-radius: var(--radius-full);
+  pointer-events: none;
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(6px);
   transition: opacity var(--duration-md) var(--ease), transform var(--duration-md) var(--ease);
 }
-.section-indicator.is-visible { opacity: 1; transform: none; }
-.section-indicator__num {
+.section-dot.is-visible { opacity: 1; transform: none; }
+
+.section-dot__pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--clay);
+  flex-shrink: 0;
+  position: relative;
+}
+@keyframes section-pulse {
+  0%   { transform: translate(-50%, -50%) scale(1);   opacity: 0.45; }
+  65%  { transform: translate(-50%, -50%) scale(2.8); opacity: 0;    }
+  100% { transform: translate(-50%, -50%) scale(1);   opacity: 0;    }
+}
+.section-dot__pulse::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--clay);
+  animation: section-pulse 2.2s ease-out infinite;
+}
+
+.section-dot__label {
   font-family: var(--font-mono);
   font-size: var(--text-mono);
   letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
   color: var(--clay);
-}
-.section-indicator__total {
-  font-family: var(--font-mono);
-  font-size: var(--text-mono);
-  letter-spacing: var(--tracking-mono);
-  color: var(--pebble);
-}
-.section-indicator__label {
-  font-family: var(--font-sans);
-  font-size: var(--text-small);
-  color: var(--ink);
   white-space: nowrap;
+  opacity: 0.8;
 }
 
 /* ── Back to top ──────────────────────────────────────────── */
@@ -158,7 +170,7 @@ html {
 .to-top svg { width: 16px; height: 16px; display: block; }
 
 @media (max-width: 600px) {
-  .section-indicator { left: var(--space-4); bottom: var(--space-4); }
+  .section-dot { left: var(--space-4); bottom: var(--space-4); }
   .to-top { right: var(--space-4); bottom: var(--space-4); width: 42px; height: 42px; }
 }
 
