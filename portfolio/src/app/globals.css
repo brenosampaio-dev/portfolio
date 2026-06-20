@@ -95,9 +95,19 @@ html {
   border-radius: 50%;
   background: color-mix(in srgb, var(--clay) 30%, transparent);
   opacity: 0;
+  pointer-events: auto;
+  cursor: pointer;
   animation: rail-fade 0.5s var(--ease-out) forwards;
   transition: transform var(--duration-md) var(--ease), background var(--duration-md) var(--ease);
 }
+/* Generous invisible hit area so the 6px dot is easy to grab */
+.rail__dot::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+}
+.rail__dot:hover,
 .rail__dot.is-active {
   background: var(--clay);
   transform: scale(1.35);
@@ -123,6 +133,7 @@ html {
   position: absolute;
   left: 16px;
   transform: translateY(-50%);
+  pointer-events: none;
   font-family: var(--font-mono);
   font-size: var(--text-mono);
   letter-spacing: var(--tracking-mono);
@@ -140,6 +151,45 @@ html {
   transition: top var(--duration-lg) var(--ease);
 }
 
+/* ── Mini indicator — single pulsing dot + label (mobile) ───── */
+.rail-mini {
+  display: none;
+  position: fixed;
+  left: var(--space-5);
+  bottom: var(--space-5);
+  z-index: 40;
+  align-items: center;
+  gap: var(--space-3);
+  pointer-events: none;
+}
+.rail-mini__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--clay);
+  position: relative;
+  flex-shrink: 0;
+}
+.rail-mini__dot::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--clay);
+  animation: rail-pulse 2.2s var(--ease-out) infinite;
+}
+.rail-mini__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--clay);
+  white-space: nowrap;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rail__line { animation: none; transform: scaleY(1); }
   .rail__dot,
@@ -148,6 +198,7 @@ html {
 
 @media (max-width: 1360px) {
   .rail { display: none; }
+  .rail-mini { display: flex; }
 }
 
 /* ── Back to top ──────────────────────────────────────────── */
