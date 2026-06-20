@@ -499,6 +499,24 @@ html {
   overflow: hidden;
 }
 .hero__media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Live WebGL media — the flowing shader replaces the dashed placeholder. */
+.hero__media--live {
+  position: relative;
+  border: 0;
+  background: linear-gradient(150deg, var(--silk), var(--clay-wash));
+}
+.liquid-hero {
+  position: absolute;
+  inset: 0;
+  /* fallback shown until the shader paints (and if WebGL is unavailable) */
+  background: linear-gradient(150deg, var(--silk), var(--clay-wash));
+}
+.liquid-hero__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .hero__media span {
   font-family: var(--font-mono);
   font-size: var(--text-mono);
