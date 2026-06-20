@@ -741,6 +741,35 @@ html {
   padding-top: var(--space-5);
   border-top: 1px solid var(--mist);
 }
+/* Each column deals in as one focus-in unit (left-to-right via ProcessReveal). */
+.js .process-col {
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(8px);
+  will-change: opacity, transform, filter;
+}
+.js .process-col.is-in {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+  transition:
+    opacity var(--duration-lg) var(--ease-reveal),
+    transform var(--duration-lg) var(--ease-reveal),
+    filter var(--duration-lg) var(--ease);
+}
+/* Inner pieces ride the column — no separate hidden state of their own. */
+.js .process-col .reveal {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .process-col,
+  .js .process-col.is-in {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
 .process-col__index {
   font-family: var(--font-mono);
   font-size: var(--text-mono);
