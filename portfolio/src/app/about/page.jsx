@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Text, Button, Divider } from "@/components/ds";
 import { Reveal } from "@/components/site/Reveal";
+import { Scramble } from "@/components/site/Scramble";
 import { profile } from "@/lib/content";
 
 export const metadata = {
@@ -14,21 +15,27 @@ export default function About() {
     <article>
       {/* ── Hero — copy · portrait · facts sidebar (mockup 2) ──── */}
       <header className="container about-hero">
-        <Reveal className="about-hero__copy">
-          <span className="eyebrow eyebrow--accent">About Breno</span>
-          <Text variant="display" className="about-hero__title">
-            Product designer with a <span className="accent">strategic</span> and{" "}
-            <span className="accent">operational</span> mindset.
-          </Text>
-          <Text variant="body-lg" style={{ maxWidth: "44ch", color: "var(--graphite)" }}>
-            I came to design from inside the operation, not from the outside looking in — and
-            that&rsquo;s still how I work.
-          </Text>
-          <Link href="/breno-sampaio-cv.pdf" className="link-arrow" style={{ marginTop: "var(--space-2)" }}>
-            Download CV
-            <span className="arrow" aria-hidden="true">↗</span>
-          </Link>
-        </Reveal>
+        <div className="about-hero__copy">
+          <Scramble className="eyebrow eyebrow--accent" text="About Breno" delay={120} />
+          <Reveal mask delay={60}>
+            <Text variant="display" className="about-hero__title">
+              Product designer with a <span className="accent">strategic</span> and{" "}
+              <span className="accent">operational</span> mindset.
+            </Text>
+          </Reveal>
+          <Reveal delay={220}>
+            <Text variant="body-lg" style={{ maxWidth: "44ch", color: "var(--graphite)" }}>
+              I came to design from inside the operation, not from the outside looking in — and
+              that&rsquo;s still how I work.
+            </Text>
+          </Reveal>
+          <Reveal delay={300}>
+            <Link href="/breno-sampaio-cv.pdf" className="link-arrow" style={{ marginTop: "var(--space-2)" }}>
+              Download CV
+              <span className="arrow" aria-hidden="true">↗</span>
+            </Link>
+          </Reveal>
+        </div>
 
         <Reveal delay={100}>
           <div className="portrait" role="img" aria-label="Portrait of Breno Sampaio — photo to be added">
@@ -71,12 +78,14 @@ export default function About() {
 
       {/* ── Narrative ────────────────────────────────────────── */}
       <section className="container section about-body" aria-labelledby="story-title">
-        <Reveal className="section-head">
-          <span className="eyebrow eyebrow--accent">The path</span>
-          <Text variant="h2" id="story-title">
-            From running operations to <span className="accent">designing</span> them.
-          </Text>
-        </Reveal>
+        <div className="section-head">
+          <Scramble className="eyebrow eyebrow--accent" text="The path" />
+          <Reveal mask>
+            <Text variant="h2" id="story-title">
+              From running operations to <span className="accent">designing</span> them.
+            </Text>
+          </Reveal>
+        </div>
 
         <Reveal className="prose">
           <p>

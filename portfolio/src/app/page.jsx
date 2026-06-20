@@ -4,6 +4,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { Cascade } from "@/components/site/Cascade";
 import { ProcessReveal } from "@/components/site/ProcessReveal";
 import { Scramble } from "@/components/site/Scramble";
+import { LiquidHero } from "@/components/site/LiquidHero";
 import { LocalTime } from "@/components/site/LocalTime";
 import { profile, projects, approach, process, principles } from "@/lib/content";
 
@@ -32,8 +33,8 @@ export default function Home() {
             </Reveal>
           </div>
 
-          <Reveal delay={160} className="hero__media" aria-hidden="true">
-            <span>Editorial image — to add</span>
+          <Reveal delay={160} className="hero__media hero__media--live" aria-hidden="true">
+            <LiquidHero />
           </Reveal>
         </div>
 
@@ -56,7 +57,7 @@ export default function Home() {
       {/* ── 2 · Selected work — 4-up editorial row (mockup 3) ──── */}
       <section className="container section" id="work" data-label="Work" aria-labelledby="work-title">
         <div className="section-head">
-          <Reveal><span className="eyebrow eyebrow--accent">Selected work</span></Reveal>
+          <Scramble className="eyebrow eyebrow--accent" text="Selected work" />
           <Reveal mask delay={60}><Text variant="h2" id="work-title">Selected work</Text></Reveal>
           <Reveal delay={140}>
             <Text variant="body" style={{ color: "var(--stone)", maxWidth: "48ch" }}>
@@ -87,7 +88,7 @@ export default function Home() {
       <section className="container section" id="approach" data-label="Approach" aria-labelledby="approach-title">
         <div className="approach">
           <div className="section-head">
-            <Reveal><span className="eyebrow eyebrow--accent">Approach</span></Reveal>
+            <Scramble className="eyebrow eyebrow--accent" text="Approach" />
             <Reveal mask delay={60}>
               <Text variant="h2" id="approach-title">
                 Design with <span className="accent">purpose</span>, build with <span className="accent">perspective</span>.
@@ -119,7 +120,7 @@ export default function Home() {
       <section className="container section" id="process" data-label="Process" aria-labelledby="process-title">
         <div className="process-head">
           <div className="stack" style={{ gap: "var(--space-4)" }}>
-            <Reveal><span className="eyebrow eyebrow--accent">Process</span></Reveal>
+            <Scramble className="eyebrow eyebrow--accent" text="Process" />
             <Reveal mask delay={60}>
               <Text variant="h2" id="process-title">
                 A clear process. Built for <span className="accent">impact</span>.
@@ -155,7 +156,7 @@ export default function Home() {
       <section className="container section" id="principles" data-label="Principles" aria-labelledby="principles-title">
         <div className="approach">
           <div className="section-head">
-            <Reveal><span className="eyebrow eyebrow--accent">Principles</span></Reveal>
+            <Scramble className="eyebrow eyebrow--accent" text="Principles" />
             <Reveal mask delay={60}>
               <Text variant="h2" id="principles-title">
                 Guiding choices. <span className="accent">Creating impact</span>.
@@ -187,7 +188,7 @@ export default function Home() {
       {/* ── 6 · About — copy · portrait · facts (mockup 2) ─────── */}
       <section className="container about-hero" id="about" data-label="About" aria-labelledby="about-title">
         <div className="about-hero__copy">
-          <Reveal><span className="eyebrow eyebrow--accent">About Breno</span></Reveal>
+          <Scramble className="eyebrow eyebrow--accent" text="About Breno" />
           <Reveal mask delay={60}>
             <Text variant="h1" className="about-hero__title" id="about-title">
               Product designer with a <span className="accent">strategic</span> and{" "}
@@ -247,7 +248,7 @@ export default function Home() {
       <section className="container section" id="contact" data-label="Contact" aria-labelledby="contact-title">
         <div className="contact">
           <div className="stack" style={{ gap: "var(--space-6)" }}>
-            <Reveal><span className="eyebrow eyebrow--accent">Let&rsquo;s connect</span></Reveal>
+            <Scramble className="eyebrow eyebrow--accent" text="Let’s connect" />
             <Reveal mask delay={60}>
               <Text variant="h1" id="contact-title" style={{ maxWidth: "16ch" }}>
                 Let&rsquo;s create products with <span className="accent">clarity</span> and <span className="accent">purpose</span>.

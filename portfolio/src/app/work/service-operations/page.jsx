@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Text, Tag, Status, Button, Divider, QuoteBlock } from "@/components/ds";
 import { Reveal } from "@/components/site/Reveal";
+import { Scramble } from "@/components/site/Scramble";
 import { Frame } from "@/components/site/Frame";
 
 export const metadata = {
@@ -58,20 +59,26 @@ export default function ServiceOperationsCase() {
           </Link>
         </Reveal>
 
-        <Reveal className="stack" style={{ gap: "var(--space-6)" }}>
-          <div className="case-hero__meta">
-            <Tag>Concept case</Tag>
-            <Tag>Service operations</Tag>
-            <Tag>2026</Tag>
-          </div>
-          <Text variant="display" className="case-hero__title">
-            Service Operations <span className="accent">Dashboard</span>
-          </Text>
-          <Text variant="body-lg" style={{ maxWidth: "60ch", color: "var(--graphite)" }}>
-            One operational view of what&rsquo;s open at shift handover — so information stops
-            getting lost between PMS, chat, paper and memory.
-          </Text>
-        </Reveal>
+        <div className="stack" style={{ gap: "var(--space-6)" }}>
+          <Reveal>
+            <div className="case-hero__meta">
+              <Tag>Concept case</Tag>
+              <Tag>Service operations</Tag>
+              <Tag>2026</Tag>
+            </div>
+          </Reveal>
+          <Reveal mask delay={60}>
+            <Text variant="display" className="case-hero__title">
+              Service Operations <span className="accent">Dashboard</span>
+            </Text>
+          </Reveal>
+          <Reveal delay={160}>
+            <Text variant="body-lg" style={{ maxWidth: "60ch", color: "var(--graphite)" }}>
+              One operational view of what&rsquo;s open at shift handover — so information stops
+              getting lost between PMS, chat, paper and memory.
+            </Text>
+          </Reveal>
+        </div>
       </header>
 
       {/* ── Snapshot / TL;DR ─────────────────────────────────── */}
@@ -117,10 +124,12 @@ export default function ServiceOperationsCase() {
 
       {/* ── Context & problem ────────────────────────────────── */}
       <section id="sec-context" data-label="Context" className="container section case-section" aria-labelledby="ctx">
-        <Reveal className="case-section__head">
-          <span className="eyebrow eyebrow--accent">01 — Context &amp; problem</span>
-          <Text variant="h2" id="ctx">The day doesn&rsquo;t end. It gets handed over.</Text>
-        </Reveal>
+        <div className="case-section__head">
+          <Scramble className="eyebrow eyebrow--accent" text="01 — Context & problem" />
+          <Reveal mask>
+            <Text variant="h2" id="ctx">The day doesn&rsquo;t end. It gets handed over.</Text>
+          </Reveal>
+        </div>
 
         <Reveal className="prose">
           <p>
@@ -159,10 +168,12 @@ export default function ServiceOperationsCase() {
 
       {/* ── Role, scope & constraints ────────────────────────── */}
       <section id="sec-scope" data-label="Scope" className="container section case-section" aria-labelledby="scope">
-        <Reveal className="case-section__head">
-          <span className="eyebrow eyebrow--accent">02 — Role, scope &amp; constraints</span>
-          <Text variant="h2" id="scope">A real problem, an honest proposal.</Text>
-        </Reveal>
+        <div className="case-section__head">
+          <Scramble className="eyebrow eyebrow--accent" text="02 — Role, scope & constraints" />
+          <Reveal mask>
+            <Text variant="h2" id="scope">A real problem, an honest proposal.</Text>
+          </Reveal>
+        </div>
 
         <Reveal className="prose">
           <p className="muted">
@@ -199,10 +210,12 @@ export default function ServiceOperationsCase() {
 
       {/* ── Process ──────────────────────────────────────────── */}
       <section id="sec-process" data-label="Process" className="container section case-section" aria-labelledby="process">
-        <Reveal className="case-section__head">
-          <span className="eyebrow eyebrow--accent">03 — Process</span>
-          <Text variant="h2" id="process">Evidence I lived, assumptions to validate.</Text>
-        </Reveal>
+        <div className="case-section__head">
+          <Scramble className="eyebrow eyebrow--accent" text="03 — Process" />
+          <Reveal mask>
+            <Text variant="h2" id="process">Evidence I lived, assumptions to validate.</Text>
+          </Reveal>
+        </div>
 
         <Reveal className="prose">
           <p className="muted">
@@ -252,10 +265,12 @@ export default function ServiceOperationsCase() {
 
       {/* ── The design & system ──────────────────────────────── */}
       <section id="sec-design" data-label="Design" className="container section case-section" aria-labelledby="design">
-        <Reveal className="case-section__head">
-          <span className="eyebrow eyebrow--accent">04 — The design &amp; system</span>
-          <Text variant="h2" id="design">Operational clarity before pretty reports.</Text>
-        </Reveal>
+        <div className="case-section__head">
+          <Scramble className="eyebrow eyebrow--accent" text="04 — The design & system" />
+          <Reveal mask>
+            <Text variant="h2" id="design">Operational clarity before pretty reports.</Text>
+          </Reveal>
+        </div>
 
         <Reveal className="prose">
           <p>
@@ -348,10 +363,12 @@ export default function ServiceOperationsCase() {
 
       {/* ── Outcome & reflection ─────────────────────────────── */}
       <section id="sec-outcome" data-label="Outcome" className="container section case-section" aria-labelledby="outcome">
-        <Reveal className="case-section__head">
-          <span className="eyebrow eyebrow--accent">05 — Outcome &amp; reflection</span>
-          <Text variant="h2" id="outcome">Hypotheses, not results.</Text>
-        </Reveal>
+        <div className="case-section__head">
+          <Scramble className="eyebrow eyebrow--accent" text="05 — Outcome & reflection" />
+          <Reveal mask>
+            <Text variant="h2" id="outcome">Hypotheses, not results.</Text>
+          </Reveal>
+        </div>
 
         <Reveal className="prose">
           <p className="muted">
