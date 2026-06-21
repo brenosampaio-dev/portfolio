@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Text, Tag, Status, Button, Divider, QuoteBlock } from "@/components/ds";
 import { Reveal } from "@/components/site/Reveal";
 import { Scramble } from "@/components/site/Scramble";
-import { Frame } from "@/components/site/Frame";
 
 export const metadata = {
   title: "Service Operations Dashboard",
@@ -287,15 +286,6 @@ export default function ServiceOperationsCase() {
           </p>
         </Reveal>
 
-        {/* Honest empty frames — screens not designed in this concept slice */}
-        <Reveal>
-          <div className="frame-row">
-            <Frame label="Flow: before → after — to add" />
-            <Frame label="System map — to add" />
-            <Frame label="Decision states — to add" />
-          </div>
-        </Reveal>
-
         {/* Design-system slice — the delivered specimen (real, not a fake screen) */}
         <Reveal>
           <Text variant="h3" style={{ marginBottom: "var(--space-6)" }}>Design-system slice — incident card</Text>
@@ -405,6 +395,13 @@ export default function ServiceOperationsCase() {
             tired people at 3am taught me that UX isn&rsquo;t about making things pretty or modern.
             Sometimes the best design is the one that reduces mental effort, removes ambiguity, and
             helps a person do the right thing <em>even when they&rsquo;re at their limit.</em>
+          </p>
+          <p className="muted">
+            <strong style={{ color: "var(--ink)", fontWeight: 500 }}>What I&rsquo;d do differently.</strong>{" "}
+            If I were to redo this, I&rsquo;d test the logging flow first, before investing in the
+            dashboard — the dashboard assumes adoption that the log hasn&rsquo;t proven yet. Starting
+            with the smallest testable unit would validate the core behaviour earlier and inform
+            whether the full view earns its complexity.
           </p>
           <p className="muted">
             <strong style={{ color: "var(--ink)", fontWeight: 500 }}>On AI-assisted workflow.</strong>{" "}

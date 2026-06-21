@@ -20,7 +20,7 @@ export function Footer() {
         <div className="stack" style={{ gap: "var(--space-3)" }}>
           <span className="eyebrow">Elsewhere</span>
           <div className="footer-social">
-            <a className="link-quiet" href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener">
+            <a className="link-quiet" href="https://www.linkedin.com/in/brenosampayo" target="_blank" rel="noreferrer noopener">
               LinkedIn
             </a>
             <span className="sep" aria-hidden="true">·</span>
