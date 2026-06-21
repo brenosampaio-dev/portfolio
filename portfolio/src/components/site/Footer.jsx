@@ -1,4 +1,5 @@
 import { Text } from "@/components/ds";
+import { Wordmark } from "./Wordmark";
 
 /*
  * Site footer — closing note, contact, social. Sentence case, no hype.
@@ -34,9 +35,9 @@ export function Footer() {
             <Text variant="small" style={{ maxWidth: "26ch" }}>
               Good design is quiet, but it leaves a mark.
             </Text>
-            <span className="footer-seal" aria-hidden="true">
-              BS<span className="dot">.</span>
-            </span>
+            <div className="footer-seal">
+              <Wordmark />
+            </div>
           </div>
         </div>
       </div>

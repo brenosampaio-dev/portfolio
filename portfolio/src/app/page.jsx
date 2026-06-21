@@ -36,7 +36,7 @@ export default function Home() {
             </Reveal>
           </div>
 
-          <Reveal delay={160} className="hero__media hero__media--photo">
+          <Reveal delay={160} className="hero__media hero__media--photo" data-nav-dark>
             <Image
               src="/images/breno-portrait.png"
               alt="Breno Sampayo"
@@ -191,7 +191,7 @@ export default function Home() {
           </Reveal>
         </div>
 
-        <Reveal delay={120}>
+        <Reveal delay={120} data-nav-dark>
           <div className="portrait portrait--photo">
             <Image
               src="/images/breno-portrait.png"
