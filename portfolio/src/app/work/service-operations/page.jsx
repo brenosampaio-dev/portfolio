@@ -87,52 +87,42 @@ export default function ServiceOperationsCase() {
         <Reveal className="snapshot">
           <div className="snapshot__row">
             <Icon name="alert" className="snapshot__icon" />
-            <span className="snapshot__rowMain">
-              <span className="snapshot__label">Problem</span>
-              <span className="snapshot__value">
-                On shift handover, operational information scatters across PMS, email, WhatsApp,
-                notebooks and people&rsquo;s memory — so the incoming shift can&rsquo;t quickly see
-                what&rsquo;s open, what&rsquo;s urgent, and what&rsquo;s already resolved.
-              </span>
+            <span className="snapshot__label">Problem</span>
+            <span className="snapshot__value">
+              On shift handover, operational information scatters across PMS, email, WhatsApp,
+              notebooks and people&rsquo;s memory — so the incoming shift can&rsquo;t quickly see
+              what&rsquo;s open, what&rsquo;s urgent, and what&rsquo;s already resolved.
             </span>
           </div>
           <div className="snapshot__row">
             <Icon name="users" className="snapshot__icon" />
-            <span className="snapshot__rowMain">
-              <span className="snapshot__label">For whom</span>
-              <span className="snapshot__value">
-                Front-desk and service-operations teams — and everyone downstream: housekeeping,
-                maintenance, shift leads, and ultimately the guest.
-              </span>
+            <span className="snapshot__label">For whom</span>
+            <span className="snapshot__value">
+              Front-desk and service-operations teams — and everyone downstream: housekeeping,
+              maintenance, shift leads, and ultimately the guest.
             </span>
           </div>
           <div className="snapshot__row">
             <Icon name="user" className="snapshot__icon" />
-            <span className="snapshot__rowMain">
-              <span className="snapshot__label">My role</span>
-              <span className="snapshot__value">
-                Sole designer — problem framing from lived experience, flows, information
-                architecture, system logic, and UI.
-              </span>
+            <span className="snapshot__label">My role</span>
+            <span className="snapshot__value">
+              Sole designer — problem framing from lived experience, flows, information
+              architecture, system logic, and UI.
             </span>
           </div>
           <div className="snapshot__row">
             <Icon name="package" className="snapshot__icon" />
-            <span className="snapshot__rowMain">
-              <span className="snapshot__label">Delivered</span>
-              <span className="snapshot__value">
-                Core flows, key screens with real states, and a slice of the design system.
-              </span>
+            <span className="snapshot__label">Delivered</span>
+            <span className="snapshot__value">
+              Core flows, key screens with real states, and a slice of the design system.
             </span>
           </div>
           <div className="snapshot__row snapshot__row--wide">
             <Icon name="target" className="snapshot__icon" />
-            <span className="snapshot__rowMain">
-              <span className="snapshot__label">Expected impact — to validate</span>
-              <span className="snapshot__value">
-                Less information lost at handover; faster context pickup for the incoming shift.
-                <span style={{ color: "var(--stone)" }}> Hypotheses to test — no numbers until measured.</span>
-              </span>
+            <span className="snapshot__label">Expected impact — to validate</span>
+            <span className="snapshot__value">
+              Less information lost at handover; faster context pickup for the incoming shift.
+              <span style={{ color: "var(--stone)" }}> Hypotheses to test — no numbers until measured.</span>
             </span>
           </div>
         </Reveal>
