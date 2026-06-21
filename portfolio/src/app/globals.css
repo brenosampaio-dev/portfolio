@@ -63,7 +63,7 @@ html {
 /* ── Rail — vertical timeline that draws in on load ─────────── */
 .rail {
   position: fixed;
-  left: 32px;
+  left: 52px;
   top: 14vh;
   height: 72vh;
   width: 140px;
@@ -1342,22 +1342,123 @@ html {
   border-top: 1px solid var(--mist);
 }
 
-/* ── Site header ───────────────────────────────────────────── */
+/* ── Site header / dock ────────────────────────────────────── */
+#main { padding-top: 72px; }
+
 .site-header {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 50;
-  background: color-mix(in srgb, var(--paper) 86%, transparent);
-  -webkit-backdrop-filter: saturate(140%) blur(10px);
-  backdrop-filter: saturate(140%) blur(10px);
-  border-bottom: 1px solid transparent;
 }
-.site-header__inner {
+
+.dock {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--space-5);
+  height: 56px;
+  padding-inline: var(--space-6);
+  transition:
+    background var(--duration-md) var(--ease),
+    border-color var(--duration-md) var(--ease),
+    box-shadow var(--duration-md) var(--ease);
+
+  /*
+   * Apple Liquid Glass — nearly transparent, heavy blur so content
+   * below bleeds through and tints the surface. The "glass" feel
+   * comes from the specular edge + refraction gradient, NOT opacity.
+   */
+  background: rgba(255, 255, 255, 0.18);
+  -webkit-backdrop-filter: blur(48px) saturate(210%) brightness(108%);
+  backdrop-filter: blur(48px) saturate(210%) brightness(108%);
+
+  /* Pill */
+  border-radius: 100px;
+
+  /*
+   * Border: subtle on sides, very bright on top edge.
+   * The bright top line is the primary "glass" cue —
+   * it reads as light catching a curved glass rim.
+   */
+  border: 1px solid rgba(255, 255, 255, 0.50);
+
+  /* Shadow stack:
+     1. Soft ambient drop  (far, diffuse)
+     2. Close contact shadow  (near, crisp)
+     3. Inner top specular line  (the bright rim)
+     4. Inner bottom edge  (slight darkening, gives thickness)
+  */
+  box-shadow:
+    0 16px 64px rgba(28, 26, 24, 0.10),
+    0  4px 16px rgba(28, 26, 24, 0.06),
+    inset 0  1px 0 rgba(255, 255, 255, 0.92),
+    inset 0 -1px 0 rgba(188, 184, 179, 0.20);
+
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/*
+ * Directional light refraction — simulates a curved glass surface
+ * catching light from the upper-left (Apple's default light angle).
+ * Fades to transparent so it doesn't flatten the glass.
+ */
+.dock::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.32) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+/* Dark glass — when dock floats over dark content (portrait, dark sections) */
+.site-header--dark .dock {
+  background: rgba(20, 18, 16, 0.38);
+  -webkit-backdrop-filter: blur(48px) saturate(180%) brightness(92%);
+  backdrop-filter: blur(48px) saturate(180%) brightness(92%);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 16px 64px rgba(0, 0, 0, 0.32),
+    0  4px 16px rgba(0, 0, 0, 0.22),
+    inset 0  1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+}
+.site-header--dark .dock::before {
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 35%,
+    transparent 65%
+  );
+}
+.site-header--dark .nav a { color: rgba(255, 255, 255, 0.72); }
+.site-header--dark .nav a:hover { color: rgba(255, 255, 255, 1); }
+.site-header--dark .wordmark { color: rgba(255, 255, 255, 0.90); }
+.site-header--dark .dock__divider { background: rgba(255, 255, 255, 0.16); }
+.site-header--dark .availability { color: rgba(255, 255, 255, 0.62); }
+.site-header--dark .header-contact { color: rgba(255, 255, 255, 0.90); }
+.site-header--dark .header-contact:hover { color: rgba(255, 255, 255, 0.65); }
+
+.dock__divider {
+  flex-shrink: 0;
+  width: 1px;
+  height: 18px;
+  background: color-mix(in srgb, var(--mist) 90%, transparent);
+  transition: background var(--duration-md) var(--ease);
+}
+
+.dock__actions {
+  display: flex;
+  align-items: center;
   gap: var(--space-6);
-  height: 72px;
 }
 .wordmark {
   display: inline-flex;
@@ -1370,8 +1471,37 @@ html {
   letter-spacing: 0.01em;
   color: var(--ink);
   text-decoration: none;
+  transition: color var(--duration-md) var(--ease);
 }
-.wordmark .dot { color: var(--clay); }
+@keyframes wm-slash-spin {
+  0%   { opacity: 0; transform: rotate(-82deg) scaleY(0.6); }
+  6%   { opacity: 1; }
+  100% { opacity: 1; transform: rotate(0deg) scaleY(1); }
+}
+@keyframes wm-b-emerge {
+  from { clip-path: inset(0 0 0 100%); transform: translateX(0.22em); }
+  to   { clip-path: inset(0 0 0 0%); transform: translateX(0); }
+}
+@keyframes wm-s-emerge {
+  from { clip-path: inset(0 100% 0 0); transform: translateX(-0.22em); }
+  to   { clip-path: inset(0 0% 0 0); transform: translateX(0); }
+}
+.wm-b {
+  display: inline-block;
+  animation: wm-b-emerge 1.3s cubic-bezier(0.76, 0, 0.24, 1) 1.05s both;
+}
+.wm-slash {
+  display: inline-block;
+  transform-origin: 50% 50%;
+  animation: wm-slash-spin 1.6s cubic-bezier(0.76, 0, 0.24, 1) 0s both;
+}
+.wm-s {
+  display: inline-block;
+  animation: wm-s-emerge 1.3s cubic-bezier(0.76, 0, 0.24, 1) 1.05s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wm-b, .wm-slash, .wm-s { animation: none; }
+}
 
 .nav {
   display: flex;
@@ -1386,7 +1516,7 @@ html {
   color: var(--graphite);
   text-decoration: none;
   transition:
-    color var(--duration-sm) var(--ease),
+    color var(--duration-md) var(--ease),
     font-variation-settings var(--duration-md) var(--ease);
 }
 .nav a:hover {
@@ -1406,6 +1536,7 @@ html {
   font-family: var(--font-sans);
   font-size: var(--text-small);
   color: var(--stone);
+  transition: color var(--duration-md) var(--ease);
 }
 .availability .dot {
   position: relative;
@@ -1437,7 +1568,7 @@ html {
   font-weight: var(--weight-medium);
   color: var(--ink);
   text-decoration: none;
-  transition: color var(--duration-sm) var(--ease);
+  transition: color var(--duration-md) var(--ease);
 }
 .header-contact:hover { color: var(--clay); }
 
@@ -1467,13 +1598,9 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 18px;
-  color: var(--ink);
   margin-left: auto;
 }
-.footer-seal .dot { color: var(--clay); }
+.footer-seal .wordmark { font-size: 18px; }
 
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 1040px) {
@@ -1527,10 +1654,12 @@ html {
   .grid--4,
   .grid--2 { grid-template-columns: 1fr; }
 
-  .site-header__inner { height: 60px; }
+  .site-header { left: var(--space-4); right: var(--space-4); transform: none; }
+  .dock { height: 46px; padding-inline: var(--space-4); gap: var(--space-3); }
   .nav { gap: var(--space-4); }
   .nav a { font-size: var(--text-micro); }
   .nav .nav-hide-sm { display: none; }
+  .availability__text { display: none; }
   .site-footer__grid { grid-template-columns: 1fr; gap: var(--space-8); }
 
   .work-grid { grid-template-columns: 1fr; }
@@ -1546,4 +1675,64 @@ html {
   .decision { grid-template-columns: 1fr; gap: var(--space-4); padding: var(--space-6); }
   .incident__fields { grid-template-columns: 1fr; }
   .prose p { font-size: var(--text-body); }
+}
+
+/* ── Preloader ─────────────────────────────────────────────── */
+@keyframes noise-animation {
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(-2%, -3%); }
+  20%  { transform: translate(-4%, 2%); }
+  30%  { transform: translate(2%, -4%); }
+  40%  { transform: translate(-2%, 5%); }
+  50%  { transform: translate(-4%, 2%); }
+  60%  { transform: translate(3%, 0); }
+  70%  { transform: translate(0, 3%); }
+  80%  { transform: translate(-3%, 0); }
+  90%  { transform: translate(2%, 2%); }
+  100% { transform: translate(1%, 0); }
+}
+
+@keyframes preloader-fade-out {
+  to { opacity: 0; visibility: hidden; }
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.preloader--out {
+  animation: preloader-fade-out 0.7s var(--ease) forwards;
+}
+
+.preloader__noise {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: noise-animation 0.15s steps(1) infinite;
+  pointer-events: none;
+}
+
+.preloader__logo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.02em;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(72px, 12vw, 160px);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader__noise { animation: none; }
 }
