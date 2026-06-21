@@ -10,6 +10,7 @@ import { Footer } from "@/components/site/Footer";
 import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { ToTop } from "@/components/site/ToTop";
+import { Preloader } from "@/components/site/Preloader";
 
 export const metadata = {
   metadataBase: new URL("https://brenosampaio.com"),
@@ -59,6 +60,7 @@ export default function RootLayout({ children }) {
         <Script id="js-flag" strategy="beforeInteractive">
           {`document.documentElement.classList.add('js')`}
         </Script>
+        <Preloader />
         <SmoothScroll />
         <ScrollProgress />
         <a href="#main" className="skip-link">Skip to content</a>
