@@ -114,10 +114,10 @@ export default function About() {
             inside the problems I now design for.
           </p>
           <p className="muted">
-            I read and work across Portuguese (native), Spanish (fluent), French (strong) and
-            English (working). I&rsquo;m based in {profile.location}, working remotely, and
-            currently in transition — open to product roles and collaborations where the problems
-            are real.
+            I read and work across Portuguese (native), Spanish (fluent), French (professional),
+            Italian (intermediate) and English. I&rsquo;m based in {profile.location}, working
+            remotely, and currently in transition — open to product roles and collaborations
+            where the problems are real.
           </p>
 
           <div style={{ marginTop: "var(--space-8)", display: "flex", gap: "var(--space-6)", flexWrap: "wrap" }}>

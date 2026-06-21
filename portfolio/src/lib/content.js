@@ -9,8 +9,9 @@ export const profile = {
   languages: [
     { name: "Portuguese", level: "Native" },
     { name: "Spanish", level: "Fluent" },
-    { name: "French", level: "Strong" },
-    { name: "English", level: "Working" },
+    { name: "French", level: "Professional / Fluent" },
+    { name: "Italian", level: "Intermediate" },
+    { name: "English", level: "Professional working" },
   ],
 };
 
