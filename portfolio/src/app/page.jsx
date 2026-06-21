@@ -26,8 +26,7 @@ export default function Home() {
             </Reveal>
             <Reveal delay={220}>
               <Text variant="body-lg" className="hero__lead" style={{ color: "var(--graphite)" }}>
-                I turn messy operational reality into clear, usable products — and I care how
-                they get built.
+                I design operational tools for service teams — and I care how they get built.
               </Text>
             </Reveal>
             <Reveal delay={320} className="hero__actions">
@@ -58,27 +57,30 @@ export default function Home() {
           <Reveal mask delay={60}><Text variant="h2" id="work-title">Selected work</Text></Reveal>
           <Reveal delay={140}>
             <Text variant="body" style={{ color: "var(--stone)", maxWidth: "48ch" }}>
-              One case shown in full, problem first. The rest is coming as I document it — one
-              honest piece beats a padded grid.
+              One case shown in full, problem first.
             </Text>
           </Reveal>
         </div>
 
-        <div className="work-grid">
-          {projects.map((p, i) => (
-            <Reveal key={p.slug || `upcoming-${i}`} delay={i * 90}>
-              <ProjectCard
-                category={p.category}
-                title={p.title}
-                problem={p.problem}
-                role={p.role}
-                year={p.year}
-                href={p.href}
-                upcoming={p.upcoming}
-              />
-            </Reveal>
-          ))}
+        <div className="work-grid work-grid--solo">
+          {projects
+            .filter((p) => !p.upcoming)
+            .map((p) => (
+              <Reveal key={p.slug} delay={90}>
+                <ProjectCard
+                  category={p.category}
+                  title={p.title}
+                  problem={p.problem}
+                  role={p.role}
+                  year={p.year}
+                  href={p.href}
+                />
+              </Reveal>
+            ))}
         </div>
+        <Reveal delay={180}>
+          <p className="work-more">More case studies in progress — one honest piece beats a padded grid.</p>
+        </Reveal>
       </section>
 
       {/* ── 3 · Approach — numbered editorial rows (mockup 4) ──── */}

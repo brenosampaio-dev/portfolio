@@ -679,6 +679,16 @@ html {
 }
 .work-grid > * { min-width: 0; }
 
+.work-grid--solo {
+  grid-template-columns: repeat(2, 1fr);
+}
+.work-more {
+  margin-top: var(--space-6);
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  color: var(--stone);
+}
+
 /* ── Approach / principles — numbered editorial rows ───────── */
 .approach {
   display: grid;
