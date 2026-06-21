@@ -1399,8 +1399,8 @@ html {
 .icon {
   display: inline-block;
   flex-shrink: 0;
-  vertical-align: middle;
   overflow: visible;
+  transform-origin: center;
 }
 /* Natural resting state: fully drawn. pathLength="1" normalises every path so
    one dash spans the whole stroke regardless of its real length. */
@@ -1408,44 +1408,88 @@ html {
   stroke-dasharray: 1;
   stroke-dashoffset: 0;
 }
-/* The flourish: redraw from blank back to the natural state — always settles. */
-.icon--draw path { animation: icon-draw 600ms var(--ease-reveal) both; }
+
+/*
+ * The flourish — two coupled curves, retriggered on every hover (desktop) and
+ * once on first view (touch):
+ *  · the stroke redraws with an ease-in-out S-curve, the way a hand draws a
+ *    line — gentle start, confident middle, soft landing — fading in over the
+ *    first third so it materialises rather than wipes;
+ *  · the whole mark rises from a hair under size on an ease-out, settling onto
+ *    its resting state with no overshoot (Apple-calm, not springy).
+ * Both end exactly at the natural state, so the icon always comes to rest.
+ */
+.icon--draw path { animation: icon-draw 760ms cubic-bezier(0.65, 0, 0.35, 1) both; }
+.icon--draw { animation: icon-rise 760ms var(--ease-out) both; }
 @keyframes icon-draw {
-  from { stroke-dashoffset: 1; }
-  to   { stroke-dashoffset: 0; }
+  0%   { stroke-dashoffset: 1; opacity: 0; }
+  28%  { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes icon-rise {
+  from { transform: scale(0.9); }
+  to   { transform: scale(1); }
 }
 @media (prefers-reduced-motion: reduce) {
+  .icon--draw,
   .icon--draw path { animation: none; }
 }
 
-/* Snapshot rows — icon anchors the row */
-.snapshot__row { flex-direction: row; align-items: flex-start; gap: var(--space-4); }
-.snapshot__icon { color: var(--clay); margin-top: 3px; }
-.snapshot__rowMain { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+/*
+ * Alignment — every icon shares a baseline grid with its label. The icon and
+ * the name sit on row 1, centred to each other; any secondary line (value,
+ * description, language list) drops to row 2 and aligns under the name, never
+ * under the icon. One consistent rhythm across snapshot, about and contact.
+ */
+.snapshot__row,
+.about-fact {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--space-4);
+  row-gap: var(--space-2);
+  align-items: center;
+}
+.snapshot__icon,
+.about-fact__icon { grid-column: 1; grid-row: 1; color: var(--clay); }
+.snapshot__label,
+.about-fact__label { grid-column: 2; grid-row: 1; }
+.snapshot__value,
+.about-fact > .about-fact__value,
+.about-fact > .stack { grid-column: 2; grid-row: 2; min-width: 0; }
 
-/* About facts — icon anchor */
-.about-fact { flex-direction: row; align-items: flex-start; gap: var(--space-4); }
-.about-fact__icon { color: var(--clay); margin-top: 3px; }
-.about-fact__main { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; flex: 1; }
+/* Contact rows — same grid as about/snapshot: icon shares row 1 with the
+   label, the value drops to row 2, the arrow spans both rows on the right. */
+.contact-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: var(--space-4);
+  row-gap: var(--space-1);
+  align-items: center;
+}
+.contact-row__icon { grid-column: 1; grid-row: 1; color: var(--clay); }
+.contact-row__label { grid-column: 2; grid-row: 1; }
+.contact-row__value { grid-column: 2; grid-row: 2; }
+.contact-row .arrow { grid-column: 3; grid-row: 1 / span 2; align-self: center; }
 
-/* Contact rows — icon anchor */
-.contact-row__lead { display: flex; align-items: center; gap: var(--space-4); min-width: 0; }
-.contact-row__icon { color: var(--clay); }
-
-/* Constraints — icon anchor (only the icon variant of the def list) */
+/* Constraints — icon · term · description, icon centred on the term line */
 .def-list--icon .def-item {
   grid-template-columns: 22px 188px 1fr;
   gap: var(--space-5);
-  align-items: start;
+  align-items: center;
 }
-.def-item__icon { color: var(--clay); margin-top: 1px; }
+.def-item__icon { grid-column: 1; color: var(--clay); }
 
 /* Process step — icon sits above the index in each header */
 .process-col__icon { color: var(--clay); margin-bottom: var(--space-1); }
 
 @media (max-width: 700px) {
-  .def-list--icon .def-item { grid-template-columns: 22px 1fr; gap: var(--space-2) var(--space-4); }
-  .def-list--icon .def-item__icon { grid-row: span 2; }
+  /* Stacked on phones: icon spans both lines and centres against the pair. */
+  .def-list--icon .def-item {
+    grid-template-columns: 22px 1fr;
+    gap: var(--space-2) var(--space-4);
+    align-items: center;
+  }
+  .def-list--icon .def-item__icon { grid-row: 1 / span 2; align-self: center; }
 }
 
 /* ── Site header / dock ────────────────────────────────────── */

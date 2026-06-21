@@ -222,38 +222,30 @@ export default function Home() {
         <Reveal delay={200} className="about-facts">
           <div className="about-fact">
             <Icon name="map-pin" className="about-fact__icon" />
-            <div className="about-fact__main">
-              <span className="about-fact__label">Based in</span>
-              <span className="about-fact__value">{profile.location}</span>
-            </div>
+            <span className="about-fact__label">Based in</span>
+            <span className="about-fact__value">{profile.location}</span>
           </div>
           <div className="about-fact">
             <Icon name="briefcase" className="about-fact__icon" />
-            <div className="about-fact__main">
-              <span className="about-fact__label">Working</span>
-              <span className="about-fact__value">Remotely · global projects</span>
-            </div>
+            <span className="about-fact__label">Working</span>
+            <span className="about-fact__value">Remotely · global projects</span>
           </div>
           <div className="about-fact">
             <Icon name="globe" className="about-fact__icon" />
-            <div className="about-fact__main">
-              <span className="about-fact__label">Languages</span>
-              <div className="stack" style={{ gap: "var(--space-2)", marginTop: "var(--space-1)" }}>
-                {profile.languages.map((l) => (
-                  <span className="lang-row" key={l.name}>
-                    <span className="about-fact__value">{l.name}</span>
-                    <span className="lang-row__level">{l.level}</span>
-                  </span>
-                ))}
-              </div>
+            <span className="about-fact__label">Languages</span>
+            <div className="stack" style={{ gap: "var(--space-2)" }}>
+              {profile.languages.map((l) => (
+                <span className="lang-row" key={l.name}>
+                  <span className="about-fact__value">{l.name}</span>
+                  <span className="lang-row__level">{l.level}</span>
+                </span>
+              ))}
             </div>
           </div>
           <div className="about-fact">
             <Icon name="award" className="about-fact__icon" />
-            <div className="about-fact__main">
-              <span className="about-fact__label">Certification</span>
-              <span className="about-fact__value">Google UX Design Certificate</span>
-            </div>
+            <span className="about-fact__label">Certification</span>
+            <span className="about-fact__value">Google UX Design Certificate</span>
           </div>
         </Reveal>
       </section>
@@ -280,33 +272,21 @@ export default function Home() {
 
           <Reveal className="contact-list" delay={120}>
             <a className="contact-row" href={`mailto:${profile.email}`}>
-              <span className="contact-row__lead">
-                <Icon name="mail" className="contact-row__icon" />
-                <span className="stack" style={{ gap: "var(--space-1)" }}>
-                  <span className="contact-row__label">Email</span>
-                  <span className="contact-row__value">{profile.email}</span>
-                </span>
-              </span>
+              <Icon name="mail" className="contact-row__icon" />
+              <span className="contact-row__label">Email</span>
+              <span className="contact-row__value">{profile.email}</span>
               <span className="arrow" aria-hidden="true">↗</span>
             </a>
             <div className="contact-row">
-              <span className="contact-row__lead">
-                <Icon name="map-pin" className="contact-row__icon" />
-                <span className="stack" style={{ gap: "var(--space-1)" }}>
-                  <span className="contact-row__label">Location</span>
-                  <span className="contact-row__value">{profile.location}</span>
-                </span>
-              </span>
+              <Icon name="map-pin" className="contact-row__icon" />
+              <span className="contact-row__label">Location</span>
+              <span className="contact-row__value">{profile.location}</span>
             </div>
             <div className="contact-row">
-              <span className="contact-row__lead">
-                <Icon name="clock" className="contact-row__icon" />
-                <span className="stack" style={{ gap: "var(--space-1)" }}>
-                  <span className="contact-row__label">Local time</span>
-                  <span className="contact-row__value">
-                    <LocalTime timeZone={profile.timezone} />
-                  </span>
-                </span>
+              <Icon name="clock" className="contact-row__icon" />
+              <span className="contact-row__label">Local time</span>
+              <span className="contact-row__value">
+                <LocalTime timeZone={profile.timezone} />
               </span>
             </div>
           </Reveal>

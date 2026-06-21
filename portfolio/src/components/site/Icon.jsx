@@ -30,7 +30,12 @@ export function Icon({ name, size = 20, strokeWidth = 1.5, className = "", ...pr
 
     const play = () => {
       el.classList.remove("icon--draw");
-      void el.offsetWidth; // reflow so the animation can restart
+      // Force a style/layout flush so removing then re-adding the class actually
+      // restarts the animation. SVG elements have no offsetWidth, so the usual
+      // `void el.offsetWidth` reads undefined and never forces reflow — meaning
+      // every hover after the first would be a no-op. getBoundingClientRect()
+      // does flush layout on SVG, so each hover replays from the start.
+      el.getBoundingClientRect();
       el.classList.add("icon--draw");
     };
 
