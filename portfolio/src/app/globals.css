@@ -1632,6 +1632,148 @@ html {
   .states { grid-template-columns: 1fr; }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   TriageAI case visuals — human-controlled AI intake. Same tokens,
+   same fire-once motion. Confidence uses only the existing palette:
+   slate = "look here", alert = the one genuine caution.
+   ════════════════════════════════════════════════════════════════ */
+
+/* Confidence token — three calm levels, palette-only */
+.conf {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--tracking-mono);
+  white-space: nowrap;
+  border: 1px solid var(--mist);
+  border-radius: var(--radius-full);
+  padding: 4px 11px;
+  color: var(--stone);
+}
+.conf__dot { width: 5px; height: 5px; border-radius: 50%; background: var(--pebble); flex-shrink: 0; }
+.conf--high { color: var(--graphite); }
+.conf--high .conf__dot { background: var(--clay); }
+.conf--review { color: var(--clay); border-color: color-mix(in srgb, var(--clay) 35%, transparent); background: var(--clay-wash); }
+.conf--review .conf__dot { background: var(--clay); }
+.conf--low { color: var(--alert); border-color: var(--alert-border); background: var(--alert-wash); }
+.conf--low .conf__dot { background: var(--alert); }
+
+/* Triage inbox — the hero screen */
+.triage { display: flex; flex-direction: column; gap: var(--space-5); }
+.triage__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); }
+.triage__eyebrow { display: block; font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--clay); margin-bottom: 4px; }
+.triage__title { font-family: var(--font-sans); font-size: var(--text-small); color: var(--stone); }
+.triage__flagcount { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--alert); white-space: nowrap; }
+.triage__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.triage-row { display: grid; grid-template-columns: 2px 1fr auto; gap: var(--space-4); align-items: center; padding: var(--space-4) 0; border-top: 1px solid var(--mist); }
+.triage-row:first-child { border-top: 0; padding-top: 0; }
+.triage-row__rail { align-self: stretch; border-radius: var(--radius-full); background: transparent; }
+.triage-row--low .triage-row__rail { background: var(--alert); }
+.triage-row--review .triage-row__rail { background: var(--clay); }
+.triage-row__main { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.triage-row__msg { font-family: var(--font-sans); font-size: var(--text-small); color: var(--ink); line-height: 1.35; }
+.triage-row__meta { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); color: var(--stone); display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.triage-row__lang { color: var(--clay); }
+.triage-row__sep { color: var(--pebble); }
+
+/* System flow — channels → AI → human gate → response */
+.sysflow { display: flex; flex-wrap: wrap; align-items: stretch; gap: var(--space-3); }
+.sysflow__step { display: flex; align-items: center; gap: var(--space-3); flex: 1 1 auto; min-width: 0; opacity: 0; transform: translateY(14px); transition: opacity 0.6s var(--ease-out), transform 0.7s var(--ease-out); transition-delay: calc(var(--i, 0) * 110ms); }
+.sysflow.is-in .sysflow__step { opacity: 1; transform: translateY(0); }
+.sysflow-node { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: var(--space-4) var(--space-5); border: 1px solid var(--mist); border-radius: var(--radius-md); background: var(--paper); }
+.sysflow-node__label { font-family: var(--font-sans); font-size: var(--text-small); font-weight: var(--weight-medium); color: var(--ink); }
+.sysflow-node__sub { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); color: var(--stone); }
+.sysflow-node--gate { background: var(--clay-wash); border-color: color-mix(in srgb, var(--clay) 35%, transparent); box-shadow: var(--shadow-subtle); }
+.sysflow-node--gate .sysflow-node__label,
+.sysflow-node--gate .sysflow-node__sub { color: var(--clay); }
+.sysflow__arrow { color: var(--clay); font-size: var(--text-body); flex: 0 0 auto; }
+
+/* Analysis panel — the signature screen */
+.apanel { display: grid; grid-template-columns: 0.85fr 1.15fr; border: 1px solid var(--mist); border-radius: var(--radius-md); overflow: hidden; background: var(--paper); }
+.apanel__msg { padding: var(--space-6); background: var(--silk); display: flex; flex-direction: column; gap: var(--space-3); border-right: 1px solid var(--mist); }
+.apanel__msghead { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
+.apanel__from { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--stone); }
+.apanel__time { font-family: var(--font-mono); font-size: var(--text-mono); color: var(--pebble); }
+.apanel__text { font-family: var(--font-sans); font-size: var(--text-body-lg); line-height: 1.45; color: var(--ink); margin: 0; }
+.apanel__lang { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); color: var(--clay); margin-top: auto; }
+.apanel__read { padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-5); }
+.apanel__readhead { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.apanel__eyebrow { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--clay); }
+.apanel__facts { display: flex; flex-direction: column; gap: var(--space-3); margin: 0; }
+.apanel-fact { display: grid; grid-template-columns: 92px 1fr; gap: var(--space-4); align-items: baseline; padding-bottom: var(--space-3); border-bottom: 1px solid var(--mist); }
+.apanel-fact dt { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--stone); margin: 0; }
+.apanel-fact dd { font-family: var(--font-sans); font-size: var(--text-small); color: var(--ink); margin: 0; }
+.apanel-fact__why { color: var(--stone); }
+.apanel-fact__missing { color: var(--alert); }
+.apanel__reply { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-4); background: var(--clay-wash); border-radius: var(--radius-sm); }
+.apanel__replylabel { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--clay); }
+.apanel__replylabel--back { color: var(--stone); margin-top: var(--space-2); }
+.apanel__replytext { font-family: var(--font-sans); font-size: var(--text-small); line-height: 1.45; color: var(--ink); margin: 0; }
+.apanel__replytext--back { color: var(--stone); font-style: italic; }
+.apanel__actions { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.apanel__btn { font-family: var(--font-sans); font-size: var(--text-small); font-weight: var(--weight-medium); border-radius: var(--radius-sm); padding: 9px 18px; }
+.apanel__btn--primary { color: var(--paper); background: var(--clay); }
+.apanel__btn--ghost { color: var(--ink); background: transparent; border: 1px solid var(--mist); }
+.apanel__gate { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); color: var(--stone); flex: 1 1 100%; }
+
+/* Correction flow — AI was wrong, a human caught it */
+.correction { display: flex; flex-direction: column; gap: var(--space-5); padding: var(--space-6); border: 1px solid var(--mist); border-radius: var(--radius-md); background: var(--paper); max-width: var(--max-prose); }
+.correction__case { display: flex; flex-direction: column; gap: var(--space-2); }
+.correction__id { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); color: var(--clay); }
+.correction__msg { font-family: var(--font-sans); font-size: var(--text-body); line-height: 1.4; color: var(--ink); margin: 0; }
+.correction__rows { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+.correction-row { display: flex; flex-direction: column; gap: 4px; width: 100%; }
+.correction-row__key { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--stone); }
+.correction-row__was { font-family: var(--font-sans); font-size: var(--text-small); color: var(--stone); text-decoration: line-through; text-decoration-color: var(--alert); }
+.correction-row__now { font-family: var(--font-sans); font-size: var(--text-small); font-weight: var(--weight-medium); color: var(--ink); }
+.correction__arrow { color: var(--clay); font-size: var(--text-body); }
+.correction__note { font-family: var(--font-sans); font-size: var(--text-small); line-height: 1.5; color: var(--graphite); margin: 0; padding-top: var(--space-4); border-top: 1px solid var(--mist); }
+
+/* Mobile review — approve on the go (inside PhoneFrame) */
+.treview { display: flex; flex-direction: column; }
+.treview__bar { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); border-bottom: 1px solid var(--mist); background: var(--silk); }
+.treview__back { color: var(--stone); font-size: var(--text-body); line-height: 1; }
+.treview__barTitle { font-family: var(--font-sans); font-size: var(--text-small); font-weight: var(--weight-medium); color: var(--ink); margin-right: auto; }
+.treview__body { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-5) var(--space-4); }
+.treview__tags { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.treview-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--stone); background: var(--silk); border: 1px solid var(--mist); border-radius: var(--radius-full); padding: 2px 9px; }
+.treview-tag--med { color: var(--clay); }
+.treview__msg { font-family: var(--font-sans); font-size: var(--text-body); line-height: 1.4; color: var(--ink); margin: 0; }
+.treview__draft { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3) var(--space-4); background: var(--clay-wash); border-radius: var(--radius-sm); }
+.treview__draftlabel { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--clay); }
+.treview__drafttext { font-family: var(--font-sans); font-size: var(--text-small); line-height: 1.4; color: var(--ink); margin: 0; }
+.treview__back-en { font-family: var(--font-sans); font-size: var(--text-mono); color: var(--stone); font-style: italic; line-height: 1.4; }
+.treview__actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-top: var(--space-2); }
+.treview__approve { text-align: center; font-family: var(--font-sans); font-size: var(--text-small); font-weight: var(--weight-medium); color: var(--paper); background: var(--clay); border-radius: var(--radius-sm); padding: 10px; }
+.treview__correct { text-align: center; font-family: var(--font-sans); font-size: var(--text-small); font-weight: var(--weight-medium); color: var(--ink); background: transparent; border: 1px solid var(--mist); border-radius: var(--radius-sm); padding: 10px; }
+
+/* External evidence strip — problem-framing data, NOT TriageAI's results */
+.evidence { display: flex; flex-direction: column; gap: var(--space-5); padding: var(--space-6); border: 1px solid var(--mist); border-radius: var(--radius-md); background: var(--silk); }
+.evidence__label { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--stone); }
+.evidence__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.evidence-stat { display: flex; flex-direction: column; gap: var(--space-2); }
+.evidence-stat__num { font-family: var(--font-sans); font-size: var(--text-h2); font-weight: var(--weight-light); letter-spacing: -0.03em; color: var(--clay); line-height: 1; }
+.evidence-stat__desc { font-family: var(--font-sans); font-size: var(--text-small); line-height: 1.45; color: var(--graphite); }
+.evidence__src { font-family: var(--font-mono); font-size: var(--text-mono); color: var(--pebble); line-height: 1.5; }
+
+/* Triage states — slate "needs review" variant on the shared states grid */
+.state__box--review { background: var(--clay-wash); border-color: color-mix(in srgb, var(--clay) 25%, transparent); }
+.state__dot--review { background: var(--clay); }
+
+@media (max-width: 980px) {
+  .apanel { grid-template-columns: 1fr; }
+  .apanel__msg { border-right: 0; border-bottom: 1px solid var(--mist); }
+  .evidence__grid { grid-template-columns: 1fr; gap: var(--space-5); }
+}
+@media (max-width: 760px) {
+  .sysflow { flex-direction: column; align-items: stretch; }
+  .sysflow__step { flex-direction: column; gap: var(--space-2); }
+  .sysflow__arrow { transform: rotate(90deg); align-self: center; }
+  .triage__head { flex-direction: column; gap: var(--space-2); }
+}
+
 .case-cta {
   display: flex;
   align-items: center;
