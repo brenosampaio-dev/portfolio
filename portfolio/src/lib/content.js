@@ -28,11 +28,14 @@ export const projects = [
     href: "/work/service-operations",
   },
   {
-    category: "In progress",
-    title: "Next case",
-    problem: "A second case study is being written up. One honest piece beats a padded grid.",
-    role: "Documenting",
-    upcoming: true,
+    slug: "triageai",
+    category: "Concept case",
+    title: "TriageAI",
+    problem:
+      "Human-controlled AI intake for multilingual requests — AI structures and ranks, a human approves every reply that goes out.",
+    role: "Sole designer",
+    year: "2026",
+    href: "/work/triageai",
   },
   {
     category: "Coming soon",
