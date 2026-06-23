@@ -59,7 +59,7 @@ export default function Home() {
           <Reveal mask delay={60}><Text variant="h2" id="work-title">Selected work</Text></Reveal>
           <Reveal delay={140}>
             <Text variant="body" style={{ color: "var(--stone)", maxWidth: "48ch" }}>
-              One case shown in full, problem first.
+              Two cases, shown in full — problem first.
             </Text>
           </Reveal>
         </div>
@@ -84,7 +84,7 @@ export default function Home() {
           ))}
         </div>
         <Reveal delay={180}>
-          <p className="work-more">More case studies in progress — one honest piece beats a padded grid.</p>
+          <p className="work-more">More case studies in progress — honest pieces beat a padded grid.</p>
         </Reveal>
       </section>
 
