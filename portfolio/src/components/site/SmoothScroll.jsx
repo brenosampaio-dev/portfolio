@@ -29,12 +29,22 @@ export function SmoothScroll() {
       return document.getElementById(id);
     };
 
+    // Touch devices (phones, tablets) scroll natively — Lenis only smooths the
+    // mouse wheel, which they don't have. Worse: with syncTouch off, a running
+    // Lenis keeps its OWN scroll position alongside the native one, and its rAF
+    // loop forces the page back to that value every frame — eating programmatic
+    // scrollTo()s. The result was anchor taps (the bottom dock dots) jumping to
+    // the wrong place. So we skip Lenis entirely on touch and let the native
+    // scroll — plus native smooth scrollTo() for anchors — run unopposed.
+    const touch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+
     let lenis;
     let rafId;
     let cancelled = false;
 
     // Compute an absolute target Y ourselves (offset-adjusted) and pass it as a
-    // number — Lenis's element-offset math doesn't match this layout.
+    // number — Lenis's element-offset math doesn't match this layout. With Lenis
+    // present (pointer devices only) it drives; otherwise native smooth scroll.
     const scrollToEl = (el, immediate = false) => {
       const y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET);
       if (lenis) {
@@ -62,10 +72,11 @@ export function SmoothScroll() {
     // Honour a hash present on first load (after layout settles).
     const initialHash = window.location.hash.slice(1);
 
-    if (reduce) {
+    // No Lenis under reduced-motion or on touch — native scroll owns both.
+    if (reduce || touch) {
       if (initialHash) {
         const el = document.getElementById(initialHash);
-        if (el) requestAnimationFrame(() => scrollToEl(el));
+        if (el) requestAnimationFrame(() => scrollToEl(el, true));
       }
       return () => document.removeEventListener("click", onClick, true);
     }
