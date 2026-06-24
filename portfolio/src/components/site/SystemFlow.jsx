@@ -1,12 +1,18 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
+import { SEQ_BEAT, SEQ_START } from "@/lib/motion";
 
 /*
  * SystemFlow — the control principle, drawn as a pipeline: requests come in,
  * the AI structures and ranks them, but nothing reaches the customer without
  * passing the human approval gate. The gate is the marked node, not an
- * afterthought — it's the whole point. Fires once on enter, then settles.
+ * afterthought — it's the whole point.
+ *
+ * It plays as a sequence on enter: each card focuses in on the site's shared
+ * cadence (SEQ_BEAT between steps, same as Approach/Process), and the connector
+ * draws toward the next card at the half-beat, so the eye is led from one step
+ * to the next. Fires once, then settles. Respects reduced motion.
  */
 const nodes = [
   { label: "Channels", sub: "WhatsApp · Email · Web", kind: "in" },
@@ -25,6 +31,13 @@ export function SystemFlow() {
       el.classList.add("is-in");
       return;
     }
+    // If it's already in view on mount, light it up directly — belt-and-braces
+    // so the sequence always plays even if the observer is slow to fire.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+      el.classList.add("is-in");
+      return;
+    }
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -34,7 +47,7 @@ export function SystemFlow() {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -43,15 +56,22 @@ export function SystemFlow() {
   return (
     <div className="sysflow" ref={ref}>
       {nodes.map((n, i) => (
-        <div className="sysflow__step" key={n.label} style={{ "--i": i }}>
-          <div className={`sysflow-node sysflow-node--${n.kind}`}>
+        <Fragment key={n.label}>
+          <div
+            className={`sysflow-node sysflow-node--${n.kind}`}
+            style={{ "--d": `${SEQ_START + i * SEQ_BEAT}ms` }}
+          >
             <span className="sysflow-node__label">{n.label}</span>
             <span className="sysflow-node__sub">{n.sub}</span>
           </div>
           {i < nodes.length - 1 && (
-            <span className="sysflow__arrow" aria-hidden="true">→</span>
+            <span
+              className="sysflow__conn"
+              aria-hidden="true"
+              style={{ "--d": `${SEQ_START + i * SEQ_BEAT + Math.round(SEQ_BEAT / 2)}ms` }}
+            />
           )}
-        </div>
+        </Fragment>
       ))}
     </div>
   );
