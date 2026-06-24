@@ -49,12 +49,12 @@ const constraints = [
 ];
 
 const measure = [
-  "Incidents left open per shift",
-  "Time to resolution",
-  "How many get reopened",
-  "How many are dropped at handover",
-  "Which areas generate the most pending work",
-  "How long it takes to log one incident",
+  { metric: "Incidents left open per shift", reveals: "Is the handover clearing work, or just carrying it forward?" },
+  { metric: "Time to resolution", reveals: "Are things getting fixed, or only logged?" },
+  { metric: "How many get reopened", reveals: "Did “resolved” really mean resolved?" },
+  { metric: "How many are dropped at handover", reveals: "The core failure — is it shrinking?" },
+  { metric: "Which areas generate the most pending work", reveals: "Where the operation actually strains." },
+  { metric: "How long it takes to log one incident", reveals: "If it's slow, the team falls back to WhatsApp." },
 ];
 
 export default function ServiceOperationsCase() {
@@ -423,11 +423,14 @@ export default function ServiceOperationsCase() {
 
         <Reveal>
           <Text variant="h3" style={{ marginBottom: "var(--space-2)" }}>What I&rsquo;d measure next</Text>
-          <div className="def-list">
+          <div className="measure-list">
             {measure.map((m, i) => (
-              <div className="def-item" key={m}>
-                <span className="def-item__term">{String(i + 1).padStart(2, "0")}</span>
-                <span className="def-item__desc">{m}</span>
+              <div className="measure-item" key={m.metric}>
+                <span className="measure-item__num">{String(i + 1).padStart(2, "0")}</span>
+                <span>
+                  <span className="measure-item__metric">{m.metric}</span>
+                  <span className="measure-item__reveals">{m.reveals}</span>
+                </span>
               </div>
             ))}
           </div>
