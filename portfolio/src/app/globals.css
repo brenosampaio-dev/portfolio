@@ -1226,6 +1226,47 @@ html {
   color: var(--stone);
 }
 
+/* What I'd measure — each metric paired with the question it answers (set in
+   Cormorant italic, the site's accent voice). Number sits tight to the metric,
+   no dead column. Shows the reasoning, not just a list. */
+.measure-list { display: flex; flex-direction: column; }
+.measure-item {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: var(--space-5);
+  align-items: baseline;
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--mist);
+}
+.measure-item:last-child { border-bottom: 1px solid var(--mist); }
+.measure-item__num {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: var(--tracking-mono);
+  color: var(--clay);
+}
+.measure-item__metric {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
+  color: var(--ink);
+  line-height: 1.35;
+}
+.measure-item__reveals {
+  display: block;
+  margin-top: var(--space-1);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  letter-spacing: var(--tracking-serif);
+  color: var(--clay);
+  line-height: 1.4;
+}
+@media (max-width: 600px) {
+  .measure-item { grid-template-columns: 26px 1fr; gap: var(--space-4); }
+}
+
 /* Decision cards */
 .decision-grid {
   display: grid;
@@ -1274,22 +1315,39 @@ html {
 /* Key Design Decisions — Editorial Ledger */
 .decisions-ledger { display: flex; flex-direction: column; }
 .dl-item {
-  padding: var(--space-12) 0;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: var(--space-6);
+  padding: var(--space-10) 0;
   border-top: 0.5px solid var(--mist);
 }
 .dl-item:first-child { border-top: 0; padding-top: 0; }
 
 .dl-num {
-  display: block;
   font-family: var(--font-sans);
-  font-size: 72px;
+  font-size: 24px;
   font-weight: var(--weight-light);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   line-height: 1;
   color: var(--clay);
+  padding-top: 4px;
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(12px);
   transition: opacity 0.6s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.dl-body { min-width: 0; }
+.dl-name {
+  font-family: var(--font-sans);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-h3);
+  color: var(--ink);
+  line-height: 1.2;
+  margin: 0 0 var(--space-5);
+  max-width: 34ch;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s var(--ease-out) 0.12s, transform 0.7s var(--ease-out) 0.12s;
 }
 .dl-rule {
   display: block;
@@ -1298,21 +1356,8 @@ html {
   background: var(--clay);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.8s var(--ease-out) 0.12s;
-  margin: var(--space-5) 0 var(--space-6);
-}
-.dl-name {
-  font-family: var(--font-sans);
-  font-size: var(--text-h3);
-  font-weight: var(--weight-medium);
-  letter-spacing: var(--tracking-h3);
-  color: var(--ink);
-  line-height: 1.2;
-  margin: 0 0 var(--space-8);
-  max-width: 28ch;
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.6s var(--ease-out) 0.18s, transform 0.7s var(--ease-out) 0.18s;
+  transition: transform 0.8s var(--ease-out) 0.18s;
+  margin: 0 0 var(--space-6);
 }
 .dl-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
 .dl-col {
@@ -1350,11 +1395,10 @@ html {
 @media (max-width: 980px) {
   .dl-cols { grid-template-columns: 1fr 1fr; gap: var(--space-6); }
   .dl-col--trade { grid-column: 1 / -1; }
-  .dl-num { font-size: 56px; }
 }
 @media (max-width: 700px) {
-  .dl-item { padding: var(--space-8) 0; }
-  .dl-num { font-size: 48px; }
+  .dl-item { grid-template-columns: 38px 1fr; gap: var(--space-4); padding: var(--space-8) 0; }
+  .dl-num { font-size: 18px; }
   .dl-cols { grid-template-columns: 1fr; gap: var(--space-5); }
   .dl-col--trade { grid-column: auto; }
 }
@@ -1679,17 +1723,55 @@ html {
 .triage-row__lang { color: var(--clay); }
 .triage-row__sep { color: var(--pebble); }
 
-/* System flow — channels → AI → human gate → response */
-.sysflow { display: flex; flex-wrap: wrap; align-items: stretch; gap: var(--space-3); }
-.sysflow__step { display: flex; align-items: center; gap: var(--space-3); flex: 1 1 auto; min-width: 0; opacity: 0; transform: translateY(14px); transition: opacity 0.6s var(--ease-out), transform 0.7s var(--ease-out); transition-delay: calc(var(--i, 0) * 110ms); }
-.sysflow.is-in .sysflow__step { opacity: 1; transform: translateY(0); }
-.sysflow-node { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: var(--space-4) var(--space-5); border: 1px solid var(--mist); border-radius: var(--radius-md); background: var(--paper); }
+/* System flow — channels → AI → human gate → response. Plays as a signal
+   travelling the pipeline: each card sits dim, then lights up in turn on the
+   site cadence (--d per step), the connector's fill draws toward the next card,
+   and the human gate is marked the moment it lights. Fires once, then settles. */
+.sysflow { display: flex; align-items: stretch; gap: var(--space-2); }
+.sysflow-node {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--mist);
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  opacity: 0.32;
+  transition:
+    opacity var(--reveal-dur) var(--ease-reveal) var(--d, 0ms),
+    box-shadow var(--reveal-dur) var(--ease-reveal) var(--d, 0ms),
+    border-color var(--reveal-dur) var(--ease-reveal) var(--d, 0ms);
+}
+.sysflow.is-in .sysflow-node { opacity: 1; }
 .sysflow-node__label { font-family: var(--font-sans); font-size: var(--text-small); font-weight: var(--weight-medium); color: var(--ink); }
 .sysflow-node__sub { font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); color: var(--stone); }
-.sysflow-node--gate { background: var(--clay-wash); border-color: color-mix(in srgb, var(--clay) 35%, transparent); box-shadow: var(--shadow-subtle); }
+.sysflow-node--gate { background: var(--clay-wash); }
 .sysflow-node--gate .sysflow-node__label,
 .sysflow-node--gate .sysflow-node__sub { color: var(--clay); }
-.sysflow__arrow { color: var(--clay); font-size: var(--text-body); flex: 0 0 auto; }
+.sysflow.is-in .sysflow-node--gate { box-shadow: 0 0 0 1.5px var(--clay); border-color: var(--clay); }
+.sysflow__conn {
+  position: relative;
+  flex: 0 0 var(--space-6);
+  align-self: center;
+  height: 1.5px;
+  background: var(--mist);
+}
+.sysflow__conn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--clay);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s var(--ease-reveal) var(--d, 0ms);
+}
+.sysflow.is-in .sysflow__conn::before { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .sysflow-node, .sysflow.is-in .sysflow-node { opacity: 1; }
+  .sysflow__conn::before, .sysflow.is-in .sysflow__conn::before { transform: scaleX(1); }
+}
 
 /* Analysis panel — the signature screen */
 .apanel { display: grid; grid-template-columns: 0.85fr 1.15fr; border: 1px solid var(--mist); border-radius: var(--radius-md); overflow: hidden; background: var(--paper); }
@@ -1770,8 +1852,10 @@ html {
 }
 @media (max-width: 760px) {
   .sysflow { flex-direction: column; align-items: stretch; }
-  .sysflow__step { flex-direction: column; gap: var(--space-2); }
-  .sysflow__arrow { transform: rotate(90deg); align-self: center; }
+  .sysflow-node { flex: 0 0 auto; }
+  .sysflow__conn { flex: 0 0 auto; width: 1.5px; height: var(--space-5); align-self: center; }
+  .sysflow__conn::before { transform: scaleY(0); transform-origin: top center; }
+  .sysflow.is-in .sysflow__conn::before { transform: scaleY(1); }
   .triage__head { flex-direction: column; gap: var(--space-2); }
 }
 

@@ -16,6 +16,7 @@ import { AnalysisPanel } from "@/components/site/AnalysisPanel";
 import { CorrectionFlow } from "@/components/site/CorrectionFlow";
 import { TriageStates } from "@/components/site/TriageStates";
 import { TriageMobile } from "@/components/site/TriageMobile";
+import { CountUp } from "@/components/site/CountUp";
 
 export const metadata = {
   title: "TriageAI",
@@ -71,18 +72,18 @@ const constraints = [
 ];
 
 const measure = [
-  "Time to first response on urgent cases",
-  "How often the human overrides the AI — and on what",
-  "How many low-confidence flags were genuinely wrong",
-  "Replies handled per shift vs. the manual baseline",
-  "How many cases stalled waiting on missing information",
-  "Consistency of replies to the same question across languages",
+  { metric: "Time to first response on urgent cases", reveals: "Is triage moving urgent work up, or just relabeling it?" },
+  { metric: "How often the human overrides the AI — and on what", reveals: "Shows exactly where the AI is still weak." },
+  { metric: "How many low-confidence flags were genuinely wrong", reveals: "Is the confidence signal calibrated, or just noise?" },
+  { metric: "Replies handled per shift vs. the manual baseline", reveals: "Does the approval gate cost more than it saves?" },
+  { metric: "How many cases stalled waiting on missing information", reveals: "Is the system surfacing the gaps, or hiding them?" },
+  { metric: "Consistency of replies to the same question across languages", reveals: "Does the back-translation actually hold meaning?" },
 ];
 
 const evidence = [
-  { num: "~65%", desc: "of customers now expect faster responses than they did five years ago." },
-  { num: "~60%", desc: "rarely or never buy from sources that aren't in their own language." },
-  { num: "~14%", desc: "of self-service interactions actually resolve — deflection without resolution fails the customer." },
+  { num: 65, prefix: "~", suffix: "%", desc: "of customers now expect faster responses than they did five years ago." },
+  { num: 60, prefix: "~", suffix: "%", desc: "rarely or never buy from sources that aren't in their own language." },
+  { num: 14, prefix: "~", suffix: "%", desc: "of self-service interactions actually resolve — deflection without resolution fails the customer." },
 ];
 
 export default function TriageAICase() {
@@ -212,7 +213,9 @@ export default function TriageAICase() {
             <div className="evidence__grid">
               {evidence.map((e) => (
                 <div className="evidence-stat" key={e.num}>
-                  <span className="evidence-stat__num">{e.num}</span>
+                  <span className="evidence-stat__num">
+                    <CountUp value={e.num} prefix={e.prefix} suffix={e.suffix} />
+                  </span>
                   <span className="evidence-stat__desc">{e.desc}</span>
                 </div>
               ))}
@@ -491,11 +494,14 @@ export default function TriageAICase() {
 
         <Reveal>
           <Text variant="h3" style={{ marginBottom: "var(--space-2)" }}>What I&rsquo;d measure next</Text>
-          <div className="def-list">
+          <div className="measure-list">
             {measure.map((m, i) => (
-              <div className="def-item" key={m}>
-                <span className="def-item__term">{String(i + 1).padStart(2, "0")}</span>
-                <span className="def-item__desc">{m}</span>
+              <div className="measure-item" key={m.metric}>
+                <span className="measure-item__num">{String(i + 1).padStart(2, "0")}</span>
+                <span>
+                  <span className="measure-item__metric">{m.metric}</span>
+                  <span className="measure-item__reveals">{m.reveals}</span>
+                </span>
               </div>
             ))}
           </div>

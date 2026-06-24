@@ -4,10 +4,10 @@ import { useEffect, useRef } from "react";
 
 /*
  * DecisionsLedger — the design decisions as a full-width editorial ledger.
- * A large light index sits above each decision (no empty sticky column, no
- * dead space), an accent rule draws in, then Problem / Decision / Trade-off in
- * three columns. Trade-off is set in the accent colour on purpose: it's the
- * "what I gave up" — the senior signal a reader is scanning for.
+ * A small index sits in the left margin of each decision (a quiet marker, not a
+ * giant number), the title leads, an accent rule draws in, then Problem /
+ * Decision / Trade-off in three columns. Trade-off is set in the accent colour
+ * on purpose: it's the "what I gave up" — the senior signal a reader scans for.
  *
  * Each row reveals once as it enters the viewport (number rises, rule draws,
  * name clears, columns cascade), then settles and stays. Respects reduced
@@ -45,21 +45,23 @@ export function DecisionsLedger({ decisions }) {
     <div className="decisions-ledger" ref={ref}>
       {decisions.map((d, i) => (
         <div className="dl-item" key={d.name}>
-          <span className="dl-num">{String(i + 1).padStart(2, "0")}</span>
-          <span className="dl-rule" aria-hidden="true" />
-          <h4 className="dl-name">{d.name}</h4>
-          <div className="dl-cols">
-            <div className="dl-col">
-              <span className="dl-tag">Problem</span>
-              <p className="dl-text">{d.problem}</p>
-            </div>
-            <div className="dl-col">
-              <span className="dl-tag">Decision</span>
-              <p className="dl-text">{d.decision}</p>
-            </div>
-            <div className="dl-col dl-col--trade">
-              <span className="dl-tag">Trade-off</span>
-              <p className="dl-text">{d.tradeoff}</p>
+          <span className="dl-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+          <div className="dl-body">
+            <h4 className="dl-name">{d.name}</h4>
+            <span className="dl-rule" aria-hidden="true" />
+            <div className="dl-cols">
+              <div className="dl-col">
+                <span className="dl-tag">Problem</span>
+                <p className="dl-text">{d.problem}</p>
+              </div>
+              <div className="dl-col">
+                <span className="dl-tag">Decision</span>
+                <p className="dl-text">{d.decision}</p>
+              </div>
+              <div className="dl-col dl-col--trade">
+                <span className="dl-tag">Trade-off</span>
+                <p className="dl-text">{d.tradeoff}</p>
+              </div>
             </div>
           </div>
         </div>
