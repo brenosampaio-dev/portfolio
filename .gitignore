@@ -14,8 +14,15 @@ breno-portfolio-snapshot.zip
 Thumbs.db
 portfolio/dev.log
 
+# Local environment files — examples may be committed, secrets may not.
+.env*
+!.env.example
+
 # Claude Code local state
 .claude/
 .claude.json
 *.ps1
 brand/
+
+# Portfolio case studies — each is its own git repo (see gh repo per case)
+portfolio-cases/
