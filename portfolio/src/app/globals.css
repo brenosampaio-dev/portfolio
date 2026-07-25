@@ -2450,6 +2450,16 @@ html {
 .site-header--dark .availability { color: rgba(255, 255, 255, 0.62); }
 .site-header--dark .header-contact { color: rgba(255, 255, 255, 0.90); }
 .site-header--dark .header-contact:hover { color: rgba(255, 255, 255, 0.65); }
+.site-header--dark .header-cv {
+  color: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.08);
+}
+.site-header--dark .header-cv:hover {
+  color: #161616;
+  border-color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.92);
+}
 
 .dock__divider {
   flex-shrink: 0;
@@ -2576,6 +2586,51 @@ html {
 }
 .header-contact:hover { color: var(--clay); }
 
+.header-cv {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 32px;
+  padding-inline: 13px;
+  border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--paper) 42%, transparent);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    color var(--duration-sm) var(--ease),
+    background var(--duration-sm) var(--ease),
+    border-color var(--duration-sm) var(--ease),
+    transform var(--duration-sm) var(--ease);
+}
+.header-cv:hover {
+  color: var(--paper);
+  border-color: var(--ink);
+  background: var(--ink);
+  transform: translateY(-1px);
+}
+.header-cv:active { transform: translateY(0); }
+.header-cv:focus-visible,
+.header-contact:focus-visible,
+.nav a:focus-visible,
+.wordmark:focus-visible,
+.theme-btn:focus-visible {
+  outline: 2px solid var(--clay-ring);
+  outline-offset: 3px;
+}
+.header-cv__label--short { display: none; }
+.header-cv__arrow {
+  display: inline-block;
+  font-size: 13px;
+  transition: transform var(--duration-sm) var(--ease);
+}
+.header-cv:hover .header-cv__arrow { transform: translateY(2px); }
+
 /* ── Site footer ───────────────────────────────────────────── */
 .site-footer {
   border-top: 1px solid var(--mist);
@@ -2618,7 +2673,7 @@ html {
   .grid--4 { grid-template-columns: repeat(2, 1fr); }
   .grid--3 { grid-template-columns: 1fr; }
 
-  .header-right .availability { display: none; }
+  .dock .availability { display: none; }
   .nav { gap: var(--space-6); }
   .site-footer__grid {
     grid-template-columns: 1fr 1fr;
@@ -2658,16 +2713,24 @@ html {
   .grid--4,
   .grid--2 { grid-template-columns: 1fr; }
 
-  /* Dock — a centered, content-hugging pill (not a stretched bar). Drop the
-     availability indicator and its divider so it reads clean: B/S | Work About Contact */
+  /* Dock — keep the full navigation usable without letting the compact CV
+     action crowd the glass pill on phone-sized screens. */
   .site-header { left: 50%; right: auto; transform: translateX(-50%); }
-  .dock { height: 48px; padding-inline: var(--space-5); gap: var(--space-4); }
-  .nav { gap: var(--space-5); }
+  .dock { height: 48px; padding-inline: var(--space-4); gap: var(--space-3); }
+  .nav { gap: var(--space-4); }
   .nav a { font-size: var(--text-small); }
   .nav .nav-hide-sm { display: none; }
   .dock .availability { display: none; }
   .dock .dock__divider--mid { display: none; }
-  .dock__actions { gap: 0; }
+  .dock__actions { gap: var(--space-2); }
+  .header-cv {
+    min-width: 42px;
+    min-height: 32px;
+    padding-inline: 9px;
+    gap: 5px;
+  }
+  .header-cv__label--long { display: none; }
+  .header-cv__label--short { display: inline; }
 
   .site-footer__grid { grid-template-columns: 1fr; gap: var(--space-8); }
 
@@ -2718,6 +2781,17 @@ html {
   .decision { grid-template-columns: 1fr; gap: var(--space-4); padding: var(--space-6); }
   .incident__fields { grid-template-columns: 1fr; }
   .prose p { font-size: var(--text-body); }
+}
+
+@media (max-width: 400px) {
+  .nav a[href="/#about"] { display: none; }
+}
+
+@media (max-width: 340px) {
+  .dock {
+    padding-inline: var(--space-2);
+    gap: 10px;
+  }
 }
 
 /* ── Mobile accordion (≤700px) — case sections & process steps ───── */
