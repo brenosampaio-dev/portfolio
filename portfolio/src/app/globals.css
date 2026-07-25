@@ -2716,13 +2716,13 @@ html {
   /* Dock — keep the full navigation usable without letting the compact CV
      action crowd the glass pill on phone-sized screens. */
   .site-header { left: 50%; right: auto; transform: translateX(-50%); }
-  .dock { height: 48px; padding-inline: var(--space-4); gap: var(--space-3); }
-  .nav { gap: var(--space-4); }
+  .dock { height: 48px; padding-inline: var(--space-3); gap: 10px; }
+  .nav { gap: 14px; }
   .nav a { font-size: var(--text-small); }
   .nav .nav-hide-sm { display: none; }
   .dock .availability { display: none; }
   .dock .dock__divider--mid { display: none; }
-  .dock__actions { gap: var(--space-2); }
+  .dock__actions { gap: 6px; }
   .header-cv {
     min-width: 42px;
     min-height: 32px;
@@ -2783,15 +2783,12 @@ html {
   .prose p { font-size: var(--text-body); }
 }
 
-@media (max-width: 400px) {
-  .nav a[href="/#about"] { display: none; }
-}
-
 @media (max-width: 340px) {
   .dock {
     padding-inline: var(--space-2);
     gap: 10px;
   }
+  .nav a[href="/#about"] { display: none; }
 }
 
 /* ── Mobile accordion (≤700px) — case sections & process steps ───── */
