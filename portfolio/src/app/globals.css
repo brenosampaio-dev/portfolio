@@ -1669,7 +1669,13 @@ html {
 .phone-frame__notch { display: block; width: 84px; height: 5px; border-radius: var(--radius-full); background: var(--mist); margin: 2px auto 10px; }
 .phone-frame__body { border: 1px solid var(--mist); border-radius: 20px; overflow: hidden; background: var(--paper); }
 
-.dash { display: flex; flex-direction: column; gap: var(--space-5); }
+.dash {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  --dash-enter: cubic-bezier(.165, .84, .44, 1);
+  --dash-draw: cubic-bezier(.22, 1, .36, 1);
+}
 .dash__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); }
 .dash__eyebrow {
   display: block;
@@ -1684,7 +1690,15 @@ html {
 .dash__clock { font-family: var(--font-mono); font-size: var(--text-small); color: var(--ink); }
 
 .dash__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
-.dash__stat { display: flex; flex-direction: column; gap: 3px; padding: var(--space-3) var(--space-4); background: var(--silk); border-radius: var(--radius-sm); }
+.dash__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--silk);
+  border-radius: var(--radius-sm);
+  transform-origin: 50% 100%;
+}
 .dash__stat--urgent { background: var(--alert-wash); }
 .dash__stat-value { font-family: var(--font-sans); font-size: var(--text-h3); font-weight: var(--weight-light); color: var(--ink); line-height: 1; }
 .dash__stat--urgent .dash__stat-value { color: var(--alert); }
@@ -1704,11 +1718,155 @@ html {
 .dash-row--urgent .dash-row__flag { color: var(--alert); }
 
 .dash__aside { padding: var(--space-4); background: var(--silk); border-radius: var(--radius-sm); }
-.dash__aside-label { display: block; font-family: var(--font-mono); font-size: var(--text-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; color: var(--stone); margin-bottom: var(--space-3); }
+.dash__aside-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.dash__aside-label,
+.dash__areas-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--stone);
+}
+.dash__aside-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+.dash__aside-live i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--clay);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--clay) 22%, transparent);
+}
+
+.dash-chart { position: relative; margin: var(--space-3) 0 var(--space-4); }
+.dash-chart svg { display: block; width: 100%; height: 90px; overflow: visible; }
+.dash-chart__grid line { stroke: var(--mist); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.dash-chart__area { fill: url("#queuePulseFill"); }
+.dash-chart__line {
+  fill: none;
+  stroke: var(--clay);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.dash-chart__points circle {
+  fill: var(--paper);
+  stroke: var(--clay);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.dash-chart__points circle:last-child { fill: var(--clay); }
+.dash-chart__axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  color: var(--pebble);
+}
+.dash__areas-label { margin-bottom: var(--space-3); }
 .dash__areas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
 .dash-area__name { display: block; font-family: var(--font-sans); font-size: var(--text-small); color: var(--graphite); margin-bottom: 5px; }
 .dash-area__bar { display: block; height: 4px; border-radius: var(--radius-full); background: var(--mist); overflow: hidden; }
-.dash-area__fill { display: block; height: 100%; background: var(--clay); border-radius: var(--radius-full); }
+.dash-area__fill {
+  display: block;
+  height: 100%;
+  background: var(--clay);
+  border-radius: var(--radius-full);
+  transform-origin: left center;
+}
+
+/* Dashboard motion: fire once, explain the data, then settle. */
+.dash--preparing,
+.dash--preparing * {
+  transition: none !important;
+}
+.dash--motion .dash__head,
+.dash--motion .dash__stat,
+.dash--motion .dash-row,
+.dash--motion .dash__aside {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.dash--motion .dash__head {
+  transition: opacity 500ms var(--dash-enter), transform 620ms var(--dash-enter);
+}
+.dash--motion .dash__stat {
+  transform: translateY(9px) scale(0.975);
+  transition:
+    opacity 520ms var(--dash-enter),
+    transform 700ms var(--dash-enter);
+}
+.dash--motion .dash__stat:nth-child(2) { transition-delay: 70ms; }
+.dash--motion .dash__stat:nth-child(3) { transition-delay: 140ms; }
+.dash--motion .dash-row {
+  transition:
+    opacity 480ms var(--dash-enter),
+    transform 620ms var(--dash-enter);
+  transition-delay: calc(190ms + var(--row-index, 0) * 80ms);
+}
+.dash--motion .dash__aside {
+  transition:
+    opacity 620ms var(--dash-enter),
+    transform 760ms var(--dash-enter);
+  transition-delay: 220ms;
+}
+.dash--motion .dash-chart__area { opacity: 0; transition: opacity 900ms var(--dash-enter) 520ms; }
+.dash--motion .dash-chart__line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1150ms var(--dash-draw) 430ms;
+}
+.dash--motion .dash-chart__points circle {
+  opacity: 0;
+  transform: scale(0.72);
+  transition:
+    opacity 260ms ease calc(900ms + var(--point-index, 0) * 110ms),
+    transform 420ms var(--dash-enter) calc(900ms + var(--point-index, 0) * 110ms);
+}
+.dash--motion .dash-area__fill {
+  transform: scaleX(0);
+  transition: transform 850ms var(--dash-draw) calc(720ms + var(--area-index, 0) * 100ms);
+}
+.dash--motion.is-in .dash__head,
+.dash--motion.is-in .dash__stat,
+.dash--motion.is-in .dash-row,
+.dash--motion.is-in .dash__aside {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.dash--motion.is-in .dash-chart__area { opacity: 1; }
+.dash--motion.is-in .dash-chart__line { stroke-dashoffset: 0; }
+.dash--motion.is-in .dash-chart__points circle { opacity: 1; transform: scale(1); }
+.dash--motion.is-in .dash-area__fill { transform: scaleX(1); }
+.dash--motion.is-in .dash-row--urgent .dash-row__dot {
+  animation: dash-urgent-breathe 3200ms ease-out 1400ms infinite;
+}
+.dash--motion.is-in .dash__aside-live i {
+  animation: dash-live-breathe 3600ms ease-out 1200ms infinite;
+}
+
+@keyframes dash-urgent-breathe {
+  0%, 68%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--alert) 0%, transparent); }
+  78% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--alert) 12%, transparent); }
+}
+
+@keyframes dash-live-breathe {
+  0%, 68%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--clay) 0%, transparent); }
+  78% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--clay) 12%, transparent); }
+}
 
 /* Hero visual — full-width product moment under the lead */
 .case-hero__visual { margin-top: var(--space-8); }
@@ -1825,6 +1983,7 @@ html {
   .dash__body { grid-template-columns: 1fr; gap: var(--space-5); }
   .browser-frame__body { padding: var(--space-5); }
   .dash__stat-value { font-size: var(--text-body-lg); }
+  .dash-chart svg { height: 82px; }
   .design-mobile { grid-template-columns: 1fr; gap: var(--space-6); justify-items: center; }
   .design-mobile__note { text-align: left; }
   .flow__ba { grid-template-columns: 1fr; }
@@ -1834,6 +1993,27 @@ html {
 
 @media (max-width: 560px) {
   .states { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dash,
+  .dash *,
+  .dash *::before,
+  .dash *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .dash__head,
+  .dash__stat,
+  .dash-row,
+  .dash__aside,
+  .dash-chart__area,
+  .dash-chart__points circle {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .dash-chart__line { stroke-dashoffset: 0 !important; }
+  .dash-area__fill { transform: scaleX(1) !important; }
 }
 
 /* ════════════════════════════════════════════════════════════════
