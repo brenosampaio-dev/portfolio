@@ -81,6 +81,16 @@ export function Header() {
           <Link href="/#contact" className="header-contact">
             {t.nav.contact} <span aria-hidden="true">↗</span>
           </Link>
+          <a
+            href="/breno-sampaio-cv.pdf"
+            className="header-cv"
+            download
+            aria-label={`${t.nav.downloadCv} (PDF)`}
+          >
+            <span className="header-cv__label header-cv__label--long">{t.nav.downloadCv}</span>
+            <span className="header-cv__label header-cv__label--short" aria-hidden="true">CV</span>
+            <span className="header-cv__arrow" aria-hidden="true">↓</span>
+          </a>
         </div>
 
         <div className="dock__divider" aria-hidden="true" />

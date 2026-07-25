@@ -5,7 +5,13 @@
 // plumbing keeps working if a switcher comes back later.
 
 const en = {
-  nav: { work: "Work", about: "About", approach: "Approach", contact: "Contact" },
+  nav: {
+    work: "Work",
+    about: "About",
+    approach: "Approach",
+    contact: "Contact",
+    downloadCv: "Download CV",
+  },
   availability: "Open to roles",
 
   hero: {
