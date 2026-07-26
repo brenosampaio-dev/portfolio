@@ -1,5 +1,5 @@
 "use client";
-import { Text, Tag, Status, Button, Divider, QuoteBlock } from "@/components/ds";
+import { Text, Tag, Status, Button, Divider } from "@/components/ds";
 import { Reveal } from "@/components/site/Reveal";
 import { Icon } from "@/components/site/Icon";
 import { CaseHero } from "@/components/site/CaseHero";
@@ -7,12 +7,11 @@ import { CaseSnapshot } from "@/components/site/CaseSnapshot";
 import { CaseSection } from "@/components/site/CaseSection";
 import { DecisionsLedger } from "@/components/site/DecisionsLedger";
 import { BrowserFrame } from "@/components/site/BrowserFrame";
-import { PhoneFrame } from "@/components/site/PhoneFrame";
 import { DashboardPreview } from "@/components/site/DashboardPreview";
-import { MobileLog } from "@/components/site/MobileLog";
 import { StatesGrid } from "@/components/site/StatesGrid";
 import { ScatterFragments } from "@/components/site/ScatterFragments";
 import { FlowDiagram } from "@/components/site/FlowDiagram";
+import { ServiceSqlSpecimen } from "@/components/site/TechnicalArtifacts";
 import { useLang } from "@/context/AppContext";
 import { getT } from "@/lib/i18n";
 
@@ -68,23 +67,10 @@ export function ServiceOperationsContent() {
             <span className="snapshot__label">{c.snapshot.forWhom}</span>
             <span className="snapshot__value">{s.snapshotForWhom}</span>
           </div>
-          <div className="snapshot__row">
-            <Icon name="user" className="snapshot__icon" />
-            <span className="snapshot__label">{c.snapshot.myRole}</span>
-            <span className="snapshot__value">{s.snapshotMyRole}</span>
-          </div>
-          <div className="snapshot__row">
-            <Icon name="package" className="snapshot__icon" />
-            <span className="snapshot__label">{c.snapshot.delivered}</span>
-            <span className="snapshot__value">{s.snapshotDelivered}</span>
-          </div>
           <div className="snapshot__row snapshot__row--wide">
             <Icon name="target" className="snapshot__icon" />
             <span className="snapshot__label">{c.snapshot.impact}</span>
-            <span className="snapshot__value">
-              {s.snapshotImpact}
-              <span style={{ color: "var(--stone)" }}> {c.snapshot.hypotheses}</span>
-            </span>
+            <span className="snapshot__value">{s.snapshotImpact}</span>
           </div>
         </Reveal>
       </section>
@@ -99,42 +85,6 @@ export function ServiceOperationsContent() {
           <ScatterFragments />
         </Reveal>
 
-        <Reveal style={{ maxWidth: "var(--max-prose)", paddingBlock: "var(--space-6)" }}>
-          <QuoteBlock size="md" quote={s.quote} />
-        </Reveal>
-      </CaseSection>
-
-      <div className="container"><Divider /></div>
-
-      {/* ── Role, scope & constraints ────────────────────────── */}
-      <CaseSection id="scope" label="Scope" number={c.sectionNums.scope} heading={c.scopeHeading}>
-        <Reveal className="prose">
-          <p className="muted">
-            <strong style={{ color: "var(--ink)", fontWeight: 500 }}>{c.roleLabel}</strong>{" "}
-            {s.roleText}
-          </p>
-          <p className="muted">
-            <strong style={{ color: "var(--ink)", fontWeight: 500 }}>{c.scopeLabel}</strong>{" "}
-            {s.scopeText}
-          </p>
-          <p className="muted">
-            <strong style={{ color: "var(--ink)", fontWeight: 500 }}>{c.effortLabel}</strong>{" "}
-            {s.effortText}
-          </p>
-        </Reveal>
-
-        <Reveal>
-          <Text variant="h3" style={{ marginBottom: "var(--space-2)" }}>{c.constraintsHeading}</Text>
-          <div className="def-list def-list--icon">
-            {s.constraints.map((c_) => (
-              <div className="def-item" key={c_.term}>
-                <Icon name={c_.icon} className="def-item__icon" />
-                <span className="def-item__term">{c_.term}</span>
-                <span className="def-item__desc">{c_.desc}</span>
-              </div>
-            ))}
-          </div>
-        </Reveal>
       </CaseSection>
 
       <div className="container"><Divider /></div>
@@ -148,6 +98,10 @@ export function ServiceOperationsContent() {
               {item.text}
             </p>
           ))}
+        </Reveal>
+
+        <Reveal>
+          <ServiceSqlSpecimen />
         </Reveal>
 
         <Reveal>
@@ -228,18 +182,6 @@ export function ServiceOperationsContent() {
         </Reveal>
 
         <Reveal>
-          <Text variant="h3" style={{ marginBottom: "var(--space-6)" }}>{s.mobileHeading}</Text>
-          <div className="design-mobile">
-            <PhoneFrame>
-              <MobileLog />
-            </PhoneFrame>
-            <div className="design-mobile__note prose">
-              <p className="muted">{s.mobileProse}</p>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal>
           <Text variant="h3" style={{ marginBottom: "var(--space-6)" }}>{c.statesHeading}</Text>
           <StatesGrid states={STATES} />
         </Reveal>
@@ -256,23 +198,8 @@ export function ServiceOperationsContent() {
           </p>
         </Reveal>
 
-        <Reveal>
-          <Text variant="h3" style={{ marginBottom: "var(--space-2)" }}>{c.measureHeading}</Text>
-          <div className="measure-list">
-            {s.measure.map((m, i) => (
-              <div className="measure-item" key={i}>
-                <span className="measure-item__num">{String(i + 1).padStart(2, "0")}</span>
-                <span>
-                  <span className="measure-item__metric">{m.metric}</span>
-                  <span className="measure-item__reveals">{m.reveals}</span>
-                </span>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
         <Reveal className="prose">
-          {["tradeoffs", "reflection", "different", "ai"].map((key) => (
+          {["tradeoffs", "reflection", "different"].map((key) => (
             <p key={key} className={key === "reflection" ? "" : "muted"}>
               <strong style={{ color: "var(--ink)", fontWeight: 500 }}>{s.outcomeProse[key].label}</strong>{" "}
               {s.outcomeProse[key].text}
@@ -281,7 +208,6 @@ export function ServiceOperationsContent() {
         </Reveal>
 
         <Reveal className="case-cta">
-          <Text variant="body" style={{ color: "var(--stone)" }}>{c.moreComing}</Text>
           <Button href="/#contact" variant="secondary">{c.getInTouch}</Button>
         </Reveal>
       </CaseSection>

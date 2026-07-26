@@ -13,7 +13,7 @@ const loop = [
   "Message in",
   "AI classifies — language · intent · urgency · missing info",
   "Human reviews, confidence visible — approve or correct",
-  "Send & logged with who approved what",
+  "Send the approved reply and log who approved what",
 ];
 
 const before = ["Read everything", "Guess the language", "Guess the urgency", "Reply inconsistently"];

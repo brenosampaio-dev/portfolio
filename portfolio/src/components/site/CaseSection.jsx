@@ -16,6 +16,7 @@ export function CaseSection({ id, number, heading, label, defaultOpen = true, ch
     <section id={id} data-label={label} className="container section case-section" aria-labelledby={headingId}>
       <Collapsible
         defaultOpen={defaultOpen}
+        label={label}
         header={
           <div className="case-section__head">
             <Scramble className="eyebrow eyebrow--accent" text={number} />

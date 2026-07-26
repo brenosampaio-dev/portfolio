@@ -14,7 +14,7 @@ export const profile = {
   ],
 };
 
-// Selected work — one real case, then honest placeholders for what's next.
+// Selected work — independent concepts with limitations labelled in the cases.
 export const projects = [
   {
     slug: "service-operations",

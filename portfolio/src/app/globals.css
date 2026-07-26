@@ -252,7 +252,7 @@ html {
   text-transform: uppercase;
   color: var(--clay);
   white-space: nowrap;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.94);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 0.5px solid rgba(255, 255, 255, 0.7);
@@ -293,9 +293,9 @@ html {
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 .case-dock--dark .case-dock__name {
-  background: rgba(20, 18, 16, 0.5);
+  background: rgba(20, 18, 16, 0.92);
   border-color: rgba(255, 255, 255, 0.14);
-  color: var(--clay-light);
+  color: #fff;
 }
 .case-dock--dark .case-dock__dot { background: rgba(255, 255, 255, 0.4); }
 .case-dock--dark .case-dock__dot.is-active { background: var(--clay-light); }
@@ -822,6 +822,69 @@ html {
   color: var(--stone);
 }
 
+.project-card__preview {
+  position: relative;
+  isolation: isolate;
+}
+.project-card__preview .browser-frame--card {
+  position: absolute;
+  inset: 0 auto auto 0;
+  flex: 0 0 142%;
+  width: 142%;
+  min-height: 142%;
+  transform: scale(0.704);
+  transform-origin: top left;
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+.project-card__preview .browser-frame--card .browser-frame__bar {
+  padding-block: 8px;
+}
+.project-card__preview .browser-frame--card .browser-frame__body {
+  padding: var(--space-5);
+}
+
+/* Professional evidence — evidence before method. */
+.experience-layout {
+  display: grid;
+  grid-template-columns: 0.72fr 1.28fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+.experience-list {
+  border-top: 1px solid var(--mist);
+}
+.experience-item {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.3fr) 1fr;
+  gap: var(--space-6);
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--mist);
+}
+.experience-item__dates {
+  padding-top: 5px;
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: var(--tracking-mono);
+  color: var(--ink);
+}
+.experience-item__role {
+  font-size: var(--text-body-lg) !important;
+}
+.experience-item__company {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-small);
+  color: var(--stone);
+}
+.experience-item__detail {
+  max-width: 62ch;
+  margin-top: var(--space-3);
+  font-size: var(--text-small);
+  line-height: 1.6;
+  color: var(--graphite);
+}
+
 /* ── Approach / principles — numbered editorial rows ───────── */
 .approach {
   display: grid;
@@ -1030,7 +1093,7 @@ html {
   }
 }
 
-/* ── Process — 6-column grid (mockup 1) ────────────────────── */
+/* ── Process — five-stage implementation cycle ─────────────── */
 .process-head {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
@@ -1040,7 +1103,7 @@ html {
 }
 .process-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: var(--space-8);
 }
 .process-col {
@@ -1195,6 +1258,10 @@ html {
   gap: var(--space-6);
 }
 .about-hero__title { max-width: 13ch; }
+.about-hero--compact {
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: var(--space-20);
+}
 
 .portrait {
   aspect-ratio: 4 / 5;
@@ -1656,6 +1723,92 @@ html {
   padding: 3px 12px;
 }
 .browser-frame__body { padding: var(--space-6); }
+
+/* Technical artifacts — concrete data and integration evidence, clearly
+   labelled as conceptual rather than production output. */
+.technical-artifact {
+  overflow: hidden;
+  border: 1px solid var(--mist);
+  border-radius: var(--radius-md);
+  background: var(--paper);
+}
+.technical-artifact figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border-bottom: 1px solid var(--mist);
+}
+.technical-artifact figcaption strong {
+  font-size: var(--text-body-lg);
+  font-weight: var(--weight-medium);
+  color: var(--ink);
+}
+.technical-artifact figcaption > span:last-child {
+  max-width: 68ch;
+  font-size: var(--text-small);
+  line-height: 1.6;
+  color: var(--stone);
+}
+.technical-artifact__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.technical-artifact__code {
+  overflow-x: auto;
+  padding: var(--space-6);
+  background: var(--silk);
+  color: var(--graphite);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.65;
+  tab-size: 2;
+}
+.technical-artifact__tableWrap {
+  overflow-x: auto;
+}
+.technical-artifact__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-small);
+  text-align: left;
+}
+.technical-artifact__table th,
+.technical-artifact__table td {
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--mist);
+  vertical-align: top;
+}
+.technical-artifact__table thead th {
+  border-top: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--stone);
+}
+.technical-artifact__table tbody th {
+  font-weight: var(--weight-medium);
+  color: var(--ink);
+}
+.technical-artifact__table td {
+  color: var(--graphite);
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
 
 .phone-frame {
   width: 286px;
@@ -2209,34 +2362,87 @@ html {
   border-top: 1px solid var(--mist);
 }
 
-/* ── Collapsible — mobile-only progressive disclosure ──────────
-   Desktop: body always open, no toggle chrome. Spacing here mirrors the
-   old section flex-gap so the reading rhythm is unchanged above the phone
-   breakpoint. The mobile accordion behaviour lives in the 700px query. */
+/* ── Collapsible — native, functional progressive disclosure ── */
 .collapsible {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: 0;
 }
 .collapsible__head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-5);
-  cursor: default;
-}
-.collapsible__head:focus-visible {
-  outline: 2px solid var(--clay-ring);
-  outline-offset: 6px;
-  border-radius: var(--radius-sm);
 }
 .collapsible__headInner { flex: 1 1 auto; min-width: 0; }
-.collapsible__icon { display: none; }
-.collapsible__panel { display: block; }
+.collapsible__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--mist);
+  border-radius: var(--radius-full);
+  background: var(--paper);
+  color: var(--clay);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-sm) var(--ease),
+    background var(--duration-sm) var(--ease),
+    transform var(--duration-sm) var(--ease-out);
+}
+.collapsible__toggle:hover {
+  border-color: var(--clay);
+  background: var(--clay-wash);
+}
+.collapsible__toggle:active { transform: scale(0.96); }
+.collapsible__icon {
+  display: block;
+  position: relative;
+  width: 14px;
+  height: 14px;
+}
+.collapsible__icon::before,
+.collapsible__icon::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+  transition: transform var(--duration-md) var(--ease);
+}
+.collapsible__icon::before {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  transform: translateY(-50%);
+}
+.collapsible__icon::after {
+  left: 50%;
+  top: 0;
+  width: 1.5px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+.collapsible.is-open .collapsible__icon::after {
+  transform: translateX(-50%) scaleY(0);
+}
+.collapsible__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--reveal-dur) var(--ease-reveal);
+}
+.collapsible.is-open .collapsible__panel { grid-template-rows: 1fr; }
 .collapsible__panelInner {
   display: flex;
   flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
   gap: var(--space-8);
+}
+.collapsible.is-open .collapsible__panelInner {
+  padding-top: var(--space-8);
 }
 
 /* Process columns reuse the collapsible primitive but keep their own tighter
@@ -2247,6 +2453,13 @@ html {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+}
+.collapsible.process-col .collapsible__toggle {
+  width: 32px;
+  height: 32px;
+}
+.collapsible.process-col.is-open .collapsible__panelInner {
+  padding-top: var(--space-4);
 }
 
 /* ── Monoline icons — draw-on-interaction marks ────────────── */
@@ -2661,7 +2874,42 @@ html {
 }
 .footer-seal .wordmark { font-size: 18px; }
 
+/* Branded dead-end recovery. */
+.not-found {
+  min-height: min(760px, 82dvh);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-6);
+  padding-block: var(--space-30);
+}
+.not-found h1 { max-width: 14ch; }
+.not-found p {
+  max-width: 54ch;
+  color: var(--stone);
+}
+.not-found__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+.nav a[aria-current="page"] {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: var(--clay);
+}
+
 /* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1440px) {
+  .process-grid {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: var(--space-10);
+  }
+}
+
 @media (max-width: 1040px) {
   .work-grid { grid-template-columns: repeat(2, 1fr); }
   .process-grid { grid-template-columns: repeat(3, 1fr); row-gap: var(--space-10); }
@@ -2688,6 +2936,7 @@ html {
   .meta-strip { flex-wrap: wrap; gap: var(--space-8); }
 
   .approach,
+  .experience-layout,
   .about-teaser,
   .contact { grid-template-columns: 1fr; gap: var(--space-10); }
 
@@ -2781,6 +3030,12 @@ html {
   .decision { grid-template-columns: 1fr; gap: var(--space-4); padding: var(--space-6); }
   .incident__fields { grid-template-columns: 1fr; }
   .prose p { font-size: var(--text-body); }
+  .experience-item { grid-template-columns: 1fr; gap: var(--space-2); }
+  .technical-artifact__table th,
+  .technical-artifact__table td {
+    min-width: 128px;
+    padding: var(--space-3) var(--space-4);
+  }
 }
 
 @media (max-width: 340px) {
@@ -2795,7 +3050,6 @@ html {
 @media (max-width: 700px) {
   .collapsible { gap: 0; }
   .collapsible__head {
-    cursor: pointer;
     align-items: center;
     gap: var(--space-4);
     padding-block: var(--space-5);
@@ -2835,7 +3089,7 @@ html {
   }
   .collapsible.is-open .collapsible__panelInner { padding-bottom: var(--space-6); }
 
-  /* Header content is always visible — it's the tap target, not the body. */
+  /* Header content stays visible beside the native toggle button. */
   .collapsible__head .reveal { opacity: 1 !important; transform: none !important; }
   .collapsible__head .reveal--mask { overflow: visible; }
   .collapsible__head .reveal--mask .reveal__inner { transform: none !important; }
@@ -2869,66 +3123,6 @@ html {
     filter: none;
     transition: none;
   }
-}
-
-/* ── Preloader ─────────────────────────────────────────────── */
-@keyframes noise-animation {
-  0%   { transform: translate(0, 0); }
-  10%  { transform: translate(-2%, -3%); }
-  20%  { transform: translate(-4%, 2%); }
-  30%  { transform: translate(2%, -4%); }
-  40%  { transform: translate(-2%, 5%); }
-  50%  { transform: translate(-4%, 2%); }
-  60%  { transform: translate(3%, 0); }
-  70%  { transform: translate(0, 3%); }
-  80%  { transform: translate(-3%, 0); }
-  90%  { transform: translate(2%, 2%); }
-  100% { transform: translate(1%, 0); }
-}
-
-@keyframes preloader-fade-out {
-  to { opacity: 0; visibility: hidden; }
-}
-
-.preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  background: var(--paper);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.preloader--out {
-  animation: preloader-fade-out 0.7s var(--ease) forwards;
-}
-
-.preloader__noise {
-  position: absolute;
-  inset: -50%;
-  width: 200%;
-  height: 200%;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: noise-animation 0.15s steps(1) infinite;
-  pointer-events: none;
-}
-
-.preloader__logo {
-  display: flex;
-  align-items: baseline;
-  gap: 0.02em;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(72px, 12vw, 160px);
-  color: var(--ink);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .preloader__noise { animation: none; }
 }
 
 /* ── Dark mode ─────────────────────────────────────────────── */

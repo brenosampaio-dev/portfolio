@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { Wordmark } from "./Wordmark";
 import { useTheme, useLang } from "@/context/AppContext";
@@ -32,6 +33,7 @@ function MoonIcon() {
 export function Header() {
   const headerRef = useRef(null);
   const { theme, toggle } = useTheme();
+  const pathname = usePathname();
   const { lang } = useLang();
   const t = getT(lang);
 
@@ -66,8 +68,8 @@ export function Header() {
         <div className="dock__divider" aria-hidden="true" />
 
         <nav className="nav" aria-label="Primary">
-          <Link href="/#work">{t.nav.work}</Link>
-          <Link href="/#about">{t.nav.about}</Link>
+          <Link href="/#work" aria-current={pathname.startsWith("/work") ? "page" : undefined}>{t.nav.work}</Link>
+          <Link href="/#about" aria-current={pathname === "/about" ? "page" : undefined}>{t.nav.about}</Link>
           <Link href="/#approach" className="nav-hide-sm">{t.nav.approach}</Link>
         </nav>
 
@@ -85,7 +87,7 @@ export function Header() {
             href="/breno-sampaio-cv.pdf"
             className="header-cv"
             download
-            aria-label={`${t.nav.downloadCv} (PDF)`}
+            aria-label={`CV — ${t.nav.downloadCv} (PDF)`}
           >
             <span className="header-cv__label header-cv__label--long">{t.nav.downloadCv}</span>
             <span className="header-cv__label header-cv__label--short" aria-hidden="true">CV</span>

@@ -5,12 +5,14 @@ import { Text, Button, ProjectCard, Divider } from "@/components/ds";
 import { Reveal } from "@/components/site/Reveal";
 import { ProcessReveal } from "@/components/site/ProcessReveal";
 import { Scramble } from "@/components/site/Scramble";
-import { SequenceSteps } from "@/components/site/SequenceSteps";
 import { Toolkit } from "@/components/site/Toolkit";
 import { Collapsible } from "@/components/site/Collapsible";
 import { Icon } from "@/components/site/Icon";
 import { LocationTime } from "@/components/site/LocationTime";
 import { LocalTime } from "@/components/site/LocalTime";
+import { BrowserFrame } from "@/components/site/BrowserFrame";
+import { DashboardPreview } from "@/components/site/DashboardPreview";
+import { TriageInbox } from "@/components/site/TriageInbox";
 import { profile } from "@/lib/content";
 import { useLang } from "@/context/AppContext";
 import { getT } from "@/lib/i18n";
@@ -39,8 +41,8 @@ export function HomeContent() {
               </Text>
             </Reveal>
             <Reveal delay={320} className="hero__actions">
-              <Button href="/work/service-operations" variant="primary">{t.hero.cta1}</Button>
-              <Button href="#approach" variant="link">{t.hero.cta2}</Button>
+              <Button href="#work" variant="primary">{t.hero.cta1}</Button>
+              <Button href="/breno-sampaio-cv.pdf" variant="link" download>{t.hero.cta2}</Button>
             </Reveal>
           </div>
 
@@ -86,6 +88,17 @@ export function HomeContent() {
                 year={p.year}
                 href={p.href}
                 upcoming={p.upcoming}
+                preview={
+                  p.slug === "service-operations" ? (
+                    <BrowserFrame url="operations.local/open-now" className="browser-frame--card">
+                      <DashboardPreview />
+                    </BrowserFrame>
+                  ) : p.slug === "triageai" ? (
+                    <BrowserFrame url="support.local/intake" className="browser-frame--card">
+                      <TriageInbox />
+                    </BrowserFrame>
+                  ) : null
+                }
               />
             </Reveal>
           ))}
@@ -95,29 +108,40 @@ export function HomeContent() {
         </Reveal>
       </section>
 
-      {/* ── 3 · Approach ─────────────────────────────────────── */}
-      <section className="container section" id="approach" data-label={t.labels.approach} aria-labelledby="approach-title">
-        <div className="approach">
+      {/* ── 3 · Professional evidence ───────────────────────── */}
+      <section className="container section" id="experience" data-label={t.labels.experience} aria-labelledby="experience-title">
+        <div className="experience-layout">
           <div className="section-head">
-            <Scramble className="eyebrow eyebrow--accent" text={t.approach.eyebrow} />
+            <Scramble className="eyebrow eyebrow--accent" text={t.experience.eyebrow} />
             <Reveal mask delay={60}>
-              <Text variant="h2" id="approach-title">
-                {renderTitle(t.approach.heading)}
+              <Text variant="h2" id="experience-title">
+                {renderTitle(t.experience.heading)}
               </Text>
             </Reveal>
             <Reveal delay={140}>
-              <Text variant="body" style={{ color: "var(--stone)", maxWidth: "40ch" }}>
-                {t.approach.subheading}
+              <Text variant="body" style={{ color: "var(--stone)", maxWidth: "44ch" }}>
+                {t.experience.subheading}
               </Text>
             </Reveal>
           </div>
 
-          <SequenceSteps items={t.approachItems} />
+          <Reveal className="experience-list" delay={120}>
+            {t.experience.items.map((item) => (
+              <div className="experience-item" key={`${item.company}-${item.dates}`}>
+                <span className="experience-item__dates">{item.dates}</span>
+                <div>
+                  <Text variant="h3" as="h3" className="experience-item__role">{item.role}</Text>
+                  <span className="experience-item__company">{item.company} · {item.location}</span>
+                  <p className="experience-item__detail">{item.detail}</p>
+                </div>
+              </div>
+            ))}
+          </Reveal>
         </div>
       </section>
 
-      {/* ── 4 · Process ──────────────────────────────────────── */}
-      <section className="container section" id="process" data-label={t.labels.process} aria-labelledby="process-title">
+      {/* ── 4 · How I work ───────────────────────────────────── */}
+      <section className="container section" id="approach" data-label={t.labels.process} aria-labelledby="process-title">
         <div className="process-head">
           <div className="stack" style={{ gap: "var(--space-4)" }}>
             <Scramble className="eyebrow eyebrow--accent" text={t.process.eyebrow} />
@@ -140,6 +164,7 @@ export function HomeContent() {
               key={step.title}
               className="process-col"
               defaultOpen={i === 0}
+              label={step.title}
               header={
                 <>
                   <Icon name={step.icon} size={22} className="process-col__icon" />
@@ -157,38 +182,11 @@ export function HomeContent() {
             </Collapsible>
           ))}
         </div>
-        <ProcessReveal targetId="process" />
+        <ProcessReveal targetId="approach" />
       </section>
 
-      {/* ── 5 · Principles ───────────────────────────────────── */}
-      <section className="container section" id="principles" data-label={t.labels.principles} aria-labelledby="principles-title">
-        <div className="approach">
-          <div className="section-head">
-            <Scramble className="eyebrow eyebrow--accent" text={t.principles.eyebrow} />
-            <Reveal mask delay={60}>
-              <Text variant="h2" id="principles-title">
-                {renderTitle(t.principles.heading)}
-              </Text>
-            </Reveal>
-            <Reveal delay={140}>
-              <Text variant="body" style={{ color: "var(--stone)", maxWidth: "40ch" }}>
-                {t.principles.subheading}
-              </Text>
-            </Reveal>
-          </div>
-
-          <SequenceSteps
-            items={t.principlesItems.map((pr) => ({
-              title: pr.principle,
-              description: pr.description,
-              annotation: pr.annotation,
-            }))}
-          />
-        </div>
-      </section>
-
-      {/* ── 6 · About ────────────────────────────────────────── */}
-      <section className="container about-hero" id="about" data-label={t.labels.about} aria-labelledby="about-title">
+      {/* ── 5 · About ────────────────────────────────────────── */}
+      <section className="container about-hero about-hero--compact" id="about" data-label={t.labels.about} aria-labelledby="about-title">
         <div className="about-hero__copy">
           <Scramble className="eyebrow eyebrow--accent" text={t.about.eyebrow} />
           <Reveal mask delay={60}>
@@ -208,18 +206,6 @@ export function HomeContent() {
             </Link>
           </Reveal>
         </div>
-
-        <Reveal delay={120} data-nav-dark>
-          <div className="portrait portrait--photo">
-            <Image
-              src="/images/breno-portrait.png"
-              alt="Breno Sampaio"
-              fill
-              sizes="(max-width: 980px) 90vw, 360px"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-        </Reveal>
 
         <Reveal delay={200} className="about-facts">
           <div className="about-fact">
@@ -249,12 +235,17 @@ export function HomeContent() {
             <span className="about-fact__label">{t.about.facts.cert}</span>
             <span className="about-fact__value">{t.about.facts.certValue}</span>
           </div>
+          <div className="about-fact">
+            <Icon name="globe" className="about-fact__icon" />
+            <span className="about-fact__label">{t.about.facts.mobility}</span>
+            <span className="about-fact__value">{t.about.facts.mobilityValue}</span>
+          </div>
         </Reveal>
       </section>
 
       <div className="container"><Divider /></div>
 
-      {/* ── 7 · Contact ──────────────────────────────────────── */}
+      {/* ── 6 · Contact ──────────────────────────────────────── */}
       <section className="container section" id="contact" data-label={t.labels.contact} aria-labelledby="contact-title">
         <div className="contact">
           <div className="stack" style={{ gap: "var(--space-6)" }}>
