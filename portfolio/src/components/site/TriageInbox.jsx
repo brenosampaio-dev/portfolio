@@ -1,4 +1,5 @@
 import { Confidence } from "./Confidence";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * TriageInbox — the concept's core screen, rendered as real UI in code (not a
@@ -7,50 +8,21 @@ import { Confidence } from "./Confidence";
  * The confidence signal is in plain view on every row — the opposite of a
  * confident black box. Built from the same tokens as the rest of the site.
  */
-const queue = [
-  {
-    msg: "No recibí el reembolso de mi reserva cancelada.",
-    channel: "WhatsApp",
-    lang: "ES",
-    intent: "Refund",
-    conf: "low",
-  },
-  {
-    msg: "Le radiateur ne chauffe pas dans la chambre 214.",
-    channel: "Web form",
-    lang: "FR",
-    intent: "Maintenance",
-    conf: "review",
-  },
-  {
-    msg: "Pode confirmar o horário do check-in?",
-    channel: "Email",
-    lang: "PT",
-    intent: "Booking question",
-    conf: "high",
-  },
-  {
-    msg: "Can I add an extra night to my stay?",
-    channel: "Email",
-    lang: "EN",
-    intent: "Booking change",
-    conf: "high",
-  },
-];
-
 export function TriageInbox() {
+  const { t } = useI18n();
+  const copy = t.specimens.triage.inbox;
   return (
     <div className="triage">
       <div className="triage__head">
         <div>
-          <span className="triage__eyebrow">Triage · inbox</span>
-          <span className="triage__title">12 in queue · sorted by what needs a human</span>
+          <span className="triage__eyebrow">{copy.eyebrow}</span>
+          <span className="triage__title">{copy.title}</span>
         </div>
-        <span className="triage__flagcount">2 need review</span>
+        <span className="triage__flagcount">{copy.flagCount}</span>
       </div>
 
       <ul className="triage__list">
-        {queue.map((q, i) => (
+        {copy.queue.map((q, i) => (
           <li
             className={`triage-row${q.conf === "low" ? " triage-row--low" : ""}${
               q.conf === "review" ? " triage-row--review" : ""
@@ -59,7 +31,7 @@ export function TriageInbox() {
           >
             <span className="triage-row__rail" aria-hidden="true" />
             <div className="triage-row__main">
-              <span className="triage-row__msg">{q.msg}</span>
+              <span className="triage-row__msg" lang={q.locale}>{q.msg}</span>
               <span className="triage-row__meta">
                 <span className="triage-row__lang">{q.lang}</span>
                 <span className="triage-row__sep" aria-hidden="true">·</span>

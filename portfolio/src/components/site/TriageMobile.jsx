@@ -1,4 +1,5 @@
 import { Confidence } from "./Confidence";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * TriageMobile — reviewing on the go, as real UI in code. The same control
@@ -7,34 +8,32 @@ import { Confidence } from "./Confidence";
  * PhoneFrame. Quick to act on, impossible to send by accident.
  */
 export function TriageMobile() {
+  const { t } = useI18n();
+  const copy = t.specimens.triage.mobile;
   return (
     <div className="treview">
       <div className="treview__bar">
         <span className="treview__back" aria-hidden="true">←</span>
-        <span className="treview__barTitle">Review</span>
+        <span className="treview__barTitle">{copy.title}</span>
         <Confidence level="review" />
       </div>
       <div className="treview__body">
         <span className="treview__tags">
           <span className="treview-tag">FR</span>
-          <span className="treview-tag">Maintenance</span>
-          <span className="treview-tag treview-tag--med">Priority: Medium</span>
+          <span className="treview-tag">{copy.maintenance}</span>
+          <span className="treview-tag treview-tag--med">{copy.priority}</span>
         </span>
-        <p className="treview__msg" lang="fr">
-          “Le radiateur ne chauffe pas dans la chambre 214.”
-        </p>
+        <p className="treview__msg" lang="fr">{copy.message}</p>
 
         <div className="treview__draft">
-          <span className="treview__draftlabel">Proposed reply · FR</span>
-          <p className="treview__drafttext" lang="fr">
-            “Merci de nous l’avoir signalé. Je vérifie la disponibilité de la maintenance et je reviens vers vous avec un délai confirmé.”
-          </p>
-          <span className="treview__back-en">EN · “Thanks for flagging it. I’m checking maintenance availability and will confirm a timeframe.”</span>
+          <span className="treview__draftlabel">{copy.replyLabel}</span>
+          <p className="treview__drafttext" lang="fr">{copy.reply}</p>
+          <span className="treview__back-en">{copy.backTranslation}</span>
         </div>
 
         <div className="treview__actions">
-          <span className="treview__approve">Approve</span>
-          <span className="treview__correct">Correct</span>
+          <span className="treview__approve">{copy.approve}</span>
+          <span className="treview__correct">{copy.correct}</span>
         </div>
       </div>
     </div>

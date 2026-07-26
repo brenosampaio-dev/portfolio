@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useRef } from "react";
 import { SEQ_BEAT, SEQ_START } from "@/lib/motion";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * SystemFlow — the control principle, drawn as a pipeline: requests come in,
@@ -16,15 +17,10 @@ import { SEQ_BEAT, SEQ_START } from "@/lib/motion";
  * transition-delays, so it always plays cleanly when the section comes into view.
  * Fires once, then settles. Respects reduced motion.
  */
-const nodes = [
-  { label: "Channels", sub: "WhatsApp · Email · Web", kind: "in" },
-  { label: "AI triage", sub: "Language · intent · urgency", kind: "ai" },
-  { label: "Human approval", sub: "Nothing sends without this", kind: "gate" },
-  { label: "Response", sub: "Consistent across languages", kind: "out" },
-];
-
 export function SystemFlow() {
   const ref = useRef(null);
+  const { t } = useI18n();
+  const nodes = t.specimens.triage.systemFlow;
 
   useEffect(() => {
     const el = ref.current;

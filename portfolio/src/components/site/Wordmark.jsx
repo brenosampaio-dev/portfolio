@@ -1,9 +1,11 @@
 "use client";
 import Link from "next/link";
 import { useRef } from "react";
+import { useI18n } from "@/lib/useI18n";
 
 export function Wordmark() {
   const ref = useRef(null);
+  const { t } = useI18n();
 
   function replay() {
     const el = ref.current;
@@ -24,7 +26,7 @@ export function Wordmark() {
       <span className="wm-b">B</span>
       <span className="wm-slash">/</span>
       <span className="wm-s">S</span>
-      <span className="sr-only"> — Breno Sampaio home</span>
+      <span className="sr-only"> — {t.a11y.home}</span>
     </Link>
   );
 }

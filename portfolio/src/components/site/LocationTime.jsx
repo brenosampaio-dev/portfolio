@@ -2,6 +2,7 @@
 
 import { profile } from "@/lib/content";
 import { LocalTime } from "@/components/site/LocalTime";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * LocationTime — a quiet "where I am / my time" readout for the hero: a small
@@ -10,6 +11,7 @@ import { LocalTime } from "@/components/site/LocalTime";
  * decoration. The spin is CSS and disabled under reduced motion.
  */
 export function LocationTime() {
+  const { t } = useI18n();
   return (
     <span className="locus">
       <span className="locus__globe" aria-hidden="true">
@@ -20,7 +22,7 @@ export function LocationTime() {
         </svg>
       </span>
       <span className="locus__text">
-        {profile.location} · <LocalTime timeZone={profile.timezone} />
+        {t.profile.location} · <LocalTime timeZone={profile.timezone} />
       </span>
     </span>
   );

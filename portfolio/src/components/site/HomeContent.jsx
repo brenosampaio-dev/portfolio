@@ -211,7 +211,7 @@ export function HomeContent() {
           <div className="about-fact">
             <Icon name="map-pin" className="about-fact__icon" />
             <span className="about-fact__label">{t.about.facts.basedIn}</span>
-            <span className="about-fact__value">{profile.location}</span>
+            <span className="about-fact__value">{t.profile.location}</span>
           </div>
           <div className="about-fact">
             <Icon name="briefcase" className="about-fact__icon" />
@@ -272,7 +272,7 @@ export function HomeContent() {
             <div className="contact-row">
               <Icon name="map-pin" className="contact-row__icon" />
               <span className="contact-row__label">{t.contact.location}</span>
-              <span className="contact-row__value">{profile.location}</span>
+              <span className="contact-row__value">{t.profile.location}</span>
             </div>
             <div className="contact-row">
               <Icon name="clock" className="contact-row__icon" />

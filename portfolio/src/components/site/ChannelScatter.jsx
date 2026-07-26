@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * ChannelScatter — the problem, made visible. The same volume of requests
@@ -9,19 +10,10 @@ import { useEffect, useRef } from "react";
  * it reads any one label. Fires once on enter; under reduced motion it simply
  * shows. No loop — the mess settles and stays. Reuses the shared .scatter CSS.
  */
-const sources = [
-  "WhatsApp · ES",
-  "Email · PT",
-  "Web form · FR",
-  "Email · EN",
-  "WhatsApp · FR",
-  "Web form · ES",
-  "No priority",
-  "Unread · 2h",
-];
-
 export function ChannelScatter() {
   const ref = useRef(null);
+  const { t } = useI18n();
+  const copy = t.specimens.triage.channelScatter;
 
   useEffect(() => {
     const el = ref.current;
@@ -48,7 +40,7 @@ export function ChannelScatter() {
   return (
     <div className="scatter" ref={ref} aria-hidden="true">
       <div className="scatter__field">
-        {sources.map((s, i) => (
+        {copy.sources.map((s, i) => (
           <span className="scatter-chip" key={s} style={{ "--i": i }}>
             <span className="scatter-chip__src">{s}</span>
             <span className="scatter-chip__line" />
@@ -56,7 +48,7 @@ export function ChannelScatter() {
         ))}
       </div>
       <span className="scatter__caption">
-        Every channel, every language, arriving at once — unranked, unread, no priority.
+        {copy.caption}
       </span>
     </div>
   );

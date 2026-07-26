@@ -5,6 +5,8 @@
  * path is what makes the tool trustworthy, not the happy path. Real UI in code.
  */
 export function CorrectionFlow() {
+  const { t } = useI18n();
+  const copy = t.specimens.triage.correction;
   return (
     <div className="correction">
       <div className="correction__case">
@@ -16,21 +18,18 @@ export function CorrectionFlow() {
 
       <div className="correction__rows">
         <div className="correction-row">
-          <span className="correction-row__key">AI read</span>
-          <span className="correction-row__was">Intent · Maintenance question</span>
+          <span className="correction-row__key">{copy.aiRead}</span>
+          <span className="correction-row__was">{copy.aiValue}</span>
         </div>
         <span className="correction__arrow" aria-hidden="true">↓</span>
         <div className="correction-row">
-          <span className="correction-row__key">Human corrected</span>
-          <span className="correction-row__now">Intent · Complaint — repeated, escalate</span>
+          <span className="correction-row__key">{copy.humanCorrected}</span>
+          <span className="correction-row__now">{copy.humanValue}</span>
         </div>
       </div>
 
-      <p className="correction__note">
-        In this prototype scenario, the review gate lets the agent correct the classification
-        before approving the reply. The override creates labelled feedback for future rule or
-        model review.
-      </p>
+      <p className="correction__note">{copy.note}</p>
     </div>
   );
 }
+import { useI18n } from "@/lib/useI18n";

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * DecisionsLedger — the design decisions as a full-width editorial ledger.
@@ -15,6 +16,7 @@ import { useEffect, useRef } from "react";
  */
 export function DecisionsLedger({ decisions }) {
   const ref = useRef(null);
+  const { t } = useI18n();
 
   useEffect(() => {
     const el = ref.current;
@@ -51,15 +53,15 @@ export function DecisionsLedger({ decisions }) {
             <span className="dl-rule" aria-hidden="true" />
             <div className="dl-cols">
               <div className="dl-col">
-                <span className="dl-tag">Problem</span>
+                <span className="dl-tag">{t.common.problem}</span>
                 <p className="dl-text">{d.problem}</p>
               </div>
               <div className="dl-col">
-                <span className="dl-tag">Decision</span>
+                <span className="dl-tag">{t.common.decision}</span>
                 <p className="dl-text">{d.decision}</p>
               </div>
               <div className="dl-col dl-col--trade">
-                <span className="dl-tag">Trade-off</span>
+                <span className="dl-tag">{t.common.tradeoff}</span>
                 <p className="dl-text">{d.tradeoff}</p>
               </div>
             </div>

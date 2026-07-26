@@ -1,4 +1,5 @@
 import { Confidence } from "./Confidence";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * AnalysisPanel — the signature screen, built as real UI in code. A case opened
@@ -10,61 +11,63 @@ import { Confidence } from "./Confidence";
  * The primary action is Review, not Send: nothing leaves without a human.
  */
 export function AnalysisPanel() {
+  const { t } = useI18n();
+  const copy = t.specimens.triage.analysis;
   return (
     <div className="apanel">
       {/* Incoming message */}
       <div className="apanel__msg">
         <div className="apanel__msghead">
-          <span className="apanel__from">Guest · WhatsApp</span>
-          <span className="apanel__time">2 min ago</span>
+          <span className="apanel__from">{copy.from}</span>
+          <span className="apanel__time">{copy.time}</span>
         </div>
         <p className="apanel__text" lang="es">
           “No recibí el reembolso de mi reserva cancelada. ¿Pueden revisarlo hoy, por favor?”
         </p>
-        <span className="apanel__lang">Detected language · Spanish (ES)</span>
+        <span className="apanel__lang">{copy.detectedLanguage}</span>
       </div>
 
       {/* AI reading */}
       <div className="apanel__read">
         <div className="apanel__readhead">
-          <span className="apanel__eyebrow">AI analysis</span>
+          <span className="apanel__eyebrow">{copy.analysis}</span>
           <Confidence level="low" />
         </div>
 
         <dl className="apanel__facts">
           <div className="apanel-fact">
-            <dt>Intent</dt>
-            <dd>Refund request</dd>
+            <dt>{copy.intentLabel}</dt>
+            <dd>{copy.intent}</dd>
           </div>
           <div className="apanel-fact">
-            <dt>Urgency</dt>
+            <dt>{copy.urgencyLabel}</dt>
             <dd>
-              High <span className="apanel-fact__why">— “reembolso” + cancelled booking</span>
+              {copy.urgency} <span className="apanel-fact__why">{copy.urgencyWhy}</span>
             </dd>
           </div>
           <div className="apanel-fact">
-            <dt>Missing info</dt>
-            <dd className="apanel-fact__missing">Booking reference — needed before a reply can go out</dd>
+            <dt>{copy.missingLabel}</dt>
+            <dd className="apanel-fact__missing">{copy.missing}</dd>
           </div>
         </dl>
 
         {/* Drafted reply + back-translation — verify across the language */}
         <div className="apanel__reply">
-          <span className="apanel__replylabel">Proposed reply · ES</span>
+          <span className="apanel__replylabel">{copy.proposedReply}</span>
           <p className="apanel__replytext" lang="es">
             “Lamento lo ocurrido. Para localizar tu reembolso, ¿puedes compartir el número de reserva?”
           </p>
-          <span className="apanel__replylabel apanel__replylabel--back">Back-translation · EN</span>
-          <p className="apanel__replytext apanel__replytext--back">
-            “Sorry about that. To locate your refund, could you share your booking reference?”
+          <span className="apanel__replylabel apanel__replylabel--back">{copy.backTranslation}</span>
+          <p className="apanel__replytext apanel__replytext--back" lang={t.locale}>
+            {copy.backTranslationText}
           </p>
         </div>
 
         {/* Action — review is primary, send is gated behind it */}
         <div className="apanel__actions">
-          <span className="apanel__btn apanel__btn--primary">Review &amp; approve</span>
-          <span className="apanel__btn apanel__btn--ghost">Correct</span>
-          <span className="apanel__gate">Send is gated — nothing leaves unapproved</span>
+          <span className="apanel__btn apanel__btn--primary">{copy.review}</span>
+          <span className="apanel__btn apanel__btn--ghost">{copy.correct}</span>
+          <span className="apanel__gate">{copy.gate}</span>
         </div>
       </div>
     </div>

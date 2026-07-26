@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * TriageFlow — the resolution, as information architecture. Before: read
@@ -9,17 +10,10 @@ import { useEffect, useRef } from "react";
  * languages. Below, the core loop the product is built around. Honest diagram,
  * not a faked screen. Reuses the shared .flow CSS; fires once and settles.
  */
-const loop = [
-  "Message in",
-  "AI classifies — language · intent · urgency · missing info",
-  "Human reviews, confidence visible — approve or correct",
-  "Send the approved reply and log who approved what",
-];
-
-const before = ["Read everything", "Guess the language", "Guess the urgency", "Reply inconsistently"];
-
 export function TriageFlow() {
   const ref = useRef(null);
+  const { t } = useI18n();
+  const copy = t.specimens.triage.flow;
 
   useEffect(() => {
     const el = ref.current;
@@ -47,22 +41,22 @@ export function TriageFlow() {
     <div className="flow" ref={ref}>
       <div className="flow__ba">
         <div className="flow-state flow-state--before">
-          <span className="flow-state__label">Before</span>
+          <span className="flow-state__label">{copy.beforeLabel}</span>
           <div className="flow-state__frags" aria-hidden="true">
-            {before.map((b) => (
+            {copy.before.map((b) => (
               <span className="flow-frag" key={b}>{b}</span>
             ))}
           </div>
         </div>
         <span className="flow__arrow" aria-hidden="true">→</span>
         <div className="flow-state flow-state--after">
-          <span className="flow-state__label">After</span>
-          <span className="flow-state__one">AI structures &amp; ranks, a human verifies &amp; approves</span>
+          <span className="flow-state__label">{copy.afterLabel}</span>
+          <span className="flow-state__one">{copy.after}</span>
         </div>
       </div>
 
       <div className="flow__steps">
-        {loop.map((f, i) => (
+        {copy.steps.map((f, i) => (
           <div className="flow-step" key={f} style={{ "--i": i }}>
             <span className="flow-step__n">{String(i + 1).padStart(2, "0")}</span>
             <span className="flow-step__t">{f}</span>

@@ -6,40 +6,28 @@
  * Reuses the shared .states / .state CSS, with a slate "needs review" variant.
  */
 export function TriageStates() {
+  const { t } = useI18n();
+  const states = t.specimens.triage.states;
   return (
     <div className="states">
-      <div className="state">
-        <span className="state__label">Empty</span>
-        <div className="state__box state__box--empty">
-          <span className="state__line state__line--dashed" />
-          <span className="state__caption">Queue clear. Nothing waiting on a human.</span>
+      {states.map((state) => (
+        <div className="state" key={state.label}>
+          <span className="state__label">{state.label}</span>
+          <div className={`state__box${state.variant ? ` state__box--${state.variant}` : ""}`}>
+            {state.variant === "empty" && <span className="state__line state__line--dashed" />}
+            {state.variant === "processing" && (
+              <>
+                <span className="state__skeleton state__skeleton--w80" />
+                <span className="state__skeleton state__skeleton--w60" />
+                <span className="state__skeleton state__skeleton--w70" />
+              </>
+            )}
+            {state.variant === "review" && <span className="state__dot state__dot--review" aria-hidden="true" />}
+            {state.caption && <span className="state__caption">{state.caption}</span>}
+          </div>
         </div>
-      </div>
-
-      <div className="state">
-        <span className="state__label">Processing</span>
-        <div className="state__box">
-          <span className="state__skeleton state__skeleton--w80" />
-          <span className="state__skeleton state__skeleton--w60" />
-          <span className="state__skeleton state__skeleton--w70" />
-        </div>
-      </div>
-
-      <div className="state">
-        <span className="state__label">Needs review</span>
-        <div className="state__box state__box--review">
-          <span className="state__dot state__dot--review" aria-hidden="true" />
-          <span className="state__caption">Low confidence — pulled to the top for a human to verify.</span>
-        </div>
-      </div>
-
-      <div className="state">
-        <span className="state__label">Missing info</span>
-        <div className="state__box state__box--empty">
-          <span className="state__line state__line--dashed" />
-          <span className="state__caption">Can&rsquo;t draft a reply yet — booking reference needed first.</span>
-        </div>
-      </div>
+      ))}
     </div>
   );
 }
+import { useI18n } from "@/lib/useI18n";

@@ -10,6 +10,8 @@ import { Footer } from "@/components/site/Footer";
 import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { ToTop } from "@/components/site/ToTop";
+import { LocaleMetadata } from "@/components/site/LocaleMetadata";
+import { SkipLink } from "@/components/site/SkipLink";
 import { Providers } from "@/context/AppContext";
 import { profile } from "@/lib/content";
 
@@ -31,7 +33,7 @@ export const metadata = {
     description: SHARE_DESCRIPTION,
     url: "https://brenosampaio.vercel.app",
     siteName: "Breno Sampaio",
-    locale: "en_GB",
+    locale: "en_CA",
     type: "website",
   },
   twitter: {
@@ -49,13 +51,13 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-CA" suppressHydrationWarning>
       <head>
         {/* Reads localStorage('theme') or prefers-color-scheme before first paint
             so the correct data-theme attribute is set with no visible flash. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme:dark)').matches;document.documentElement.setAttribute('data-theme',s||(p?'dark':'light'));}catch(e){}})();`,
+            __html: `(function(){try{var d=document.documentElement;var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme:dark)').matches;d.setAttribute('data-theme',s||(p?'dark':'light'));var l=localStorage.getItem('lang');if(l!=='en'&&l!=='fr')l=(navigator.language||'').toLowerCase().indexOf('fr')===0?'fr':'en';d.setAttribute('data-lang',l);d.lang=l==='fr'?'fr-CA':'en-CA';}catch(e){}})();`,
           }}
         />
         {/*
@@ -76,6 +78,7 @@ export default function RootLayout({ children }) {
       <body>
         {/* Structured data — lets search engines understand who this is. */}
         <script
+          id="person-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -101,9 +104,10 @@ export default function RootLayout({ children }) {
           {`document.documentElement.classList.add('js')`}
         </Script>
         <Providers>
+          <LocaleMetadata />
           <SmoothScroll />
           <ScrollProgress />
-          <a href="#main" className="skip-link">Skip to content</a>
+          <SkipLink />
           <Header />
           <main id="main">{children}</main>
           <Footer />

@@ -24,24 +24,15 @@ const INTAKE_PAYLOAD = `{
   "attachments": []
 }`;
 
-const contractRows = [
-  ["channel", "Channel integration", "Yes", "Recoverable intake queue"],
-  ["message", "Inbound channel", "Yes", "Reject payload with a field error"],
-  ["customer_reference", "Customer", "No", "Create an information task"],
-  ["detected_language", "Classification", "Yes", "Route to human review"],
-  ["confidence", "Classification", "Yes", "Apply the review threshold"],
-];
-
 export function ServiceSqlSpecimen() {
+  const { t } = useI18n();
+  const copy = t.specimens.technical.service;
   return (
     <figure className="technical-artifact">
       <figcaption>
-        <span className="technical-artifact__eyebrow">Data retrieval specimen</span>
-        <strong>Proposed SQL for the “Open now” handover view</strong>
-        <span>
-          A reduced query makes filtering and priority order explicit. The schema is conceptual,
-          and this is not a production database query.
-        </span>
+        <span className="technical-artifact__eyebrow">{copy.eyebrow}</span>
+        <strong>{copy.title}</strong>
+        <span>{copy.note}</span>
       </figcaption>
       <pre className="technical-artifact__code">
         <code>{OPEN_INCIDENTS_QUERY}</code>
@@ -51,32 +42,28 @@ export function ServiceSqlSpecimen() {
 }
 
 export function TriagePayloadSpecimen() {
+  const { t } = useI18n();
+  const copy = t.specimens.technical.triage;
   return (
     <figure className="technical-artifact">
       <figcaption>
-        <span className="technical-artifact__eyebrow">Input contract specimen</span>
-        <strong>Reduced request payload and failure rules</strong>
-        <span>
-          The payload is illustrative. It defines the boundary between a channel integration and
-          the triage workflow; no live API is connected.
-        </span>
+        <span className="technical-artifact__eyebrow">{copy.eyebrow}</span>
+        <strong>{copy.title}</strong>
+        <span>{copy.note}</span>
       </figcaption>
       <pre className="technical-artifact__code">
         <code>{INTAKE_PAYLOAD}</code>
       </pre>
       <div className="technical-artifact__tableWrap">
         <table className="technical-artifact__table">
-          <caption className="sr-only">Triage intake field contract</caption>
+          <caption className="sr-only">{copy.caption}</caption>
           <thead>
             <tr>
-              <th scope="col">Field</th>
-              <th scope="col">Origin</th>
-              <th scope="col">Required</th>
-              <th scope="col">Failure path</th>
+              {copy.headers.map((header) => <th scope="col" key={header}>{header}</th>)}
             </tr>
           </thead>
           <tbody>
-            {contractRows.map(([field, origin, required, failure]) => (
+            {copy.rows.map(([field, origin, required, failure]) => (
               <tr key={field}>
                 <th scope="row"><code>{field}</code></th>
                 <td>{origin}</td>
@@ -90,3 +77,4 @@ export function TriagePayloadSpecimen() {
     </figure>
   );
 }
+import { useI18n } from "@/lib/useI18n";
