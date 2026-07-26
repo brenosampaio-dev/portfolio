@@ -10,12 +10,11 @@ import { Footer } from "@/components/site/Footer";
 import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { ToTop } from "@/components/site/ToTop";
-import { Preloader } from "@/components/site/Preloader";
 import { Providers } from "@/context/AppContext";
 import { profile } from "@/lib/content";
 
 const SHARE_DESCRIPTION =
-  "Software implementation, SaaS onboarding and application support grounded in multilingual service operations and UX/UI experience.";
+  "Requirements, data rules, testable workflows and support documentation grounded in multilingual service operations and UX/UI practice.";
 
 export const metadata = {
   metadataBase: new URL("https://brenosampaio.vercel.app"),
@@ -24,12 +23,15 @@ export const metadata = {
     template: "%s — Breno Sampaio",
   },
   description: SHARE_DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Breno Sampaio — Software Implementation & Application Support",
     description: SHARE_DESCRIPTION,
     url: "https://brenosampaio.vercel.app",
     siteName: "Breno Sampaio",
-    locale: "en_US",
+    locale: "en_GB",
     type: "website",
   },
   twitter: {
@@ -99,7 +101,6 @@ export default function RootLayout({ children }) {
           {`document.documentElement.classList.add('js')`}
         </Script>
         <Providers>
-          <Preloader />
           <SmoothScroll />
           <ScrollProgress />
           <a href="#main" className="skip-link">Skip to content</a>

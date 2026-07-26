@@ -27,8 +27,9 @@ export function CorrectionFlow() {
       </div>
 
       <p className="correction__note">
-        Caught before it reached the customer. The override is logged — and feeds back into how
-        the signal is judged next time.
+        In this prototype scenario, the review gate lets the agent correct the classification
+        before approving the reply. The override creates labelled feedback for future rule or
+        model review.
       </p>
     </div>
   );

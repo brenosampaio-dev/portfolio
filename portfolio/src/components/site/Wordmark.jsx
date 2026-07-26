@@ -18,13 +18,13 @@ export function Wordmark() {
     <Link
       href="/"
       className="wordmark"
-      aria-label="Breno Sampaio — home"
       ref={ref}
       onMouseEnter={replay}
     >
       <span className="wm-b">B</span>
       <span className="wm-slash">/</span>
       <span className="wm-s">S</span>
+      <span className="sr-only"> — Breno Sampaio home</span>
     </Link>
   );
 }

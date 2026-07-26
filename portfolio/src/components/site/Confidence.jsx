@@ -5,7 +5,11 @@
  * human (slate accent), Low is the one genuine caution (alert vermilion) — the
  * state the whole tool exists to catch.
  */
-const LABEL = { high: "High", review: "Needs review", low: "Low" };
+const LABEL = {
+  high: "Confidence: High",
+  review: "Confidence: Needs review",
+  low: "Confidence: Low",
+};
 
 export function Confidence({ level = "high", className = "" }) {
   return (

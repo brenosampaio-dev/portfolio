@@ -18,7 +18,7 @@ export function TriageMobile() {
         <span className="treview__tags">
           <span className="treview-tag">FR</span>
           <span className="treview-tag">Maintenance</span>
-          <span className="treview-tag treview-tag--med">Medium</span>
+          <span className="treview-tag treview-tag--med">Priority: Medium</span>
         </span>
         <p className="treview__msg" lang="fr">
           “Le radiateur ne chauffe pas dans la chambre 214.”
@@ -27,9 +27,9 @@ export function TriageMobile() {
         <div className="treview__draft">
           <span className="treview__draftlabel">Proposed reply · FR</span>
           <p className="treview__drafttext" lang="fr">
-            “Merci de l’avoir signalé. La maintenance passera dans l’heure.”
+            “Merci de nous l’avoir signalé. Je vérifie la disponibilité de la maintenance et je reviens vers vous avec un délai confirmé.”
           </p>
-          <span className="treview__back-en">EN · “Thanks for flagging it. Maintenance will come within the hour.”</span>
+          <span className="treview__back-en">EN · “Thanks for flagging it. I’m checking maintenance availability and will confirm a timeframe.”</span>
         </div>
 
         <div className="treview__actions">

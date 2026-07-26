@@ -31,10 +31,15 @@ export function AboutContent() {
             </Text>
           </Reveal>
           <Reveal delay={300}>
-            <Link href="/breno-sampaio-cv.pdf" className="link-arrow" style={{ marginTop: "var(--space-2)" }}>
+            <a
+              href="/breno-sampaio-cv.pdf"
+              className="link-arrow"
+              style={{ marginTop: "var(--space-2)" }}
+              download
+            >
               {ta.downloadCv}
-              <span className="arrow" aria-hidden="true">↗</span>
-            </Link>
+              <span className="arrow" aria-hidden="true">↓</span>
+            </a>
           </Reveal>
         </div>
 
@@ -79,6 +84,10 @@ export function AboutContent() {
             <span className="about-fact__label">{ta.facts.status}</span>
             <span className="about-fact__value">{ta.facts.statusValue}</span>
           </div>
+          <div className="about-fact">
+            <span className="about-fact__label">{ta.facts.mobility}</span>
+            <span className="about-fact__value">{ta.facts.mobilityValue}</span>
+          </div>
         </Reveal>
       </header>
 
@@ -103,7 +112,7 @@ export function AboutContent() {
           ))}
 
           <div style={{ marginTop: "var(--space-8)", display: "flex", gap: "var(--space-6)", flexWrap: "wrap" }}>
-            <Button href="/work/service-operations" variant="primary">{ta.ctaWork}</Button>
+            <Button href="/#work" variant="primary">{ta.ctaWork}</Button>
             <Link href="/#contact" className="link-arrow">
               {ta.ctaContact}
               <span className="arrow" aria-hidden="true">↗</span>
