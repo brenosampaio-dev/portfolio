@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * ProjectCard — editorial work card (problem-first), matching the Selected Work
@@ -18,11 +19,12 @@ export function ProjectCard({
   href,
   preview,
   previewSrc,
-  previewLabel = "case preview",
+  previewLabel,
   upcoming = false,
   style,
   ...props
 }) {
+  const { t } = useI18n();
   const [hover, setHover] = useState(false);
   const interactive = !!href && !upcoming;
 
@@ -73,7 +75,7 @@ export function ProjectCard({
               color: "var(--pebble)",
             }}
           >
-            {upcoming ? "more coming" : previewLabel}
+            {upcoming ? t.common.moreComing : (previewLabel || t.common.casePreview)}
           </span>
         )}
       </div>
@@ -145,7 +147,7 @@ export function ProjectCard({
             color: "var(--stone)",
           }}
         >
-          {year || (upcoming ? "Soon" : "")}
+          {year || (upcoming ? t.common.soon : "")}
         </span>
         <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-3)" }}>
           <span
@@ -179,7 +181,7 @@ export function ProjectCard({
       <Link
         href={href}
         style={{ textDecoration: "none", color: "inherit", display: "block", height: "100%" }}
-        aria-label={`${title} — view case`}
+        aria-label={`${title} — ${t.common.viewCase}`}
       >
         {card}
       </Link>

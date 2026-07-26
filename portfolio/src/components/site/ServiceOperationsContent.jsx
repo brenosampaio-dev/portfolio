@@ -14,19 +14,14 @@ import { FlowDiagram } from "@/components/site/FlowDiagram";
 import { ServiceSqlSpecimen } from "@/components/site/TechnicalArtifacts";
 import { useLang } from "@/context/AppContext";
 import { getT } from "@/lib/i18n";
-
-const STATES = [
-  { label: "Empty", variant: "empty", caption: "No open or escalated incidents in this view." },
-  { label: "Loading", variant: "loading" },
-  { label: "Error", variant: "error", caption: "Save failed. Draft kept locally — retry when ready." },
-  { label: "Success", variant: "success", caption: "Incident logged with owner, status and history." },
-];
+import { renderTitle } from "@/lib/renderTitle";
 
 export function ServiceOperationsContent() {
   const { lang } = useLang();
   const t = getT(lang);
   const c = t.cases;
   const s = t.cases.serviceOps;
+  const specimen = t.specimens.service;
 
   const factItems = [
     { label: c.factLabels.role, value: s.facts.role },
@@ -43,7 +38,7 @@ export function ServiceOperationsContent() {
         backHref="/#work"
         backLabel={c.back}
         tags={[s.tag, "2026"]}
-        title={<>Incident & <span className="accent">Handover Workflow</span></>}
+        title={renderTitle(s.title)}
         lead={s.lead}
         visual={
           <BrowserFrame url="operations.local/open-now">
@@ -55,7 +50,7 @@ export function ServiceOperationsContent() {
       </CaseHero>
 
       {/* ── Snapshot / TL;DR ─────────────────────────────────── */}
-      <section id="snapshot" data-label="Snapshot" className="container section--tight" aria-label="Snapshot">
+      <section id="snapshot" data-label={c.sectionLabels.snapshot} className="container section--tight" aria-label={c.sectionLabels.snapshot}>
         <Reveal className="snapshot">
           <div className="snapshot__row">
             <Icon name="alert" className="snapshot__icon" />
@@ -76,7 +71,7 @@ export function ServiceOperationsContent() {
       </section>
 
       {/* ── Context & problem ────────────────────────────────── */}
-      <CaseSection id="context" label="Context" number={c.sectionNums.context} heading={s.contextHeading}>
+      <CaseSection id="context" label={c.sectionLabels.context} number={c.sectionNums.context} heading={s.contextHeading}>
         <Reveal className="prose">
           {s.contextProse.map((p, i) => <p key={i}>{p}</p>)}
         </Reveal>
@@ -90,7 +85,7 @@ export function ServiceOperationsContent() {
       <div className="container"><Divider /></div>
 
       {/* ── Process ──────────────────────────────────────────── */}
-      <CaseSection id="process" label="Process" number={c.sectionNums.process} heading={s.processHeading}>
+      <CaseSection id="process" label={c.sectionLabels.process} number={c.sectionNums.process} heading={s.processHeading}>
         <Reveal className="prose">
           {s.processProse.map((item, i) => (
             <p key={i} className="muted">
@@ -117,7 +112,7 @@ export function ServiceOperationsContent() {
       <div className="container"><Divider /></div>
 
       {/* ── The design & system ──────────────────────────────── */}
-      <CaseSection id="design" label="Design" number={c.sectionNums.design} heading={s.designHeading}>
+      <CaseSection id="design" label={c.sectionLabels.design} number={c.sectionNums.design} heading={s.designHeading}>
         <Reveal className="prose">
           <p>{s.designProse[0]}</p>
           <p className="muted">{s.designProse[1]}</p>
@@ -129,51 +124,35 @@ export function ServiceOperationsContent() {
             <div className="incident">
               <div className="incident__top">
                 <span className="incident__id">INC-2041</span>
-                <Status variant="urgent">Urgent</Status>
+                <Status variant="urgent">{specimen.incident.urgent}</Status>
               </div>
-              <span className="incident__title">Late checkout requested — room note pending</span>
+              <span className="incident__title">{specimen.incident.title}</span>
               <div className="incident__meta">
-                <Tag>Front desk</Tag>
-                <Tag>Guest request</Tag>
+                {specimen.incident.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
               </div>
               <div className="incident__fields">
-                <div className="incident__field">
-                  <span className="incident__key">Category</span>
-                  <span className="incident__val">Guest request</span>
-                </div>
-                <div className="incident__field">
-                  <span className="incident__key">Room</span>
-                  <span className="incident__val">412</span>
-                </div>
-                <div className="incident__field">
-                  <span className="incident__key">Area</span>
-                  <span className="incident__val">Reception</span>
-                </div>
-                <div className="incident__field">
-                  <span className="incident__key">Owner</span>
-                  <span className="incident__val">Night shift</span>
-                </div>
+                {specimen.incident.fields.map((field) => (
+                  <div className="incident__field" key={field.label}>
+                    <span className="incident__key">{field.label}</span>
+                    <span className="incident__val">{field.value}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="stack" style={{ gap: "var(--space-5)" }}>
               <div className="stack" style={{ gap: "var(--space-2)" }}>
-                <span className="incident__key">Status tokens</span>
+                <span className="incident__key">{specimen.incident.statusTokens}</span>
                 <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
-                  <Status variant="default">Open</Status>
-                  <Status variant="urgent">Urgent</Status>
-                  <Status variant="done">Resolved</Status>
+                  <Status variant="default">{specimen.incident.statuses.open}</Status>
+                  <Status variant="urgent">{specimen.incident.statuses.urgent}</Status>
+                  <Status variant="done">{specimen.incident.statuses.resolved}</Status>
                 </div>
               </div>
               <div className="stack" style={{ gap: "var(--space-2)" }}>
-                <span className="incident__key">Guided fields</span>
+                <span className="incident__key">{specimen.incident.guidedFields}</span>
                 <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
-                  <Tag>Category</Tag>
-                  <Tag>Room</Tag>
-                  <Tag>Area</Tag>
-                  <Tag>Priority</Tag>
-                  <Tag>Owner</Tag>
-                  <Tag>Status</Tag>
+                  {specimen.incident.fieldTags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
                 </div>
               </div>
               <Text variant="small">{s.dsSliceNote}</Text>
@@ -183,14 +162,14 @@ export function ServiceOperationsContent() {
 
         <Reveal>
           <Text variant="h3" style={{ marginBottom: "var(--space-6)" }}>{c.statesHeading}</Text>
-          <StatesGrid states={STATES} />
+          <StatesGrid states={specimen.states} />
         </Reveal>
       </CaseSection>
 
       <div className="container"><Divider /></div>
 
       {/* ── Outcome & reflection ─────────────────────────────── */}
-      <CaseSection id="outcome" label="Outcome" number={c.sectionNums.outcome} heading={s.outcomeHeading}>
+      <CaseSection id="outcome" label={c.sectionLabels.outcome} number={c.sectionNums.outcome} heading={s.outcomeHeading}>
         <Reveal className="prose">
           <p className="muted">
             <strong style={{ color: "var(--ink)", fontWeight: 500 }}>{s.outcomeProse.impact.label}</strong>{" "}

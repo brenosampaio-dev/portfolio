@@ -59,7 +59,7 @@ export function AboutContent() {
         <Reveal delay={160} className="about-facts">
           <div className="about-fact">
             <span className="about-fact__label">{ta.facts.basedIn}</span>
-            <span className="about-fact__value">{profile.location}</span>
+            <span className="about-fact__value">{t.profile.location}</span>
           </div>
           <div className="about-fact">
             <span className="about-fact__label">{ta.facts.working}</span>
@@ -107,7 +107,7 @@ export function AboutContent() {
         <Reveal className="prose">
           {ta.story.map((para, i) => (
             <p key={i} className={i > 0 ? "muted" : undefined}>
-              {para.replace("{location}", profile.location)}
+              {para.replace("{location}", t.profile.location)}
             </p>
           ))}
 

@@ -5,17 +5,15 @@
  * human (slate accent), Low is the one genuine caution (alert vermilion) — the
  * state the whole tool exists to catch.
  */
-const LABEL = {
-  high: "Confidence: High",
-  review: "Confidence: Needs review",
-  low: "Confidence: Low",
-};
+import { useI18n } from "@/lib/useI18n";
 
 export function Confidence({ level = "high", className = "" }) {
+  const { t } = useI18n();
+  const labels = t.specimens.triage.confidence;
   return (
     <span className={`conf conf--${level}${className ? ` ${className}` : ""}`}>
       <span className="conf__dot" aria-hidden="true" />
-      {LABEL[level] || LABEL.high}
+      {labels[level] || labels.high}
     </span>
   );
 }

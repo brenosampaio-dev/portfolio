@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Scramble } from "@/components/site/Scramble";
 import { TOOLKIT_ICONS } from "@/lib/toolkitIcons";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * Toolkit — a calm, static row of the tools that matter. The label decodes in
@@ -12,6 +13,7 @@ import { TOOLKIT_ICONS } from "@/lib/toolkitIcons";
  * motion / no-JS shows them in place.
  */
 export function Toolkit({ items = TOOLKIT_ICONS, stagger = 90 }) {
+  const { t } = useI18n();
   const ref = useRef(null);
   const [open, setOpen] = useState(0);
   const n = items.length;
@@ -102,7 +104,7 @@ export function Toolkit({ items = TOOLKIT_ICONS, stagger = 90 }) {
 
   return (
     <div className="toolkit" ref={ref}>
-      <Scramble className="eyebrow eyebrow--accent toolkit__label" text="Technical foundation" />
+      <Scramble className="eyebrow eyebrow--accent toolkit__label" text={t.toolkit.label} />
       <div className="toolkit__row">
         {items.map((it, i) => (
           <span

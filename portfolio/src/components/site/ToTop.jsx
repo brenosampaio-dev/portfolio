@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * ToTop — appears once the reader has scrolled past the first viewport.
@@ -8,6 +9,7 @@ import { useEffect, useRef } from "react";
  */
 export function ToTop() {
   const ref = useRef(null);
+  const { t } = useI18n();
 
   useEffect(() => {
     const btn = ref.current;
@@ -36,7 +38,7 @@ export function ToTop() {
   };
 
   return (
-    <button ref={ref} type="button" className="to-top" onClick={toTop} aria-label="Back to top">
+    <button ref={ref} type="button" className="to-top" onClick={toTop} aria-label={t.a11y.backToTop}>
       <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
         <path d="M8 13V3M8 3L3.5 7.5M8 3l4.5 4.5" stroke="currentColor" strokeWidth="1.3"
           strokeLinecap="round" strokeLinejoin="round" />

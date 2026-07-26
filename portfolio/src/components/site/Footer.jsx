@@ -27,7 +27,7 @@ export function Footer() {
             </a>
             <span className="sep" aria-hidden="true">·</span>
             <a className="link-quiet" href="mailto:hello@brenosampaio.com">
-              Email
+              {t.footer.email}
             </a>
           </div>
         </div>

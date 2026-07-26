@@ -17,12 +17,14 @@ import { CaseSnapshot } from "@/components/site/CaseSnapshot";
 import { TriagePayloadSpecimen } from "@/components/site/TechnicalArtifacts";
 import { useLang } from "@/context/AppContext";
 import { getT } from "@/lib/i18n";
+import { renderTitle } from "@/lib/renderTitle";
 
 export function TriageAIContent() {
   const { lang } = useLang();
   const t = getT(lang);
   const c = t.cases;
   const s = t.cases.triageai;
+  const specimen = t.specimens.triage;
   const factItems = [
     { label: c.factLabels.role, value: s.facts.role },
     { label: c.factLabels.type, value: s.facts.type },
@@ -38,7 +40,7 @@ export function TriageAIContent() {
         backHref="/#work"
         backLabel={c.back}
         tags={[s.tag, "2026"]}
-        title={<>Multilingual <span className="accent">Support Triage</span></>}
+        title={renderTitle(s.title)}
         lead={s.lead}
         visual={
           <BrowserFrame url="support.local/intake">
@@ -50,7 +52,7 @@ export function TriageAIContent() {
       </CaseHero>
 
       {/* ── Snapshot / TL;DR ─────────────────────────────────── */}
-      <section id="snapshot" data-label="Snapshot" className="container section--tight" aria-label="Snapshot">
+      <section id="snapshot" data-label={c.sectionLabels.snapshot} className="container section--tight" aria-label={c.sectionLabels.snapshot}>
         <Reveal className="snapshot">
           <div className="snapshot__row">
             <Icon name="alert" className="snapshot__icon" />
@@ -71,10 +73,10 @@ export function TriageAIContent() {
       </section>
 
       {/* ── Context & problem ────────────────────────────────── */}
-      <section id="sec-context" data-label="Context" className="container section case-section" aria-labelledby="ctx">
+      <section id="sec-context" data-label={c.sectionLabels.context} className="container section case-section" aria-labelledby="ctx">
         <Collapsible
           defaultOpen
-          label="Context"
+          label={c.sectionLabels.context}
           header={
             <div className="case-section__head">
               <Scramble className="eyebrow eyebrow--accent" text={c.sectionNums.context} />
@@ -94,10 +96,10 @@ export function TriageAIContent() {
       <div className="container"><Divider /></div>
 
       {/* ── Process ──────────────────────────────────────────── */}
-      <section id="sec-process" data-label="Process" className="container section case-section" aria-labelledby="process">
+      <section id="sec-process" data-label={c.sectionLabels.process} className="container section case-section" aria-labelledby="process">
         <Collapsible
           defaultOpen
-          label="Process"
+          label={c.sectionLabels.process}
           header={
             <div className="case-section__head">
               <Scramble className="eyebrow eyebrow--accent" text={c.sectionNums.process} />
@@ -134,10 +136,10 @@ export function TriageAIContent() {
       <div className="container"><Divider /></div>
 
       {/* ── The design & system ──────────────────────────────── */}
-      <section id="sec-design" data-label="Design" className="container section case-section" aria-labelledby="design">
+      <section id="sec-design" data-label={c.sectionLabels.design} className="container section case-section" aria-labelledby="design">
         <Collapsible
           defaultOpen
-          label="Design"
+          label={c.sectionLabels.design}
           header={
             <div className="case-section__head">
               <Scramble className="eyebrow eyebrow--accent" text={c.sectionNums.design} />
@@ -152,7 +154,7 @@ export function TriageAIContent() {
             <p className="muted">
               {s.designProse[1]}{" "}
               <strong style={{ color: "var(--ink)", fontWeight: 500 }}>{s.designEmphasis.low}</strong>{" "}
-              {lang === "en" ? "and" : lang === "fr" ? "et" : "y"}{" "}
+              {t.common.and}{" "}
               <strong style={{ color: "var(--ink)", fontWeight: 500 }}>{s.designEmphasis.caught}</strong>
             </p>
           </Reveal>
@@ -180,32 +182,22 @@ export function TriageAIContent() {
                 <span className="incident__title">“No recibí el reembolso de mi reserva cancelada.”</span>
                 <div className="incident__meta">
                   <Tag>ES</Tag>
-                  <Tag>Refund</Tag>
-                  <Status variant="urgent">Priority: High</Status>
+                  <Tag>{specimen.incident.refund}</Tag>
+                  <Status variant="urgent">{specimen.incident.priorityHigh}</Status>
                 </div>
                 <div className="incident__fields">
-                  <div className="incident__field">
-                    <span className="incident__key">Channel</span>
-                    <span className="incident__val">WhatsApp</span>
-                  </div>
-                  <div className="incident__field">
-                    <span className="incident__key">Intent</span>
-                    <span className="incident__val">Refund request</span>
-                  </div>
-                  <div className="incident__field">
-                    <span className="incident__key">Missing</span>
-                    <span className="incident__val">Booking reference</span>
-                  </div>
-                  <div className="incident__field">
-                    <span className="incident__key">Action</span>
-                    <span className="incident__val">Needs review</span>
-                  </div>
+                  {specimen.incident.fields.map((field) => (
+                    <div className="incident__field" key={field.label}>
+                      <span className="incident__key">{field.label}</span>
+                      <span className="incident__val">{field.value}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
               <div className="stack" style={{ gap: "var(--space-5)" }}>
                 <div className="stack" style={{ gap: "var(--space-2)" }}>
-                  <span className="incident__key">Confidence tokens</span>
+                  <span className="incident__key">{specimen.incident.confidenceTokens}</span>
                   <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
                     <Confidence level="high" />
                     <Confidence level="review" />
@@ -213,14 +205,14 @@ export function TriageAIContent() {
                   </div>
                 </div>
                 <div className="stack" style={{ gap: "var(--space-2)" }}>
-                  <span className="incident__key">Tags — language · intent · urgency</span>
+                  <span className="incident__key">{specimen.incident.tagsLabel}</span>
                   <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
                     <Tag>ES</Tag>
                     <Tag>PT</Tag>
                     <Tag>FR</Tag>
                     <Tag>EN</Tag>
-                    <Tag>Refund</Tag>
-                    <Tag>Maintenance</Tag>
+                    <Tag>{specimen.incident.refund}</Tag>
+                    <Tag>{specimen.incident.maintenance}</Tag>
                   </div>
                 </div>
                 <Text variant="small">{s.dsSliceNote}</Text>
@@ -238,10 +230,10 @@ export function TriageAIContent() {
       <div className="container"><Divider /></div>
 
       {/* ── Outcome & reflection ─────────────────────────────── */}
-      <section id="sec-outcome" data-label="Outcome" className="container section case-section" aria-labelledby="outcome">
+      <section id="sec-outcome" data-label={c.sectionLabels.outcome} className="container section case-section" aria-labelledby="outcome">
         <Collapsible
           defaultOpen
-          label="Outcome"
+          label={c.sectionLabels.outcome}
           header={
             <div className="case-section__head">
               <Scramble className="eyebrow eyebrow--accent" text={c.sectionNums.outcome} />

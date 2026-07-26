@@ -31,7 +31,7 @@ export const projects = [
     category: "Concept case",
     title: "Multilingual Support Triage",
     problem:
-      "A support intake workflow that structures, prioritises and routes multilingual requests while keeping every outgoing response under human approval.",
+      "A support intake workflow that structures, prioritizes and routes multilingual requests while keeping every outgoing response under human approval.",
     role: "Technical-functional concept",
     year: "2026",
     href: "/work/triageai",

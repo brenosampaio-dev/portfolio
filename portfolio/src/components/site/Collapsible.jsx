@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * Collapsible — progressive disclosure with a native button at every viewport.
@@ -13,6 +14,7 @@ import { useId, useState } from "react";
 export function Collapsible({ header, children, defaultOpen = false, className = "", label = "section" }) {
   const [open, setOpen] = useState(defaultOpen);
   const panelId = useId();
+  const { t } = useI18n();
 
   return (
     <div className={`collapsible${open ? " is-open" : ""}${className ? ` ${className}` : ""}`}>
@@ -23,7 +25,7 @@ export function Collapsible({ header, children, defaultOpen = false, className =
           className="collapsible__toggle"
           aria-expanded={open}
           aria-controls={panelId}
-          aria-label={`${open ? "Collapse" : "Expand"} ${label}`}
+          aria-label={`${open ? t.a11y.collapse : t.a11y.expand} ${label}`}
           onClick={() => setOpen((value) => !value)}
         >
           <span className="collapsible__icon" aria-hidden="true" />

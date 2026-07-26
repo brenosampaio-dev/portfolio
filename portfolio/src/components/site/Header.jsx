@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { Wordmark } from "./Wordmark";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTheme, useLang } from "@/context/AppContext";
 import { getT } from "@/lib/i18n";
 
@@ -67,7 +68,7 @@ export function Header() {
 
         <div className="dock__divider" aria-hidden="true" />
 
-        <nav className="nav" aria-label="Primary">
+        <nav className="nav" aria-label={t.a11y.primaryNavigation}>
           <Link href="/#work" aria-current={pathname.startsWith("/work") ? "page" : undefined}>{t.nav.work}</Link>
           <Link href="/#about" aria-current={pathname === "/about" ? "page" : undefined}>{t.nav.about}</Link>
           <Link href="/#approach" className="nav-hide-sm">{t.nav.approach}</Link>
@@ -98,10 +99,11 @@ export function Header() {
         <div className="dock__divider" aria-hidden="true" />
 
         <div className="dock__controls">
+          <LanguageSwitcher />
           <button
             className="theme-btn"
             onClick={toggle}
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            aria-label={theme === "dark" ? t.a11y.switchToLight : t.a11y.switchToDark}
           >
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </button>

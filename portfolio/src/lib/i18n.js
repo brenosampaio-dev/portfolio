@@ -1,10 +1,83 @@
 ﻿// ── Translations ─────────────────────────────────────────────────────────
 // *word* inside a string = <span className="accent"> (italic serif).
-// EN-only for now — es/fr were removed, unreachable with no language
-// switcher in the UI. getT still takes a lang param so AppContext's lang
-// plumbing keeps working if a switcher comes back later.
+// Canadian English and Canadian French. Every user-facing string — including
+// interface specimens, accessibility labels and client-side metadata — lives
+// here so the language control changes the complete rendered experience.
 
 const en = {
+  locale: "en-CA",
+  profile: {
+    location: "Valencia, Spain",
+  },
+  languageSwitcher: {
+    group: "Language",
+    active: "Canadian English selected",
+    options: {
+      en: "Use Canadian English",
+      fr: "Passer au français canadien",
+    },
+  },
+  a11y: {
+    primaryNavigation: "Primary navigation",
+    switchToLight: "Switch to light mode",
+    switchToDark: "Switch to dark mode",
+    sections: "Page sections",
+    backToTop: "Back to top",
+    skipToContent: "Skip to content",
+    home: "Breno Sampaio home",
+    expand: "Expand",
+    collapse: "Collapse",
+  },
+  common: {
+    and: "and",
+    problem: "Problem",
+    decision: "Decision",
+    tradeoff: "Trade-off",
+    viewCase: "view case study",
+    casePreview: "case study preview",
+    moreComing: "more coming",
+    soon: "Soon",
+  },
+  toolkit: {
+    label: "Technical foundation",
+  },
+  notFound: {
+    eyebrow: "404 · Page not found",
+    heading: "This route has no *next action*.",
+    body: "The page may have moved. Return to the selected work or start again from the home page.",
+    work: "Explore selected work",
+    home: "Go home",
+  },
+  metadata: {
+    ogLocale: "en_CA",
+    person: {
+      jobTitle: "Software Implementation and Application Support",
+      addressLocality: "Valencia",
+      languages: ["Portuguese", "Spanish", "French", "English"],
+    },
+    pages: {
+      home: {
+        title: "Breno Sampaio — Software Implementation & Application Support",
+        description: "Requirements, data rules, testable workflows and support documentation grounded in multilingual service operations and UX/UI practice.",
+      },
+      about: {
+        title: "About — Breno Sampaio",
+        description: "From frontline service operations to software implementation, SaaS onboarding and application support. Based in Valencia, Spain.",
+      },
+      serviceOperations: {
+        title: "Incident & Handover Workflow — Breno Sampaio",
+        description: "A technical-functional concept for logging, assigning, escalating and handing over service incidents with clear status, ownership, history and acceptance criteria.",
+      },
+      triage: {
+        title: "Multilingual Support Triage — Breno Sampaio",
+        description: "A technical-functional concept for structuring, prioritizing and routing multilingual support requests with human approval, escalation rules and failure handling.",
+      },
+      notFound: {
+        title: "Page not found — Breno Sampaio",
+        description: "The requested page could not be found.",
+      },
+    },
+  },
   nav: {
     work: "Work",
     about: "About",
@@ -105,6 +178,7 @@ const en = {
   footer: {
     location:  "Valencia, Spain · open to hybrid and remote roles",
     elsewhere: "Elsewhere",
+    email:      "Email",
     tagline:   "Clear systems help people do better work.",
   },
 
@@ -167,7 +241,7 @@ const en = {
     },
     {
       slug: "triageai", category: "Concept case", title: "Multilingual Support Triage",
-      problem: "A support intake workflow that structures, prioritises and routes multilingual requests while keeping every outgoing response under human approval.",
+      problem: "A support intake workflow that structures, prioritizes and routes multilingual requests while keeping every outgoing response under human approval.",
       role: "Interface & workflow specimens", year: "2026", href: "/work/triageai",
     },
   ],
@@ -185,17 +259,210 @@ const en = {
     { title: "Configure", icon: "sitemap", description: "Translate the workflow into data, states, permissions and routing.", items: ["Map required data", "Define states and transitions", "Set roles and permissions", "Document integration assumptions"] },
     { title: "Test", icon: "check-circle", description: "Verify normal flows, exceptions, validation and access.", items: ["Test the happy path", "Exercise error and recovery states", "Check permissions", "Prepare and support UAT"] },
     { title: "Onboard", icon: "layout", description: "Prepare documentation, training and handover for adoption.", items: ["Write practical guidance", "Train around real tasks", "Clarify ownership", "Track adoption questions"] },
-    { title: "Support", icon: "send", description: "Reproduce issues, gather evidence and improve the process.", items: ["Capture steps and evidence", "Prioritise by impact", "Follow resolution clearly", "Feed recurring issues back"] },
+    { title: "Support", icon: "send", description: "Reproduce issues, gather evidence and improve the process.", items: ["Capture steps and evidence", "Prioritize by impact", "Follow resolution clearly", "Feed recurring issues back"] },
   ],
 
   principlesItems: [
     { annotation: "", principle: "Clear communication", description: "State scope, decisions, risks and next actions in language each team can use." },
-    { annotation: "", principle: "Operational fit", description: "Configure around the real workflow, not an idealised process that disappears after launch." },
+    { annotation: "", principle: "Operational fit", description: "Configure around the real workflow, not an idealized process that disappears after launch." },
     { annotation: "", principle: "Traceability", description: "Keep ownership, status changes, approvals and support evidence visible." },
     { annotation: "", principle: "Human control", description: "Automate support work without hiding uncertainty or removing accountable review." },
     { annotation: "", principle: "Multilingual context", description: "Treat language as an operational requirement across intake, documentation and support." },
     { annotation: "", principle: "UX as a supporting layer", description: "Use clarity and restraint to reduce errors, training effort and cognitive load." },
   ],
+
+  specimens: {
+    service: {
+      dashboard: {
+        eyebrow: "Open now",
+        title: "Shift handover · night → morning",
+        stats: [
+          { label: "Open", value: 6 },
+          { label: "Urgent", value: 2, urgent: true },
+          { label: "Resolved today", value: 9 },
+        ],
+        incidents: [
+          { id: "INC-2041", title: "Late checkout requested — room note pending", area: "Reception", owner: "Night shift", urgent: true },
+          { id: "INC-2038", title: "AC not cooling — guest waiting in 318", area: "Maintenance", owner: "Technician on call", urgent: true },
+          { id: "INC-2035", title: "Extra towels and crib requested for 412", area: "Housekeeping", owner: "Floor 4" },
+          { id: "INC-2030", title: "Charge to double-check on room 207 folio", area: "Front desk", owner: "Morning shift" },
+        ],
+        urgent: "Urgent",
+        open: "Open",
+        asideLabel: "Queue pressure and pending work by area",
+        shiftPulse: "Shift pulse",
+        window: "12-hour window",
+        pendingByArea: "Pending by area",
+        areas: [
+          { name: "Maintenance", load: 0.82 },
+          { name: "Housekeeping", load: 0.54 },
+          { name: "Front desk", load: 0.33 },
+        ],
+      },
+      scatter: {
+        sources: ["PMS", "Email", "WhatsApp group", "Paper notebook", "Spreadsheet", "Post-it", "Verbal “by the way”", "Someone’s memory"],
+        caption: "The same incident, scattered across every tool — and the person who just left.",
+      },
+      flow: {
+        beforeLabel: "Before",
+        afterLabel: "After",
+        before: ["PMS", "Chat", "Paper", "Memory"],
+        after: "One operational view of what is still open",
+        steps: ["Log an incident", "Hand over a shift", "See what is open now", "Resolve and update with history"],
+      },
+      states: [
+        { label: "Empty", variant: "empty", caption: "No open or escalated incidents in this view." },
+        { label: "Loading", variant: "loading" },
+        { label: "Error", variant: "error", caption: "Save failed. Draft kept locally — retry when ready." },
+        { label: "Success", variant: "success", caption: "Incident logged with owner, status and history." },
+      ],
+      incident: {
+        urgent: "Urgent",
+        title: "Late checkout requested — room note pending",
+        tags: ["Front desk", "Guest request"],
+        fields: [
+          { label: "Category", value: "Guest request" },
+          { label: "Room", value: "412" },
+          { label: "Area", value: "Reception" },
+          { label: "Owner", value: "Night shift" },
+        ],
+        statusTokens: "Status tokens",
+        statuses: { open: "Open", urgent: "Urgent", resolved: "Resolved" },
+        guidedFields: "Guided fields",
+        fieldTags: ["Category", "Room", "Area", "Priority", "Owner", "Status"],
+      },
+      mobile: {
+        title: "New incident",
+        eyebrow: "Guided log",
+        fields: [
+          { key: "Category", value: "Guest request" },
+          { key: "Room", value: "412" },
+          { key: "Area", value: "Reception" },
+          { key: "Priority", value: "Urgent", urgent: true },
+        ],
+        description: "Description",
+        note: "Guest asked for late checkout until 2:00 p.m. — confirm with housekeeping.",
+        save: "Log incident",
+      },
+    },
+    triage: {
+      confidence: {
+        high: "Confidence: High",
+        review: "Confidence: Needs review",
+        low: "Confidence: Low",
+      },
+      systemFlow: [
+        { label: "Channels", sub: "WhatsApp · Email · Web", kind: "in" },
+        { label: "AI triage", sub: "Language · intent · urgency", kind: "ai" },
+        { label: "Human approval", sub: "Nothing sends without this", kind: "gate" },
+        { label: "Response", sub: "Consistent across languages", kind: "out" },
+      ],
+      channelScatter: {
+        sources: ["WhatsApp · ES", "Email · PT", "Web form · FR", "Email · EN", "WhatsApp · FR", "Web form · ES", "No priority", "Unread · 2h"],
+        caption: "Every channel, every language, arriving at once — unranked, unread, no priority.",
+      },
+      inbox: {
+        eyebrow: "Triage · inbox",
+        title: "12 in queue · sorted by what needs a person",
+        flagCount: "2 need review",
+        queue: [
+          { msg: "No recibí el reembolso de mi reserva cancelada.", locale: "es", channel: "WhatsApp", lang: "ES", intent: "Refund", conf: "low" },
+          { msg: "Le radiateur ne chauffe pas dans la chambre 214.", locale: "fr", channel: "Web form", lang: "FR", intent: "Maintenance", conf: "review" },
+          { msg: "Pode confirmar o horário do check-in?", locale: "pt", channel: "Email", lang: "PT", intent: "Booking question", conf: "high" },
+          { msg: "Can I add an extra night to my stay?", locale: "en", channel: "Email", lang: "EN", intent: "Booking change", conf: "high" },
+        ],
+      },
+      flow: {
+        beforeLabel: "Before",
+        afterLabel: "After",
+        before: ["Read everything", "Guess the language", "Guess the urgency", "Reply inconsistently"],
+        after: "AI structures and ranks; a person verifies and approves",
+        steps: [
+          "Message received",
+          "AI classifies language, intent, urgency and missing information",
+          "A person reviews visible confidence, then approves or corrects",
+          "Send the approved reply and log who approved what",
+        ],
+      },
+      analysis: {
+        from: "Guest · WhatsApp",
+        time: "2 min ago",
+        detectedLanguage: "Detected language · Spanish (ES)",
+        analysis: "AI analysis",
+        intentLabel: "Intent",
+        intent: "Refund request",
+        urgencyLabel: "Urgency",
+        urgency: "High",
+        urgencyWhy: "— “reembolso” + cancelled booking",
+        missingLabel: "Missing information",
+        missing: "Booking reference — required before a reply can be sent",
+        proposedReply: "Proposed reply · ES",
+        backTranslation: "Back-translation · EN",
+        backTranslationText: "“Sorry about that. To locate your refund, could you share your booking reference?”",
+        review: "Review and approve",
+        correct: "Correct",
+        gate: "Sending is gated — nothing leaves without approval",
+      },
+      correction: {
+        aiRead: "AI interpretation",
+        aiValue: "Intent · Maintenance question",
+        humanCorrected: "Human correction",
+        humanValue: "Intent · Repeated complaint — escalate",
+        note: "In this prototype scenario, the review gate lets the agent correct the classification before approving the reply. The override creates labelled feedback for future rule or model review.",
+      },
+      states: [
+        { label: "Empty", variant: "empty", caption: "Queue clear. Nothing is waiting for a person." },
+        { label: "Processing", variant: "processing" },
+        { label: "Needs review", variant: "review", caption: "Low confidence — moved to the top for a person to verify." },
+        { label: "Missing information", variant: "empty", caption: "A reply cannot be drafted yet — the booking reference is required first." },
+      ],
+      incident: {
+        refund: "Refund",
+        maintenance: "Maintenance",
+        priorityHigh: "Priority: High",
+        fields: [
+          { label: "Channel", value: "WhatsApp" },
+          { label: "Intent", value: "Refund request" },
+          { label: "Missing", value: "Booking reference" },
+          { label: "Action", value: "Needs review" },
+        ],
+        confidenceTokens: "Confidence tokens",
+        tagsLabel: "Tags — language · intent · urgency",
+      },
+      mobile: {
+        title: "Review",
+        maintenance: "Maintenance",
+        priority: "Priority: Medium",
+        message: "« Le chauffage ne fonctionne pas dans la chambre 214. »",
+        replyLabel: "Proposed reply · FR",
+        reply: "« Merci de nous l’avoir signalé. Je vérifie la disponibilité de l’équipe d’entretien et je vous confirmerai le délai. »",
+        backTranslation: "EN · “Thanks for flagging it. I’m checking maintenance availability and will confirm a timeframe.”",
+        approve: "Approve",
+        correct: "Correct",
+      },
+    },
+    technical: {
+      service: {
+        eyebrow: "Data retrieval specimen",
+        title: "Proposed SQL for the “Open now” handover view",
+        note: "A reduced query makes filtering and priority order explicit. The schema is conceptual; this is not a production database query.",
+      },
+      triage: {
+        eyebrow: "Input contract specimen",
+        title: "Reduced request payload and failure rules",
+        note: "The payload is illustrative. It defines the boundary between a channel integration and the triage workflow; no live API is connected.",
+        caption: "Triage intake field contract",
+        headers: ["Field", "Origin", "Required", "Failure path"],
+        rows: [
+          ["channel", "Channel integration", "Yes", "Recoverable intake queue"],
+          ["message", "Inbound channel", "Yes", "Reject payload with a field error"],
+          ["customer_reference", "Customer", "No", "Create an information task"],
+          ["detected_language", "Classification", "Yes", "Route to human review"],
+          ["confidence", "Classification", "Yes", "Apply the review threshold"],
+        ],
+      },
+    },
+  },
 
   cases: {
     back:        "Selected work",
@@ -215,6 +482,13 @@ const en = {
       design:  "03 — The design & system",
       outcome: "04 — Outcome & reflection",
     },
+    sectionLabels: {
+      snapshot: "Snapshot",
+      context: "Context",
+      process: "Process",
+      design: "Design",
+      outcome: "Outcome",
+    },
     roleLabel: "Role.", scopeLabel: "Scope.", effortLabel: "Effort.",
     constraintsHeading: "Operational constraints",
     decisionsHeading:   "Functional decisions",
@@ -225,6 +499,7 @@ const en = {
     getInTouch:  "Start a conversation",
 
     serviceOps: {
+      title: "Incident & *Handover Workflow*",
       tag: "Incident & handover workflow",
       lead: "An implementation concept for logging, assigning, escalating and handing over incidents with clear status, ownership and history.",
       contextHeading: "The day doesn’t end. Responsibility changes hands.",
@@ -290,8 +565,9 @@ const en = {
     },
 
     triageai: {
+      title: "Multilingual *Support Triage*",
       tag: "Multilingual support intake",
-      lead: "A technical-functional concept for structuring, prioritising and routing support requests across four languages — while keeping every outgoing response under human approval.",
+      lead: "A technical-functional concept for structuring, prioritizing and routing support requests across four languages — while keeping every outgoing response under human approval.",
       contextHeading:  "A message is not yet a support case.",
       processHeading:  "From raw intake to owned, traceable work.",
       designHeading:   "Routing rules, human approval and failure handling.",
@@ -332,7 +608,7 @@ const en = {
         { label: "Failure handling.", text: "Invalid payloads enter a recoverable intake queue, unavailable integrations retry with visible status, missing required data creates a customer-information task and every manual override records actor, timestamp, old value, new value and reason." },
       ],
       designProse: [
-        "The inbox prioritises work that needs attention now: SLA risk, high priority, low confidence, missing required data and failed routing. Each case shows the proposed classification and the evidence an agent needs to verify it.",
+        "The inbox prioritizes work that needs attention now: SLA risk, high priority, low confidence, missing required data and failed routing. Each case shows the proposed classification and the evidence an agent needs to verify it.",
         "In this prototype scenario, the review gate makes the proposed classification and correction visible:",
       ],
       designEmphasis: { low: "low confidence is labelled", caught: "the agent can correct the classification before approving a reply." },
@@ -340,7 +616,7 @@ const en = {
         impact:     { label: "Expected impact — to validate.", text: "Faster ownership of urgent cases, fewer requests lost across channels, more consistent multilingual responses and fewer incorrect replies reaching customers. These are hypotheses, not results." },
         tradeoffs:  { label: "Pilot and onboarding plan.", text: "Begin with one channel and a narrow intent set. Run UAT on routing, missing data, duplicates, SLA escalation, correction and send approval. Train agents on the review queue, supervisors on overrides and support staff on integration-failure evidence before adding more automation." },
         reflection: { label: "Implementation limit.", text: "The interface specimens demonstrate workflow behaviour. They are not a trained model, live API, CRM integration or production support system." },
-        ai:         { label: "AI-assisted workflow.", text: "AI supported research organisation, drafting and edge-case review. The support model, routing rules, permissions, trade-offs and final decisions remained mine." },
+        ai:         { label: "AI-assisted workflow.", text: "AI supported research organization, drafting and edge-case review. The support model, routing rules, permissions, trade-offs and final decisions remained mine." },
       },
       constraints: [
         { icon: "alert", term: "Classification can be wrong", desc: "Low confidence, conflicting signals and manual corrections must be visible before approval." },
@@ -366,5 +642,693 @@ const en = {
   },
 };
 
-export const i18n = { en };
+const fr = {
+  ...en,
+  locale: "fr-CA",
+  profile: {
+    location: "Valence, Espagne",
+  },
+  languageSwitcher: {
+    group: "Langue",
+    active: "Français canadien sélectionné",
+    options: {
+      en: "Switch to Canadian English",
+      fr: "Utiliser le français canadien",
+    },
+  },
+  a11y: {
+    primaryNavigation: "Navigation principale",
+    switchToLight: "Passer au mode clair",
+    switchToDark: "Passer au mode sombre",
+    sections: "Sections de la page",
+    backToTop: "Retourner en haut de la page",
+    skipToContent: "Aller au contenu principal",
+    home: "Accueil de Breno Sampaio",
+    expand: "Développer",
+    collapse: "Réduire",
+  },
+  common: {
+    and: "et",
+    problem: "Problème",
+    decision: "Décision",
+    tradeoff: "Compromis",
+    viewCase: "voir l’étude de cas",
+    casePreview: "aperçu de l’étude de cas",
+    moreComing: "d’autres projets à venir",
+    soon: "Bientôt",
+  },
+  toolkit: {
+    label: "Fondations techniques",
+  },
+  notFound: {
+    eyebrow: "404 · Page introuvable",
+    heading: "Cette adresse n’a aucune *prochaine étape*.",
+    body: "La page a peut-être été déplacée. Revenez aux projets sélectionnés ou repartez de la page d’accueil.",
+    work: "Voir les projets sélectionnés",
+    home: "Retour à l’accueil",
+  },
+  metadata: {
+    ogLocale: "fr_CA",
+    person: {
+      jobTitle: "Implantation logicielle et soutien applicatif",
+      addressLocality: "Valence",
+      languages: ["Portugais", "Espagnol", "Français", "Anglais"],
+    },
+    pages: {
+      home: {
+        title: "Breno Sampaio — Implantation logicielle et soutien applicatif",
+        description: "Exigences, règles de données, processus vérifiables et documentation de soutien, ancrés dans des opérations de service multilingues et la pratique UX/UI.",
+      },
+      about: {
+        title: "Profil — Breno Sampaio",
+        description: "Des opérations de service de première ligne à l’implantation logicielle, à l’intégration SaaS et au soutien applicatif. Basé à Valence, en Espagne.",
+      },
+      serviceOperations: {
+        title: "Gestion des incidents et relève — Breno Sampaio",
+        description: "Un concept technico-fonctionnel pour consigner, attribuer, transmettre au niveau supérieur et transférer les incidents de service avec des états, une responsabilité, un historique et des critères d’acceptation clairs.",
+      },
+      triage: {
+        title: "Triage du soutien multilingue — Breno Sampaio",
+        description: "Un concept technico-fonctionnel pour structurer, prioriser et acheminer les demandes de soutien multilingues avec approbation humaine, règles de transmission au niveau supérieur et gestion des défaillances.",
+      },
+      notFound: {
+        title: "Page introuvable — Breno Sampaio",
+        description: "La page demandée est introuvable.",
+      },
+    },
+  },
+  nav: {
+    work: "Projets",
+    about: "Profil",
+    approach: "Méthode",
+    contact: "Contact",
+    downloadCv: "CV canadien (anglais)",
+  },
+  availability: "Ouvert aux possibilités",
+
+  hero: {
+    title: "L’implantation de logiciels, ancrée dans les *opérations réelles*.",
+    lead: "Je transforme des opérations de service multilingues en exigences claires, règles de données, processus vérifiables et documentation pratique pour l’implantation logicielle et le soutien applicatif.",
+    cta1: "Voir les projets sélectionnés",
+    cta2: "Télécharger le CV canadien (anglais)",
+  },
+
+  work: {
+    eyebrow: "Implantation et soutien",
+    heading: "Études de cas en implantation et en soutien.",
+    subheading: "Deux concepts qui transforment des problèmes opérationnels en exigences, processus, règles, états vérifiables et documentation de soutien.",
+    more: "Travail conceptuel indépendant. Les hypothèses, les limites et les résultats attendus sont clairement indiqués.",
+  },
+
+  experience: {
+    eyebrow: "Expérience professionnelle",
+    heading: "L’expérience opérationnelle derrière la *pensée systémique*.",
+    subheading: "Plus de huit ans en opérations de service multilingues en Espagne et en France, parallèlement à une pratique indépendante en produit et en UX.",
+    items: [
+      {
+        dates: "2024 — 2026",
+        role: "Opérations de réception et soutien administratif",
+        company: "Moontels",
+        location: "Valence",
+        detail: "Analyse des écarts liés aux réservations, à la facturation et au service dans ICNEA, Salesforce et les systèmes internes; coordination de la responsabilité et des transferts entre les équipes.",
+      },
+      {
+        dates: "2023 — 2024",
+        role: "Services aux clients et opérations",
+        company: "Travelodge Hotels",
+        location: "Valence",
+        detail: "Résolution de dossiers multilingues en personne, par téléphone et par voie numérique, avec maintien de données de réservation exactes et suivi des actions ouvertes.",
+      },
+      {
+        dates: "2020 — 2023",
+        role: "Designer UX/UI autonome",
+        company: "À son compte",
+        location: "France",
+        detail: "Cartographie des exigences, des parcours utilisateurs et de l’architecture de l’information; production de maquettes filaires et de prototypes haute fidélité pour une clientèle indépendante.",
+      },
+      {
+        dates: "2017 — 2020",
+        role: "Opérations de réception",
+        company: "ibis, ibis Styles et ibis budget",
+        location: "Rennes",
+        detail: "Gestion du soutien client multilingue, de l’exactitude des réservations, des relèves de quart et de l’intégration de nouvelles recrues dans les systèmes opérationnels d’Accor.",
+      },
+    ],
+  },
+
+  process: {
+    eyebrow: "Ma méthode",
+    heading: "Cinq étapes, du problème opérationnel au *processus soutenu*.",
+    subheading: "Les exigences, la configuration, les essais et l’adoption demeurent liés au travail réel.",
+  },
+
+  principles: {
+    eyebrow: "Principes",
+    heading: "Des principes pour une *implantation fiable*.",
+    subheading: "Des pratiques qui rendent les logiciels compréhensibles, traçables et utiles d’une équipe, d’une langue et d’une relève à l’autre.",
+  },
+
+  about: {
+    eyebrow: "À propos de Breno",
+    heading: "Des opérations de première ligne à *l’implantation logicielle*.",
+    lead: "Les opérations de service m’ont appris où les systèmes échouent. L’UX/UI et mes fondations techniques m’aident maintenant à relier les utilisateurs, les processus et les équipes techniques.",
+    cta: "Lire mon parcours",
+    facts: {
+      basedIn: "Basé à",
+      working: "Disponibilité",
+      workingValue: "Hybride · télétravail · mobilité",
+      languages: "Langues",
+      cert: "Certification",
+      certValue: "Certificat professionnel Google en conception UX",
+      mobility: "Canada",
+      mobilityValue: "Ouvert à un déménagement à Calgary · soutien requis pour un permis de travail lié à l’employeur",
+    },
+  },
+
+  contact: {
+    eyebrow: "Entrons en contact",
+    heading: "Rendons les logiciels plus simples à *implanter, adopter et soutenir*.",
+    body: "Je suis ouvert aux postes juniors et intermédiaires en implantation logicielle, intégration SaaS et soutien applicatif. Je suis basé à Valence, en Espagne, et j’envisage un déménagement pour la bonne occasion.",
+    email: "Courriel",
+    location: "Lieu",
+    localTime: "Heure locale",
+  },
+
+  footer: {
+    location: "Valence, Espagne · ouvert aux postes hybrides et à distance",
+    elsewhere: "Ailleurs",
+    email: "Courriel",
+    tagline: "Des systèmes clairs aident les gens à mieux travailler.",
+  },
+
+  aboutPage: {
+    eyebrow: "À propos de Breno",
+    heading: "Des opérations de première ligne à *l’implantation logicielle*.",
+    lead: "J’ai d’abord appris comment un logiciel réussit du côté des opérations, là où une responsabilité floue, une information fragmentée et de mauvaises relèves deviennent des problèmes de service.",
+    downloadCv: "Télécharger le CV canadien (anglais)",
+    facts: {
+      basedIn: "Basé à",
+      working: "Disponibilité",
+      workingValue: "Hybride · télétravail · mobilité",
+      languages: "Langues",
+      cert: "Certification",
+      certValue: "Certificat professionnel Google en conception UX",
+      status: "Statut",
+      statusValue: "Ouvert aux postes en implantation et en soutien",
+      mobility: "Canada",
+      mobilityValue: "Ouvert à un déménagement à Calgary · soutien requis pour un permis de travail lié à l’employeur",
+    },
+    storyEyebrow: "Mon parcours",
+    storyHeading: "Les opérations m’ont appris ce que les logiciels doivent *réellement accomplir*.",
+    story: [
+      "Plus de huit ans en opérations de service et de soutien à la clientèle m’ont montré où les systèmes échouent concrètement : information dispersée entre les outils, responsabilité floue et processus qui reposent sur la mémoire.",
+      "Cette expérience façonne ma manière d’aborder l’implantation et le soutien. Je cartographie le processus, le traduis en exigences et en règles de données, vérifie les parcours normaux et les scénarios d’échec, documente les décisions et prépare les utilisateurs à l’adoption.",
+      "Mon expérience en UX/UI favorise des interfaces claires et une charge cognitive réduite. Je développe des fondations pratiques en SQL, données relationnelles, API REST, HTTP/JSON, Postman, Git et dépannage, sans présenter un travail conceptuel comme un logiciel déployé. Basé à {location}, je travaille en portugais, en espagnol, en français et en anglais.",
+    ],
+    ctaWork: "Voir les projets sélectionnés",
+    ctaContact: "Communiquer avec moi",
+  },
+
+  labels: {
+    intro: "Introduction",
+    work: "Projets",
+    experience: "Expérience",
+    approach: "Méthode",
+    process: "Processus",
+    principles: "Principes",
+    about: "Profil",
+    contact: "Contact",
+    thePath: "Parcours",
+  },
+
+  languageNames: {
+    Portuguese: "Portugais",
+    Spanish: "Espagnol",
+    French: "Français",
+    Italian: "Italien",
+    English: "Anglais",
+  },
+  languageLevels: {
+    Native: "Langue maternelle",
+    Fluent: "Courant",
+    "Professional / Fluent": "Professionnel · courant",
+    Intermediate: "Intermédiaire",
+    "Professional working": "Professionnel",
+  },
+
+  projects: [
+    {
+      slug: "service-operations",
+      category: "Étude conceptuelle",
+      title: "Gestion des incidents et relève",
+      problem: "Un processus opérationnel pour consigner, attribuer, transmettre au niveau supérieur et transférer les incidents ouverts avec un état, une responsabilité et un historique clairs.",
+      role: "Spécimens d’interface et de processus",
+      year: "2026",
+      href: "/work/service-operations",
+    },
+    {
+      slug: "triageai",
+      category: "Étude conceptuelle",
+      title: "Triage du soutien multilingue",
+      problem: "Un processus de réception qui structure, priorise et achemine les demandes multilingues tout en soumettant chaque réponse sortante à une approbation humaine.",
+      role: "Spécimens d’interface et de processus",
+      year: "2026",
+      href: "/work/triageai",
+    },
+  ],
+
+  approachItems: [
+    { title: "Comprendre le processus réel", description: "Commencer par les utilisateurs, les outils, les contraintes et les endroits où l’information, la responsabilité ou le service se brisent." },
+    { title: "Cartographier les exigences et les dépendances", description: "Transformer le problème en portée, exigences, contraintes et critères d’acceptation explicites." },
+    { title: "Définir les données, les états et les responsabilités", description: "Clarifier les champs, les changements d’état, les autorisations, les règles d’acheminement et la responsabilité avant la configuration." },
+    { title: "Tester les parcours normaux et les scénarios d’échec", description: "Vérifier le parcours nominal, les exceptions, la validation, les accès, les intégrations et la reprise, pas seulement le scénario de démonstration." },
+    { title: "Documenter et soutenir l’adoption", description: "Préparer les utilisateurs, transférer clairement les décisions et continuer d’apprendre des problèmes de soutien après le lancement." },
+  ],
+
+  processSteps: [
+    {
+      title: "Découvrir et définir",
+      icon: "search",
+      description: "Comprendre le processus, puis définir la portée, les exigences et les critères de réussite.",
+      items: ["Interroger les personnes qui font le travail", "Cartographier l’emplacement de l’information", "Distinguer les faits des hypothèses", "Rédiger les critères d’acceptation"],
+    },
+    {
+      title: "Configurer",
+      icon: "sitemap",
+      description: "Traduire le processus en données, états, autorisations et règles d’acheminement.",
+      items: ["Cartographier les données requises", "Définir les états et les transitions", "Établir les rôles et les autorisations", "Documenter les hypothèses d’intégration"],
+    },
+    {
+      title: "Tester",
+      icon: "check-circle",
+      description: "Vérifier les parcours normaux, les exceptions, la validation et les accès.",
+      items: ["Tester le parcours nominal", "Exercer les états d’erreur et de reprise", "Vérifier les autorisations", "Préparer et soutenir les tests d’acceptation utilisateur"],
+    },
+    {
+      title: "Accompagner",
+      icon: "layout",
+      description: "Préparer la documentation, la formation et la relève nécessaires à l’adoption.",
+      items: ["Rédiger des directives pratiques", "Former à partir des tâches réelles", "Clarifier la responsabilité", "Suivre les questions d’adoption"],
+    },
+    {
+      title: "Soutenir",
+      icon: "send",
+      description: "Reproduire les problèmes, recueillir les preuves et améliorer le processus.",
+      items: ["Consigner les étapes et les preuves", "Prioriser selon l’incidence", "Suivre clairement la résolution", "Réinjecter les problèmes récurrents dans le processus"],
+    },
+  ],
+
+  principlesItems: [
+    { annotation: "", principle: "Communication claire", description: "Présenter la portée, les décisions, les risques et les prochaines actions dans un langage que chaque équipe peut utiliser." },
+    { annotation: "", principle: "Adéquation opérationnelle", description: "Configurer selon le processus réel, et non selon un idéal qui disparaît après le lancement." },
+    { annotation: "", principle: "Traçabilité", description: "Rendre visibles la responsabilité, les changements d’état, les approbations et les preuves de soutien." },
+    { annotation: "", principle: "Contrôle humain", description: "Automatiser le travail de soutien sans masquer l’incertitude ni supprimer une révision responsable." },
+    { annotation: "", principle: "Contexte multilingue", description: "Traiter la langue comme une exigence opérationnelle dans la réception, la documentation et le soutien." },
+    { annotation: "", principle: "L’UX comme couche de soutien", description: "Utiliser la clarté et la retenue pour réduire les erreurs, les efforts de formation et la charge cognitive." },
+  ],
+
+  specimens: {
+    service: {
+      dashboard: {
+        eyebrow: "Ouverts maintenant",
+        title: "Relève de quart · nuit → matin",
+        stats: [
+          { label: "Ouverts", value: 6 },
+          { label: "Urgents", value: 2, urgent: true },
+          { label: "Résolus aujourd’hui", value: 9 },
+        ],
+        incidents: [
+          { id: "INC-2041", title: "Départ tardif demandé — note de chambre en attente", area: "Réception", owner: "Quart de nuit", urgent: true },
+          { id: "INC-2038", title: "Climatisation défectueuse — client en attente à la 318", area: "Entretien", owner: "Technicien de garde", urgent: true },
+          { id: "INC-2035", title: "Serviettes et lit de bébé demandés pour la 412", area: "Entretien ménager", owner: "4e étage" },
+          { id: "INC-2030", title: "Frais à revérifier sur le folio de la 207", area: "Réception", owner: "Quart du matin" },
+        ],
+        urgent: "Urgent",
+        open: "Ouvert",
+        asideLabel: "Pression de la file et travail en attente par secteur",
+        shiftPulse: "Pouls du quart",
+        window: "Fenêtre de 12 h",
+        pendingByArea: "En attente par secteur",
+        areas: [
+          { name: "Entretien", load: 0.82 },
+          { name: "Entretien ménager", load: 0.54 },
+          { name: "Réception", load: 0.33 },
+        ],
+      },
+      scatter: {
+        sources: ["PMS", "Courriel", "Groupe WhatsApp", "Cahier papier", "Feuille de calcul", "Papillon adhésif", "Message verbal « au fait »", "Mémoire d’un collègue"],
+        caption: "Le même incident, dispersé entre tous les outils — et la personne qui vient de quitter.",
+      },
+      flow: {
+        beforeLabel: "Avant",
+        afterLabel: "Après",
+        before: ["PMS", "Clavardage", "Papier", "Mémoire"],
+        after: "Une seule vue opérationnelle de ce qui demeure ouvert",
+        steps: ["Consigner un incident", "Effectuer une relève de quart", "Voir ce qui est ouvert maintenant", "Résoudre et mettre à jour avec historique"],
+      },
+      states: [
+        { label: "Vide", variant: "empty", caption: "Aucun incident ouvert ou transmis au niveau supérieur dans cette vue." },
+        { label: "Chargement", variant: "loading" },
+        { label: "Erreur", variant: "error", caption: "Échec de l’enregistrement. Le brouillon est conservé localement; réessayez lorsque vous êtes prêt." },
+        { label: "Réussite", variant: "success", caption: "Incident consigné avec responsable, état et historique." },
+      ],
+      incident: {
+        urgent: "Urgent",
+        title: "Départ tardif demandé — note de chambre en attente",
+        tags: ["Réception", "Demande client"],
+        fields: [
+          { label: "Catégorie", value: "Demande client" },
+          { label: "Chambre", value: "412" },
+          { label: "Secteur", value: "Réception" },
+          { label: "Responsable", value: "Quart de nuit" },
+        ],
+        statusTokens: "Repères d’état",
+        statuses: { open: "Ouvert", urgent: "Urgent", resolved: "Résolu" },
+        guidedFields: "Champs guidés",
+        fieldTags: ["Catégorie", "Chambre", "Secteur", "Priorité", "Responsable", "État"],
+      },
+      mobile: {
+        title: "Nouvel incident",
+        eyebrow: "Saisie guidée",
+        fields: [
+          { key: "Catégorie", value: "Demande client" },
+          { key: "Chambre", value: "412" },
+          { key: "Secteur", value: "Réception" },
+          { key: "Priorité", value: "Urgent", urgent: true },
+        ],
+        description: "Description",
+        note: "Le client a demandé un départ tardif à 14 h — à confirmer avec l’entretien ménager.",
+        save: "Consigner l’incident",
+      },
+    },
+    triage: {
+      confidence: {
+        high: "Confiance : élevée",
+        review: "Confiance : à vérifier",
+        low: "Confiance : faible",
+      },
+      systemFlow: [
+        { label: "Canaux", sub: "WhatsApp · courriel · Web", kind: "in" },
+        { label: "Triage par IA", sub: "Langue · intention · urgence", kind: "ai" },
+        { label: "Approbation humaine", sub: "Aucun envoi sans approbation", kind: "gate" },
+        { label: "Réponse", sub: "Cohérente dans toutes les langues", kind: "out" },
+      ],
+      channelScatter: {
+        sources: ["WhatsApp · ES", "Courriel · PT", "Formulaire Web · FR", "Courriel · EN", "WhatsApp · FR", "Formulaire Web · ES", "Aucune priorité", "Non lu · 2 h"],
+        caption: "Tous les canaux et toutes les langues arrivent en même temps — sans classement, sans lecture ni priorité.",
+      },
+      inbox: {
+        eyebrow: "Triage · boîte de réception",
+        title: "12 en file · classés selon l’intervention humaine requise",
+        flagCount: "2 à vérifier",
+        queue: [
+          { msg: "No recibí el reembolso de mi reserva cancelada.", locale: "es", channel: "WhatsApp", lang: "ES", intent: "Remboursement", conf: "low" },
+          { msg: "Le radiateur ne chauffe pas dans la chambre 214.", locale: "fr", channel: "Formulaire Web", lang: "FR", intent: "Entretien", conf: "review" },
+          { msg: "Pode confirmar o horário do check-in?", locale: "pt", channel: "Courriel", lang: "PT", intent: "Question de réservation", conf: "high" },
+          { msg: "Can I add an extra night to my stay?", locale: "en", channel: "Courriel", lang: "EN", intent: "Modification de réservation", conf: "high" },
+        ],
+      },
+      flow: {
+        beforeLabel: "Avant",
+        afterLabel: "Après",
+        before: ["Tout lire", "Deviner la langue", "Deviner l’urgence", "Répondre de façon inégale"],
+        after: "L’IA structure et classe; une personne vérifie et approuve",
+        steps: [
+          "Message reçu",
+          "L’IA classe la langue, l’intention, l’urgence et l’information manquante",
+          "Une personne examine le niveau de confiance visible, puis approuve ou corrige",
+          "Envoyer la réponse approuvée et consigner qui a approuvé quoi",
+        ],
+      },
+      analysis: {
+        from: "Client · WhatsApp",
+        time: "Il y a 2 min",
+        detectedLanguage: "Langue détectée · espagnol (ES)",
+        analysis: "Analyse par l’IA",
+        intentLabel: "Intention",
+        intent: "Demande de remboursement",
+        urgencyLabel: "Urgence",
+        urgency: "Élevée",
+        urgencyWhy: "— « reembolso » + réservation annulée",
+        missingLabel: "Information manquante",
+        missing: "Numéro de réservation — requis avant l’envoi d’une réponse",
+        proposedReply: "Réponse proposée · ES",
+        backTranslation: "Rétrotraduction · FR",
+        backTranslationText: "« Désolé pour cette situation. Pour retrouver votre remboursement, pourriez-vous transmettre votre numéro de réservation? »",
+        review: "Vérifier et approuver",
+        correct: "Corriger",
+        gate: "L’envoi est contrôlé — aucune réponse ne part sans approbation",
+      },
+      correction: {
+        aiRead: "Interprétation de l’IA",
+        aiValue: "Intention · Question d’entretien",
+        humanCorrected: "Correction humaine",
+        humanValue: "Intention · Plainte répétée — transmettre au niveau supérieur",
+        note: "Dans ce scénario de prototype, l’étape de vérification permet à l’agent de corriger la classification avant d’approuver la réponse. La modification produit une rétroaction clairement identifiée pour une future révision des règles ou du modèle.",
+      },
+      states: [
+        { label: "Vide", variant: "empty", caption: "La file est vide. Aucune demande n’attend une intervention humaine." },
+        { label: "Traitement", variant: "processing" },
+        { label: "À vérifier", variant: "review", caption: "Faible niveau de confiance — demande placée en tête pour vérification humaine." },
+        { label: "Information manquante", variant: "empty", caption: "Impossible de rédiger une réponse pour l’instant — le numéro de réservation est d’abord requis." },
+      ],
+      incident: {
+        refund: "Remboursement",
+        maintenance: "Entretien",
+        priorityHigh: "Priorité : élevée",
+        fields: [
+          { label: "Canal", value: "WhatsApp" },
+          { label: "Intention", value: "Demande de remboursement" },
+          { label: "Manquant", value: "Numéro de réservation" },
+          { label: "Action", value: "À vérifier" },
+        ],
+        confidenceTokens: "Repères de confiance",
+        tagsLabel: "Étiquettes — langue · intention · urgence",
+      },
+      mobile: {
+        title: "Vérification",
+        maintenance: "Entretien",
+        priority: "Priorité : moyenne",
+        message: "« Le chauffage ne fonctionne pas dans la chambre 214. »",
+        replyLabel: "Réponse proposée · FR",
+        reply: "« Merci de nous l’avoir signalé. Je vérifie la disponibilité de l’équipe d’entretien et je vous confirmerai le délai. »",
+        backTranslation: "FR · « Merci de nous l’avoir signalé. Je vérifie la disponibilité de l’équipe d’entretien et je vous confirmerai le délai. »",
+        approve: "Approuver",
+        correct: "Corriger",
+      },
+    },
+    technical: {
+      service: {
+        eyebrow: "Spécimen de récupération de données",
+        title: "SQL proposé pour la vue de relève « Ouverts maintenant »",
+        note: "Une requête réduite rend explicites le filtrage et l’ordre des priorités. Le schéma est conceptuel; il ne s’agit pas d’une requête de production.",
+      },
+      triage: {
+        eyebrow: "Spécimen de contrat d’entrée",
+        title: "Charge utile réduite et règles de défaillance",
+        note: "La charge utile est illustrative. Elle définit la frontière entre l’intégration d’un canal et le processus de triage; aucune API active n’est connectée.",
+        caption: "Contrat des champs de réception pour le triage",
+        headers: ["Champ", "Origine", "Requis", "Chemin de défaillance"],
+        rows: [
+          ["channel", "Intégration du canal", "Oui", "File de réception récupérable"],
+          ["message", "Canal entrant", "Oui", "Rejeter la charge utile avec une erreur de champ"],
+          ["customer_reference", "Client", "Non", "Créer une tâche de collecte d’information"],
+          ["detected_language", "Classification", "Oui", "Acheminer vers une vérification humaine"],
+          ["confidence", "Classification", "Oui", "Appliquer le seuil de vérification"],
+        ],
+      },
+    },
+  },
+
+  cases: {
+    back: "Projets sélectionnés",
+    conceptCase: "Étude conceptuelle",
+    snapshot: {
+      problem: "Problème",
+      forWhom: "Pour qui",
+      myRole: "Mon rôle",
+      delivered: "Livrables",
+      impact: "Incidence attendue — à valider",
+      hypotheses: "Hypothèses à tester — aucun chiffre avant la mesure.",
+    },
+    factLabels: {
+      role: "Rôle",
+      type: "Type",
+      platform: "Plateforme",
+      stack: "Technologies",
+      status: "Statut",
+      delivered: "Livrables",
+    },
+    sectionNums: {
+      context: "01 — Contexte et problème",
+      process: "02 — Processus",
+      design: "03 — Conception et système",
+      outcome: "04 — Résultats et réflexion",
+    },
+    sectionLabels: {
+      snapshot: "Aperçu",
+      context: "Contexte",
+      process: "Processus",
+      design: "Conception",
+      outcome: "Résultats",
+    },
+    roleLabel: "Rôle.",
+    scopeLabel: "Portée.",
+    effortLabel: "Effort.",
+    constraintsHeading: "Contraintes opérationnelles",
+    decisionsHeading: "Décisions fonctionnelles",
+    measureHeading: "Ce que je mesurerais ensuite",
+    statesHeading: "États du système et reprise",
+    scopeHeading: "Un problème réel, une proposition honnête.",
+    moreComing: "Vous cherchez un travail d’implantation et de soutien ancré dans les opérations réelles?",
+    getInTouch: "Démarrer une conversation",
+
+    serviceOps: {
+      title: "Gestion des incidents et *relève de quart*",
+      tag: "Gestion des incidents et relève",
+      lead: "Un concept d’implantation pour consigner, attribuer, transmettre au niveau supérieur et transférer les incidents avec un état, une responsabilité et un historique clairs.",
+      contextHeading: "La journée ne se termine pas. La responsabilité change de mains.",
+      processHeading: "D’une défaillance opérationnelle à des exigences vérifiables.",
+      designHeading: "Un processus défini par les données, les états et la responsabilité.",
+      outcomeHeading: "Un plan pilote, sans résultats inventés.",
+      snapshotProblem: "Au moment de la relève, des notes fragmentées rendent difficiles à vérifier le travail ouvert, l’urgence et la responsabilité.",
+      snapshotForWhom: "Réception, entretien ménager, entretien technique et supervision partageant des incidents non résolus.",
+      snapshotMyRole: "Concept technico-fonctionnel indépendant — analyse, définition du processus et des exigences, modélisation des données et des états, conception d’interface et planification de la validation.",
+      snapshotDelivered: "Carte de l’état actuel, processus fonctionnel, modèle de champs et d’états, écrans principaux, états d’erreur, critères d’acceptation et plan pilote.",
+      snapshotImpact: "Reprise de contexte plus rapide, responsabilité plus claire et moins d’incidents perdus entre les quarts — toutes des hypothèses à valider.",
+      facts: {
+        role: "Analyse opérationnelle · exigences · processus · planification de la validation",
+        type: "Concept technico-fonctionnel · opérations internes",
+        platform: "Relève sur ordinateur · consignation mobile",
+        stack: "Spécimens d’interface et de processus en Next.js et React · aucune intégration active",
+        status: "Concept indépendant · juin–juillet 2026 · essais auprès des utilisateurs à venir",
+        delivered: "Exigences · règles · états · spécimens d’interface · critères d’acceptation",
+      },
+      quote: "Si la responsabilité, l’état et la prochaine action ne sont pas explicites, le quart suivant doit reconstruire l’opération à partir de fragments.",
+      contextProse: [
+        "Un quart peut se terminer pendant que le travail continue. Le problème n’est pas l’absence de notes, mais l’absence d’un dossier fiable réunissant un responsable, un état, une priorité, une prochaine action et un historique.",
+        "Ce concept définit le plus petit processus partagé permettant de consigner, attribuer, transmettre au niveau supérieur, résoudre et transférer un incident sans prétendre à des intégrations actives.",
+      ],
+      roleText: "Concept indépendant couvrant l’analyse opérationnelle, la cartographie des parties prenantes, les exigences, les règles d’affaires, la modélisation des données et des états, la conception d’interface et la planification de la validation.",
+      scopeText: "Le problème provient d’une expérience directe des opérations de service. Le processus est une proposition, non un logiciel déployé; les intégrations demeurent des hypothèses futures.",
+      effortText: "Concept indépendant développé de juin à juillet 2026. Les états d’interface sont implantés; les essais auprès des utilisateurs et les intégrations actives restent à réaliser.",
+      processProse: [
+        { label: "Analyse de l’état actuel.", text: "Les faits issus du travail à la réception et des relèves ont été séparés des hypothèses. Le problème récurrent était l’information fragmentée et la responsabilité floue; l’adoption d’un formulaire guidé et l’incidence d’une vue « Ouverts maintenant » doivent encore être testées avec une véritable équipe." },
+        { label: "Modèle fonctionnel.", text: "Les entités principales sont l’incident, l’utilisateur, l’équipe, le lieu et l’entrée d’activité. Les champs requis sont la catégorie, le lieu, la priorité, le responsable, l’état, la description, la prochaine action et l’heure de mise à jour." },
+        { label: "Critères d’acceptation.", text: "Un utilisateur peut consigner un incident avec validation des champs requis; seuls les rôles autorisés peuvent le réattribuer ou le fermer; chaque changement d’état crée une entrée d’historique; un échec d’enregistrement conserve le brouillon et permet de réessayer; la vue de relève affiche chaque élément ouvert ou transmis au niveau supérieur avec son responsable et sa prochaine action." },
+      ],
+      dsSliceHeading: "Spécimen d’implantation — dossier d’incident",
+      dsSliceNote: "La fiche présente les données minimales dont une autre équipe a besoin pour agir : catégorie, lieu, priorité, responsable, état et prochaine action. Les champs structurés permettent le filtrage, l’acheminement et l’historique d’audit.",
+      mobileHeading: "Saisie mobile — données requises sans long formulaire",
+      mobileProse: "Des choix guidés gardent la saisie mobile courte tout en conservant les champs nécessaires à l’attribution, à la transmission au niveau supérieur et à la relève. Le texte libre ajoute du contexte; il ne remplace pas les données structurées.",
+      designProse: [
+        "La vue de relève répond à quatre questions opérationnelles : qu’est-ce qui demeure ouvert, qu’est-ce qui est urgent, qui en est responsable et quelle est la prochaine étape? Les filtres et les résumés restent secondaires à ces décisions.",
+        "Le processus couvre les états brouillon, ouvert, attribué, en cours, transmis au niveau supérieur, résolu et rouvert. La validation, les autorisations, l’échec d’enregistrement et la reprise font partie de la spécification; ce ne sont pas des cas limites laissés à l’implantation.",
+      ],
+      outcomeProse: {
+        impact: { label: "Incidence attendue — à valider.", text: "Responsabilité plus claire, reprise de contexte plus rapide, moins d’incidents abandonnés à la relève et moins de reprises entre la réception, l’entretien ménager et l’entretien technique. Ce sont des hypothèses, non des résultats mesurés." },
+        tradeoffs: { label: "Plan pilote et de soutien.", text: "Commencer par un quart et le processus de consignation, puis mener des essais d’acceptation sur l’attribution, la transmission au niveau supérieur, la fermeture et la reprise après un échec d’enregistrement. Fournir un guide d’une page, former d’abord les responsables, consigner les problèmes de soutien pendant deux semaines, puis décider si les intégrations ou les rapports sont justifiés." },
+        reflection: { label: "Limite d’implantation.", text: "Les spécimens d’interface démontrent le comportement du processus. Ils ne sont reliés ni à un PMS, ni à une plateforme de messagerie, ni à une base de données de production; ils ne constituent pas une intégration déployée." },
+        different: { label: "Ce que je testerais d’abord.", text: "Je validerais les champs requis et le temps de saisie avant d’élargir le tableau de bord. Si les gens évitent le formulaire sous pression, la vue de relève ne peut pas devenir fiable." },
+        ai: { label: "Processus assisté par l’IA.", text: "L’IA a soutenu la rédaction et la révision des cas limites. Le cadrage opérationnel, les exigences, les règles, les compromis et les décisions finales sont restés les miens." },
+      },
+      constraints: [
+        { icon: "globe", term: "Équipes multilingues", desc: "Les libellés et les états doivent demeurer objectifs en portugais, en espagnol, en français et en anglais." },
+        { icon: "devices", term: "Deux contextes de travail", desc: "L’ordinateur soutient la relève et la supervision; le mobile permet une consignation rapide loin du comptoir." },
+        { icon: "wifi", term: "Fiabilité de l’enregistrement", desc: "Un échec doit conserver le brouillon, expliquer le problème et offrir une action claire pour réessayer." },
+      ],
+      decisions: [
+        { name: "Chaque incident ouvert exige un responsable et une prochaine action", problem: "Un état sans responsabilité oblige encore l’équipe entrante à deviner.", decision: "Empêcher l’état « prêt pour la relève » tant que le responsable et la prochaine action ne sont pas présents.", tradeoff: "Deux champs obligatoires de plus, mais aucun travail incomplet présenté comme prêt." },
+        { name: "Les transitions d’état suivent des règles d’affaires", problem: "Des changements libres rendent l’historique peu fiable et permettent au travail de disparaître.", decision: "Définir les transitions permises et exiger une raison pour la transmission au niveau supérieur, la réattribution, la réouverture et la fermeture.", tradeoff: "Moins de flexibilité en échange d’une meilleure traçabilité." },
+        { name: "Un échec d’enregistrement ne supprime jamais le travail", problem: "Un utilisateur sous pression abandonnera l’outil après avoir perdu une seule fois son rapport d’incident.", decision: "Conserver le brouillon localement, préciser ce qui a échoué et offrir une seule action pour réessayer.", tradeoff: "Exige un comportement de reprise explicite plutôt qu’une erreur générique." },
+      ],
+      measure: [
+        { metric: "Incidents sans responsable ni prochaine action", reveals: "Indique si les données requises améliorent la qualité de la relève." },
+        { metric: "Temps requis pour consigner un incident", reveals: "Indique si le processus demeure pratique sous la pression d’un quart." },
+        { metric: "Temps avant la première prise en charge et la résolution", reveals: "Indique si l’acheminement mène à l’action, pas seulement à la consignation." },
+      ],
+    },
+
+    triageai: {
+      title: "Triage du *soutien multilingue*",
+      tag: "Réception du soutien multilingue",
+      lead: "Un concept technico-fonctionnel pour structurer, prioriser et acheminer les demandes de soutien dans quatre langues, tout en soumettant chaque réponse sortante à une approbation humaine.",
+      contextHeading: "Un message n’est pas encore un dossier de soutien.",
+      processHeading: "D’une demande brute à un travail attribué et traçable.",
+      designHeading: "Règles d’acheminement, approbation humaine et gestion des défaillances.",
+      outcomeHeading: "Hypothèses de soutien et plan d’intégration.",
+      sysGateHeading: "Le processus de soutien, avec responsabilité et approbation explicites",
+      analysisPanelHeading: "Vérifier la classification avant la réponse",
+      correctionHeading: "Correction, transmission au niveau supérieur et historique d’audit",
+      dsSliceHeading: "Spécimen d’implantation — dossier de soutien structuré",
+      dsSliceNote: "Le dossier associe la couleur à des libellés explicites de confiance et de priorité. L’interface vise les WCAG 2.2 AA; la vérification formelle reste à effectuer.",
+      mobileHeading: "Vérification mobile — agir sans envoi accidentel",
+      mobileProse: "La vue mobile garde visibles la classification, l’information manquante et le niveau de confiance. Les agents peuvent approuver ou corriger; l’envoi exige toujours une action humaine intentionnelle.",
+      snapshotProblem: "Les demandes arrivent par courriel, messagerie et formulaire Web en portugais, en espagnol, en français et en anglais, sans priorité, responsabilité ni données requises uniformes.",
+      snapshotForWhom: "Équipes de service et de soutien multilingues qui doivent acheminer le travail entrant, protéger les SLA et conserver une responsabilité claire pour les décisions touchant la clientèle.",
+      snapshotMyRole: "Concept technico-fonctionnel indépendant — cartographie de la réception, règles d’acheminement et de transmission au niveau supérieur, autorisations, états de défaillance, conception d’interface et planification de la validation.",
+      snapshotDelivered: "Schéma d’entrée, règles de priorité et d’acheminement, processus d’approbation humaine, gestion des erreurs, piste d’audit, écrans principaux et mesures de soutien.",
+      snapshotImpact: "Prise en charge plus rapide du travail urgent, moins de demandes perdues et réponses plus uniformes — des hypothèses à valider avec une véritable équipe.",
+      facts: {
+        role: "Cartographie des entrées · règles d’acheminement · conception d’interface · planification de la validation",
+        type: "Concept technico-fonctionnel · opérations de soutien",
+        platform: "File de réception sur ordinateur · vérification humaine sur mobile",
+        stack: "Spécimens d’interface et de processus en Next.js et React · aucun modèle ni API actifs",
+        status: "Concept indépendant · juin–juillet 2026 · essais auprès des utilisateurs et vérification de l’accessibilité à venir",
+        delivered: "Contrat d’entrée · règles d’acheminement · états d’interface · piste d’audit · plan d’essais d’acceptation",
+      },
+      evidenceLabel: "Portée du concept — entrées concrètes, sans affirmations commerciales",
+      evidenceSrc: "Les chiffres décrivent uniquement le processus proposé. Ils ne représentent ni l’utilisation, ni la performance, ni les résultats auprès de la clientèle.",
+      quote: "Le soutien devient gérable lorsque chaque demande contient les données, la priorité, le responsable et la prochaine action nécessaires pour avancer.",
+      contextProse: [
+        "Un message peut arriver par courriel, messagerie ou formulaire Web dans quatre langues, avec des références manquantes, des renseignements en double ou une urgence cachée dans du texte libre.",
+        "Le concept propose une structure et une réponse, mais n’envoie jamais sans supervision. Un agent vérifie le dossier, les responsables traitent les exceptions et chaque correction demeure dans l’historique d’activité.",
+      ],
+      roleText: "Concept indépendant couvrant la cartographie des entrées, les exigences fonctionnelles, les règles d’acheminement et de transmission au niveau supérieur, les autorisations, la gestion des erreurs, la conception d’interface et la planification de la validation.",
+      scopeText: "TriageAI demeure le nom interne du concept. Le processus est illustré, non déployé; aucun modèle de production, CRM, service de messagerie ni intégration API n’est actif derrière le prototype.",
+      effortText: "Concept indépendant développé de juin à juillet 2026. Les états d’interface sont implantés; la validation du modèle, les essais auprès des utilisateurs et les intégrations actives demeurent à réaliser.",
+      processProse: [
+        { label: "Contrat d’entrée.", text: "Une charge utile API simplifiée transmettrait le canal, received_at, customer_reference, subject, message et attachments. Le système ajoute case_id, detected_language, intent, priority, SLA target, owner, confidence et missing_fields." },
+        { label: "Acheminement et transmission au niveau supérieur.", text: "Les demandes hautement prioritaires liées aux remboursements, aux accès et à la sécurité passent en tête de file. Les dossiers incomplets ou à faible niveau de confiance exigent une vérification; un risque lié au SLA ou une exception aux politiques est transmis à un responsable; les doublons sont reliés au dossier original plutôt que de créer du travail parallèle." },
+        { label: "Gestion des défaillances.", text: "Les charges utiles invalides entrent dans une file de réception récupérable; les intégrations indisponibles réessaient avec un état visible; les données requises manquantes créent une tâche de collecte d’information; chaque correction manuelle consigne l’auteur, l’horodatage, l’ancienne valeur, la nouvelle valeur et la raison." },
+      ],
+      designProse: [
+        "La boîte de réception priorise le travail qui exige une attention immédiate : risque lié au SLA, priorité élevée, faible niveau de confiance, données requises manquantes et échec d’acheminement. Chaque dossier présente la classification proposée et les éléments dont l’agent a besoin pour la vérifier.",
+        "Dans ce scénario de prototype, l’étape de vérification rend visibles la classification proposée et sa correction :",
+      ],
+      designEmphasis: {
+        low: "le faible niveau de confiance est explicitement indiqué",
+        caught: "l’agent peut corriger la classification avant d’approuver la réponse.",
+      },
+      outcomeProse: {
+        impact: { label: "Incidence attendue — à valider.", text: "Prise en charge plus rapide des dossiers urgents, moins de demandes perdues entre les canaux, réponses multilingues plus uniformes et moins de réponses incorrectes envoyées à la clientèle. Ce sont des hypothèses, non des résultats." },
+        tradeoffs: { label: "Plan pilote et d’intégration.", text: "Commencer par un seul canal et un ensemble restreint d’intentions. Effectuer les essais d’acceptation sur l’acheminement, les données manquantes, les doublons, la transmission liée au SLA, la correction et l’approbation de l’envoi. Former les agents à la file de vérification, les responsables aux corrections manuelles et le personnel de soutien aux preuves de défaillance d’intégration avant d’ajouter de l’automatisation." },
+        reflection: { label: "Limite d’implantation.", text: "Les spécimens d’interface démontrent le comportement du processus. Ils ne constituent ni un modèle entraîné, ni une API active, ni une intégration CRM, ni un système de soutien en production." },
+        ai: { label: "Processus assisté par l’IA.", text: "L’IA a soutenu l’organisation de la recherche, la rédaction et la révision des cas limites. Le modèle de soutien, les règles d’acheminement, les autorisations, les compromis et les décisions finales sont restés les miens." },
+      },
+      constraints: [
+        { icon: "alert", term: "La classification peut être erronée", desc: "Le faible niveau de confiance, les signaux contradictoires et les corrections manuelles doivent être visibles avant l’approbation." },
+        { icon: "globe", term: "Quatre langues de travail", desc: "Le portugais, l’espagnol, le français et l’anglais peuvent arriver dans la même file; la langue et la rétrotraduction demeurent explicites." },
+        { icon: "sitemap", term: "Défaillance d’intégration", desc: "Les canaux indisponibles, les charges utiles invalides et les dossiers en double nécessitent des états récupérables, des preuves et un responsable." },
+      ],
+      decisions: [
+        { name: "Aucune réponse ne part sans approbation humaine", problem: "Une mauvaise langue, priorité ou réponse peut créer un incident de soutien plus important.", decision: "L’automatisation peut proposer une classification et un texte, mais un agent doit approuver chaque réponse sortante.", tradeoff: "Moins de vitesse d’automatisation en échange d’une communication responsable avec la clientèle." },
+        { name: "L’acheminement utilise des règles et un niveau de confiance explicites", problem: "Une seule étiquette prédite peut mal acheminer un travail urgent ou ambigu.", decision: "Combiner l’intention, la priorité, le SLA et le niveau de confiance; les dossiers ambigus, contradictoires ou à faible confiance passent à la vérification manuelle.", tradeoff: "Davantage d’états à gérer, mais moins d’échecs d’acheminement silencieux." },
+        { name: "L’information manquante crée une tâche, pas une impasse", problem: "Les dossiers de soutien arrivent souvent sans la référence nécessaire pour agir.", decision: "Énumérer les champs manquants, attribuer la responsabilité et préparer une demande d’information avant que le dossier puisse avancer.", tradeoff: "Résolution plus lente des dossiers incomplets, mais progression visible plutôt qu’attente cachée." },
+      ],
+      evidence: [
+        { num: 4, prefix: "", suffix: "", desc: "langues de travail dans une même file de soutien : PT, ES, FR et EN." },
+        { num: 3, prefix: "", suffix: "", desc: "canaux d’entrée modélisés : courriel, messagerie et formulaire Web." },
+        { num: 1, prefix: "", suffix: "", desc: "étape d’approbation humaine requise avant tout envoi." },
+      ],
+      measure: [
+        { metric: "Temps avant la première prise en charge, par priorité", reveals: "Indique si l’acheminement protège les SLA urgents." },
+        { metric: "Taux de correction manuelle par intention et par langue", reveals: "Indique où la classification ou l’acheminement doivent encore être améliorés." },
+        { metric: "Dossiers bloqués par de l’information manquante", reveals: "Indique si le contrat d’entrée recueille des données exploitables." },
+      ],
+    },
+  },
+};
+
+export const i18n = { en, fr };
 export function getT(lang) { return i18n[lang] || i18n.en; }

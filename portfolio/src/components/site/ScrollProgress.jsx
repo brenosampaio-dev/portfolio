@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * ScrollProgress — section navigation that adapts to the input.
@@ -17,6 +18,7 @@ import { usePathname } from "next/navigation";
  * bottom band of the viewport where the dock sits). Respects reduced motion.
  */
 export function ScrollProgress() {
+  const { t } = useI18n();
   const sectionsRef = useRef([]);
   const pillRef = useRef(null);
   const nameRef = useRef(null);
@@ -194,7 +196,7 @@ export function ScrollProgress() {
 
       <nav
         className={`case-dock${entered ? " is-in" : ""}${dark ? " case-dock--dark" : ""}${isCaseStudy ? " case-dock--case" : ""}`}
-        aria-label="Sections"
+        aria-label={t.a11y.sections}
       >
         <div className="case-dock__pill" ref={pillRef}>
           <span className="case-dock__name" ref={nameRef}>

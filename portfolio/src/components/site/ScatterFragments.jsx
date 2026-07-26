@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useI18n } from "@/lib/useI18n";
 
 /*
  * ScatterFragments — the problem, made visible. The same incident lives across
@@ -8,19 +9,10 @@ import { useEffect, useRef } from "react";
  * reads "noise" before reading any one label. Fires once on enter; under
  * reduced motion it simply shows. No loop — the mess settles and stays.
  */
-const sources = [
-  "PMS",
-  "Email",
-  "WhatsApp group",
-  "Paper notebook",
-  "Spreadsheet",
-  "Post-it",
-  "Verbal “by the way”",
-  "Someone’s memory",
-];
-
 export function ScatterFragments() {
   const ref = useRef(null);
+  const { t } = useI18n();
+  const copy = t.specimens.service.scatter;
 
   useEffect(() => {
     const el = ref.current;
@@ -47,7 +39,7 @@ export function ScatterFragments() {
   return (
     <div className="scatter" ref={ref} aria-hidden="true">
       <div className="scatter__field">
-        {sources.map((s, i) => (
+        {copy.sources.map((s, i) => (
           <span className="scatter-chip" key={s} style={{ "--i": i }}>
             <span className="scatter-chip__src">{s}</span>
             <span className="scatter-chip__line" />
@@ -55,7 +47,7 @@ export function ScatterFragments() {
         ))}
       </div>
       <span className="scatter__caption">
-        The same incident, scattered across everything — and whoever just left.
+        {copy.caption}
       </span>
     </div>
   );
