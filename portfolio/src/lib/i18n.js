@@ -6,6 +6,11 @@
 
 const en = {
   locale: "en-CA",
+  resume: {
+    href: "/breno-sampaio-resume-en.pdf",
+    fileName: "Breno_Sampaio_Resume_EN.pdf",
+    downloadAria: "Download résumé in English (PDF)",
+  },
   profile: {
     location: "Valencia, Spain",
   },
@@ -83,7 +88,7 @@ const en = {
     about: "About",
     approach: "Approach",
     contact: "Contact",
-    downloadCv: "Canada résumé",
+    downloadCv: "Resume in English",
   },
   availability: "Open to roles",
 
@@ -91,7 +96,7 @@ const en = {
     title:  "Software implementation, grounded in *real operations*.",
     lead:   "I translate multilingual service operations into clear requirements, data rules, testable workflows and practical support documentation for software implementation and application support.",
     cta1:   "Explore selected work",
-    cta2:   "Download Canada résumé",
+    cta2:   "Resume in English",
   },
 
   work: {
@@ -186,7 +191,7 @@ const en = {
     eyebrow:     "About Breno",
     heading:     "From frontline operations to *software implementation*.",
     lead:        "I learned how software succeeds from the operational side first — where unclear ownership, fragmented information and poor handovers become service problems.",
-    downloadCv:  "Download Canada résumé",
+    downloadCv:  "Resume in English",
     facts: {
       basedIn:       "Based in",
       working:       "Availability",
@@ -645,6 +650,11 @@ const en = {
 const fr = {
   ...en,
   locale: "fr-CA",
+  resume: {
+    href: "/breno-sampaio-resume-fr.pdf",
+    fileName: "Breno_Sampaio_Resume_FR.pdf",
+    downloadAria: "Télécharger le résumé en français (PDF)",
+  },
   profile: {
     location: "Valence, Espagne",
   },
@@ -722,7 +732,7 @@ const fr = {
     about: "Profil",
     approach: "Méthode",
     contact: "Contact",
-    downloadCv: "CV canadien (anglais)",
+    downloadCv: "Résumé en français",
   },
   availability: "Ouvert aux possibilités",
 
@@ -730,7 +740,7 @@ const fr = {
     title: "L’implantation de logiciels, ancrée dans les *opérations réelles*.",
     lead: "Je transforme des opérations de service multilingues en exigences claires, règles de données, processus vérifiables et documentation pratique pour l’implantation logicielle et le soutien applicatif.",
     cta1: "Voir les projets sélectionnés",
-    cta2: "Télécharger le CV canadien (anglais)",
+    cta2: "Résumé en français",
   },
 
   work: {
@@ -825,7 +835,7 @@ const fr = {
     eyebrow: "À propos de Breno",
     heading: "Des opérations de première ligne à *l’implantation logicielle*.",
     lead: "J’ai d’abord appris comment un logiciel réussit du côté des opérations, là où une responsabilité floue, une information fragmentée et de mauvaises relèves deviennent des problèmes de service.",
-    downloadCv: "Télécharger le CV canadien (anglais)",
+    downloadCv: "Résumé en français",
     facts: {
       basedIn: "Basé à",
       working: "Disponibilité",
