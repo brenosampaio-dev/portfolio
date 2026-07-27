@@ -42,7 +42,7 @@ export function HomeContent() {
             </Reveal>
             <Reveal delay={320} className="hero__actions">
               <Button href="#work" variant="primary">{t.hero.cta1}</Button>
-              <Button href="/breno-sampaio-cv.pdf" variant="link" download>{t.hero.cta2}</Button>
+              <Button href={t.resume.href} variant="link" download={t.resume.fileName}>{t.hero.cta2}</Button>
             </Reveal>
           </div>
 

@@ -85,10 +85,10 @@ export function Header() {
             {t.nav.contact} <span aria-hidden="true">↗</span>
           </Link>
           <a
-            href="/breno-sampaio-cv.pdf"
+            href={t.resume.href}
             className="header-cv"
-            download
-            aria-label={`CV — ${t.nav.downloadCv} (PDF)`}
+            download={t.resume.fileName}
+            aria-label={t.resume.downloadAria}
           >
             <span className="header-cv__label header-cv__label--long">{t.nav.downloadCv}</span>
             <span className="header-cv__label header-cv__label--short" aria-hidden="true">CV</span>

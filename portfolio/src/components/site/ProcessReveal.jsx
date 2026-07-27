@@ -1,15 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import { SEQ_BEAT, SEQ_START } from "@/lib/motion";
 
 /*
  * ProcessReveal — deals the process columns in left-to-right. When the grid
- * enters view each column lifts out of a blur in quick succession, so the six
- * steps land like a fast, satisfying cascade (same focus-in language as the
- * headings). Plays once; reduced motion / no-JS shows the grid in place.
+ * enters view each column lifts out of a blur in quick succession. The content
+ * remains visible by default, so a missed observer event or hash navigation
+ * can never leave the whole section permanently transparent.
  */
-export function ProcessReveal({ targetId = "process", stagger = SEQ_BEAT, startDelay = SEQ_START }) {
+export function ProcessReveal({ targetId = "process", stagger = 110, startDelay = 40 }) {
   useEffect(() => {
     const section = document.getElementById(targetId);
     if (!section) return;
@@ -22,17 +21,34 @@ export function ProcessReveal({ targetId = "process", stagger = SEQ_BEAT, startD
       return;
     }
 
-    let timers = [];
     let started = false;
     const run = () => {
       if (started) return;
       started = true;
       cols.forEach((c, i) => {
-        timers.push(setTimeout(() => c.classList.add("is-in"), startDelay + i * stagger));
+        c.classList.add("is-in");
+        c.animate(
+          [
+            { opacity: 0, transform: "translateY(16px)", filter: "blur(8px)" },
+            { opacity: 1, transform: "translateY(0)", filter: "blur(0)" },
+          ],
+          {
+            duration: 420,
+            delay: startDelay + i * stagger,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "both",
+          }
+        );
       });
     };
 
     const grid = section.querySelector(".process-grid") || section;
+    const initialRect = grid.getBoundingClientRect();
+    if (initialRect.top < window.innerHeight && initialRect.bottom > 0) {
+      run();
+      return;
+    }
+
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
@@ -44,10 +60,7 @@ export function ProcessReveal({ targetId = "process", stagger = SEQ_BEAT, startD
     );
     io.observe(grid);
 
-    return () => {
-      io.disconnect();
-      timers.forEach(clearTimeout);
-    };
+    return () => io.disconnect();
   }, [targetId, stagger, startDelay]);
 
   return null;

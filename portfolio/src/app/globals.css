@@ -1115,21 +1115,12 @@ html {
   padding-top: var(--space-5);
   border-top: 1px solid var(--mist);
 }
-/* Each column deals in as one focus-in unit (left-to-right via ProcessReveal). */
+/* ProcessReveal animates progressively; this readable resting state remains
+   the CSS default if the observer is unavailable or a hash jump races it. */
 .js .process-col {
-  opacity: 0;
-  transform: translateY(16px);
-  filter: blur(8px);
-  will-change: opacity, transform, filter;
-}
-.js .process-col.is-in {
   opacity: 1;
   transform: none;
-  filter: blur(0);
-  transition:
-    opacity var(--reveal-dur) var(--ease-reveal),
-    transform var(--reveal-dur) var(--ease-reveal),
-    filter var(--reveal-dur) var(--ease);
+  filter: none;
 }
 /* Inner pieces ride the column — no separate hidden state of their own. */
 .js .process-col .reveal {

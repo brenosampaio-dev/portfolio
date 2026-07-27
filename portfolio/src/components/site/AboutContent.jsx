@@ -32,10 +32,10 @@ export function AboutContent() {
           </Reveal>
           <Reveal delay={300}>
             <a
-              href="/breno-sampaio-cv.pdf"
+              href={t.resume.href}
               className="link-arrow"
               style={{ marginTop: "var(--space-2)" }}
-              download
+              download={t.resume.fileName}
             >
               {ta.downloadCv}
               <span className="arrow" aria-hidden="true">↓</span>
