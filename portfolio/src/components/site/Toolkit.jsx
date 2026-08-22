@@ -15,7 +15,9 @@ export function Toolkit({ stagger = 70 }) {
   const ref = useRef(null);
   const [open, setOpen] = useState(0);
   const groups = t.toolkit.groups ?? [];
-  const n = groups.reduce((total, group) => total + group.items.length, 0);
+  const roadmap = t.toolkit.roadmap ?? { items: [] };
+  const currentItemCount = groups.reduce((total, group) => total + group.items.length, 0);
+  const n = currentItemCount + roadmap.items.length;
 
   useEffect(() => {
     const el = ref.current;
@@ -106,39 +108,65 @@ export function Toolkit({ stagger = 70 }) {
         <p className="toolkit__summary">{t.toolkit.summary}</p>
       </div>
 
-      <div className="toolkit__groups">
-        {groups.map((group, groupIndex) => {
-          const offset = groups
-            .slice(0, groupIndex)
-            .reduce((total, precedingGroup) => total + precedingGroup.items.length, 0);
+      <div className="toolkit__content">
+        <div className="toolkit__groups">
+          {groups.map((group, groupIndex) => {
+            const offset = groups
+              .slice(0, groupIndex)
+              .reduce((total, precedingGroup) => total + precedingGroup.items.length, 0);
 
-          return (
-            <div className="toolkit__group" key={group.label}>
-              <div className="toolkit__group-heading">
-                <span className="toolkit__group-index" aria-hidden="true">
-                  {String(groupIndex + 1).padStart(2, "0")}
-                </span>
-                <span className="toolkit__group-title">{group.label}</span>
+            return (
+              <div className="toolkit__group" key={group.label}>
+                <div className="toolkit__group-heading">
+                  <span className="toolkit__group-index" aria-hidden="true">
+                    {String(groupIndex + 1).padStart(2, "0")}
+                  </span>
+                  <span className="toolkit__group-title">{group.label}</span>
+                </div>
+
+                <ul className="toolkit__list">
+                  {group.items.map((item, itemIndex) => {
+                    const sequenceIndex = offset + itemIndex;
+
+                    return (
+                      <li
+                        key={item}
+                        className={`toolkit__item${sequenceIndex < open ? " is-in" : ""}`}
+                      >
+                        <span className="toolkit__marker" aria-hidden="true">↘</span>
+                        <span className="toolkit__name">{item}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
+            );
+          })}
+        </div>
 
-              <ul className="toolkit__list">
-                {group.items.map((item, itemIndex) => {
-                  const sequenceIndex = offset + itemIndex;
-
-                  return (
-                    <li
-                      key={item}
-                      className={`toolkit__item${sequenceIndex < open ? " is-in" : ""}`}
-                    >
-                      <span className="toolkit__marker" aria-hidden="true">↘</span>
-                      <span className="toolkit__name">{item}</span>
-                    </li>
-                  );
-                })}
-              </ul>
+        <div className="toolkit__roadmap">
+          <div className="toolkit__roadmap-meta">
+            <div className="toolkit__roadmap-heading">
+              <span className="toolkit__group-index" aria-hidden="true">04</span>
+              <span className="toolkit__group-title">{roadmap.label}</span>
             </div>
-          );
-        })}
+            <span className="toolkit__roadmap-status">{roadmap.status}</span>
+          </div>
+
+          <ul className="toolkit__roadmap-list">
+            {roadmap.items.map((item, itemIndex) => (
+              <li
+                key={item}
+                className={`toolkit__item toolkit__item--roadmap${
+                  currentItemCount + itemIndex < open ? " is-in" : ""
+                }`}
+              >
+                <span className="toolkit__marker" aria-hidden="true">↘</span>
+                <span className="toolkit__name">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
