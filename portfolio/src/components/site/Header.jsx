@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Wordmark } from "./Wordmark";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTheme, useLang } from "@/context/AppContext";
@@ -31,8 +31,19 @@ function MoonIcon() {
   );
 }
 
+function ToolsIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <circle cx="4" cy="9" r="1.25" fill="currentColor" />
+      <circle cx="9" cy="9" r="1.25" fill="currentColor" />
+      <circle cx="14" cy="9" r="1.25" fill="currentColor" />
+    </svg>
+  );
+}
+
 export function Header() {
   const headerRef = useRef(null);
+  const [toolsOpen, setToolsOpen] = useState(false);
   const { theme, toggle } = useTheme();
   const pathname = usePathname();
   const { lang } = useLang();
@@ -60,6 +71,39 @@ export function Header() {
     darkEls.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    setToolsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    function closeOnHeaderLink(event) {
+      const link = event.target.closest?.("a");
+      if (link && headerRef.current?.contains(link)) setToolsOpen(false);
+    }
+
+    document.addEventListener("click", closeOnHeaderLink, true);
+    return () => document.removeEventListener("click", closeOnHeaderLink, true);
+  }, []);
+
+  useEffect(() => {
+    if (!toolsOpen) return undefined;
+
+    function closeOnOutsidePress(event) {
+      if (!headerRef.current?.contains(event.target)) setToolsOpen(false);
+    }
+
+    function closeOnEscape(event) {
+      if (event.key === "Escape") setToolsOpen(false);
+    }
+
+    document.addEventListener("pointerdown", closeOnOutsidePress);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePress);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [toolsOpen]);
 
   return (
     <header className="site-header" ref={headerRef}>
@@ -96,7 +140,7 @@ export function Header() {
           </a>
         </div>
 
-        <div className="dock__divider" aria-hidden="true" />
+        <div className="dock__divider dock__divider--controls" aria-hidden="true" />
 
         <div className="dock__controls">
           <LanguageSwitcher />
@@ -109,7 +153,53 @@ export function Header() {
           </button>
 
         </div>
+
+        <button
+          type="button"
+          className="mobile-tools-toggle"
+          aria-expanded={toolsOpen}
+          aria-controls="mobile-header-tools"
+          aria-label={toolsOpen ? t.a11y.closeHeaderTools : t.a11y.openHeaderTools}
+          onClick={() => setToolsOpen((open) => !open)}
+        >
+          <ToolsIcon />
+        </button>
       </div>
+
+      {toolsOpen && (
+        <div
+          id="mobile-header-tools"
+          className="mobile-tools"
+          onClick={(event) => {
+            if (event.target.closest("a")) setToolsOpen(false);
+          }}
+        >
+          <div className="mobile-tools__actions">
+            <a
+              href={t.resume.href}
+              className="mobile-tools__link mobile-tools__link--primary"
+              download={t.resume.fileName}
+            >
+              <span>{t.nav.downloadCv}</span>
+              <span aria-hidden="true">↓</span>
+            </a>
+            <Link href="/#contact" className="mobile-tools__link">
+              <span>{t.nav.contact}</span>
+              <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+          <div className="mobile-tools__preferences">
+            <LanguageSwitcher />
+            <button
+              className="theme-btn mobile-tools__theme"
+              onClick={toggle}
+              aria-label={theme === "dark" ? t.a11y.switchToLight : t.a11y.switchToDark}
+            >
+              {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

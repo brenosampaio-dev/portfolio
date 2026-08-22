@@ -3473,40 +3473,184 @@ html {
   .grid--4,
   .grid--2 { grid-template-columns: 1fr; }
 
-  /* Dock — keep the full navigation usable without letting the compact CV
-     action crowd the glass pill on phone-sized screens. */
-  .site-header { left: 50%; right: auto; transform: translateX(-50%); }
-  .dock { height: 48px; max-width: calc(100vw - 20px); padding-inline: 9px; gap: 8px; }
-  .nav { gap: 12px; }
-  .nav a { font-size: var(--text-small); }
+  /* Phone navigation prioritizes destinations. Hiring and display utilities
+     stay available in a separate panel instead of compressing the main row. */
+  .site-header {
+    top: max(12px, calc(env(safe-area-inset-top) + 8px));
+    left: 50%;
+    right: auto;
+    width: calc(100vw - 24px);
+    transform: translateX(-50%);
+  }
+  .dock {
+    width: 100%;
+    height: 56px;
+    max-width: none;
+    padding-inline: 8px;
+    gap: 8px;
+  }
+  .wordmark {
+    justify-content: center;
+    min-width: 40px;
+    min-height: 44px;
+    font-size: 21px;
+  }
+  .nav {
+    flex: 1;
+    justify-content: center;
+    gap: 2px;
+  }
+  .nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding-inline: 10px;
+    border-radius: var(--radius-full);
+    font-size: var(--text-small);
+  }
+  .nav a[aria-current="page"] {
+    color: var(--ink);
+    background: color-mix(in srgb, var(--ink) 7%, transparent);
+  }
   .nav .nav-hide-sm { display: none; }
   .dock .availability { display: none; }
-  .dock .dock__divider--mid { display: none; }
-  .dock__actions { gap: 6px; }
-  .header-contact { display: none; }
-  .dock__controls { gap: 3px; }
-  .language-switcher {
-    grid-template-columns: repeat(2, 23px);
-    height: 28px;
+  .dock .dock__divider--mid,
+  .dock .dock__divider--controls,
+  .dock__actions,
+  .dock__controls { display: none; }
+
+  .mobile-tools-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--graphite);
+    cursor: pointer;
+    transition:
+      color var(--duration-sm) var(--ease),
+      background var(--duration-sm) var(--ease),
+      transform var(--duration-sm) var(--ease);
   }
-  .language-switcher__thumb {
-    width: 23px;
-    height: 22px;
+  .mobile-tools-toggle[aria-expanded="true"] {
+    color: var(--paper);
+    background: var(--ink);
   }
-  .language-switcher--fr .language-switcher__thumb { transform: translateX(23px); }
-  .language-switcher__option {
-    min-width: 23px;
-    min-height: 22px;
-    font-size: 8px;
+  .mobile-tools-toggle:active { transform: scale(0.94); }
+  .mobile-tools-toggle:focus-visible,
+  .mobile-tools__link:focus-visible {
+    outline: 2px solid var(--clay-ring);
+    outline-offset: 2px;
   }
-  .header-cv {
-    min-width: 42px;
-    min-height: 32px;
-    padding-inline: 9px;
-    gap: 5px;
+
+  .mobile-tools {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    display: grid;
+    width: min(280px, 100%);
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.58);
+    border-radius: var(--radius-lg);
+    background: rgba(249, 247, 243, 0.88);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    backdrop-filter: blur(32px) saturate(180%);
+    box-shadow: 0 4px 8px rgba(28, 26, 24, 0.12);
+    animation: mobile-tools-in 180ms var(--ease-out) both;
   }
-  .header-cv__label--long { display: none; }
-  .header-cv__label--short { display: inline; }
+  .mobile-tools__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .mobile-tools__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 44px;
+    padding-inline: 12px;
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    background: color-mix(in srgb, var(--ink) 6%, transparent);
+  }
+  .mobile-tools__link--primary {
+    color: var(--paper);
+    background: var(--ink);
+  }
+  .mobile-tools__preferences {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid color-mix(in srgb, var(--mist) 82%, transparent);
+  }
+  .mobile-tools .language-switcher {
+    grid-template-columns: repeat(2, 44px);
+    height: 48px;
+  }
+  .mobile-tools .language-switcher__thumb {
+    width: 44px;
+    height: 42px;
+  }
+  .mobile-tools .language-switcher--fr .language-switcher__thumb { transform: translateX(44px); }
+  .mobile-tools .language-switcher__option {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 9px;
+  }
+  .mobile-tools__theme {
+    width: 48px;
+    height: 48px;
+    border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+    background: color-mix(in srgb, var(--paper) 46%, transparent);
+  }
+
+  .site-header--dark .nav a[aria-current="page"] {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .site-header--dark .mobile-tools-toggle { color: rgba(255, 255, 255, 0.82); }
+  .site-header--dark .mobile-tools-toggle[aria-expanded="true"] {
+    color: #161616;
+    background: rgba(255, 255, 255, 0.92);
+  }
+  .site-header--dark .mobile-tools,
+  [data-theme="dark"] .mobile-tools {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(13, 16, 23, 0.90);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.28);
+  }
+  .site-header--dark .mobile-tools__link,
+  [data-theme="dark"] .mobile-tools__link {
+    color: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .site-header--dark .mobile-tools__link--primary,
+  [data-theme="dark"] .mobile-tools__link--primary {
+    color: #161616;
+    background: rgba(255, 255, 255, 0.92);
+  }
+  .site-header--dark .mobile-tools__preferences,
+  [data-theme="dark"] .mobile-tools__preferences {
+    border-top-color: rgba(255, 255, 255, 0.12);
+  }
+
+  @keyframes mobile-tools-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   .site-footer__grid { grid-template-columns: 1fr; gap: var(--space-8); }
 
@@ -3567,10 +3711,10 @@ html {
 
 @media (max-width: 340px) {
   .dock {
-    padding-inline: var(--space-2);
-    gap: 10px;
+    padding-inline: 6px;
+    gap: 6px;
   }
-  .nav a[href="/#about"] { display: none; }
+  .nav a { padding-inline: 8px; }
 }
 
 /* ── Mobile accordion (≤700px) — case sections & process steps ───── */
@@ -3704,6 +3848,11 @@ html {
   gap: var(--space-3);
 }
 
+.mobile-tools-toggle,
+.mobile-tools {
+  display: none;
+}
+
 .theme-btn {
   display: inline-flex;
   align-items: center;
@@ -3801,6 +3950,66 @@ html {
 .site-header--dark .language-switcher__option:hover { color: #fff; }
 .site-header--dark .language-switcher__option[aria-pressed="true"] { color: #161616; }
 
+/* Transitional compact state: narrow tablets keep the desktop controls, but
+   shed secondary labels before the full dock can touch the viewport edges. */
+@media (min-width: 601px) and (max-width: 800px) {
+  .site-header {
+    left: 50%;
+    right: auto;
+    max-width: calc(100vw - 24px);
+    transform: translateX(-50%);
+  }
+  .dock {
+    max-width: calc(100vw - 24px);
+    padding-inline: 14px;
+    gap: 14px;
+  }
+  .nav { gap: 18px; }
+  .nav .nav-hide-sm,
+  .dock .availability,
+  .dock .dock__divider--mid { display: none; }
+  .dock__actions,
+  .dock__controls { gap: 8px; }
+  .header-cv {
+    min-width: 44px;
+    min-height: 36px;
+    padding-inline: 10px;
+  }
+  .header-cv__label--long { display: none; }
+  .header-cv__label--short { display: inline; }
+}
+
+/* These controls are declared after the main responsive section, so the
+   phone-specific visibility and target sizes live beside their base rules. */
+@media (max-width: 600px) {
+  .dock__actions,
+  .dock__controls,
+  .dock .dock__divider--mid,
+  .dock .dock__divider--controls { display: none; }
+  .mobile-tools-toggle { display: inline-flex; }
+  .mobile-tools { display: grid; }
+  .mobile-tools .language-switcher {
+    grid-template-columns: repeat(2, 44px);
+    height: 48px;
+  }
+  .mobile-tools .language-switcher__thumb {
+    width: 44px;
+    height: 42px;
+  }
+  .mobile-tools .language-switcher--fr .language-switcher__thumb { transform: translateX(44px); }
+  .mobile-tools .language-switcher__option {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 9px;
+  }
+  .mobile-tools__theme {
+    width: 48px;
+    height: 48px;
+    border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
+    background: color-mix(in srgb, var(--paper) 46%, transparent);
+  }
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 180ms;
@@ -3808,6 +4017,8 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .mobile-tools { animation: none; }
+  .mobile-tools-toggle { transition: none; }
   .language-switcher__thumb,
   .language-switcher__option {
     transition: none;
