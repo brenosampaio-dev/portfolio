@@ -2,21 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Scramble } from "@/components/site/Scramble";
-import { TOOLKIT_ICONS } from "@/lib/toolkitIcons";
 import { useI18n } from "@/lib/useI18n";
 
 /*
- * Toolkit — a calm, static row of the tools that matter. The label decodes in
- * (same Scramble as the section eyebrows); then the logos resolve from a blur
- * one after another in a quick deal — same focus-in language as the rest of
- * the site, just a snappier stagger since they're small. Plays once; reduced
- * motion / no-JS shows them in place.
+ * Toolkit — a compact capability map for support roles. The label decodes in
+ * (same Scramble as the section eyebrows); then each capability resolves from
+ * a blur in a quick deal. Plays once; reduced motion / no-JS shows everything
+ * in place.
  */
-export function Toolkit({ items = TOOLKIT_ICONS, stagger = 90 }) {
+export function Toolkit({ stagger = 70 }) {
   const { t } = useI18n();
   const ref = useRef(null);
   const [open, setOpen] = useState(0);
-  const n = items.length;
+  const groups = t.toolkit.groups ?? [];
+  const n = groups.reduce((total, group) => total + group.items.length, 0);
 
   useEffect(() => {
     const el = ref.current;
@@ -55,10 +54,8 @@ export function Toolkit({ items = TOOLKIT_ICONS, stagger = 90 }) {
     };
   }, [n, stagger]);
 
-  // Touch devices can't hover, so the brand colour arrives as a wave instead:
-  // each time the toolkit scrolls into view, a pulse of colour ripples across
-  // the icons in order, then fades back to graphite. Re-fires on every entry.
-  // Hover devices keep the per-icon :hover and skip this entirely.
+  // Touch devices can't hover, so the accent arrives as a wave instead. It
+  // re-fires on every entry; hover devices keep the quieter hover treatment.
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -104,20 +101,44 @@ export function Toolkit({ items = TOOLKIT_ICONS, stagger = 90 }) {
 
   return (
     <div className="toolkit" ref={ref}>
-      <Scramble className="eyebrow eyebrow--accent toolkit__label" text={t.toolkit.label} />
-      <div className="toolkit__row">
-        {items.map((it, i) => (
-          <span
-            key={it.name}
-            className={`toolkit__item${i < open ? " is-in" : ""}`}
-            style={it.color ? { "--icon-color": it.color } : undefined}
-          >
-            <svg viewBox="0 0 24 24" className="toolkit__logo" aria-hidden="true" focusable="false">
-              <path d={it.path} />
-            </svg>
-            <span className="toolkit__name">{it.name}</span>
-          </span>
-        ))}
+      <div className="toolkit__intro">
+        <Scramble className="eyebrow eyebrow--accent toolkit__label" text={t.toolkit.label} />
+        <p className="toolkit__summary">{t.toolkit.summary}</p>
+      </div>
+
+      <div className="toolkit__groups">
+        {groups.map((group, groupIndex) => {
+          const offset = groups
+            .slice(0, groupIndex)
+            .reduce((total, precedingGroup) => total + precedingGroup.items.length, 0);
+
+          return (
+            <div className="toolkit__group" key={group.label}>
+              <div className="toolkit__group-heading">
+                <span className="toolkit__group-index" aria-hidden="true">
+                  {String(groupIndex + 1).padStart(2, "0")}
+                </span>
+                <span className="toolkit__group-title">{group.label}</span>
+              </div>
+
+              <ul className="toolkit__list">
+                {group.items.map((item, itemIndex) => {
+                  const sequenceIndex = offset + itemIndex;
+
+                  return (
+                    <li
+                      key={item}
+                      className={`toolkit__item${sequenceIndex < open ? " is-in" : ""}`}
+                    >
+                      <span className="toolkit__marker" aria-hidden="true">↘</span>
+                      <span className="toolkit__name">{item}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

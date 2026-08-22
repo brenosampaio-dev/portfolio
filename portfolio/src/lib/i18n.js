@@ -44,7 +44,22 @@ const en = {
     soon: "Soon",
   },
   toolkit: {
-    label: "Application support foundation",
+    label: "Support capability map",
+    summary: "Evidence-backed strengths for IT, technical and application support roles.",
+    groups: [
+      {
+        label: "User support",
+        items: ["Multilingual communication", "Issue investigation", "User onboarding"],
+      },
+      {
+        label: "Service operations",
+        items: ["Incident triage", "Ticket ownership", "Escalation & handover", "Support documentation"],
+      },
+      {
+        label: "Systems & technical foundation",
+        items: ["Structured troubleshooting", "Salesforce & ICNEA", "Jira", "SQL & data checks", "REST APIs & Postman"],
+      },
+    ],
   },
   notFound: {
     eyebrow: "404 · Page not found",
@@ -689,7 +704,22 @@ const fr = {
     soon: "Bientôt",
   },
   toolkit: {
-    label: "Fondations en soutien applicatif",
+    label: "Carte des compétences en soutien",
+    summary: "Des acquis concrets pour les postes en soutien TI, technique et applicatif.",
+    groups: [
+      {
+        label: "Soutien aux utilisateurs",
+        items: ["Communication multilingue", "Analyse des problèmes", "Intégration des utilisateurs"],
+      },
+      {
+        label: "Opérations de soutien",
+        items: ["Triage des incidents", "Suivi complet des dossiers", "Escalade et relève", "Documentation de soutien"],
+      },
+      {
+        label: "Systèmes et fondations techniques",
+        items: ["Dépannage structuré", "Salesforce et ICNEA", "Jira", "SQL et contrôle des données", "API REST et Postman"],
+      },
+    ],
   },
   notFound: {
     eyebrow: "404 · Page introuvable",
