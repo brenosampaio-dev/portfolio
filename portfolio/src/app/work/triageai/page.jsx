@@ -1,14 +1,5 @@
-import { TriageAIContent } from "@/components/site/TriageAIContent";
-
-export const metadata = {
-  title: "Multilingual Support Triage",
-  description:
-    "Technical-functional concept for structuring, prioritizing and routing multilingual support requests with human approval, escalation rules and failure handling.",
-  alternates: {
-    canonical: "/work/triageai",
-  },
-};
+import { redirect } from "next/navigation";
 
 export default function TriageAICase() {
-  return <TriageAIContent />;
+  redirect("/work/missing-reservation");
 }

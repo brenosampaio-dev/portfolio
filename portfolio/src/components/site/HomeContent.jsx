@@ -10,9 +10,7 @@ import { Collapsible } from "@/components/site/Collapsible";
 import { Icon } from "@/components/site/Icon";
 import { LocationTime } from "@/components/site/LocationTime";
 import { LocalTime } from "@/components/site/LocalTime";
-import { BrowserFrame } from "@/components/site/BrowserFrame";
-import { DashboardPreview } from "@/components/site/DashboardPreview";
-import { TriageInbox } from "@/components/site/TriageInbox";
+import { SupportCasePreview } from "@/components/site/SupportCasePreview";
 import { profile } from "@/lib/content";
 import { useLang } from "@/context/AppContext";
 import { getT } from "@/lib/i18n";
@@ -88,17 +86,7 @@ export function HomeContent() {
                 year={p.year}
                 href={p.href}
                 upcoming={p.upcoming}
-                preview={
-                  p.slug === "service-operations" ? (
-                    <BrowserFrame url="operations.local/open-now" className="browser-frame--card">
-                      <DashboardPreview />
-                    </BrowserFrame>
-                  ) : p.slug === "triageai" ? (
-                    <BrowserFrame url="support.local/intake" className="browser-frame--card">
-                      <TriageInbox />
-                    </BrowserFrame>
-                  ) : null
-                }
+                preview={p.slug ? <SupportCasePreview slug={p.slug} card /> : null}
               />
             </Reveal>
           ))}

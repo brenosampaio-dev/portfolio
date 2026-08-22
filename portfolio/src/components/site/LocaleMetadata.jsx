@@ -17,13 +17,15 @@ export function LocaleMetadata() {
     const pageKey =
       pathname === "/about"
         ? "about"
-        : pathname === "/work/service-operations"
-          ? "serviceOperations"
-          : pathname === "/work/triageai"
-            ? "triage"
-            : pathname === "/"
-              ? "home"
-              : "notFound";
+        : pathname === "/work/access-restored"
+          ? "accessRestored"
+          : pathname === "/work/missing-reservation"
+            ? "missingReservation"
+            : pathname === "/work/connectivity-broke"
+              ? "connectivityBroke"
+              : pathname === "/"
+                ? "home"
+                : "notFound";
     const page = t.metadata.pages[pageKey];
     if (!page) return;
 

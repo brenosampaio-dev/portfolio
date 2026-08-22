@@ -43,7 +43,7 @@ export function ScrollProgress() {
     );
     setActive(0);
     setHovered(null);
-  }, [pathname]);
+  }, [pathname, t]);
 
   // Active section = last one whose top has crossed the viewport middle
   useEffect(() => {

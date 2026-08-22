@@ -94,13 +94,17 @@ const en = {
         title: "About — Breno Sampaio",
         description: "From multilingual frontline operations and UX/UI to IT, technical and application support. Based in Valencia, Spain.",
       },
-      serviceOperations: {
-        title: "Incident & Handover Workflow — Breno Sampaio",
-        description: "A technical-functional concept for logging, assigning, escalating and handing over service incidents with clear status, ownership, history and acceptance criteria.",
+      accessRestored: {
+        title: "Access Restored — Windows 11 & Microsoft 365 Support Lab — Breno Sampaio",
+        description: "A Windows 11 and Microsoft 365 access-support simulation with layered diagnosis, PowerShell evidence, validation and honest escalation boundaries.",
       },
-      triage: {
-        title: "Multilingual Support Triage — Breno Sampaio",
-        description: "A technical-functional concept for structuring, prioritizing and routing multilingual support requests with human approval, escalation rules and failure handling.",
+      missingReservation: {
+        title: "The Missing Reservation — SaaS Application Support Lab — Breno Sampaio",
+        description: "A synthetic SaaS incident traced through HTTP, JSON, webhook logs, scoped SQL, controlled replay and an engineering-ready handoff.",
+      },
+      connectivityBroke: {
+        title: "Where Connectivity Broke — L1 Network Support Lab — Breno Sampaio",
+        description: "An L1 network-support simulation isolating a DNS failure distributed through DHCP with Windows command evidence and validation.",
       },
       notFound: {
         title: "Page not found — Breno Sampaio",
@@ -125,10 +129,10 @@ const en = {
   },
 
   work: {
-    eyebrow:    "Support workflow cases",
-    heading:    "Support thinking made *visible*.",
-    subheading: "Two concepts showing how I structure incidents, multilingual requests, ownership, escalation, failure states and support documentation.",
-    more:       "Independent concept work. Assumptions, limitations and expected outcomes are clearly labelled.",
+    eyebrow:    "Technical support labs",
+    heading:    "Troubleshooting made *verifiable*.",
+    subheading: "Three independent simulations across Microsoft 365 access, SaaS integrations and network connectivity—each documented from reported issue to validation and escalation.",
+    more:       "Synthetic environments and data. No production access, client information or invented performance results.",
   },
 
   experience: {
@@ -265,15 +269,20 @@ const en = {
 
   projects: [
     {
-      slug: "service-operations", category: "Support workflow case",
-      title: "Incident & Handover Workflow",
-      problem: "An operational workflow for logging, assigning, escalating and handing over open incidents with clear status, ownership and history.",
-      role: "Incident workflow & interface specimens", year: "2026", href: "/work/service-operations",
+      slug: "access-restored", category: "Independent IT support simulation",
+      title: "Access Restored",
+      problem: "A Windows 11 and Microsoft 365 sign-in failure isolated across identity, device, application and network layers.",
+      role: "Windows · M365 · PowerShell", year: "2026", href: "/work/access-restored",
     },
     {
-      slug: "triageai", category: "Support workflow case", title: "Multilingual Support Triage",
-      problem: "A support intake workflow that structures, prioritizes and routes multilingual requests while keeping every outgoing response under human approval.",
-      role: "Triage workflow & interface specimens", year: "2026", href: "/work/triageai",
+      slug: "missing-reservation", category: "Independent application support simulation", title: "The Missing Reservation",
+      problem: "An accepted reservation that never arrives downstream, traced through HTTP, JSON, webhook logs and scoped SQL.",
+      role: "API · Webhook · SQL · Logs", year: "2026", href: "/work/missing-reservation",
+    },
+    {
+      slug: "connectivity-broke", category: "Independent network support simulation", title: "Where Connectivity Broke",
+      problem: "Three Windows clients have IP connectivity but no name resolution because DHCP distributes a retired DNS server.",
+      role: "TCP/IP · DNS · DHCP", year: "2026", href: "/work/connectivity-broke",
     },
   ],
 
@@ -764,13 +773,17 @@ const fr = {
         title: "Profil — Breno Sampaio",
         description: "Des opérations multilingues de première ligne et de l’UX/UI au soutien TI, technique et applicatif. Basé à Valence, en Espagne.",
       },
-      serviceOperations: {
-        title: "Gestion des incidents et relève — Breno Sampaio",
-        description: "Un concept technico-fonctionnel pour consigner, attribuer, transmettre au niveau supérieur et transférer les incidents de service avec des états, une responsabilité, un historique et des critères d’acceptation clairs.",
+      accessRestored: {
+        title: "Accès rétabli — Labo Windows 11 et Microsoft 365 — Breno Sampaio",
+        description: "Une simulation de soutien aux accès Windows 11 et Microsoft 365 avec diagnostic par couches, preuves PowerShell, validation et limites de transmission honnêtes.",
       },
-      triage: {
-        title: "Triage du soutien multilingue — Breno Sampaio",
-        description: "Un concept technico-fonctionnel pour structurer, prioriser et acheminer les demandes de soutien multilingues avec approbation humaine, règles de transmission au niveau supérieur et gestion des défaillances.",
+      missingReservation: {
+        title: "La réservation manquante — Labo de soutien applicatif SaaS — Breno Sampaio",
+        description: "Un incident SaaS synthétique tracé par HTTP, JSON, journaux webhook, SQL limité, reprise contrôlée et transmission exploitable.",
+      },
+      connectivityBroke: {
+        title: "Là où la connectivité a rompu — Labo réseau N1 — Breno Sampaio",
+        description: "Une simulation de soutien réseau N1 isolant une panne DNS distribuée par DHCP à l’aide de commandes Windows et de validations.",
       },
       notFound: {
         title: "Page introuvable — Breno Sampaio",
@@ -795,10 +808,10 @@ const fr = {
   },
 
   work: {
-    eyebrow: "Études de processus de soutien",
-    heading: "Une méthode de soutien rendue *visible*.",
-    subheading: "Deux concepts qui montrent comment je structure les incidents, les demandes multilingues, la responsabilité, la transmission, les états d’échec et la documentation.",
-    more: "Travail conceptuel indépendant. Les hypothèses, les limites et les résultats attendus sont clairement indiqués.",
+    eyebrow: "Laboratoires de soutien technique",
+    heading: "Un dépannage rendu *vérifiable*.",
+    subheading: "Trois simulations indépendantes couvrant les accès Microsoft 365, les intégrations SaaS et la connectivité réseau—documentées du signalement à la validation et à la transmission.",
+    more: "Environnements et données synthétiques. Aucun accès de production, renseignement client ni résultat de performance inventé.",
   },
 
   experience: {
@@ -940,22 +953,31 @@ const fr = {
 
   projects: [
     {
-      slug: "service-operations",
-      category: "Étude de processus de soutien",
-      title: "Gestion des incidents et relève",
-      problem: "Un processus opérationnel pour consigner, attribuer, transmettre au niveau supérieur et transférer les incidents ouverts avec un état, une responsabilité et un historique clairs.",
-      role: "Processus d’incident et spécimens d’interface",
+      slug: "access-restored",
+      category: "Simulation indépendante de soutien TI",
+      title: "Accès rétabli",
+      problem: "Une panne de connexion Windows 11 et Microsoft 365 isolée entre identité, appareil, application et réseau.",
+      role: "Windows · M365 · PowerShell",
       year: "2026",
-      href: "/work/service-operations",
+      href: "/work/access-restored",
     },
     {
-      slug: "triageai",
-      category: "Étude de processus de soutien",
-      title: "Triage du soutien multilingue",
-      problem: "Un processus de réception qui structure, priorise et achemine les demandes multilingues tout en soumettant chaque réponse sortante à une approbation humaine.",
-      role: "Processus de triage et spécimens d’interface",
+      slug: "missing-reservation",
+      category: "Simulation indépendante de soutien applicatif",
+      title: "La réservation manquante",
+      problem: "Une réservation acceptée mais jamais livrée en aval, tracée par HTTP, JSON, webhook, journaux et SQL limité.",
+      role: "API · Webhook · SQL · Journaux",
       year: "2026",
-      href: "/work/triageai",
+      href: "/work/missing-reservation",
+    },
+    {
+      slug: "connectivity-broke",
+      category: "Simulation indépendante de soutien réseau",
+      title: "Là où la connectivité a rompu",
+      problem: "Trois clients Windows ont une connectivité IP, mais pas de résolution de nom, car DHCP fournit un ancien DNS.",
+      role: "TCP/IP · DNS · DHCP",
+      year: "2026",
+      href: "/work/connectivity-broke",
     },
   ],
 
