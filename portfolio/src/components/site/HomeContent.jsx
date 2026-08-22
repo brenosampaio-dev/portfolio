@@ -163,7 +163,7 @@ export function HomeContent() {
             <Collapsible
               key={step.title}
               className="process-col"
-              defaultOpen={i === 0}
+              defaultOpen
               label={step.title}
               header={
                 <>
