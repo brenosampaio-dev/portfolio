@@ -892,23 +892,38 @@ html {
   .toolkit {
     gap: var(--space-6);
   }
-  .toolkit__intro,
-  .toolkit__groups {
-    grid-template-columns: 1fr;
-  }
   .toolkit__intro {
+    grid-template-columns: 1fr;
     gap: var(--space-2);
+  }
+  .toolkit__content {
+    grid-auto-flow: column;
+    grid-auto-columns: 86%;
+    gap: var(--space-4);
+    align-items: stretch;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding-bottom: var(--space-2);
+    scroll-padding-inline: 0;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .toolkit__content::-webkit-scrollbar {
+    display: none;
+  }
+  .toolkit__groups {
+    display: contents;
   }
   .toolkit__group,
   .toolkit__group:first-child,
   .toolkit__group:last-child {
-    padding: var(--space-5) 0 0;
-    border-top: 1px solid var(--mist);
-    border-left: 0;
-  }
-  .toolkit__group:first-child {
-    padding-top: 0;
-    border-top: 0;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: var(--space-5);
+    border: 1px solid var(--mist);
+    background: color-mix(in srgb, var(--paper) 88%, var(--silk));
+    scroll-snap-align: start;
   }
   .toolkit__group-heading {
     min-height: 0;
@@ -919,6 +934,11 @@ html {
   }
   .toolkit__roadmap {
     gap: var(--space-4);
+    align-content: start;
+    padding: var(--space-5);
+    border: 1px solid var(--mist);
+    background: color-mix(in srgb, var(--paper) 88%, var(--silk));
+    scroll-snap-align: start;
   }
 }
 @media (prefers-reduced-motion: reduce) {
