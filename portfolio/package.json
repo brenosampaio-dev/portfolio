@@ -2,7 +2,7 @@
   "name": "breno-sampaio-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Breno Sampaio's portfolio for software implementation, SaaS onboarding and application support.",
+  "description": "Breno Sampaio's multilingual IT and technical support portfolio.",
   "scripts": {
     "dev": "node node_modules/next/dist/bin/next dev",
     "build": "node node_modules/next/dist/bin/next build",
@@ -22,7 +22,8 @@
     "eslint-config-next": "^16.2.11"
   },
   "overrides": {
-    "postcss": "8.5.19",
+    "nanoid": "3.3.18",
+    "postcss": "8.5.23",
     "sharp": "0.35.3"
   }
 }

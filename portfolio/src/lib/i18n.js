@@ -44,7 +44,7 @@ const en = {
     soon: "Soon",
   },
   toolkit: {
-    label: "Technical foundation",
+    label: "Application support foundation",
   },
   notFound: {
     eyebrow: "404 · Page not found",
@@ -56,18 +56,18 @@ const en = {
   metadata: {
     ogLocale: "en_CA",
     person: {
-      jobTitle: "Software Implementation and Application Support",
+      jobTitle: "Multilingual IT and Technical Support",
       addressLocality: "Valencia",
       languages: ["Portuguese", "Spanish", "French", "English"],
     },
     pages: {
       home: {
-        title: "Breno Sampaio — Software Implementation & Application Support",
-        description: "Requirements, data rules, testable workflows and support documentation grounded in multilingual service operations and UX/UI practice.",
+        title: "Breno Sampaio — Multilingual IT & Technical Support",
+        description: "Multilingual IT and technical support portfolio grounded in customer operations, structured troubleshooting, clear documentation and UX/UI practice.",
       },
       about: {
         title: "About — Breno Sampaio",
-        description: "From frontline service operations to software implementation, SaaS onboarding and application support. Based in Valencia, Spain.",
+        description: "From multilingual frontline operations and UX/UI to IT, technical and application support. Based in Valencia, Spain.",
       },
       serviceOperations: {
         title: "Incident & Handover Workflow — Breno Sampaio",
@@ -93,44 +93,44 @@ const en = {
   availability: "Open to roles",
 
   hero: {
-    title:  "Software implementation, grounded in *real operations*.",
-    lead:   "I translate multilingual service operations into clear requirements, data rules, testable workflows and practical support documentation for software implementation and application support.",
-    cta1:   "Explore selected work",
+    title:  "Multilingual IT support, grounded in *real service operations*.",
+    lead:   "I bring 8+ years of multilingual customer-facing operations to IT and technical support, backed by UX/UI practice and practical foundations in incident workflows, documentation, SQL, APIs and troubleshooting.",
+    cta1:   "View support case studies",
     cta2:   "Resume in English",
   },
 
   work: {
-    eyebrow:    "Implementation & support",
-    heading:    "Implementation & support case studies.",
-    subheading: "Two concepts translating operational problems into requirements, workflows, rules, testable states and support documentation.",
+    eyebrow:    "Support workflow cases",
+    heading:    "Support thinking made *visible*.",
+    subheading: "Two concepts showing how I structure incidents, multilingual requests, ownership, escalation, failure states and support documentation.",
     more:       "Independent concept work. Assumptions, limitations and expected outcomes are clearly labelled.",
   },
 
   experience: {
     eyebrow: "Professional evidence",
-    heading: "Operations experience behind the *systems thinking*.",
-    subheading: "Eight-plus years in multilingual customer operations across Spain and France, alongside independent product and UX work.",
+    heading: "The service experience behind *better support*.",
+    subheading: "Eight-plus years resolving customer and operational issues across Spain and France, alongside independent UX/UI work and growing technical foundations.",
     items: [
       {
         dates: "2024 — 2026",
         role: "Front & back office operations",
         company: "Moontels",
         location: "Valencia",
-        detail: "Investigated reservation, billing and service discrepancies across ICNEA, Salesforce and internal systems; coordinated ownership and handovers across teams.",
+        detail: "Investigated reservation, billing and service discrepancies across ICNEA, Salesforce and internal systems; coordinated ownership, follow-up and handovers across teams.",
       },
       {
         dates: "2023 — 2024",
         role: "Guest services & operations",
         company: "Travelodge Hotels",
         location: "Valencia",
-        detail: "Resolved multilingual cases across in-person, phone and digital channels while maintaining accurate reservation data and open-action follow-up.",
+        detail: "Resolved multilingual cases across in-person, phone and digital channels while maintaining accurate records, clear communication and open-action follow-up.",
       },
       {
         dates: "2020 — 2023",
         role: "Freelance UX/UI designer",
         company: "Self-employed",
         location: "France",
-        detail: "Mapped requirements, user journeys and information architecture; produced wireframes and high-fidelity prototypes for independent clients.",
+        detail: "Mapped requirements, user journeys and information architecture; created prototypes and explained design decisions directly to independent clients.",
       },
       {
         dates: "2017 — 2020",
@@ -144,20 +144,20 @@ const en = {
 
   process: {
     eyebrow:    "How I work",
-    heading:    "Five stages from operational problem to *supported workflow*.",
-    subheading: "Requirements, configuration, testing and adoption stay connected to the real work.",
+    heading:    "Five stages from reported issue to *clear resolution*.",
+    subheading: "I keep the user, the evidence, the next action and the ticket history connected throughout the support process.",
   },
 
   principles: {
     eyebrow:    "Principles",
-    heading:    "Principles for reliable *implementation*.",
-    subheading: "Behaviours keeping software understandable, traceable and useful across teams, languages and handovers.",
+    heading:    "Principles for reliable *technical support*.",
+    subheading: "Behaviours that keep issues understandable, traceable and actionable across users, teams, languages and handovers.",
   },
 
   about: {
     eyebrow: "About Breno",
-    heading: "From frontline operations to *software implementation*.",
-    lead:    "Service operations taught me where systems fail. UX/UI and technical foundations now help me connect users, workflows and technical teams.",
+    heading: "From frontline operations to *multilingual IT support*.",
+    lead:    "Service operations taught me how to listen, investigate and follow issues through. UX/UI helps me make technical guidance clearer and easier to use.",
     cta:     "Read the full story",
     facts: {
       basedIn:       "Based in",
@@ -167,30 +167,30 @@ const en = {
       cert:          "Certification",
       certValue:     "Google UX Design Certificate",
       mobility:      "Canada",
-      mobilityValue: "Open to Calgary relocation · employer-specific work permit support required",
+      mobilityValue: "Open to relocation outside Quebec · Francophone Mobility (C16) may apply; employer action required",
     },
   },
 
   contact: {
     eyebrow:   "Let's connect",
-    heading:   "Let’s make software easier to *implement, adopt and support*.",
-    body:      "I’m open to junior and associate roles in software implementation, SaaS onboarding and application support. Based in Valencia, Spain, with relocation considered for the right role.",
+    heading:   "Let’s make technical support *clearer and more human*.",
+    body:      "I’m open to IT Support, Service Desk, Technical Support and junior Application Support roles in Valencia, across remote EMEA teams and, with the right employer process, outside Quebec in Canada.",
     email:     "Email",
     location:  "Location",
     localTime: "Local time",
   },
 
   footer: {
-    location:  "Valencia, Spain · open to hybrid and remote roles",
+    location:  "Valencia, Spain · open to on-site, hybrid and remote EMEA roles",
     elsewhere: "Elsewhere",
     email:      "Email",
-    tagline:   "Clear systems help people do better work.",
+    tagline:   "Clear support helps people get back to work.",
   },
 
   aboutPage: {
     eyebrow:     "About Breno",
-    heading:     "From frontline operations to *software implementation*.",
-    lead:        "I learned how software succeeds from the operational side first — where unclear ownership, fragmented information and poor handovers become service problems.",
+    heading:     "From frontline operations to *multilingual IT support*.",
+    lead:        "I learned support from the user side first — where unclear ownership, fragmented information and poor handovers turn a solvable issue into a frustrating experience.",
     downloadCv:  "Resume in English",
     facts: {
       basedIn:       "Based in",
@@ -200,16 +200,17 @@ const en = {
       cert:          "Certification",
       certValue:     "Google UX Design Certificate",
       status:        "Status",
-      statusValue:   "Open to implementation & support roles",
+      statusValue:   "Open to IT, technical & application support roles",
       mobility:      "Canada",
-      mobilityValue: "Open to Calgary relocation · employer-specific work permit support required",
+      mobilityValue: "Open to relocation outside Quebec · Francophone Mobility (C16) may apply; employer action required",
     },
     storyEyebrow: "The path",
-    storyHeading: "Operations taught me what software must *actually do*.",
+    storyHeading: "Operations taught me what useful support must *actually do*.",
     story: [
       "Eight-plus years in customer and service operations showed me where systems fail in real life: information scattered across tools, unclear ownership and processes that depend on memory.",
-      "That experience shapes how I approach implementation and support. I map the workflow, translate it into requirements and data rules, test normal and failure paths, document decisions and prepare users for adoption.",
-      "My UX/UI background supports clear interfaces and lower cognitive load. I am building practical foundations in SQL, relational data, REST APIs, HTTP/JSON, Postman, Git and troubleshooting, without presenting concept work as deployed software. Based in {location}, I work across Portuguese, Spanish, French and English.",
+      "That experience shapes how I approach IT and application support. I clarify the impact, gather evidence, test the safest next step, communicate ownership and leave a useful record for the next person.",
+      "My UX/UI background helps me ask better questions, reduce user effort and write technical guidance people can follow. I am building practical foundations in SQL, relational data, REST APIs, HTTP/JSON, Postman, Git and structured troubleshooting, without presenting concept work as deployed software.",
+      "Based in {location}, I work across Portuguese, Spanish, French and English. I am preparing for the planned April 2027 start of a BSc in Computer Science while continuing to build hands-on support capability.",
     ],
     ctaWork:    "Explore selected work",
     ctaContact: "Get in touch",
@@ -239,15 +240,15 @@ const en = {
 
   projects: [
     {
-      slug: "service-operations", category: "Concept case",
+      slug: "service-operations", category: "Support workflow case",
       title: "Incident & Handover Workflow",
       problem: "An operational workflow for logging, assigning, escalating and handing over open incidents with clear status, ownership and history.",
-      role: "Interface & workflow specimens", year: "2026", href: "/work/service-operations",
+      role: "Incident workflow & interface specimens", year: "2026", href: "/work/service-operations",
     },
     {
-      slug: "triageai", category: "Concept case", title: "Multilingual Support Triage",
+      slug: "triageai", category: "Support workflow case", title: "Multilingual Support Triage",
       problem: "A support intake workflow that structures, prioritizes and routes multilingual requests while keeping every outgoing response under human approval.",
-      role: "Interface & workflow specimens", year: "2026", href: "/work/triageai",
+      role: "Triage workflow & interface specimens", year: "2026", href: "/work/triageai",
     },
   ],
 
@@ -260,11 +261,11 @@ const en = {
   ],
 
   processSteps: [
-    { title: "Discover & define", icon: "search", description: "Understand the workflow, then define scope, requirements and success.", items: ["Interview the people doing the work", "Map where information lives", "Separate evidence from assumption", "Write acceptance criteria"] },
-    { title: "Configure", icon: "sitemap", description: "Translate the workflow into data, states, permissions and routing.", items: ["Map required data", "Define states and transitions", "Set roles and permissions", "Document integration assumptions"] },
-    { title: "Test", icon: "check-circle", description: "Verify normal flows, exceptions, validation and access.", items: ["Test the happy path", "Exercise error and recovery states", "Check permissions", "Prepare and support UAT"] },
-    { title: "Onboard", icon: "layout", description: "Prepare documentation, training and handover for adoption.", items: ["Write practical guidance", "Train around real tasks", "Clarify ownership", "Track adoption questions"] },
-    { title: "Support", icon: "send", description: "Reproduce issues, gather evidence and improve the process.", items: ["Capture steps and evidence", "Prioritize by impact", "Follow resolution clearly", "Feed recurring issues back"] },
+    { title: "Clarify", icon: "search", description: "Understand the user, the symptoms, the impact and the expected result.", items: ["Ask focused questions", "Confirm scope and urgency", "Capture the environment", "Separate evidence from assumption"] },
+    { title: "Investigate", icon: "sitemap", description: "Reproduce the issue, collect evidence and narrow the likely causes.", items: ["Reproduce the reported behaviour", "Check data, states and dependencies", "Compare normal and failure paths", "Record what has already been tried"] },
+    { title: "Test", icon: "check-circle", description: "Test the safest next step and verify the result against clear criteria.", items: ["Start with reversible checks", "Test one variable at a time", "Verify access and permissions", "Confirm the user can continue"] },
+    { title: "Resolve or escalate", icon: "layout", description: "Resolve within scope or hand over enough context for the next team to act.", items: ["Explain the fix clearly", "Confirm ownership and next action", "Escalate with evidence", "Keep the user informed"] },
+    { title: "Document & improve", icon: "send", description: "Leave a useful ticket history and turn recurring fixes into reusable guidance.", items: ["Record symptoms, cause and resolution", "Write practical user guidance", "Flag recurring patterns", "Improve the handover for next time"] },
   ],
 
   principlesItems: [
@@ -500,7 +501,7 @@ const en = {
     measureHeading:     "What I'd measure next",
     statesHeading:      "System states and recovery",
     scopeHeading:       "A real problem, an honest proposal.",
-    moreComing:  "Looking for implementation and support work grounded in real operations?",
+    moreComing:  "Looking for IT and technical support grounded in real service operations?",
     getInTouch:  "Start a conversation",
 
     serviceOps: {
@@ -688,7 +689,7 @@ const fr = {
     soon: "Bientôt",
   },
   toolkit: {
-    label: "Fondations techniques",
+    label: "Fondations en soutien applicatif",
   },
   notFound: {
     eyebrow: "404 · Page introuvable",
@@ -700,18 +701,18 @@ const fr = {
   metadata: {
     ogLocale: "fr_CA",
     person: {
-      jobTitle: "Implantation logicielle et soutien applicatif",
+      jobTitle: "Soutien TI et technique multilingue",
       addressLocality: "Valence",
       languages: ["Portugais", "Espagnol", "Français", "Anglais"],
     },
     pages: {
       home: {
-        title: "Breno Sampaio — Implantation logicielle et soutien applicatif",
-        description: "Exigences, règles de données, processus vérifiables et documentation de soutien, ancrés dans des opérations de service multilingues et la pratique UX/UI.",
+        title: "Breno Sampaio — Soutien TI et technique multilingue",
+        description: "Portfolio de soutien TI et technique multilingue, ancré dans les opérations clients, le dépannage structuré, la documentation claire et la pratique UX/UI.",
       },
       about: {
         title: "Profil — Breno Sampaio",
-        description: "Des opérations de service de première ligne à l’implantation logicielle, à l’intégration SaaS et au soutien applicatif. Basé à Valence, en Espagne.",
+        description: "Des opérations multilingues de première ligne et de l’UX/UI au soutien TI, technique et applicatif. Basé à Valence, en Espagne.",
       },
       serviceOperations: {
         title: "Gestion des incidents et relève — Breno Sampaio",
@@ -737,44 +738,44 @@ const fr = {
   availability: "Ouvert aux possibilités",
 
   hero: {
-    title: "L’implantation de logiciels, ancrée dans les *opérations réelles*.",
-    lead: "Je transforme des opérations de service multilingues en exigences claires, règles de données, processus vérifiables et documentation pratique pour l’implantation logicielle et le soutien applicatif.",
-    cta1: "Voir les projets sélectionnés",
+    title: "Le soutien TI multilingue, ancré dans les *opérations de service réelles*.",
+    lead: "J’apporte plus de huit ans d’opérations multilingues auprès de la clientèle au soutien TI et technique, avec une pratique UX/UI et des bases concrètes en gestion des incidents, documentation, SQL, API et dépannage.",
+    cta1: "Voir les études de cas en soutien",
     cta2: "Résumé en français",
   },
 
   work: {
-    eyebrow: "Implantation et soutien",
-    heading: "Études de cas en implantation et en soutien.",
-    subheading: "Deux concepts qui transforment des problèmes opérationnels en exigences, processus, règles, états vérifiables et documentation de soutien.",
+    eyebrow: "Études de processus de soutien",
+    heading: "Une méthode de soutien rendue *visible*.",
+    subheading: "Deux concepts qui montrent comment je structure les incidents, les demandes multilingues, la responsabilité, la transmission, les états d’échec et la documentation.",
     more: "Travail conceptuel indépendant. Les hypothèses, les limites et les résultats attendus sont clairement indiqués.",
   },
 
   experience: {
     eyebrow: "Expérience professionnelle",
-    heading: "L’expérience opérationnelle derrière la *pensée systémique*.",
-    subheading: "Plus de huit ans en opérations de service multilingues en Espagne et en France, parallèlement à une pratique indépendante en produit et en UX.",
+    heading: "L’expérience de service derrière un *meilleur soutien*.",
+    subheading: "Plus de huit ans à résoudre des problèmes clients et opérationnels en Espagne et en France, parallèlement à une pratique UX/UI indépendante et au développement de bases techniques.",
     items: [
       {
         dates: "2024 — 2026",
         role: "Opérations de réception et soutien administratif",
         company: "Moontels",
         location: "Valence",
-        detail: "Analyse des écarts liés aux réservations, à la facturation et au service dans ICNEA, Salesforce et les systèmes internes; coordination de la responsabilité et des transferts entre les équipes.",
+        detail: "Analyse des écarts liés aux réservations, à la facturation et au service dans ICNEA, Salesforce et les systèmes internes; coordination de la responsabilité, du suivi et des transferts entre les équipes.",
       },
       {
         dates: "2023 — 2024",
         role: "Services aux clients et opérations",
         company: "Travelodge Hotels",
         location: "Valence",
-        detail: "Résolution de dossiers multilingues en personne, par téléphone et par voie numérique, avec maintien de données de réservation exactes et suivi des actions ouvertes.",
+        detail: "Résolution de dossiers multilingues en personne, par téléphone et par voie numérique, avec des dossiers exacts, une communication claire et le suivi des actions ouvertes.",
       },
       {
         dates: "2020 — 2023",
         role: "Designer UX/UI autonome",
         company: "À son compte",
         location: "France",
-        detail: "Cartographie des exigences, des parcours utilisateurs et de l’architecture de l’information; production de maquettes filaires et de prototypes haute fidélité pour une clientèle indépendante.",
+        detail: "Cartographie des exigences, des parcours utilisateurs et de l’architecture de l’information; création de prototypes et explication directe des décisions de conception à une clientèle indépendante.",
       },
       {
         dates: "2017 — 2020",
@@ -788,20 +789,20 @@ const fr = {
 
   process: {
     eyebrow: "Ma méthode",
-    heading: "Cinq étapes, du problème opérationnel au *processus soutenu*.",
-    subheading: "Les exigences, la configuration, les essais et l’adoption demeurent liés au travail réel.",
+    heading: "Cinq étapes, du problème signalé à une *résolution claire*.",
+    subheading: "Je garde l’utilisateur, les preuves, la prochaine action et l’historique du dossier liés tout au long du processus de soutien.",
   },
 
   principles: {
     eyebrow: "Principes",
-    heading: "Des principes pour une *implantation fiable*.",
-    subheading: "Des pratiques qui rendent les logiciels compréhensibles, traçables et utiles d’une équipe, d’une langue et d’une relève à l’autre.",
+    heading: "Des principes pour un *soutien technique fiable*.",
+    subheading: "Des pratiques qui rendent les problèmes compréhensibles, traçables et exploitables d’un utilisateur, d’une équipe, d’une langue et d’une relève à l’autre.",
   },
 
   about: {
     eyebrow: "À propos de Breno",
-    heading: "Des opérations de première ligne à *l’implantation logicielle*.",
-    lead: "Les opérations de service m’ont appris où les systèmes échouent. L’UX/UI et mes fondations techniques m’aident maintenant à relier les utilisateurs, les processus et les équipes techniques.",
+    heading: "Des opérations de première ligne au *soutien TI multilingue*.",
+    lead: "Les opérations de service m’ont appris à écouter, à analyser et à suivre un problème jusqu’à sa résolution. L’UX/UI m’aide à rendre les consignes techniques plus claires et plus faciles à utiliser.",
     cta: "Lire mon parcours",
     facts: {
       basedIn: "Basé à",
@@ -811,30 +812,30 @@ const fr = {
       cert: "Certification",
       certValue: "Certificat professionnel Google en conception UX",
       mobility: "Canada",
-      mobilityValue: "Ouvert à un déménagement à Calgary · soutien requis pour un permis de travail lié à l’employeur",
+      mobilityValue: "Ouvert à un déménagement hors Québec · Mobilité francophone (C16) possible; démarche de l’employeur requise",
     },
   },
 
   contact: {
     eyebrow: "Entrons en contact",
-    heading: "Rendons les logiciels plus simples à *implanter, adopter et soutenir*.",
-    body: "Je suis ouvert aux postes juniors et intermédiaires en implantation logicielle, intégration SaaS et soutien applicatif. Je suis basé à Valence, en Espagne, et j’envisage un déménagement pour la bonne occasion.",
+    heading: "Rendons le soutien technique *plus clair et plus humain*.",
+    body: "Je suis ouvert aux postes en soutien TI, centre de services, soutien technique et soutien applicatif junior à Valence, au sein d’équipes à distance en EMEA et, avec la démarche appropriée de l’employeur, hors Québec au Canada.",
     email: "Courriel",
     location: "Lieu",
     localTime: "Heure locale",
   },
 
   footer: {
-    location: "Valence, Espagne · ouvert aux postes hybrides et à distance",
+    location: "Valence, Espagne · ouvert aux postes sur place, hybrides et à distance en EMEA",
     elsewhere: "Ailleurs",
     email: "Courriel",
-    tagline: "Des systèmes clairs aident les gens à mieux travailler.",
+    tagline: "Un soutien clair aide les gens à reprendre leur travail.",
   },
 
   aboutPage: {
     eyebrow: "À propos de Breno",
-    heading: "Des opérations de première ligne à *l’implantation logicielle*.",
-    lead: "J’ai d’abord appris comment un logiciel réussit du côté des opérations, là où une responsabilité floue, une information fragmentée et de mauvaises relèves deviennent des problèmes de service.",
+    heading: "Des opérations de première ligne au *soutien TI multilingue*.",
+    lead: "J’ai d’abord appris le soutien du côté de l’utilisateur, là où une responsabilité floue, une information fragmentée et de mauvaises relèves transforment un problème résoluble en expérience frustrante.",
     downloadCv: "Résumé en français",
     facts: {
       basedIn: "Basé à",
@@ -844,16 +845,17 @@ const fr = {
       cert: "Certification",
       certValue: "Certificat professionnel Google en conception UX",
       status: "Statut",
-      statusValue: "Ouvert aux postes en implantation et en soutien",
+      statusValue: "Ouvert aux postes en soutien TI, technique et applicatif",
       mobility: "Canada",
-      mobilityValue: "Ouvert à un déménagement à Calgary · soutien requis pour un permis de travail lié à l’employeur",
+      mobilityValue: "Ouvert à un déménagement hors Québec · Mobilité francophone (C16) possible; démarche de l’employeur requise",
     },
     storyEyebrow: "Mon parcours",
-    storyHeading: "Les opérations m’ont appris ce que les logiciels doivent *réellement accomplir*.",
+    storyHeading: "Les opérations m’ont appris ce qu’un soutien utile doit *réellement accomplir*.",
     story: [
       "Plus de huit ans en opérations de service et de soutien à la clientèle m’ont montré où les systèmes échouent concrètement : information dispersée entre les outils, responsabilité floue et processus qui reposent sur la mémoire.",
-      "Cette expérience façonne ma manière d’aborder l’implantation et le soutien. Je cartographie le processus, le traduis en exigences et en règles de données, vérifie les parcours normaux et les scénarios d’échec, documente les décisions et prépare les utilisateurs à l’adoption.",
-      "Mon expérience en UX/UI favorise des interfaces claires et une charge cognitive réduite. Je développe des fondations pratiques en SQL, données relationnelles, API REST, HTTP/JSON, Postman, Git et dépannage, sans présenter un travail conceptuel comme un logiciel déployé. Basé à {location}, je travaille en portugais, en espagnol, en français et en anglais.",
+      "Cette expérience façonne ma manière d’aborder le soutien TI et applicatif. Je clarifie l’incidence, recueille les preuves, teste la prochaine étape la plus sûre, communique la responsabilité et laisse un historique utile pour la personne suivante.",
+      "Mon expérience en UX/UI m’aide à poser de meilleures questions, à réduire l’effort de l’utilisateur et à rédiger des consignes techniques faciles à suivre. Je développe des bases pratiques en SQL, données relationnelles, API REST, HTTP/JSON, Postman, Git et dépannage structuré, sans présenter un travail conceptuel comme un logiciel déployé.",
+      "Basé à {location}, je travaille en portugais, en espagnol, en français et en anglais. Je prépare le début prévu, en avril 2027, d’un BSc en informatique tout en continuant de développer des compétences pratiques en soutien.",
     ],
     ctaWork: "Voir les projets sélectionnés",
     ctaContact: "Communiquer avec moi",
@@ -889,19 +891,19 @@ const fr = {
   projects: [
     {
       slug: "service-operations",
-      category: "Étude conceptuelle",
+      category: "Étude de processus de soutien",
       title: "Gestion des incidents et relève",
       problem: "Un processus opérationnel pour consigner, attribuer, transmettre au niveau supérieur et transférer les incidents ouverts avec un état, une responsabilité et un historique clairs.",
-      role: "Spécimens d’interface et de processus",
+      role: "Processus d’incident et spécimens d’interface",
       year: "2026",
       href: "/work/service-operations",
     },
     {
       slug: "triageai",
-      category: "Étude conceptuelle",
+      category: "Étude de processus de soutien",
       title: "Triage du soutien multilingue",
       problem: "Un processus de réception qui structure, priorise et achemine les demandes multilingues tout en soumettant chaque réponse sortante à une approbation humaine.",
-      role: "Spécimens d’interface et de processus",
+      role: "Processus de triage et spécimens d’interface",
       year: "2026",
       href: "/work/triageai",
     },
@@ -917,34 +919,34 @@ const fr = {
 
   processSteps: [
     {
-      title: "Découvrir et définir",
+      title: "Clarifier",
       icon: "search",
-      description: "Comprendre le processus, puis définir la portée, les exigences et les critères de réussite.",
-      items: ["Interroger les personnes qui font le travail", "Cartographier l’emplacement de l’information", "Distinguer les faits des hypothèses", "Rédiger les critères d’acceptation"],
+      description: "Comprendre l’utilisateur, les symptômes, l’incidence et le résultat attendu.",
+      items: ["Poser des questions ciblées", "Confirmer la portée et l’urgence", "Consigner l’environnement", "Distinguer les faits des hypothèses"],
     },
     {
-      title: "Configurer",
+      title: "Analyser",
       icon: "sitemap",
-      description: "Traduire le processus en données, états, autorisations et règles d’acheminement.",
-      items: ["Cartographier les données requises", "Définir les états et les transitions", "Établir les rôles et les autorisations", "Documenter les hypothèses d’intégration"],
+      description: "Reproduire le problème, recueillir les preuves et réduire les causes probables.",
+      items: ["Reproduire le comportement signalé", "Vérifier les données, les états et les dépendances", "Comparer les parcours normaux et les scénarios d’échec", "Consigner ce qui a déjà été tenté"],
     },
     {
       title: "Tester",
       icon: "check-circle",
-      description: "Vérifier les parcours normaux, les exceptions, la validation et les accès.",
-      items: ["Tester le parcours nominal", "Exercer les états d’erreur et de reprise", "Vérifier les autorisations", "Préparer et soutenir les tests d’acceptation utilisateur"],
+      description: "Tester la prochaine étape la plus sûre et vérifier le résultat selon des critères clairs.",
+      items: ["Commencer par des vérifications réversibles", "Tester une variable à la fois", "Vérifier les accès et les autorisations", "Confirmer que l’utilisateur peut reprendre son travail"],
     },
     {
-      title: "Accompagner",
+      title: "Résoudre ou transmettre",
       icon: "layout",
-      description: "Préparer la documentation, la formation et la relève nécessaires à l’adoption.",
-      items: ["Rédiger des directives pratiques", "Former à partir des tâches réelles", "Clarifier la responsabilité", "Suivre les questions d’adoption"],
+      description: "Résoudre dans la portée ou transmettre assez de contexte pour que l’équipe suivante puisse agir.",
+      items: ["Expliquer clairement la solution", "Confirmer la responsabilité et la prochaine action", "Transmettre avec les preuves", "Tenir l’utilisateur informé"],
     },
     {
-      title: "Soutenir",
+      title: "Documenter et améliorer",
       icon: "send",
-      description: "Reproduire les problèmes, recueillir les preuves et améliorer le processus.",
-      items: ["Consigner les étapes et les preuves", "Prioriser selon l’incidence", "Suivre clairement la résolution", "Réinjecter les problèmes récurrents dans le processus"],
+      description: "Laisser un historique utile et transformer les solutions récurrentes en consignes réutilisables.",
+      items: ["Consigner les symptômes, la cause et la résolution", "Rédiger des consignes pratiques", "Signaler les tendances récurrentes", "Améliorer la prochaine transmission"],
     },
   ],
 
@@ -1190,7 +1192,7 @@ const fr = {
     measureHeading: "Ce que je mesurerais ensuite",
     statesHeading: "États du système et reprise",
     scopeHeading: "Un problème réel, une proposition honnête.",
-    moreComing: "Vous cherchez un travail d’implantation et de soutien ancré dans les opérations réelles?",
+    moreComing: "Vous cherchez un soutien TI et technique ancré dans les opérations de service réelles?",
     getInTouch: "Démarrer une conversation",
 
     serviceOps: {
