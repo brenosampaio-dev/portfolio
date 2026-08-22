@@ -2,7 +2,7 @@
 
 export const profile = {
   name: "Breno Sampaio",
-  role: "Software implementation and application support",
+  role: "Multilingual IT and technical support",
   location: "Valencia, Spain",
   timezone: "Europe/Madrid",
   email: "hello@brenosampaio.com",
@@ -18,64 +18,58 @@ export const profile = {
 export const projects = [
   {
     slug: "service-operations",
-    category: "Concept case",
+    category: "Support workflow case",
     title: "Incident & Handover Workflow",
     problem:
       "An operational workflow for logging, assigning, escalating and handing over open incidents with clear status, ownership and history.",
-    role: "Technical-functional concept",
+    role: "Incident workflow concept",
     year: "2026",
     href: "/work/service-operations",
   },
   {
     slug: "triageai",
-    category: "Concept case",
+    category: "Support workflow case",
     title: "Multilingual Support Triage",
     problem:
       "A support intake workflow that structures, prioritizes and routes multilingual requests while keeping every outgoing response under human approval.",
-    role: "Technical-functional concept",
+    role: "Multilingual triage concept",
     year: "2026",
     href: "/work/triageai",
   },
 ];
 
 // Process — Breno's own working method (not the mockup's copy). Problem-first,
-// systems-minded, build-aware. Six steps from discovery to handoff.
+// user-aware and evidence-led. Five steps from clarification to documentation.
 export const process = [
   {
-    title: "Discover",
+    title: "Clarify",
     icon: "search",
-    description: "Understand users, operations, current tools and failure points.",
-    items: ["Interview the people doing the work", "Map where information lives", "Find operational gaps", "Separate evidence from assumption"],
+    description: "Understand the user, the symptoms, the impact and the expected result.",
+    items: ["Ask focused questions", "Confirm scope and urgency", "Capture the environment", "Separate evidence from assumption"],
   },
   {
-    title: "Requirements",
+    title: "Investigate",
     icon: "frame",
-    description: "Define scope, functional needs, business rules and acceptance criteria.",
-    items: ["Write functional requirements", "Name constraints and dependencies", "Define what is out of scope", "Agree what success means"],
-  },
-  {
-    title: "Configure",
-    icon: "sitemap",
-    description: "Translate the workflow into data, states, permissions and routing.",
-    items: ["Map required data", "Define states and transitions", "Set roles and permissions", "Document integration assumptions"],
+    description: "Reproduce the issue, collect evidence and narrow the likely causes.",
+    items: ["Reproduce the reported behaviour", "Check data, states and dependencies", "Compare normal and failure paths", "Record what has already been tried"],
   },
   {
     title: "Test",
+    icon: "sitemap",
+    description: "Test the safest next step and verify the result against clear criteria.",
+    items: ["Start with reversible checks", "Test one variable at a time", "Verify access and permissions", "Confirm the user can continue"],
+  },
+  {
+    title: "Resolve",
     icon: "check-circle",
-    description: "Verify normal flows, exceptions, validation and access.",
-    items: ["Test the happy path", "Exercise error and recovery states", "Check permissions", "Prepare and support UAT"],
+    description: "Resolve within scope or escalate with enough context for the next team.",
+    items: ["Explain the fix clearly", "Confirm ownership and next action", "Escalate with evidence", "Keep the user informed"],
   },
   {
-    title: "Onboard",
+    title: "Document",
     icon: "layout",
-    description: "Prepare documentation, training and handover for adoption.",
-    items: ["Write practical guidance", "Train around real tasks", "Clarify ownership", "Track adoption questions"],
-  },
-  {
-    title: "Support",
-    icon: "send",
-    description: "Reproduce issues, gather evidence and improve the process.",
-    items: ["Capture steps and evidence", "Prioritise by impact", "Follow resolution clearly", "Feed recurring issues back"],
+    description: "Leave a useful ticket history and turn recurring fixes into reusable guidance.",
+    items: ["Record symptoms, cause and resolution", "Write practical user guidance", "Flag recurring patterns", "Improve the handover for next time"],
   },
 ];
 

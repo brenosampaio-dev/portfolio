@@ -1,6 +1,6 @@
 # Breno Sampaio — Portfolio
 
-Personal portfolio for Breno Sampaio, focused on software implementation, SaaS onboarding and application support.
+Personal portfolio for Breno Sampaio, focused on multilingual IT support, technical support and application support.
 Built on Breno's own design system as the real foundation — not a reskin.
 
 Three pages: **Home**, a full **case study** (Service Operations Dashboard), and **About**.

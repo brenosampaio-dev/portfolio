@@ -16,12 +16,12 @@ import { Providers } from "@/context/AppContext";
 import { profile } from "@/lib/content";
 
 const SHARE_DESCRIPTION =
-  "Requirements, data rules, testable workflows and support documentation grounded in multilingual service operations and UX/UI practice.";
+  "Multilingual IT and technical support portfolio grounded in customer operations, structured troubleshooting, clear documentation and UX/UI practice.";
 
 export const metadata = {
   metadataBase: new URL("https://brenosampaio.vercel.app"),
   title: {
-    default: "Breno Sampaio — Software Implementation & Application Support",
+    default: "Breno Sampaio — Multilingual IT & Technical Support",
     template: "%s — Breno Sampaio",
   },
   description: SHARE_DESCRIPTION,
@@ -29,7 +29,7 @@ export const metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Breno Sampaio — Software Implementation & Application Support",
+    title: "Breno Sampaio — Multilingual IT & Technical Support",
     description: SHARE_DESCRIPTION,
     url: "https://brenosampaio.vercel.app",
     siteName: "Breno Sampaio",
@@ -38,7 +38,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Breno Sampaio — Software Implementation & Application Support",
+    title: "Breno Sampaio — Multilingual IT & Technical Support",
     description: SHARE_DESCRIPTION,
   },
 };
@@ -85,7 +85,7 @@ export default function RootLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "Person",
               name: profile.name,
-              jobTitle: "Software Implementation and Application Support",
+              jobTitle: "Multilingual IT and Technical Support",
               description: SHARE_DESCRIPTION,
               url: "https://brenosampaio.vercel.app",
               email: `mailto:${profile.email}`,
