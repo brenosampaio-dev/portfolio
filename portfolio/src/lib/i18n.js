@@ -45,7 +45,7 @@ const en = {
   },
   toolkit: {
     label: "Support capability map",
-    summary: "Evidence-backed strengths for IT, technical and application support roles.",
+    summary: "Current strengths for support roles, with the next technical labs clearly marked below.",
     groups: [
       {
         label: "User support",
@@ -60,6 +60,16 @@ const en = {
         items: ["Structured troubleshooting", "Salesforce & ICNEA", "Jira", "SQL & data checks", "REST APIs & Postman"],
       },
     ],
+    roadmap: {
+      label: "Next support labs",
+      status: "Planned learning · 2026",
+      items: [
+        "Windows 11 & device troubleshooting",
+        "Microsoft 365, Entra & Intune fundamentals",
+        "TCP/IP, DNS & DHCP diagnostics",
+        "PowerShell for support",
+      ],
+    },
   },
   notFound: {
     eyebrow: "404 · Page not found",
@@ -705,7 +715,7 @@ const fr = {
   },
   toolkit: {
     label: "Carte des compétences en soutien",
-    summary: "Des acquis concrets pour les postes en soutien TI, technique et applicatif.",
+    summary: "Compétences actuelles en soutien, avec les prochains laboratoires techniques clairement identifiés.",
     groups: [
       {
         label: "Soutien aux utilisateurs",
@@ -720,6 +730,16 @@ const fr = {
         items: ["Dépannage structuré", "Salesforce et ICNEA", "Jira", "SQL et contrôle des données", "API REST et Postman"],
       },
     ],
+    roadmap: {
+      label: "Prochains laboratoires de soutien",
+      status: "Apprentissage planifié · 2026",
+      items: [
+        "Dépannage de Windows 11 et des appareils",
+        "Fondements de Microsoft 365, Entra et Intune",
+        "Diagnostic TCP/IP, DNS et DHCP",
+        "PowerShell appliqué au soutien",
+      ],
+    },
   },
   notFound: {
     eyebrow: "404 · Page introuvable",

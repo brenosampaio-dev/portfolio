@@ -743,6 +743,11 @@ html {
   font-size: var(--text-small);
   line-height: 1.55;
 }
+.toolkit__content {
+  display: grid;
+  gap: var(--space-6);
+  min-width: 0;
+}
 .toolkit__groups {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -813,6 +818,44 @@ html {
   font-size: var(--text-small);
   line-height: 1.4;
 }
+.toolkit__roadmap {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.7fr) minmax(0, 2.3fr);
+  gap: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--mist);
+}
+.toolkit__roadmap-meta {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+}
+.toolkit__roadmap-heading {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-2);
+  align-items: baseline;
+}
+.toolkit__roadmap-status {
+  padding-left: calc(0.62rem + var(--space-2));
+  color: var(--stone);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.toolkit__roadmap-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3) var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.toolkit__item--roadmap {
+  color: var(--stone);
+}
 /* Focus-in deal (JS-gated): each capability resolves in quick succession. */
 .js .toolkit__item {
   opacity: 0;
@@ -841,6 +884,9 @@ html {
   .toolkit__summary {
     max-width: 46ch;
   }
+  .toolkit__roadmap {
+    grid-template-columns: minmax(170px, 0.7fr) minmax(0, 1.3fr);
+  }
 }
 @media (max-width: 640px) {
   .toolkit {
@@ -866,6 +912,13 @@ html {
   }
   .toolkit__group-heading {
     min-height: 0;
+  }
+  .toolkit__roadmap,
+  .toolkit__roadmap-list {
+    grid-template-columns: 1fr;
+  }
+  .toolkit__roadmap {
+    gap: var(--space-4);
   }
 }
 @media (prefers-reduced-motion: reduce) {
