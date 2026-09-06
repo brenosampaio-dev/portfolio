@@ -4,6 +4,7 @@ import { Button, Divider, Status, Tag, Text } from "@/components/ds";
 import { CaseHero } from "@/components/site/CaseHero";
 import { CaseSection } from "@/components/site/CaseSection";
 import { CaseSnapshot } from "@/components/site/CaseSnapshot";
+import { CaseVisual } from "@/components/site/CaseVisual";
 import { DecisionsLedger } from "@/components/site/DecisionsLedger";
 import { Icon } from "@/components/site/Icon";
 import { Reveal } from "@/components/site/Reveal";
@@ -237,6 +238,9 @@ export function SupportCaseContent({ slug }) {
           {s.investigation.prose.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </Reveal>
         <Reveal>
+          <CaseVisual slug={slug} phase="investigation" lang={lang} />
+        </Reveal>
+        <Reveal>
           <Text variant="h3" style={{ marginBottom: "var(--space-6)" }}>{headings.trail}</Text>
           <InvestigationTrail items={s.investigation.trail} />
         </Reveal>
@@ -255,6 +259,9 @@ export function SupportCaseContent({ slug }) {
       <CaseSection id="resolution" label={sectionLabels.resolution} number={s.resolution.number} heading={s.resolution.heading}>
         <Reveal className="prose">
           {s.resolution.prose.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </Reveal>
+        <Reveal>
+          <CaseVisual slug={slug} phase="resolution" lang={lang} />
         </Reveal>
         <Reveal>
           <Text variant="h3" style={{ marginBottom: "var(--space-6)" }}>{headings.validation}</Text>

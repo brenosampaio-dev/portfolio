@@ -1,15 +1,37 @@
 "use client";
 
+import Image from "next/image";
+import "./CaseVisual.css";
 import { BrowserFrame } from "@/components/site/BrowserFrame";
 import { Status } from "@/components/ds";
 import { useLang } from "@/context/AppContext";
 import { getCaseStudy } from "@/lib/caseStudies";
+import { caseVisualLabels, getCaseVisual } from "@/lib/caseVisuals";
 
 export function SupportCasePreview({ slug, card = false }) {
   const { lang } = useLang();
   const bundle = getCaseStudy(lang, slug);
   if (!bundle) return null;
   const { preview, kind } = bundle.study;
+  const cover = card ? getCaseVisual(slug, "investigation", lang) : null;
+
+  if (cover) {
+    return (
+      <div className="case-visual-cover">
+        <Image
+          src={cover.src}
+          alt=""
+          width={cover.width}
+          height={cover.height}
+          sizes="(max-width: 800px) 90vw, 400px"
+          className="case-visual-cover__image"
+        />
+        <span className="case-visual-cover__label">
+          {caseVisualLabels[lang === "fr" ? "fr" : "en"].disclosure}
+        </span>
+      </div>
+    );
+  }
 
   return (
     <BrowserFrame url={preview.url} className={card ? "browser-frame--card" : ""}>
