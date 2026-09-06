@@ -1,0 +1,70 @@
+{
+  "generator": "Built-in image_gen",
+  "date": "2026-09-06",
+  "disclosure": "AI-generated reconstructions of the existing synthetic case studies. Not screenshots of executed lab sessions.",
+  "format": "WebP, quality 92, 1536 x 1024. Original PNGs preserved in Codex generated_images.",
+  "placement": "Investigation and resolution images follow the explanatory paragraphs of the corresponding sections. Homepage cards reuse investigation images.",
+  "assets": [
+    {
+      "asset": "public/images/case-studies/access-investigation.webp",
+      "original": "exec-52347942-869c-408c-965d-bedafda05519.png",
+      "prompts": [
+        {
+          "prompt": "Use case: ui-mockup. Generate a single ultra-realistic desktop software screenshot reconstruction for an IT support portfolio, landscape 1536x1024. NOT a photo of a monitor, no hands, no desk, no perspective. Windows 11 visual fidelity: restrained blue-gray desktop, precisely aligned rounded native windows, believable titlebars, crisp readable Segoe UI and terminal monospace. A large Windows Terminal window (65% width) beside a smaller technician incident-notes window (35% width), no overlaps. All content fictional.\nTerminal title \"Windows PowerShell\". Show only this short correct content in large legible text:\nPS> Get-Service W32Time\nStatus   Name       DisplayName\nRunning  W32Time    Windows Time\n\nPS> w32tm /query /status\nSource: Local CMOS Clock\n\nPS> Test-NetConnection login.microsoftonline.com -Port 443\nTcpTestSucceeded : True\nNotes window title \"INC-1047 / Investigation\", with one amber status indicator and exact labels:\n\"Clock comparison\"\n\"Device  08:29:14\"\n\"Reference  08:21:00\"\n\"Offset  +00:08:14\"\n\"One user / One device\"\n\"Outlook and Teams: sign-in loop\"\n\"Network path: reachable\"\nFooter inside image in clear small type: \"SIMULATED LAB / AI VISUAL RECONSTRUCTION\". Professional believable desktop UI, flat screenshot, subtle window shadows, high fidelity details, generous whitespace. No invented dashboards, no real user identities, no passwords, no corporate branding. Nothing beyond the specified text except native window controls. Keep the entire image within frame."
+        }
+      ]
+    },
+    {
+      "asset": "public/images/case-studies/access-resolution.webp",
+      "original": "exec-9593590f-9c5c-41a9-a1e7-07c76cc8cc9f.png",
+      "prompts": [
+        {
+          "prompt": "Edit this image into the corresponding RESOLUTION screenshot reconstruction for the same synthetic IT support case. Preserve exactly the composition, desktop color, native window styling, legible typography and footer disclosure. Left terminal must show only:\nPS> w32tm /resync\nSending resync command to local computer\nThe command completed successfully.\nRight window title \"INC-1047 / Validation\".\nReplace amber indicator with muted green. Replace the table and notes with this exact text at generously readable size:\n\"Validation complete\"\n\"Clock difference  < 1 second\"\n\"Browser sign-in  Completed\"\n\"Outlook  Mailbox opened\"\n\"Teams  Session connected\"\n\"No further password reset\"\nKeep footer exact \"SIMULATED LAB / AI VISUAL RECONSTRUCTION\". This is an AI illustration of a fictional ticket record, not a real operating system capture. No extra commands or other text. Landscape 1536x1024.",
+          "reference": "exec-52347942-869c-408c-965d-bedafda05519.png"
+        }
+      ]
+    },
+    {
+      "asset": "public/images/case-studies/reservation-investigation.webp",
+      "original": "exec-a736d348-f2a1-4ce9-ae97-7f957e74abd4.png",
+      "prompts": [
+        {
+          "prompt": "Use case: ui-mockup. Create an ultra-realistic desktop screenshot reconstruction of a fictional API debugging app closely resembling a professional Postman-style API client, landscape 1536x1024. Flat front-facing software screenshot, no monitor, room, people or photographic staging. Crisp legible UI text, restrained light gray interface, narrow left collection sidebar and roomy main pane, tiny orange accents, native desktop titlebar. This is fictional lab data for an IT support portfolio. Header title \"Reservation integration / APP-2318\"; sidebar \"Collections\", \"Reservation webhook\". Main request line exact: \"POST https://partner.support.test/webhooks/reservations\". Beneath a horizontal tab row with \"Body\" selected, show a large JSON editor with exact code:\n{\n  \"reservation_id\": \"RSV-8F31C\",\n  \"check_in\": \"23/09/2026\",\n  \"check_out\": \"2026-09-25\",\n  \"guest_count\": 2\n}\nHighlight ONLY the check_in date with pale amber. Response pane below: a restrained red badge \"422 Unprocessable Content\"; response exact:\n{ \"error\": \"check_in must use YYYY-MM-DD\" }\nBottom metadata strip: \"Correlation: req_9c7f2a\" and \"Event: evt_7a31\".\nPersistent readable footer \"SIMULATED LAB / AI VISUAL RECONSTRUCTION\". Excellent professional visual realism, short text only at readable sizes, no lorem ipsum, no meaningless code, no credentials, no real company data."
+        }
+      ]
+    },
+    {
+      "asset": "public/images/case-studies/reservation-resolution.webp",
+      "original": "exec-10f966c4-4cb0-42de-85aa-1f71069d2724.png",
+      "prompts": [
+        {
+          "prompt": "Transform this same realistic synthetic API client screenshot into the resolution for APP-2318. Preserve professional light gray desktop application style, sidebar, native titlebar and readable syntax-highlighted monospace. Landscape 1536x1024. Keep POST URL https://partner.support.test/webhooks/reservations and body but change ONLY check_in date to \"2026-09-23\" with subtle pale green highlight. Response status now green \"200 OK\", response body:\n{ \"event_id\": \"evt_7a31\", \"status\": \"processed\" }\nIn the lower half add a separate clearly labeled tab/pane \"SQL validation\" with readable exact query:\nSELECT COUNT(*) AS reservation_count\nFROM reservations\nWHERE reservation_id = 'RSV-8F31C';\nBelow it a tiny results table headed \"reservation_count\" containing one row \"1\". Under table a small green label \"Second replay: no duplicate\".\nKeep bottom strip \"Correlation: req_9c7f2a\", \"Event: evt_7a31\" and exact footer \"SIMULATED LAB / AI VISUAL RECONSTRUCTION\". Use short legible text, preserve identifiers exactly. No real company info or credentials. This is a UI illustration of lab validation, not proof of a real API run.",
+          "reference": "exec-a736d348-f2a1-4ce9-ae97-7f957e74abd4.png"
+        }
+      ]
+    },
+    {
+      "asset": "public/images/case-studies/network-investigation.webp",
+      "original": "exec-d43a2510-559f-4006-bce5-c9df330e83a2.png",
+      "prompts": [
+        {
+          "prompt": "Use case: ui-mockup. Produce an ultra-realistic Windows 11 desktop software screenshot reconstruction, landscape 1536x1024, flat straight-on screen capture style, no physical monitor, no hands, no room. Main dark Windows Terminal occupies 70% of composition and small neutral technician-notes window at right 30%, separated cleanly. Realistic title bars, sharp Segoe UI, large crisp monospace terminal text, restrained blue-gray desktop margin. No neon. Terminal title \"Command Prompt\". Exact short terminal content:\nC:\\> ipconfig /all\nIPv4 Address    : 192.168.10.42\nDefault Gateway : 192.168.10.1\nDNS Servers     : 192.168.10.53\n\nC:\\> ping 192.168.10.1\nSent = 4, Received = 4, Lost = 0\n\nC:\\> ping 1.1.1.1\nSent = 4, Received = 4, Lost = 0\n\nC:\\> nslookup portal.supportlab.test\nServer: 192.168.10.53\nDNS request timed out.\nTechnician notes exact: title \"NET-0732\", amber status \"Investigating\", \"3 clients / VLAN 10\", \"Gateway reachable\", \"Public IP reachable\", \"DNS lookup failed\", \"Check DHCP option 6\". Make failed lookup subtly amber not garish red. Clear footer \"SIMULATED LAB / AI VISUAL RECONSTRUCTION\". All data fictional. Keep command order and IPs precisely correct; no extra commands, badges, logos or claims of real captures."
+        },
+        {
+          "prompt": "Make exactly one localized change to this image: remove the entire Windows taskbar near the bottom, including the clock, date, start button and app icons. Replace that strip with a continuation of the surrounding dark blue desktop background. Preserve all other content, every terminal command, every IP address, note, layout, window, and footer \"SIMULATED LAB / AI VISUAL RECONSTRUCTION\" pixel-faithfully as much as possible. Do not add or change any text. Landscape 1536x1024.",
+          "reference": "exec-6b751bad-bdb3-4996-9b9e-cf4a89d570ba.png"
+        }
+      ]
+    },
+    {
+      "asset": "public/images/case-studies/network-resolution.webp",
+      "original": "exec-6a74d5ef-10b4-4520-8c0c-0fc1577d9ee3.png",
+      "prompts": [
+        {
+          "prompt": "Edit this realistic synthetic Windows screenshot to show the RESOLUTION for NET-0732. Preserve the left dark terminal and right light notes window and blue desktop, but REMOVE entire Windows taskbar including its clock/date; extend desktop background into that area. Keep footer disclosure centered and clear. Landscape 1536x1024. Terminal title now \"Windows PowerShell\". Replace terminal text with only these exact short lines, readable monospace:\nPS> ipconfig /renew\nDNS Servers : 192.168.10.10\n\nPS> ipconfig /flushdns\nSuccessfully flushed the DNS Resolver Cache.\n\nPS> nslookup portal.supportlab.test\nServer: 192.168.10.10\nName: portal.supportlab.test\nAddress: 192.168.20.25\n\nPS> Test-NetConnection 192.168.20.25 -Port 443\nTcpTestSucceeded : True\nRight notes title \"NET-0732 / Validation\", muted green indicator \"Resolved in simulation\", then short rows \"DNS: 192.168.10.10\", \"Hostname resolved\", \"TCP 443 reachable\", \"3 of 3 clients validated\". Footer \"SIMULATED LAB / AI VISUAL RECONSTRUCTION\". No date, no clock, no additional metrics, no taskbar. Do not make terminal text too wide to fit.",
+          "reference": "exec-6b751bad-bdb3-4996-9b9e-cf4a89d570ba.png"
+        }
+      ]
+    }
+  ]
+}
