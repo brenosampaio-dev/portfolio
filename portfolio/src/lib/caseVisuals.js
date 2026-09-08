@@ -2,6 +2,19 @@
 // These images illustrate the written records; they are not captured lab evidence.
 const visuals = {
   "access-restored": {
+    overview: {
+      file: "access-overview",
+      en: {
+        title: "The incident starts with a sign-in loop",
+        caption: "One employee can open Windows but cannot continue in Outlook or Teams. This reconstruction introduces the reported symptom and incident scope before the diagnostic checks.",
+        alt: "Reconstructed Windows desktop showing an Outlook sign-in interruption beside incident INC-1047: one user, one device, repeated prompts after a password change.",
+      },
+      fr: {
+        title: "L’incident commence par une boucle de connexion",
+        caption: "Une personne peut ouvrir Windows, mais ne peut pas poursuivre dans Outlook ou Teams. Cette reconstitution présente le symptôme signalé et la portée de l’incident avant les contrôles diagnostiques.",
+        alt: "Bureau Windows reconstitué montrant une interruption de connexion Outlook et le billet INC-1047 : une personne, un poste, des demandes répétées après un changement de mot de passe.",
+      },
+    },
     investigation: {
       file: "access-investigation",
       en: {
@@ -30,6 +43,19 @@ const visuals = {
     },
   },
   "missing-reservation": {
+    overview: {
+      file: "reservation-overview",
+      en: {
+        title: "Accepted upstream, absent downstream",
+        caption: "The event trace connects the accepted API request to a rejected webhook. A read-only query finds no reservation row: the starting point for investigating delivery without creating a duplicate.",
+        alt: "Reconstructed integration workspace showing req_9c7f2a accepted with HTTP 202, event evt_7a31 rejected with HTTP 422 after three attempts, and a SQL query returning zero rows for RSV-8F31C.",
+      },
+      fr: {
+        title: "Acceptée en amont, absente en aval",
+        caption: "La trace relie la requête API acceptée au webhook rejeté. Une requête en lecture seule ne trouve aucune réservation : le point de départ pour enquêter sans créer de doublon.",
+        alt: "Espace d’intégration reconstitué montrant req_9c7f2a accepté avec HTTP 202, evt_7a31 rejeté avec HTTP 422 après trois tentatives, et une requête SQL sans résultat pour RSV-8F31C.",
+      },
+    },
     investigation: {
       file: "reservation-investigation",
       en: {
@@ -58,6 +84,19 @@ const visuals = {
     },
   },
   "connectivity-broke": {
+    overview: {
+      file: "network-overview",
+      en: {
+        title: "A shared setting connects three affected clients",
+        caption: "The modeled LAN places the three Windows clients, gateway, retired DNS server and active resolver in one view. DHCP option 6 still points to 192.168.10.53, while the active resolver is 192.168.10.10.",
+        alt: "Reconstructed network lab topology with three VLAN 10 clients, gateway 192.168.10.1, stale DHCP DNS 192.168.10.53, active DNS 192.168.10.10 and internal portal 192.168.20.25 on port 443.",
+      },
+      fr: {
+        title: "Un paramètre partagé relie les trois postes touchés",
+        caption: "Le réseau modélisé réunit les trois postes Windows, la passerelle, l’ancien DNS et le résolveur actif. L’option DHCP 6 désigne encore 192.168.10.53, alors que le résolveur actif est 192.168.10.10.",
+        alt: "Topologie de labo reconstituée avec trois postes du VLAN 10, la passerelle 192.168.10.1, l’ancien DNS DHCP 192.168.10.53, le DNS actif 192.168.10.10 et le portail 192.168.20.25 sur le port 443.",
+      },
+    },
     investigation: {
       file: "network-investigation",
       en: {

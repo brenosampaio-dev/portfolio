@@ -4,10 +4,15 @@ import { Reveal } from "@/components/site/Reveal";
 
 /*
  * CaseHero — the reusable opening block for a case study: back link, tag-line,
- * title, lede. `children` (typically a CaseSnapshot) renders between the lede
- * and the visual, so a case's scannable facts always land above the mockup.
+ * title, lede. Visual-first cases introduce the scenario before the facts;
+ * older cases keep their original facts-first order.
  */
-export function CaseHero({ backHref = "/#work", backLabel, tags = [], title, lead, visual, children }) {
+export function CaseHero({ backHref = "/#work", backLabel, tags = [], title, lead, visual, visualFirst = false, children }) {
+  const visualBlock = visual && (
+    <Reveal delay={240} className="case-hero__visual">
+      {visual}
+    </Reveal>
+  );
   return (
     <header className="container case-hero">
       <Reveal>
@@ -36,13 +41,9 @@ export function CaseHero({ backHref = "/#work", backLabel, tags = [], title, lea
         </Reveal>
       </div>
 
+      {visualFirst && visualBlock}
       {children}
-
-      {visual && (
-        <Reveal delay={240} className="case-hero__visual">
-          {visual}
-        </Reveal>
-      )}
+      {!visualFirst && visualBlock}
     </header>
   );
 }

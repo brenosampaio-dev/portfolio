@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { Text, Button, ProjectCard, Divider } from "@/components/ds";
+import { Text, Button, Divider } from "@/components/ds";
 import { Reveal } from "@/components/site/Reveal";
 import { ProcessReveal } from "@/components/site/ProcessReveal";
 import { Scramble } from "@/components/site/Scramble";
@@ -10,7 +10,7 @@ import { Collapsible } from "@/components/site/Collapsible";
 import { Icon } from "@/components/site/Icon";
 import { LocationTime } from "@/components/site/LocationTime";
 import { LocalTime } from "@/components/site/LocalTime";
-import { SupportCasePreview } from "@/components/site/SupportCasePreview";
+import { WorkShowcase } from "@/components/site/WorkShowcase";
 import { profile } from "@/lib/content";
 import { useLang } from "@/context/AppContext";
 import { getT } from "@/lib/i18n";
@@ -60,10 +60,10 @@ export function HomeContent() {
       </section>
 
       {/* ── 2 · Selected work ────────────────────────────────── */}
-      <section className="container section" id="work" data-label={t.labels.work} aria-labelledby="work-title">
+      <section className="container section work-showcase-section" id="work" data-label={t.labels.work} aria-labelledby="work-title">
         <div className="section-head">
           <Scramble className="eyebrow eyebrow--accent" text={t.work.eyebrow} />
-          <Reveal mask delay={60}><Text variant="h2" id="work-title">{t.work.heading}</Text></Reveal>
+          <Reveal mask delay={60}><Text variant="h2" id="work-title">{renderTitle(t.work.heading)}</Text></Reveal>
           <Reveal delay={140}>
             <Text variant="body" style={{ color: "var(--stone)", maxWidth: "48ch" }}>
               {t.work.subheading}
@@ -71,26 +71,7 @@ export function HomeContent() {
           </Reveal>
         </div>
 
-        <div className="work-grid work-grid--solo">
-          {t.projects.map((p, i) => (
-            <Reveal
-              key={p.slug || `upcoming-${i}`}
-              delay={i * 90}
-              className={`work-item${p.upcoming ? " work-item--upcoming" : ""}`}
-            >
-              <ProjectCard
-                category={p.category}
-                title={p.title}
-                problem={p.problem}
-                role={p.role}
-                year={p.year}
-                href={p.href}
-                upcoming={p.upcoming}
-                preview={p.slug ? <SupportCasePreview slug={p.slug} card /> : null}
-              />
-            </Reveal>
-          ))}
-        </div>
+        <WorkShowcase projects={t.projects} lang={lang} viewCase={t.common.viewCase} />
         <Reveal delay={180}>
           <p className="work-more">{t.work.more}</p>
         </Reveal>

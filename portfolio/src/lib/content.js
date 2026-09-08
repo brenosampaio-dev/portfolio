@@ -5,7 +5,7 @@ export const profile = {
   role: "Multilingual IT and technical support",
   location: "Valencia, Spain",
   timezone: "Europe/Madrid",
-  email: "hello@brenosampaio.com",
+  email: "brenosampaio@outlook.com",
   languages: [
     { name: "Portuguese", level: "Native" },
     { name: "Spanish", level: "Fluent" },

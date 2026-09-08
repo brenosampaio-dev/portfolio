@@ -3,6 +3,7 @@ import { Text } from "@/components/ds";
 import { Wordmark } from "./Wordmark";
 import { useLang } from "@/context/AppContext";
 import { getT } from "@/lib/i18n";
+import { profile } from "@/lib/content";
 
 export function Footer() {
   const { lang } = useLang();
@@ -26,7 +27,7 @@ export function Footer() {
               LinkedIn
             </a>
             <span className="sep" aria-hidden="true">·</span>
-            <a className="link-quiet" href="mailto:hello@brenosampaio.com">
+            <a className="link-quiet" href={`mailto:${profile.email}`}>
               {t.footer.email}
             </a>
           </div>

@@ -8,7 +8,6 @@ import { CaseVisual } from "@/components/site/CaseVisual";
 import { DecisionsLedger } from "@/components/site/DecisionsLedger";
 import { Icon } from "@/components/site/Icon";
 import { Reveal } from "@/components/site/Reveal";
-import { SupportCasePreview } from "@/components/site/SupportCasePreview";
 import { useLang } from "@/context/AppContext";
 import { getCaseStudy } from "@/lib/caseStudies";
 import { renderTitle } from "@/lib/renderTitle";
@@ -191,7 +190,8 @@ export function SupportCaseContent({ slug }) {
         tags={[s.tag, s.year, common.synthetic]}
         title={renderTitle(s.title)}
         lead={s.lead}
-        visual={<SupportCasePreview slug={slug} />}
+        visual={<CaseVisual slug={slug} phase="overview" lang={lang} eager />}
+        visualFirst
       >
         <p className="case-subtitle">{s.subtitle}</p>
         <CaseSnapshot items={factItems} />
