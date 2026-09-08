@@ -2,7 +2,7 @@ import Image from "next/image";
 import "./CaseVisual.css";
 import { caseVisualLabels, getCaseVisual } from "@/lib/caseVisuals";
 
-export function CaseVisual({ slug, phase, lang }) {
+export function CaseVisual({ slug, phase, lang, eager = false }) {
   const visual = getCaseVisual(slug, phase, lang);
   if (!visual) return null;
   const labels = caseVisualLabels[lang === "fr" ? "fr" : "en"];
@@ -21,6 +21,7 @@ export function CaseVisual({ slug, phase, lang }) {
           alt={visual.alt}
           width={visual.width}
           height={visual.height}
+          loading={eager ? "eager" : "lazy"}
           sizes="(max-width: 800px) 100vw, (max-width: 1440px) 85vw, 1200px"
           className="case-visual__image"
         />
