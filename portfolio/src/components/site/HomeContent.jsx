@@ -26,7 +26,13 @@ export function HomeContent() {
       <section className="container hero" id="top" data-label={t.labels.intro} aria-labelledby="hero-title">
         <div className="hero__grid">
           <div className="hero__copy">
-            <Reveal><LocationTime /></Reveal>
+            <Reveal className="hero__status-row">
+              <LocationTime />
+              <span className="availability availability--hero">
+                <span className="dot" aria-hidden="true" />
+                <span className="availability__text">{t.availability}</span>
+              </span>
+            </Reveal>
             <Scramble className="eyebrow eyebrow--accent hero__eyebrow" text="Breno Sampaio" delay={120} />
             <Reveal mask delay={60}>
               <Text variant="display" id="hero-title" className="hero__title">

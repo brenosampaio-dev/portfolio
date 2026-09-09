@@ -44,6 +44,7 @@ function ToolsIcon() {
 export function Header() {
   const headerRef = useRef(null);
   const [toolsOpen, setToolsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
   const { theme, toggle } = useTheme();
   const pathname = usePathname();
   const { lang } = useLang();
@@ -70,7 +71,54 @@ export function Header() {
 
     darkEls.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveSection(null);
+      return undefined;
+    }
+
+    const sections = [
+      { id: "work", nav: "work" },
+      { id: "experience", nav: "work" },
+      { id: "approach", nav: "approach" },
+      { id: "about", nav: "about" },
+      { id: "contact", nav: "contact" },
+    ].map((item) => ({ ...item, element: document.getElementById(item.id) }))
+      .filter((item) => item.element);
+
+    let frame;
+    const updateActiveSection = () => {
+      frame = undefined;
+      const readingLine = window.scrollY + Math.max(120, window.innerHeight * 0.36);
+      let nextSection = null;
+
+      sections.forEach((section) => {
+        if (section.element.offsetTop <= readingLine) nextSection = section.nav;
+      });
+
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        nextSection = "contact";
+      }
+
+      setActiveSection((current) => current === nextSection ? current : nextSection);
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     setToolsOpen(false);
@@ -105,6 +153,12 @@ export function Header() {
     };
   }, [toolsOpen]);
 
+  const currentFor = (section) => {
+    if (pathname.startsWith("/work")) return section === "work" ? "page" : undefined;
+    if (pathname === "/about") return section === "about" ? "page" : undefined;
+    return pathname === "/" && activeSection === section ? "location" : undefined;
+  };
+
   return (
     <header className="site-header" ref={headerRef}>
       <div className="dock">
@@ -113,21 +167,17 @@ export function Header() {
         <div className="dock__divider" aria-hidden="true" />
 
         <nav className="nav" aria-label={t.a11y.primaryNavigation}>
-          <Link href="/#work" aria-current={pathname.startsWith("/work") ? "page" : undefined}>{t.nav.work}</Link>
-          <Link href="/#about" aria-current={pathname === "/about" ? "page" : undefined}>{t.nav.about}</Link>
-          <Link href="/#approach" className="nav-hide-sm">{t.nav.approach}</Link>
+          <Link href="/#work" aria-current={currentFor("work")}>{t.nav.work}</Link>
+          <Link href="/#about" aria-current={currentFor("about")}>{t.nav.about}</Link>
+          <Link href="/#approach" className="nav-hide-sm" aria-current={currentFor("approach")}>{t.nav.approach}</Link>
+          <Link href="/#contact" className="header-contact nav-hide-mobile" aria-current={currentFor("contact")}>
+            {t.nav.contact} <span aria-hidden="true">↗</span>
+          </Link>
         </nav>
 
         <div className="dock__divider dock__divider--mid" aria-hidden="true" />
 
-        <div className="dock__actions">
-          <span className="availability">
-            <span className="dot" aria-hidden="true" />
-            <span className="availability__text">{t.availability}</span>
-          </span>
-          <Link href="/#contact" className="header-contact">
-            {t.nav.contact} <span aria-hidden="true">↗</span>
-          </Link>
+        <div className="dock__controls">
           <a
             href={t.resume.href}
             className="header-cv"
@@ -138,11 +188,6 @@ export function Header() {
             <span className="header-cv__label header-cv__label--short" aria-hidden="true">CV</span>
             <span className="header-cv__arrow" aria-hidden="true">↓</span>
           </a>
-        </div>
-
-        <div className="dock__divider dock__divider--controls" aria-hidden="true" />
-
-        <div className="dock__controls">
           <LanguageSwitcher />
           <button
             className="theme-btn"
@@ -151,7 +196,6 @@ export function Header() {
           >
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </button>
-
         </div>
 
         <button
