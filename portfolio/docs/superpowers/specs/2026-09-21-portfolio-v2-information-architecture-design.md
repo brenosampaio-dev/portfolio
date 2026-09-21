@@ -57,8 +57,31 @@ The architecture is ready to replace the current public positioning only when at
 4. **One claim, one proof.** React links to code; accessibility links to checks; research links to notes; business impact links to real measurements or a clearly labelled hypothesis.
 5. **Operational experience is the differentiator, not the destination.** It explains why Breno is strong at workflows, handoffs, edge cases, service recovery, and multilingual products.
 6. **AI is a method, not an identity.** The site documents where AI helped, where it failed, and what Breno personally verified.
-7. **The existing visual language is retained.** The v2 changes hierarchy, content, evidence, and navigation before changing typography, motion, or general art direction.
+7. **The existing visual and motion language is retained.** The v2 changes hierarchy, content, and evidence without redesigning typography, transitions, scroll behavior, reveal choreography, or the progress-navigation system.
 8. **No orphan pages.** Every public page is reachable from a hub, a related-work module, or the footer.
+
+### 4.1 Protected visual and motion system
+
+The following behaviors are non-negotiable continuity requirements for v2:
+
+- the desktop `ScrollProgress` rail pinned to the left gutter;
+- the vertical line, section dots, active dot, pulse, hover preview, and active section label;
+- automatic tracking of the section currently crossing the viewport threshold;
+- the compact mobile/touch dock with active section name and dots;
+- tap and horizontal-swipe navigation between case sections;
+- the dock's light/dark adaptation over contrasting content;
+- smooth scrolling and route-aware entrance behavior;
+- the current glass header, its transitions, and its dark/light adaptation;
+- `Reveal`, masked title reveals, `Scramble`, `ProcessReveal`, and their timing language;
+- scroll-led project-card scenes, image transitions, hover responses, and progress fills;
+- case-section entrances, collapsible behavior, image expansion, and back-to-top behavior;
+- reduced-motion alternatives that preserve content and navigation.
+
+The architecture may supply new section names and different content, but it must keep the implementation contract used by the existing progress system: every tracked area remains a `main section[id]` with a stable `data-label` or `aria-label`. New Home, Work, Labs, About, and flagship case sections plug into this contract instead of replacing it.
+
+Accessibility improvements must be additive and visually faithful. For example, the mobile dots may receive larger invisible hit areas, improved focus treatment, and stronger accessible names while preserving their size, movement, active-state animation, swipe behavior, and overall appearance.
+
+Any future proposal to remove, replace, restyle, or materially retime these effects requires a separate visual review and explicit approval. It is not included in the portfolio v2 information-architecture implementation.
 
 ## 5. Recommended Page Hierarchy
 
@@ -576,10 +599,12 @@ The sitemap includes Home, Work, published flagships, Labs, About, operational a
 ### Navigation and reading
 
 - all essential content reachable within two clicks from Home;
-- labeled case navigation rather than unexplained 10-pixel dots alone;
+- preserve the existing desktop rail and mobile dot dock, including the floating active-section label;
+- retain stable section IDs and localized `data-label` or `aria-label` values so the progress system always identifies the current section;
+- improve dot hit areas and keyboard focus without changing the established visual treatment or motion;
 - visible current page and current case section;
 - descriptive anchors such as `View Support Operations case`, not repeated `View case study` only;
-- executive summaries remain readable without animation.
+- executive summaries remain readable when animation is unavailable, while the default animated presentation remains intact.
 
 ### Accessibility
 
@@ -599,7 +624,7 @@ The sitemap includes Home, Work, published flagships, Labs, About, operational a
 
 - preserve fast static rendering where possible;
 - prioritize the hero image without loading every case visual eagerly;
-- prevent animations from delaying content visibility;
+- keep existing animation timing and behavior while ensuring the non-animated and reduced-motion fallbacks expose content immediately;
 - use project images sized for their actual slots;
 - establish Lighthouse and Core Web Vitals baselines before and after v2;
 - treat no-console-errors, production build, and zero broken links as release requirements.
@@ -708,6 +733,7 @@ These signals evaluate portfolio navigation. They are not presented as hiring su
 V2 does not require:
 
 - a visual rebrand;
+- redesigning or removing the existing transitions, reveals, smooth scrolling, header behavior, desktop progress rail, or mobile case dock;
 - a blog;
 - a CMS;
 - an individual page for every Scrimba exercise;
@@ -733,4 +759,6 @@ The information architecture is correctly implemented when:
 - English and French primary routes are shareable and correctly linked;
 - resume, site, LinkedIn, GitHub, contact information, and target positioning agree;
 - the full recruiter journey works with keyboard, mobile, reduced motion, and no horizontal overflow;
+- the existing desktop progress rail, mobile section dock, transitions, reveals, project-card motion, and header behavior pass regression checks on every affected route;
+- all new tracked sections expose stable IDs and localized labels to `ScrollProgress`;
 - production build, link checks, metadata checks, console checks, and accessibility checks pass before deployment.
