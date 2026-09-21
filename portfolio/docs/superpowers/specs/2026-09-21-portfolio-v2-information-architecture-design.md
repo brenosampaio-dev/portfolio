@@ -8,6 +8,8 @@
 
 **Out of scope:** Wireframes, visual redesign, component implementation, final case-study copy, and production deployment.
 
+**Delivery companion:** `2026-09-21-portfolio-v2-delivery-strategy-design.md` governs access protection, direct work on `main`, recovery, phase order, the case-study freeze, and release sequencing. The architecture below remains normative for the finished product, but its earlier evidence-first migration order is superseded by the approved protected-build sequence.
+
 ## 1. Purpose
 
 Portfolio v2 will reposition Breno from a support-first candidate with UX/UI as a secondary skill into a credible product-design and frontend candidate progressing toward Design Engineering.
@@ -681,6 +683,8 @@ No project may be published without an inbound link from Work or Labs.
 
 ## 21. Migration Sequence
 
+The phases below describe product-readiness dependencies. Their implementation order is superseded by the delivery companion: the non-case shell and visual system are built first under protected production, case selection and implementation occur last, and the site is not reopened until the applicable evidence gates are satisfied.
+
 ### Phase A — Evidence before repositioning
 
 - complete frontend foundations;
@@ -689,7 +693,7 @@ No project may be published without an inbound link from Work or Labs.
 - run external usability sessions;
 - create the role-specific resume.
 
-The current public site remains support-first during this phase.
+Under the approved delivery strategy, production remains protected during this phase rather than serving the current support-first site publicly.
 
 ### Phase B — Architecture foundation
 

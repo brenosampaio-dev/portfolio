@@ -10,7 +10,7 @@
 
 **Out of scope:** Copy changes, case-study content, information architecture changes, wireframes, component implementation, new imagery, deployment, and removal or replacement of the existing motion/navigation system.
 
-**Companion specification:** `2026-09-21-portfolio-v2-information-architecture-design.md` remains the source of truth for page hierarchy, content, recruiter journeys, URLs, evidence gates, and release sequencing. This document governs the visual layer. If the two documents appear to conflict, preserve the information architecture and apply this visual specification only to presentation.
+**Companion specifications:** `2026-09-21-portfolio-v2-information-architecture-design.md` remains the source of truth for page hierarchy, content, recruiter journeys, URLs, and evidence gates. `2026-09-21-portfolio-v2-delivery-strategy-design.md` governs access protection, direct work on `main`, recovery, phase order, the case-study freeze, and release sequencing. This document governs the visual layer. If the documents appear to conflict, preserve the information architecture for product truth, the delivery strategy for execution order, and this specification for presentation.
 
 ## 1. Purpose
 
