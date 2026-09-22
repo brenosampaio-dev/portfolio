@@ -1,10 +1,11 @@
-export const metadata = { title: "Accueil" };
+import { HomeContent } from "@/components/site/HomeContent";
+
+export const metadata = {
+  title: "Breno Sampaio — Designer produit développant des interfaces accessibles",
+  description: "Designer produit développant des interfaces accessibles en React, avec une expérience en opérations multilingues en Espagne et en France.",
+  alternates: { canonical: "/fr", languages: { "en-CA": "/", "fr-CA": "/fr" } },
+};
 
 export default function FrenchHomePage() {
-  return (
-    <section id="top" data-label="Accueil" className="container section section--emphasis">
-      <h1>Portfolio en reconstruction</h1>
-      <p>La sélection des études de cas est en pause pendant la refonte des fondations du portfolio.</p>
-    </section>
-  );
+  return <HomeContent lang="fr" />;
 }

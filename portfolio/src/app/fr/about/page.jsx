@@ -1,10 +1,11 @@
-export const metadata = { title: "Profil" };
+import { AboutContent } from "@/components/site/AboutContent";
+
+export const metadata = {
+  title: "Profil — Opérations, design produit et frontend",
+  description: "Le lien entre opérations multilingues, design produit et apprentissage frontend dans la pratique de Breno Sampaio.",
+  alternates: { canonical: "/fr/about", languages: { "en-CA": "/about", "fr-CA": "/fr/about" } },
+};
 
 export default function FrenchAboutPage() {
-  return (
-    <section id="about" data-label="Profil" className="container section section--emphasis">
-      <h1>Profil</h1>
-      <p>La sélection des études de cas est en pause pendant la refonte des fondations du portfolio.</p>
-    </section>
-  );
+  return <AboutContent lang="fr" />;
 }

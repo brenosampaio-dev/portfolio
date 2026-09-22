@@ -1,10 +1,11 @@
-export const metadata = { title: "Labs" };
+import { LabsContent } from "@/components/site/LabsContent";
+
+export const metadata = {
+  title: "Labs — Apprentissage frontend et expériences",
+  description: "Des expériences frontend sélectionnées avec adaptations, décisions de design et réflexion technique.",
+  alternates: { canonical: "/fr/labs", languages: { "en-CA": "/labs", "fr-CA": "/fr/labs" } },
+};
 
 export default function FrenchLabsPage() {
-  return (
-    <section id="labs" data-label="Labs" className="container section section--emphasis">
-      <h1>Labs</h1>
-      <p>La sélection des études de cas est en pause pendant la refonte des fondations du portfolio.</p>
-    </section>
-  );
+  return <LabsContent lang="fr" />;
 }

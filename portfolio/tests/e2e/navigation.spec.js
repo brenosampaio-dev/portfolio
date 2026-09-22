@@ -32,18 +32,39 @@ test("mobile More closes with Escape and restores focus", async ({ page }) => {
   await expect(trigger).toBeFocused();
 });
 
-test("every exposed non-case route returns a visible heading", async ({ page }) => {
-  for (const path of [
-    "/work",
-    "/labs",
-    "/about",
-    "/fr",
-    "/fr/work",
-    "/fr/labs",
-    "/fr/about",
-  ]) {
+const nonCaseRoutes = [
+  { path: "/", lang: "en-CA", sectionIds: ["top", "work", "capabilities", "experience", "approach", "about", "contact"] },
+  { path: "/work", lang: "en-CA", sectionIds: ["work-overview", "built-products", "design-systems", "operational-archive"] },
+  { path: "/labs", lang: "en-CA", sectionIds: ["labs-overview", "current-learning", "publishing-standard"] },
+  { path: "/about", lang: "en-CA", sectionIds: ["about-overview", "about-path", "transferable-strengths", "current-learning", "timeline", "languages-location", "about-actions"] },
+  { path: "/fr", lang: "fr-CA", sectionIds: ["top", "work", "capabilities", "experience", "approach", "about", "contact"] },
+  { path: "/fr/work", lang: "fr-CA", sectionIds: ["work-overview", "built-products", "design-systems", "operational-archive"] },
+  { path: "/fr/labs", lang: "fr-CA", sectionIds: ["labs-overview", "current-learning", "publishing-standard"] },
+  { path: "/fr/about", lang: "fr-CA", sectionIds: ["about-overview", "about-path", "transferable-strengths", "current-learning", "timeline", "languages-location", "about-actions"] },
+];
+
+test("every exposed non-case route has one localized H1 and stable sections", async ({ page }) => {
+  for (const { path, lang, sectionIds } of nonCaseRoutes) {
     await page.goto(path);
-    await expect(page.locator("main h1")).toBeVisible();
+    await expect(page.locator("main h1:visible")).toHaveCount(1);
+    await expect(page.locator("html")).toHaveAttribute("lang", lang);
+    for (const id of sectionIds) {
+      await expect(page.locator(`main section#${id}`)).toBeAttached();
+    }
+    await expect(page.getByText(/^(?:Built|Shipped)$/i)).toHaveCount(0);
+  }
+});
+
+test("non-case pages have no broken internal links", async ({ page, request }) => {
+  for (const { path } of nonCaseRoutes) {
+    await page.goto(path);
+    const hrefs = await page.locator('main a[href^="/"]').evaluateAll((links) =>
+      [...new Set(links.map((link) => link.getAttribute("href")).filter(Boolean))],
+    );
+    for (const href of hrefs) {
+      const response = await request.get(href.split("#")[0]);
+      expect(response.ok(), `${path} links to ${href}`).toBe(true);
+    }
   }
 });
 

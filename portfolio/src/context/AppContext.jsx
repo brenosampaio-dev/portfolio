@@ -11,11 +11,11 @@ import {
 const ThemeCtx = createContext({ theme: "light", toggle: () => {} });
 const LangCtx  = createContext({ lang: "en", setLang: () => {} });
 
-export function Providers({ children }) {
+export function Providers({ children, initialLang = "en" }) {
   const pathname = usePathname() || "/";
   const router = useRouter();
   const [theme, setTheme] = useState("light");
-  const [lang, setLang] = useState(() => languageFromPath(pathname));
+  const [lang, setLang] = useState(() => initialLang || languageFromPath(pathname));
 
   useLayoutEffect(() => {
     const saved      = localStorage.getItem("theme");

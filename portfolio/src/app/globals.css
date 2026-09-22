@@ -619,6 +619,76 @@ html {
   flex-direction: column;
   gap: var(--space-8);
 }
+
+/* Portfolio v2 content primitives — shared by Home, Work, Labs and About. */
+.page-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 920px;
+}
+.page-intro > h1 { max-width: 18ch; }
+.page-intro__actions,
+.section-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+.section-actions { margin-top: var(--space-8); }
+.work-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+  max-width: 780px;
+  padding: var(--space-10);
+  border: 1px solid var(--mist);
+  border-radius: var(--radius-md);
+  background: var(--silk);
+}
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-12);
+}
+.capability-group {
+  min-width: 0;
+  padding: var(--space-6);
+  border-top: 1px solid var(--mist);
+  background: color-mix(in srgb, var(--silk) 54%, transparent);
+}
+.capability-group__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.capability-group__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--graphite);
+}
+.capability-group__list li {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--mist);
+  font-size: var(--text-small);
+}
+
+@media (max-width: 900px) {
+  .capability-grid { grid-template-columns: 1fr; }
+  .work-status { padding: var(--space-8); }
+}
+
+@media (max-width: 520px) {
+  .work-status { padding: var(--space-6); }
+  .capability-group { padding-inline: 0; background: transparent; }
+}
 .hero__status-row {
   display: flex;
   align-items: center;
