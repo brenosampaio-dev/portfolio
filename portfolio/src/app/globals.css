@@ -11,7 +11,7 @@
  * viewport so it reads as a calm canvas. Purely decorative (behind content).
  */
 :root {
-  --grid-dot: color-mix(in srgb, var(--ink) 6%, transparent);
+  --grid-dot: color-mix(in srgb, var(--ink) 4%, transparent);
 }
 html {
   background: var(--paper); /* paper base so the grid layer can sit above it */
@@ -374,14 +374,12 @@ html {
   padding-inline: var(--space-8);
 }
 
-/* Consistent vertical rhythm between sections */
-.section {
-  padding-block: var(--space-24);
-}
-
-.section--tight {
-  padding-block: var(--space-16);
-}
+/* Semantic vertical rhythm — choose by narrative weight, not page type. */
+.section--compact,
+.section--tight { padding-block: var(--section-compact); }
+.section,
+.section--standard { padding-block: var(--section-standard); }
+.section--emphasis { padding-block: var(--section-emphasis); }
 
 .stack {
   display: flex;
@@ -846,17 +844,14 @@ html {
 .js .toolkit__item {
   opacity: 0;
   transform: translateY(10px);
-  filter: blur(6px);
-  will-change: opacity, transform, filter;
+  will-change: opacity, transform;
 }
 .js .toolkit__item.is-in {
   opacity: 1;
   transform: none;
-  filter: blur(0);
   transition:
     opacity var(--reveal-dur) var(--ease-reveal),
-    transform var(--reveal-dur) var(--ease-reveal),
-    filter var(--reveal-dur) var(--ease);
+    transform var(--reveal-dur) var(--ease-reveal);
 }
 @media (max-width: 960px) {
   .toolkit {
@@ -1169,8 +1164,7 @@ html {
   padding-top: var(--space-2);
 }
 /* JS-gated disclosure. Height eases via grid-template-rows 0fr→1fr (exact to
-   content — smooth, unlike a guessed max-height), in lockstep with the dim and
-   blur over the shared --reveal-dur. */
+   content — smooth, unlike a guessed max-height), in lockstep with the dim. */
 .js .seq-step {
   opacity: 0.5;
   transition: opacity var(--reveal-dur) var(--ease);
@@ -1187,14 +1181,10 @@ html {
 }
 .js .seq-step__desc {
   opacity: 0;
-  filter: blur(8px);
-  transition:
-    opacity var(--reveal-dur) var(--ease),
-    filter var(--reveal-dur) var(--ease);
+  transition: opacity var(--reveal-dur) var(--ease);
 }
 .js .seq-step.is-open .seq-step__desc {
   opacity: 1;
-  filter: blur(0);
 }
 @media (prefers-reduced-motion: reduce) {
   .js .seq-step,
@@ -3083,8 +3073,8 @@ html {
    * comes from the specular edge + refraction gradient, NOT opacity.
    */
   background: rgba(255, 255, 255, 0.18);
-  -webkit-backdrop-filter: blur(48px) saturate(210%) brightness(108%);
-  backdrop-filter: blur(48px) saturate(210%) brightness(108%);
+  -webkit-backdrop-filter: blur(20px) saturate(210%) brightness(108%);
+  backdrop-filter: blur(20px) saturate(210%) brightness(108%);
 
   /* Pill */
   border-radius: 100px;
@@ -3134,8 +3124,8 @@ html {
 /* Dark glass — when dock floats over dark content (portrait, dark sections) */
 .site-header--dark .dock {
   background: rgba(20, 18, 16, 0.38);
-  -webkit-backdrop-filter: blur(48px) saturate(180%) brightness(92%);
-  backdrop-filter: blur(48px) saturate(180%) brightness(92%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(92%);
+  backdrop-filter: blur(20px) saturate(180%) brightness(92%);
   border-color: rgba(255, 255, 255, 0.14);
   box-shadow:
     0 16px 64px rgba(0, 0, 0, 0.32),
@@ -3331,7 +3321,7 @@ html {
 .wordmark:focus-visible,
 .theme-btn:focus-visible,
 .language-switcher__option:focus-visible {
-  outline: 2px solid var(--clay-ring);
+  outline: 2px solid var(--focus);
   outline-offset: 3px;
 }
 .header-cv__label--short { display: none; }
@@ -3420,7 +3410,11 @@ html {
 
 @media (max-width: 900px) {
   .container { padding-inline: var(--space-6); }
-  .section { padding-block: var(--space-20); }
+  .section--compact,
+  .section--tight { padding-block: 56px; }
+  .section,
+  .section--standard { padding-block: 64px; }
+  .section--emphasis { padding-block: 96px; }
   .grid--4 { grid-template-columns: repeat(2, 1fr); }
   .grid--3 { grid-template-columns: 1fr; }
 
@@ -3460,7 +3454,11 @@ html {
 
 @media (max-width: 600px) {
   .container { padding-inline: var(--space-5); }
-  .section { padding-block: var(--space-16); }
+  .section--compact,
+  .section--tight { padding-block: 48px; }
+  .section,
+  .section--standard { padding-block: 56px; }
+  .section--emphasis { padding-block: 80px; }
   .grid--4,
   .grid--2 { grid-template-columns: 1fr; }
 
@@ -3540,7 +3538,7 @@ html {
   .mobile-tools-toggle:active { transform: scale(0.94); }
   .mobile-tools-toggle:focus-visible,
   .mobile-tools__link:focus-visible {
-    outline: 2px solid var(--clay-ring);
+    outline: 2px solid var(--focus);
     outline-offset: 2px;
   }
 
@@ -3555,8 +3553,8 @@ html {
     border: 1px solid rgba(255, 255, 255, 0.58);
     border-radius: var(--radius-lg);
     background: rgba(249, 247, 243, 0.88);
-    -webkit-backdrop-filter: blur(32px) saturate(180%);
-    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
     box-shadow: 0 4px 8px rgba(28, 26, 24, 0.12);
     animation: mobile-tools-in 180ms var(--ease-out) both;
   }
@@ -3805,8 +3803,8 @@ html {
 /* Dock — dark-glass base in dark mode */
 [data-theme="dark"] .dock {
   background: rgba(13, 16, 23, 0.65);
-  -webkit-backdrop-filter: blur(48px) saturate(160%) brightness(85%);
-  backdrop-filter: blur(48px) saturate(160%) brightness(85%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%) brightness(85%);
+  backdrop-filter: blur(20px) saturate(160%) brightness(85%);
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow:
     0 16px 64px rgba(0, 0, 0, 0.40),
