@@ -1,11 +1,13 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Wordmark } from "./Wordmark";
-import { LanguageSwitcher } from "./LanguageSwitcher";
-import { useTheme, useLang } from "@/context/AppContext";
+import { useLang, useTheme } from "@/context/AppContext";
 import { getT } from "@/lib/i18n";
+import { GITHUB_URL, navigationFor } from "@/lib/siteNavigation";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { Wordmark } from "./Wordmark";
 
 function SunIcon() {
   return (
@@ -43,68 +45,64 @@ function ToolsIcon() {
 
 export function Header() {
   const headerRef = useRef(null);
+  const toolsRef = useRef(null);
+  const toolsTriggerRef = useRef(null);
   const [toolsOpen, setToolsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const { theme, toggle } = useTheme();
-  const pathname = usePathname();
+  const pathname = usePathname() || "/";
   const { lang } = useLang();
   const t = getT(lang);
+  const navigation = navigationFor(lang);
+  const homePath = lang === "fr" ? "/fr" : "/";
+  const moreLabel = lang === "fr" ? "Plus" : "More";
 
   useEffect(() => {
     const header = headerRef.current;
-    if (!header) return;
+    if (!header) return undefined;
 
-    const darkEls = document.querySelectorAll("[data-nav-dark]");
-    if (!darkEls.length) return;
+    const darkElements = document.querySelectorAll("[data-nav-dark]");
+    if (!darkElements.length) return undefined;
 
     const intersecting = new Set();
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) intersecting.add(e.target);
-          else intersecting.delete(e.target);
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) intersecting.add(entry.target);
+          else intersecting.delete(entry.target);
         });
         header.classList.toggle("site-header--dark", intersecting.size > 0);
       },
-      { rootMargin: "-24px 0px -88% 0px", threshold: 0 }
+      { rootMargin: "-24px 0px -88% 0px", threshold: 0 },
     );
 
-    darkEls.forEach((el) => observer.observe(el));
+    darkElements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, [pathname]);
 
   useEffect(() => {
-    if (pathname !== "/") {
+    if (pathname !== homePath) {
       setActiveSection(null);
       return undefined;
     }
 
-    const sections = [
-      { id: "work", nav: "work" },
-      { id: "experience", nav: "work" },
-      { id: "approach", nav: "approach" },
-      { id: "about", nav: "about" },
-      { id: "contact", nav: "contact" },
-    ].map((item) => ({ ...item, element: document.getElementById(item.id) }))
-      .filter((item) => item.element);
+    const sections = ["work", "capabilities", "experience", "approach", "about", "contact"]
+      .map((id) => ({ id, element: document.getElementById(id) }))
+      .filter(({ element }) => element);
 
     let frame;
     const updateActiveSection = () => {
       frame = undefined;
       const readingLine = window.scrollY + Math.max(120, window.innerHeight * 0.36);
       let nextSection = null;
-
       sections.forEach((section) => {
-        if (section.element.offsetTop <= readingLine) nextSection = section.nav;
+        if (section.element.offsetTop <= readingLine) nextSection = section.id;
       });
-
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
         nextSection = "contact";
       }
-
       setActiveSection((current) => current === nextSection ? current : nextSection);
     };
-
     const onScroll = () => {
       if (!frame) frame = window.requestAnimationFrame(updateActiveSection);
     };
@@ -112,72 +110,78 @@ export function Header() {
     updateActiveSection();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, [pathname]);
+  }, [homePath, pathname]);
 
   useEffect(() => {
     setToolsOpen(false);
   }, [pathname]);
 
   useEffect(() => {
-    function closeOnHeaderLink(event) {
-      const link = event.target.closest?.("a");
-      if (link && headerRef.current?.contains(link)) setToolsOpen(false);
-    }
-
-    document.addEventListener("click", closeOnHeaderLink, true);
-    return () => document.removeEventListener("click", closeOnHeaderLink, true);
-  }, []);
-
-  useEffect(() => {
     if (!toolsOpen) return undefined;
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      toolsRef.current?.querySelector("a, button")?.focus();
+    });
 
     function closeOnOutsidePress(event) {
       if (!headerRef.current?.contains(event.target)) setToolsOpen(false);
     }
 
     function closeOnEscape(event) {
-      if (event.key === "Escape") setToolsOpen(false);
+      if (event.key !== "Escape") return;
+      setToolsOpen(false);
+      window.requestAnimationFrame(() => toolsTriggerRef.current?.focus());
     }
 
     document.addEventListener("pointerdown", closeOnOutsidePress);
     document.addEventListener("keydown", closeOnEscape);
     return () => {
+      window.cancelAnimationFrame(focusFrame);
       document.removeEventListener("pointerdown", closeOnOutsidePress);
       document.removeEventListener("keydown", closeOnEscape);
     };
   }, [toolsOpen]);
 
-  const currentFor = (section) => {
-    if (pathname.startsWith("/work")) return section === "work" ? "page" : undefined;
-    if (pathname === "/about") return section === "about" ? "page" : undefined;
-    return pathname === "/" && activeSection === section ? "location" : undefined;
+  const currentFor = ({ id, href }) => {
+    if (id === "work" && (pathname === href || pathname.startsWith("/work/"))) return "page";
+    if (id === "labs" && pathname === href) return "page";
+    if (id === "about" && pathname === href) return "page";
+    if (pathname === homePath && activeSection === id) return "location";
+    return undefined;
   };
+
+  const [work, labs, about, contact] = navigation;
 
   return (
     <header className="site-header" ref={headerRef}>
       <div className="dock">
         <Wordmark />
-
         <div className="dock__divider" aria-hidden="true" />
 
         <nav className="nav" aria-label={t.a11y.primaryNavigation}>
-          <Link href="/#work" aria-current={currentFor("work")}>{t.nav.work}</Link>
-          <Link href="/#about" aria-current={currentFor("about")}>{t.nav.about}</Link>
-          <Link href="/#approach" className="nav-hide-sm" aria-current={currentFor("approach")}>{t.nav.approach}</Link>
-          <Link href="/#contact" className="header-contact nav-hide-mobile" aria-current={currentFor("contact")}>
-            {t.nav.contact} <span aria-hidden="true">↗</span>
-          </Link>
+          {[work, labs, about, contact].map((item) => (
+            <Link
+              key={item.id}
+              href={item.href}
+              className={item.id === "labs" || item.id === "contact" ? "nav-hide-mobile" : undefined}
+              aria-current={currentFor(item)}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="dock__divider dock__divider--mid" aria-hidden="true" />
 
         <div className="dock__controls">
+          <a className="header-contact" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+            GitHub <span aria-hidden="true">↗</span>
+          </a>
           <a
             href={t.resume.href}
             className="header-cv"
@@ -190,6 +194,7 @@ export function Header() {
           </a>
           <LanguageSwitcher />
           <button
+            type="button"
             className="theme-btn"
             onClick={toggle}
             aria-label={theme === "dark" ? t.a11y.switchToLight : t.a11y.switchToDark}
@@ -199,11 +204,12 @@ export function Header() {
         </div>
 
         <button
+          ref={toolsTriggerRef}
           type="button"
           className="mobile-tools-toggle"
           aria-expanded={toolsOpen}
           aria-controls="mobile-header-tools"
-          aria-label={toolsOpen ? t.a11y.closeHeaderTools : t.a11y.openHeaderTools}
+          aria-label={moreLabel}
           onClick={() => setToolsOpen((open) => !open)}
         >
           <ToolsIcon />
@@ -211,30 +217,29 @@ export function Header() {
       </div>
 
       {toolsOpen && (
-        <div
-          id="mobile-header-tools"
-          className="mobile-tools"
-          onClick={(event) => {
-            if (event.target.closest("a")) setToolsOpen(false);
-          }}
-        >
-          <div className="mobile-tools__actions">
+        <div id="mobile-header-tools" className="mobile-tools" ref={toolsRef}>
+          <nav className="mobile-tools__actions" aria-label={moreLabel}>
+            <Link href={labs.href} className="mobile-tools__link" onClick={() => setToolsOpen(false)}>
+              <span>{labs.label}</span><span aria-hidden="true">→</span>
+            </Link>
+            <Link href={contact.href} className="mobile-tools__link" onClick={() => setToolsOpen(false)}>
+              <span>{contact.label}</span><span aria-hidden="true">↗</span>
+            </Link>
+            <a className="mobile-tools__link" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+              <span>GitHub</span><span aria-hidden="true">↗</span>
+            </a>
             <a
               href={t.resume.href}
               className="mobile-tools__link mobile-tools__link--primary"
               download={t.resume.fileName}
             >
-              <span>{t.nav.downloadCv}</span>
-              <span aria-hidden="true">↓</span>
+              <span>{t.nav.downloadCv}</span><span aria-hidden="true">↓</span>
             </a>
-            <Link href="/#contact" className="mobile-tools__link">
-              <span>{t.nav.contact}</span>
-              <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
+          </nav>
           <div className="mobile-tools__preferences">
             <LanguageSwitcher />
             <button
+              type="button"
               className="theme-btn mobile-tools__theme"
               onClick={toggle}
               aria-label={theme === "dark" ? t.a11y.switchToLight : t.a11y.switchToDark}

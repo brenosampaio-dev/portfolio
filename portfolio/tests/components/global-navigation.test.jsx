@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { Button, ProjectCard, Status, Tag } from "@/components/ds";
+import { navigationFor } from "@/lib/siteNavigation";
 
 describe("shared v2 components", () => {
   it("renders an accessible link action and honest non-interactive project state", () => {
@@ -32,5 +33,22 @@ describe("shared v2 components", () => {
     );
     expect(screen.getByText("Building now")).toBeVisible();
     expect(screen.getByText("In progress")).toBeVisible();
+  });
+});
+
+describe("global navigation data", () => {
+  it("keeps English and French destinations shareable", () => {
+    expect(navigationFor("en").map(({ href }) => href)).toEqual([
+      "/work",
+      "/labs",
+      "/about",
+      "/#contact",
+    ]);
+    expect(navigationFor("fr").map(({ href }) => href)).toEqual([
+      "/fr/work",
+      "/fr/labs",
+      "/fr/about",
+      "/fr#contact",
+    ]);
   });
 });
