@@ -1,26 +1,43 @@
 "use client";
 import { createContext, useContext, useState, useEffect, useLayoutEffect, useCallback } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import {
+  isLocalizedHub,
+  languageFromPath,
+  localizedPath,
+  SUPPORTED_LANGS,
+} from "@/lib/locales";
 
 const ThemeCtx = createContext({ theme: "light", toggle: () => {} });
 const LangCtx  = createContext({ lang: "en", setLang: () => {} });
-const SUPPORTED_LANGS = ["en", "fr"];
 
 export function Providers({ children }) {
+  const pathname = usePathname() || "/";
+  const router = useRouter();
   const [theme, setTheme] = useState("light");
-  const [lang,  setLang]  = useState("en");
+  const [lang, setLang] = useState(() => languageFromPath(pathname));
 
   useLayoutEffect(() => {
     const saved      = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     setTheme(saved || (prefersDark ? "dark" : "light"));
+  }, []);
 
+  useLayoutEffect(() => {
+    if (isLocalizedHub(pathname)) return;
     const savedLang = localStorage.getItem("lang");
     if (savedLang && SUPPORTED_LANGS.includes(savedLang)) {
       setLang(savedLang);
     } else if (navigator.language.toLowerCase().startsWith("fr")) {
       setLang("fr");
     }
-  }, []);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (isLocalizedHub(pathname)) {
+      setLang(languageFromPath(pathname));
+    }
+  }, [pathname]);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -36,8 +53,7 @@ export function Providers({ children }) {
   }, [lang]);
 
   const toggle = () => setTheme(t => (t === "light" ? "dark" : "light"));
-  const changeLang = useCallback((nextLang) => {
-    if (!SUPPORTED_LANGS.includes(nextLang)) return;
+  const setLangWithTransition = useCallback((nextLang) => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reduceMotion && document.startViewTransition) {
       document.startViewTransition(() => setLang(nextLang));
@@ -45,6 +61,15 @@ export function Providers({ children }) {
     }
     setLang(nextLang);
   }, []);
+
+  const changeLang = useCallback((nextLang) => {
+    if (!SUPPORTED_LANGS.includes(nextLang)) return;
+    if (isLocalizedHub(pathname)) {
+      router.push(localizedPath(`${pathname}${window.location.hash}`, nextLang));
+      return;
+    }
+    setLangWithTransition(nextLang);
+  }, [pathname, router, setLangWithTransition]);
 
   return (
     <ThemeCtx.Provider value={{ theme, toggle }}>
