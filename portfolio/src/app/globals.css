@@ -6,32 +6,12 @@
  */
 
 /*
- * Accent override — the brand tint. The design system ships Clay (a warm
- * brown); here we repoint the whole Clay token family to Slate Blue so the
- * single accent (eyebrows, numbers, dots, links, button, progress, pulse)
- * updates everywhere from one place. All neutrals stay as the DS defines them.
- */
-:root {
-  --clay:       #3C4A63; /* accent — slate blue */
-  --clay-dark:  #2E3A50; /* hover / pressed */
-  --clay-light: #8791A6; /* light slate */
-  --clay-ring:  rgba(60, 74, 99, 0.18); /* focus ring */
-  --clay-wash:  rgba(60, 74, 99, 0.07); /* subtle wash / frames */
-
-  --paper: #FAFAFA; /* background — near-white neutral (was warm #F9F7F3) */
-  --silk:  #F0F0F0; /* card surfaces — neutral step below paper */
-  --pebble: #6F6B65; /* tertiary text and data labels — AA on paper and silk */
-  --stone: #68645E; /* secondary text — AA on paper and silk */
-  --alert: #B64029; /* exception text — AA on alert wash */
-}
-
-/*
  * Figma-style canvas grid — a faint dot grid behind the whole site, fading
  * out at the edges (radial mask) so the borders stay clean. Fixed to the
  * viewport so it reads as a calm canvas. Purely decorative (behind content).
  */
 :root {
-  --grid-dot: rgba(40, 44, 56, 0.06); /* very light, slate-leaning grey */
+  --grid-dot: color-mix(in srgb, var(--ink) 6%, transparent);
 }
 html {
   background: var(--paper); /* paper base so the grid layer can sit above it */
@@ -3819,20 +3799,7 @@ html {
 
 /* ── Dark mode ─────────────────────────────────────────────── */
 [data-theme="dark"] {
-  --paper:       #0D1017;
-  --silk:        #161A24;
-  --mist:        #1E2433;
-  --pebble:      #7B849B;
-  --stone:       #8A91A8;
-  --graphite:    #B0B8CF;
-  --ink:         #E8ECF6;
-  --clay:        #7B95C4;
-  --clay-dark:   #9AADD8;
-  --clay-light:  #546880;
-  --clay-ring:   rgba(123, 149, 196, 0.20);
-  --clay-wash:   rgba(123, 149, 196, 0.08);
-  --alert:       #E36C54;
-  --grid-dot:    rgba(255, 255, 255, 0.025);
+  --grid-dot: color-mix(in srgb, var(--ink) 2.5%, transparent);
 }
 
 /* Dock — dark-glass base in dark mode */

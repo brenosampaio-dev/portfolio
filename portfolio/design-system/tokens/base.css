@@ -27,15 +27,15 @@ body {
   font-feature-settings: 'kern' 1, 'liga' 1;
 }
 
-/* Focus — always visible, clay ring */
+/* Focus — always visible and governed by the semantic accent role */
 :focus-visible {
-  outline: 2px solid var(--clay);
+  outline: 2px solid var(--focus);
   outline-offset: 3px;
   border-radius: var(--radius-xs);
 }
 
 /* Text selection */
 ::selection {
-  background: var(--clay-wash);
+  background: var(--accent-wash);
   color: var(--ink);
 }
