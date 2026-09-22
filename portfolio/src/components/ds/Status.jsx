@@ -33,7 +33,7 @@ export function Status({ variant = "default", children, style, ...props }) {
         alignItems: "center",
         gap: "6px",
         fontFamily: "var(--font-mono)",
-        fontSize: "11px",
+        fontSize: "var(--text-micro)",
         letterSpacing: "var(--tracking-mono)",
         background: t.bg,
         color: t.color,
@@ -45,7 +45,7 @@ export function Status({ variant = "default", children, style, ...props }) {
       {...props}
     >
       {variant === "done" ? (
-        <span style={{ fontSize: "10px", lineHeight: 1 }} aria-hidden="true">✓</span>
+        <span style={{ fontSize: "var(--text-micro)", lineHeight: 1 }} aria-hidden="true">✓</span>
       ) : (
         <span
           aria-hidden="true"

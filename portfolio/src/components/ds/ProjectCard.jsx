@@ -20,6 +20,7 @@ export function ProjectCard({
   preview,
   previewSrc,
   previewLabel,
+  status,
   upcoming = false,
   style,
   ...props
@@ -69,7 +70,7 @@ export function ProjectCard({
           <span
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: "10px",
+              fontSize: "var(--text-micro)",
               letterSpacing: "0.06em",
               textTransform: "uppercase",
               color: "var(--pebble)",
@@ -124,6 +125,20 @@ export function ProjectCard({
         >
           {problem}
         </p>
+      )}
+
+      {status && (
+        <span
+          style={{
+            marginTop: "var(--space-3)",
+            fontFamily: "var(--font-mono)",
+            fontSize: "var(--text-micro)",
+            letterSpacing: "var(--tracking-mono)",
+            color: upcoming ? "var(--stone)" : "var(--accent)",
+          }}
+        >
+          {status}
+        </span>
       )}
 
       {/* Base row: year · role · arrow */}
