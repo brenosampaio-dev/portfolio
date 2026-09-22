@@ -8,3 +8,6 @@
 .env*
 !.env.example
 .vercel
+playwright-report/
+test-results/
+artifacts/visual/
