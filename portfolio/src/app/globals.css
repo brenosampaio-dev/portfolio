@@ -509,6 +509,7 @@ html {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  min-height: 44px;
   font-family: var(--font-sans);
   font-size: var(--text-small);
   font-weight: var(--weight-medium);
@@ -739,6 +740,8 @@ html {
 @media (max-width: 520px) {
   .work-status { padding: var(--space-6); }
   .capability-group { padding-inline: 0; background: transparent; }
+  .capability-group__head { flex-direction: column; }
+  .page-intro__actions > a { min-height: 44px !important; }
 }
 .hero__status-row {
   display: flex;
@@ -3829,6 +3832,64 @@ html {
     gap: 6px;
   }
   .nav a { padding-inline: 8px; }
+}
+
+/* At 200% zoom on a 320px phone, the effective layout viewport is 160px.
+   Keep one clear route into the complete navigation instead of clipping the
+   two abbreviated destination links against the viewport. */
+@media (max-width: 240px) {
+  .container { padding-inline: 12px; }
+  .site-header { width: calc(100vw - 16px); }
+  .dock > .dock__divider:first-of-type,
+  .dock > .nav { display: none; }
+  .dock { justify-content: space-between; }
+  .hero__grid,
+  .experience-layout,
+  .approach,
+  .about-teaser,
+  .contact {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hero__copy,
+  .experience-layout > *,
+  .approach > *,
+  .about-teaser > *,
+  .contact > * { min-width: 0; }
+  .locus {
+    align-items: flex-start;
+    min-width: 0;
+    white-space: normal;
+  }
+  .contact-row {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    column-gap: 8px;
+  }
+  .contact-row__value { overflow-wrap: anywhere; }
+  .hero__actions > a,
+  .page-intro__actions > a,
+  .section-actions > a {
+    width: 100%;
+    padding-inline: 12px !important;
+    line-height: 1.2 !important;
+    text-align: center;
+    white-space: normal !important;
+  }
+  .work-status {
+    width: 100%;
+    min-width: 0;
+    padding: 16px;
+  }
+  .work-status > * {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  .site-footer__grid > *,
+  .footer-social { min-width: 0; }
+  .footer-social .link-quiet { overflow-wrap: anywhere; }
+  .mobile-tools__preferences {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 360px) {

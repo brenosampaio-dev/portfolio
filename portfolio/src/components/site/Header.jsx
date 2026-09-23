@@ -219,12 +219,11 @@ export function Header() {
       {toolsOpen && (
         <div id="mobile-header-tools" className="mobile-tools" ref={toolsRef}>
           <nav className="mobile-tools__actions" aria-label={moreLabel}>
-            <Link href={labs.href} className="mobile-tools__link" onClick={() => setToolsOpen(false)}>
-              <span>{labs.label}</span><span aria-hidden="true">→</span>
-            </Link>
-            <Link href={contact.href} className="mobile-tools__link" onClick={() => setToolsOpen(false)}>
-              <span>{contact.label}</span><span aria-hidden="true">↗</span>
-            </Link>
+            {navigation.map((item) => (
+              <Link key={item.id} href={item.href} className="mobile-tools__link" onClick={() => setToolsOpen(false)}>
+                <span>{item.label}</span><span aria-hidden="true">{item.id === "contact" ? "↗" : "→"}</span>
+              </Link>
+            ))}
             <a className="mobile-tools__link" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
               <span>GitHub</span><span aria-hidden="true">↗</span>
             </a>
