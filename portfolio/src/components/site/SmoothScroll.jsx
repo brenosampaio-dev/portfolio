@@ -63,6 +63,10 @@ export function SmoothScroll() {
       // Capture phase: run before next/link so it never intercepts the hash.
       e.preventDefault();
       e.stopPropagation();
+      if (a.closest(".section-jump-nav")) {
+        el.tabIndex = -1;
+        el.focus({ preventScroll: true });
+      }
       scrollToEl(el);
       history.pushState(null, "", `#${el.id}`);
     };

@@ -75,3 +75,36 @@ test("external profile links are isolated from the opener", async ({ page }) => 
   const relValues = await externalLinks.evaluateAll((links) => links.map((link) => link.rel));
   expect(relValues.every((rel) => rel.includes("noopener") && rel.includes("noreferrer"))).toBe(true);
 });
+
+test("keyboard section navigation reaches and focuses Contact", async ({ page }) => {
+  await page.goto("/");
+  const jumpNav = page.locator(".section-jump-nav");
+  await expect(jumpNav).toHaveAttribute("aria-label", "Page sections");
+  const firstLink = jumpNav.getByRole("link").first();
+  for (let index = 0; index < 16; index += 1) {
+    await page.keyboard.press("Tab");
+    if (await firstLink.evaluate((link) => document.activeElement === link)) break;
+  }
+  await expect(firstLink).toBeFocused();
+
+  const contactLink = jumpNav.getByRole("link", { name: "Contact", exact: true });
+  await contactLink.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#contact")).toBeFocused();
+  await expect(page).toHaveURL(/#contact$/);
+});
+
+test("mobile dock advances one section only on horizontal swipe", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  const pill = page.locator(".case-dock__pill");
+
+  await pill.dispatchEvent("touchstart", { touches: [{ identifier: 0, clientX: 220, clientY: 760 }] });
+  await pill.dispatchEvent("touchend", { changedTouches: [{ identifier: 0, clientX: 210, clientY: 680 }] });
+  await expect(page).not.toHaveURL(/#work$/);
+
+  await pill.dispatchEvent("touchstart", { touches: [{ identifier: 1, clientX: 260, clientY: 760 }] });
+  await pill.dispatchEvent("touchend", { changedTouches: [{ identifier: 1, clientX: 180, clientY: 756 }] });
+  await expect(page).toHaveURL(/#work$/);
+  await expect(page.locator("#work")).toBeInViewport();
+});
