@@ -14,18 +14,13 @@ export function LocaleMetadata() {
   const { t } = useI18n();
 
   useEffect(() => {
-    const pageKey =
-      pathname === "/about"
-        ? "about"
-        : pathname === "/work/access-restored"
-          ? "accessRestored"
-          : pathname === "/work/missing-reservation"
-            ? "missingReservation"
-            : pathname === "/work/connectivity-broke"
-              ? "connectivityBroke"
-              : pathname === "/"
-                ? "home"
-                : "notFound";
+    const frozenLegacyPages = {
+      "/work/access-restored": "accessRestored",
+      "/work/missing-reservation": "missingReservation",
+      "/work/connectivity-broke": "connectivityBroke",
+    };
+    const pageKey = frozenLegacyPages[pathname];
+    if (!pageKey) return;
     const page = t.metadata.pages[pageKey];
     if (!page) return;
 

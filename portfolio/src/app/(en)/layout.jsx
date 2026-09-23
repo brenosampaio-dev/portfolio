@@ -6,6 +6,16 @@ export const metadata = {
   metadataBase: new URL("https://brenosampaio.vercel.app"),
   title: { default: "Breno Sampaio — Product Designer building accessible interfaces", template: "%s — Breno Sampaio" },
   description,
+  openGraph: {
+    title: "Breno Sampaio — Product Designer building accessible interfaces",
+    description,
+    url: "https://brenosampaio.vercel.app",
+    siteName: "Breno Sampaio",
+    locale: "en_CA",
+    type: "website",
+    images: [{ url: "https://brenosampaio.vercel.app/opengraph-image", width: 1200, height: 630, alt: "Breno Sampaio — Product Designer building accessible interfaces" }],
+  },
+  twitter: { card: "summary_large_image", title: "Breno Sampaio — Product Designer building accessible interfaces", description, images: ["https://brenosampaio.vercel.app/opengraph-image"] },
 };
 
 export const viewport = { themeColor: "#F8F6F1", width: "device-width", initialScale: 1 };

@@ -31,7 +31,7 @@ export function SiteDocument({ children, lang }) {
           "@context": "https://schema.org",
           "@type": "Person",
           name: profile.name,
-          jobTitle: content.identity.current,
+          jobTitle: "Product Designer",
           description: content.hero.lead,
           url: "https://brenosampaio.vercel.app",
           email: `mailto:${content.links.email}`,

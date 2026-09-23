@@ -108,3 +108,42 @@ test("mobile dock advances one section only on horizontal swipe", async ({ page 
   await expect(page).toHaveURL(/#work$/);
   await expect(page.locator("#work")).toBeInViewport();
 });
+
+test("non-case metadata is localized, reciprocal and truthful", async ({ page }) => {
+  const titles = new Set();
+  const descriptions = new Set();
+
+  for (const { path, lang } of nonCaseRoutes) {
+    await page.goto(path);
+    const title = await page.title();
+    const description = await page.locator('meta[name="description"]').getAttribute("content");
+    expect(title).toBeTruthy();
+    expect(description).toBeTruthy();
+    expect(titles.has(title), `duplicate title at ${path}`).toBe(false);
+    expect(descriptions.has(description), `duplicate description at ${path}`).toBe(false);
+    titles.add(title);
+    descriptions.add(description);
+
+    await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);
+    await expect(page.locator('link[rel="alternate"][hreflang="en-CA"]')).toHaveCount(1);
+    await expect(page.locator('link[rel="alternate"][hreflang="fr-CA"]')).toHaveCount(1);
+    await expect(page.locator("html")).toHaveAttribute("lang", lang);
+
+    const schema = JSON.parse(await page.locator("#person-schema").textContent());
+    expect(schema.jobTitle).toBe("Product Designer");
+    expect(schema.sameAs).toContain("https://github.com/brenosampaio-dev");
+    expect(schema.sameAs).toContain("https://www.linkedin.com/in/brenosampaio");
+  }
+});
+
+test("localized 404 offers Home and Work recovery", async ({ page }) => {
+  for (const route of [
+    { path: "/missing-route", home: "/", work: "/work" },
+    { path: "/fr/missing-route", home: "/fr", work: "/fr/work" },
+  ]) {
+    await page.goto(route.path);
+    await expect(page.locator("main h1")).toBeVisible();
+    await expect(page.locator(`main a[href="${route.home}"]`)).toBeVisible();
+    await expect(page.locator(`main a[href="${route.work}"]`)).toBeVisible();
+  }
+});

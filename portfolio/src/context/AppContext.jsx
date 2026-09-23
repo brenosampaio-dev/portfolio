@@ -24,7 +24,7 @@ export function Providers({ children, initialLang = "en" }) {
   }, []);
 
   useLayoutEffect(() => {
-    if (isLocalizedHub(pathname)) return;
+    if (isLocalizedHub(pathname) || languageFromPath(pathname) === "fr") return;
     const savedLang = localStorage.getItem("lang");
     if (savedLang && SUPPORTED_LANGS.includes(savedLang)) {
       setLang(savedLang);
@@ -34,7 +34,7 @@ export function Providers({ children, initialLang = "en" }) {
   }, [pathname]);
 
   useEffect(() => {
-    if (isLocalizedHub(pathname)) {
+    if (isLocalizedHub(pathname) || languageFromPath(pathname) === "fr") {
       setLang(languageFromPath(pathname));
     }
   }, [pathname]);
