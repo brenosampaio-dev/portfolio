@@ -23,8 +23,8 @@
   --text-body-lg:      19px;   /* Lead paragraph */
   --text-body:         16px;   /* Body */
   --text-small:        14px;   /* Captions, metadata */
-  --text-micro:        12px;   /* Labels, chips */
-  --text-mono:         11px;   /* Technical labels, eyebrows */
+  --text-micro: 12px;          /* Labels, chips */
+  --text-mono: 12px;           /* Technical labels, eyebrows */
   --text-serif-disp:   60px;   /* Cormorant display accent */
   --text-serif-quote:  26px;   /* Cormorant pull quote */
 

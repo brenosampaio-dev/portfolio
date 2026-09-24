@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 /*
  * ProcessReveal — deals the process columns in left-to-right. When the grid
- * enters view each column lifts out of a blur in quick succession. The content
+ * enters view each column lifts in quick succession. The content
  * remains visible by default, so a missed observer event or hash navigation
  * can never leave the whole section permanently transparent.
  */
@@ -29,8 +29,8 @@ export function ProcessReveal({ targetId = "process", stagger = 110, startDelay 
         c.classList.add("is-in");
         c.animate(
           [
-            { opacity: 0, transform: "translateY(16px)", filter: "blur(8px)" },
-            { opacity: 1, transform: "translateY(0)", filter: "blur(0)" },
+            { opacity: 0, transform: "translateY(16px)" },
+            { opacity: 1, transform: "translateY(0)" },
           ],
           {
             duration: 420,

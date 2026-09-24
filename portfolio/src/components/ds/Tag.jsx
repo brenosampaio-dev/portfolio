@@ -10,7 +10,7 @@ export function Tag({ children, style, ...props }) {
         display: "inline-flex",
         alignItems: "center",
         fontFamily: "var(--font-mono)",
-        fontSize: "11px",
+        fontSize: "var(--text-micro)",
         fontWeight: 400,
         letterSpacing: "var(--tracking-mono)",
         background: "var(--paper)",

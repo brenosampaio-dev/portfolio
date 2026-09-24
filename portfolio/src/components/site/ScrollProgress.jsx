@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useI18n } from "@/lib/useI18n";
+import { SectionJumpNav } from "@/components/site/SectionJumpNav";
 
 /*
  * ScrollProgress — section navigation that adapts to the input.
@@ -171,6 +172,8 @@ export function ScrollProgress() {
 
   return (
     <>
+      <SectionJumpNav sections={sections} label={t.a11y.sections} title={t.a11y.onThisPage} />
+
       <nav className="rail" aria-hidden="true" style={isCaseStudy ? { display: "none" } : undefined}>
         <span className="rail__line" />
         {sections.map((s, i) => (

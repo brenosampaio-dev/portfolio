@@ -1,58 +1,73 @@
 /*
- * Color — Japanese paper warmth, charcoal ink, one clay accent.
+ * Colour — warm paper, charcoal ink, one restrained indigo accent.
  *
- * Palette inspired by: washi paper, unglazed ceramic, graphite,
- * soft stone, warm grey, muted earth tones. No tech blues, no neon.
- *
- * Naming follows the brand vocabulary: Paper, Silk, Mist, Stone,
- * Graphite, Ink, Clay. One warm accent (Clay). Alert held in reserve.
- *
- * ma (間) — intentional restraint. Every color earns its presence.
+ * Primitive names describe material; semantic aliases describe purpose.
+ * Indigo replaces the former app-level Clay override as the single accent.
  */
 :root {
-  /* ── Warm neutrals ──────────────────────────────────────────── */
-  --paper:    #F9F7F3;  /* Page background — warm off-white, washi paper */
-  --silk:     #F0EDE7;  /* Card / input surfaces — slightly warmer */
-  --mist:     #DDD9D4;  /* Borders, hairlines — soft stone */
-  --pebble:   #BCB8B3;  /* Disabled, placeholders — river pebble */
-  --stone:    #857F79;  /* Secondary text — aged stone */
-  --graphite: #3D3B38;  /* Strong surface text — graphite stick */
-  --ink:      #1C1A18;  /* Primary text — charcoal ink */
+  /* Light primitives */
+  --paper: #F8F6F1;
+  --silk: #EFEAE2;
+  --mist: #D8D2C9;
+  --pebble: #6D675F;
+  --stone: #69635C;
+  --graphite: #3F3B36;
+  --ink: #1B1A18;
 
-  /* ── Accent — one warm earth tone ──────────────────────────── */
-  --clay:       #8A6A4E;  /* Warm accent — unglazed clay */
-  --clay-dark:  #6A5038;  /* Hover / pressed — darker clay */
-  --clay-light: #B89A7E;  /* Accent on dark surfaces */
-  --clay-ring:  rgba(138, 106, 78, 0.16);  /* Focus ring */
-  --clay-wash:  rgba(138, 106, 78, 0.06);  /* Subtle tinted surface */
+  /* Accent and exception */
+  --indigo: #3D4B66;
+  --indigo-dark: #2E3950;
+  --indigo-light: #8794AE;
+  --alert: #B4452D;
 
-  /* ── Alert — genuine exception only ────────────────────────── */
-  --alert:        #C44A31;
-  --alert-wash:   rgba(196,  74, 49, 0.06);
-  --alert-border: rgba(196,  74, 49, 0.20);
-
-  /* ── Backwards-compatible aliases (old names still resolve) ─── */
-  --charcoal:         var(--graphite);
-  --ivory:            var(--silk);
-  --warm-grey:        var(--stone);
-  --muted-grey:       var(--pebble);
-  --moss:             var(--clay);
-  --moss-dark:        var(--clay-dark);
-  --moss-mid:         var(--clay-light);
-  --vermilion:        var(--alert);
-  --ring-moss:        var(--clay-ring);
-  --moss-wash:        var(--clay-wash);
-  --vermilion-wash:   var(--alert-wash);
-  --vermilion-border: var(--alert-border);
-
-  /* ── Semantic aliases ──────────────────────────────────────── */
-  --bg-page:        var(--paper);
-  --surface-card:   var(--silk);
-  --text-primary:   var(--ink);
+  /* Semantic roles */
+  --accent: var(--indigo);
+  --accent-hover: var(--indigo-dark);
+  --focus: var(--indigo);
+  --bg-page: var(--paper);
+  --surface-card: var(--silk);
+  --text-primary: var(--ink);
   --text-secondary: var(--stone);
-  --text-disabled:  var(--pebble);
-  --border:         var(--mist);
-  --accent:         var(--clay);
-  --accent-hover:   var(--clay-dark);
-  --on-accent:      var(--paper);
+  --text-disabled: var(--pebble);
+  --border: var(--mist);
+  --on-accent: var(--paper);
+
+  /* Derived translucent roles */
+  --accent-ring: color-mix(in srgb, var(--indigo) 16%, transparent);
+  --accent-wash: color-mix(in srgb, var(--indigo) 6%, transparent);
+  --alert-wash: color-mix(in srgb, var(--alert) 6%, transparent);
+  --alert-border: color-mix(in srgb, var(--alert) 20%, transparent);
+
+  /* Transitional compatibility aliases */
+  --clay: var(--indigo);
+  --clay-dark: var(--indigo-dark);
+  --clay-light: var(--indigo-light);
+  --clay-ring: var(--accent-ring);
+  --clay-wash: var(--accent-wash);
+  --charcoal: var(--graphite);
+  --ivory: var(--silk);
+  --warm-grey: var(--stone);
+  --muted-grey: var(--pebble);
+  --moss: var(--indigo);
+  --moss-dark: var(--indigo-dark);
+  --moss-mid: var(--indigo-light);
+  --vermilion: var(--alert);
+  --ring-moss: var(--accent-ring);
+  --moss-wash: var(--accent-wash);
+  --vermilion-wash: var(--alert-wash);
+  --vermilion-border: var(--alert-border);
+}
+
+[data-theme="dark"] {
+  --paper: #0E1118;
+  --silk: #171B25;
+  --mist: #252B39;
+  --pebble: #8E96AA;
+  --stone: #A3A9B9;
+  --graphite: #C3C8D4;
+  --ink: #F0F2F7;
+  --indigo: #8399C4;
+  --indigo-dark: #A0B0D3;
+  --indigo-light: #A0B0D3;
+  --alert: #F07A61;
 }

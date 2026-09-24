@@ -1,11 +1,12 @@
 // Single source of real content. No invented clients, metrics, or logos.
+import { portfolioProfileFacts } from "@/lib/portfolioV2";
 
 export const profile = {
   name: "Breno Sampaio",
   role: "Multilingual IT and technical support",
-  location: "Valencia, Spain",
+  location: portfolioProfileFacts.location,
   timezone: "Europe/Madrid",
-  email: "brenosampaio@outlook.com",
+  email: portfolioProfileFacts.links.email,
   languages: [
     { name: "Portuguese", level: "Native" },
     { name: "Spanish", level: "Fluent" },

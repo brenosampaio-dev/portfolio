@@ -16,7 +16,7 @@ export function Scramble({
   text,
   className = "",
   delay = 0,
-  duration = 1.4,
+  duration = 0.9,
   ...props
 }) {
   const ref = useRef(null);
@@ -27,6 +27,7 @@ export function Scramble({
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return; // server-rendered text stays as-is
+    const resolvedDelay = Math.min(Math.max(delay, 0), 200);
 
     let tween;
     let st;
@@ -50,7 +51,7 @@ export function Scramble({
           onEnter: () => {
             tween = gsap.to(el, {
               duration,
-              delay: delay / 1000,
+              delay: resolvedDelay / 1000,
               scrambleText: {
                 text,
                 chars: "upperCase",

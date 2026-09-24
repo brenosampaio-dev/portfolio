@@ -14,7 +14,7 @@ export function Divider({ variant = "hairline", label, style, ...props }) {
         <span
           style={{
             fontFamily: "var(--font-mono)",
-            fontSize: "10px",
+            fontSize: "var(--text-mono)",
             letterSpacing: "var(--tracking-eyebrow)",
             textTransform: "uppercase",
             color: "var(--pebble)",

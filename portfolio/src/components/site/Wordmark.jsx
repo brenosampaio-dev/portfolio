@@ -5,7 +5,7 @@ import { useI18n } from "@/lib/useI18n";
 
 export function Wordmark() {
   const ref = useRef(null);
-  const { t } = useI18n();
+  const { lang, t } = useI18n();
 
   function replay() {
     const el = ref.current;
@@ -18,7 +18,7 @@ export function Wordmark() {
 
   return (
     <Link
-      href="/"
+      href={lang === "fr" ? "/fr" : "/"}
       className="wordmark"
       ref={ref}
       onMouseEnter={replay}

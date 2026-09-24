@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <g fill="none" stroke="#3D4B66" stroke-opacity=".16">
+    <path d="M80 160h560M960 118h460M180 690h470M910 804h500"/>
+    <path d="M350 68v250M1240 570v300M760 550v340" stroke-dasharray="2 12"/>
+  </g>
+  <g fill="#3D4B66" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" letter-spacing="1">
+    <text x="82" y="116">const surface = clarity(complexity);</text>
+    <text x="82" y="150" opacity=".62">interface → states → feedback</text>
+    <text x="210" y="236" opacity=".76">&lt;section aria-labelledby="work"&gt;</text>
+    <text x="210" y="270" opacity=".48">  decisions.map(makeVisible)</text>
+    <text x="210" y="304" opacity=".76">&lt;/section&gt;</text>
+    <text x="930" y="88" opacity=".58">01 / understand</text>
+    <text x="930" y="122">02 / define</text>
+    <text x="930" y="156" opacity=".7">03 / explore</text>
+    <text x="930" y="190" opacity=".48">04 / build + validate</text>
+    <text x="930" y="224" opacity=".32">05 / iterate</text>
+    <text x="102" y="610" opacity=".66">--space: clamp(1rem, 3vw, 4rem);</text>
+    <text x="102" y="644" opacity=".46">--motion: transform 180ms ease-out;</text>
+    <text x="102" y="678">@media (prefers-reduced-motion: reduce)</text>
+    <text x="102" y="712" opacity=".62">{ animation: none; }</text>
+    <text x="850" y="594" opacity=".42">function makeClear(workflow) {</text>
+    <text x="850" y="628">  const constraints = observe(workflow);</text>
+    <text x="850" y="662" opacity=".74">  return prototype(constraints)</text>
+    <text x="850" y="696" opacity=".5">    .test(edgeCases)</text>
+    <text x="850" y="730" opacity=".3">    .refine(withEvidence);</text>
+    <text x="850" y="764" opacity=".42">}</text>
+    <text x="314" y="884" opacity=".34">grid-template-columns: clarity 1fr;</text>
+    <text x="314" y="918" opacity=".7">if (complex) makeLegible();</text>
+  </g>
+  <g fill="#B4452D" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" opacity=".56">
+    <text x="650" y="150">{ }</text>
+    <text x="1420" y="250">/&gt;</text>
+    <text x="680" y="720">[aria-hidden]</text>
+    <text x="120" y="900">// under the surface</text>
+  </g>
+</svg>

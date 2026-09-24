@@ -1,107 +1,70 @@
-"use client";
-import Link from "next/link";
 import Image from "next/image";
-import { Text, Button, Divider } from "@/components/ds";
-import { Reveal } from "@/components/site/Reveal";
-import { ProcessReveal } from "@/components/site/ProcessReveal";
-import { Scramble } from "@/components/site/Scramble";
-import { Toolkit } from "@/components/site/Toolkit";
-import { Collapsible } from "@/components/site/Collapsible";
+import Link from "next/link";
+import { Button, Divider, Text } from "@/components/ds";
+import { CapabilityGroup } from "@/components/site/CapabilityGroup";
 import { Icon } from "@/components/site/Icon";
 import { LocationTime } from "@/components/site/LocationTime";
-import { LocalTime } from "@/components/site/LocalTime";
-import { WorkShowcase } from "@/components/site/WorkShowcase";
-import { profile } from "@/lib/content";
-import { useLang } from "@/context/AppContext";
+import { ProcessReveal } from "@/components/site/ProcessReveal";
+import { Reveal } from "@/components/site/Reveal";
+import { Scramble } from "@/components/site/Scramble";
+import { WorkStatusPanel } from "@/components/site/WorkStatusPanel";
 import { getT } from "@/lib/i18n";
-import { renderTitle } from "@/lib/renderTitle";
+import { getPortfolioV2 } from "@/lib/portfolioV2";
 
-export function HomeContent() {
-  const { lang } = useLang();
-  const t = getT(lang);
+export function HomeContent({ lang = "en" }) {
+  const content = getPortfolioV2(lang);
+  const legacy = getT(lang);
+  const fr = lang === "fr";
+  const prefix = fr ? "/fr" : "";
+  const labels = fr
+    ? { top: "Introduction", work: "Projets", capabilities: "Compétences", experience: "Expérience", approach: "Méthode", about: "Profil", contact: "Contact" }
+    : { top: "Intro", work: "Work", capabilities: "Capabilities", experience: "Experience", approach: "Approach", about: "About", contact: "Contact" };
 
   return (
     <>
-      {/* ── 1 · Hero ─────────────────────────────────────────── */}
-      <section className="container hero" id="top" data-label={t.labels.intro} aria-labelledby="hero-title">
+      <section className="container hero" id="top" data-label={labels.top} aria-labelledby="hero-title">
         <div className="hero__grid">
           <div className="hero__copy">
-            <Reveal className="hero__status-row">
-              <LocationTime />
-              <span className="availability availability--hero">
-                <span className="dot" aria-hidden="true" />
-                <span className="availability__text">{t.availability}</span>
-              </span>
-            </Reveal>
-            <Scramble className="eyebrow eyebrow--accent hero__eyebrow" text="Breno Sampaio" delay={120} />
-            <Reveal mask delay={60}>
-              <Text variant="display" id="hero-title" className="hero__title">
-                {renderTitle(t.hero.title)}
-              </Text>
-            </Reveal>
-            <Reveal delay={220}>
-              <Text variant="body-lg" className="hero__lead" style={{ color: "var(--graphite)" }}>
-                {t.hero.lead}
-              </Text>
-            </Reveal>
-            <Reveal delay={320} className="hero__actions">
-              <Button href="#work" variant="primary">{t.hero.cta1}</Button>
-              <Button href={t.resume.href} variant="link" download={t.resume.fileName}>{t.hero.cta2}</Button>
+            <Reveal className="hero__status-row"><LocationTime /></Reveal>
+            <Scramble className="eyebrow eyebrow--accent hero__eyebrow" text={content.hero.eyebrow} delay={80} />
+            <Reveal mask delay={50}><Text variant="display" id="hero-title" className="hero__title">{content.hero.title}</Text></Reveal>
+            <Reveal delay={140}><Text variant="body-lg" className="hero__lead" style={{ color: "var(--graphite)" }}>{content.hero.lead}</Text></Reveal>
+            <Reveal delay={190}><Text variant="mono">{content.hero.targets}</Text></Reveal>
+            <Reveal delay={220} className="hero__actions">
+              <Button href="#approach">{content.hero.primaryAction}</Button>
+              <Button href={content.links.github} variant="secondary" target="_blank" rel="noopener noreferrer">{content.hero.secondaryAction}</Button>
             </Reveal>
           </div>
-
-          <Reveal delay={160} className="hero__media hero__media--photo" data-nav-dark>
-            <Image
-              src="/images/breno-portrait.png"
-              alt="Breno Sampaio"
-              fill
-              sizes="(max-width: 980px) 90vw, 460px"
-              style={{ objectFit: "cover" }}
-              priority
-            />
+          <Reveal delay={120} className="hero__media hero__media--photo" data-nav-dark>
+            <Image src="/images/breno-portrait.png" alt="Breno Sampaio" fill sizes="(max-width: 600px) 270px, (max-width: 900px) 320px, 380px" style={{ objectFit: "cover" }} priority />
           </Reveal>
         </div>
-
-        <Toolkit />
       </section>
 
-      {/* ── 2 · Selected work ────────────────────────────────── */}
-      <section className="container section work-showcase-section" id="work" data-label={t.labels.work} aria-labelledby="work-title">
+      <section className="container section" id="work" data-label={labels.work} aria-labelledby="home-work-title">
+        <WorkStatusPanel id="home-work-title" status={content.statusLabels[content.work.status]} heading={content.work.heading} body={content.work.body} />
+        <Reveal delay={120} className="section-actions"><Button href={`${prefix}/work`} variant="secondary">{fr ? "Voir les projets" : "View work"}</Button></Reveal>
+      </section>
+
+      <section className="container section" id="capabilities" data-label={labels.capabilities} aria-labelledby="capabilities-title">
         <div className="section-head">
-          <Scramble className="eyebrow eyebrow--accent" text={t.work.eyebrow} />
-          <Reveal mask delay={60}><Text variant="h2" id="work-title">{renderTitle(t.work.heading)}</Text></Reveal>
-          <Reveal delay={140}>
-            <Text variant="body" style={{ color: "var(--stone)", maxWidth: "48ch" }}>
-              {t.work.subheading}
-            </Text>
-          </Reveal>
+          <Scramble className="eyebrow eyebrow--accent" text={labels.capabilities} />
+          <Reveal mask><Text as="h2" variant="h2" id="capabilities-title">{fr ? "Un regard produit. Une expérience opérationnelle. Une pratique frontend en développement." : "Product judgment. Operational depth. Frontend in progress."}</Text></Reveal>
         </div>
-
-        <WorkShowcase projects={t.projects} lang={lang} viewCase={t.common.viewCase} />
-        <Reveal delay={180}>
-          <p className="work-more">{t.work.more}</p>
-        </Reveal>
+        <div className="capability-grid">
+          {content.capabilities.map((group) => <CapabilityGroup key={group.id} title={group.title} status={content.statusLabels[group.status]} items={group.items} />)}
+        </div>
       </section>
 
-      {/* ── 3 · Professional evidence ───────────────────────── */}
-      <section className="container section" id="experience" data-label={t.labels.experience} aria-labelledby="experience-title">
+      <section className="container section" id="experience" data-label={labels.experience} aria-labelledby="experience-title">
         <div className="experience-layout">
           <div className="section-head">
-            <Scramble className="eyebrow eyebrow--accent" text={t.experience.eyebrow} />
-            <Reveal mask delay={60}>
-              <Text variant="h2" id="experience-title">
-                {renderTitle(t.experience.heading)}
-              </Text>
-            </Reveal>
-            <Reveal delay={140}>
-              <Text variant="body" style={{ color: "var(--stone)", maxWidth: "44ch" }}>
-                {t.experience.subheading}
-              </Text>
-            </Reveal>
+            <Scramble className="eyebrow eyebrow--accent" text={labels.experience} />
+            <Reveal mask><Text as="h2" variant="h2" id="experience-title">{fr ? "Les opérations m’ont appris ce que les interfaces cachent." : "Operations taught me what interfaces tend to hide."}</Text></Reveal>
+            <Reveal><Text variant="body">{content.about.lead}</Text></Reveal>
           </div>
-
-          <Reveal className="experience-list" delay={120}>
-            {t.experience.items.map((item) => (
+          <Reveal className="experience-list">
+            {legacy.experience.items.map((item) => (
               <div className="experience-item" key={`${item.company}-${item.dates}`}>
                 <span className="experience-item__dates">{item.dates}</span>
                 <div>
@@ -115,147 +78,54 @@ export function HomeContent() {
         </div>
       </section>
 
-      {/* ── 4 · How I work ───────────────────────────────────── */}
-      <section className="container section" id="approach" data-label={t.labels.process} aria-labelledby="process-title">
+      <section className="container section" id="approach" data-label={labels.approach} aria-labelledby="approach-title">
         <div className="process-head">
-          <div className="stack" style={{ gap: "var(--space-4)" }}>
-            <Scramble className="eyebrow eyebrow--accent" text={t.process.eyebrow} />
-            <Reveal mask delay={60}>
-              <Text variant="h2" id="process-title">
-                {renderTitle(t.process.heading)}
-              </Text>
-            </Reveal>
+          <div className="section-head">
+            <Scramble className="eyebrow eyebrow--accent" text={labels.approach} />
+            <Reveal mask><Text as="h2" variant="h2" id="approach-title">{fr ? "De l’ambiguïté à une interface qui résiste au réel." : "From ambiguity to an interface that holds up."}</Text></Reveal>
           </div>
-          <Reveal delay={140}>
-            <Text variant="body" style={{ color: "var(--stone)" }}>
-              {t.process.subheading}
-            </Text>
-          </Reveal>
         </div>
-
-        <div className="process-grid">
-          {t.processSteps.map((step, i) => (
-            <Collapsible
-              key={step.title}
-              className="process-col"
-              defaultOpen
-              label={step.title}
-              header={
-                <>
-                  <Icon name={step.icon} size={22} className="process-col__icon" />
-                  <span className="process-col__index">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="process-col__title">{step.title}</span>
-                </>
-              }
-            >
-              <span className="process-col__desc">{step.description}</span>
-              <ul className="process-col__items">
-                {step.items.map((it) => (
-                  <li key={it}>{it}</li>
-                ))}
-              </ul>
-            </Collapsible>
+        <div className="process-grid process-grid--v2">
+          {content.process.map((step, index) => (
+            <article className="process-col" key={step.id}>
+              <span className="process-col__index">{String(index + 1).padStart(2, "0")}</span>
+              <Text as="h3" variant="h3" className="process-col__title">{step.title}</Text>
+              <Text variant="small" className="process-col__desc">{step.body}</Text>
+            </article>
           ))}
         </div>
         <ProcessReveal targetId="approach" />
       </section>
 
-      {/* ── 5 · About ────────────────────────────────────────── */}
-      <section className="container about-hero about-hero--compact" id="about" data-label={t.labels.about} aria-labelledby="about-title">
+      <section className="container about-hero about-hero--compact" id="about" data-label={labels.about} aria-labelledby="about-title">
         <div className="about-hero__copy">
-          <Scramble className="eyebrow eyebrow--accent" text={t.about.eyebrow} />
-          <Reveal mask delay={60}>
-            <Text variant="h1" as="h2" className="about-hero__title" id="about-title">
-              {renderTitle(t.about.heading)}
-            </Text>
-          </Reveal>
-          <Reveal delay={160}>
-            <Text variant="body-lg" style={{ maxWidth: "44ch", color: "var(--graphite)" }}>
-              {t.about.lead}
-            </Text>
-          </Reveal>
-          <Reveal delay={240}>
-            <Link href="/about" className="link-arrow">
-              {t.about.cta}
-              <span className="arrow" aria-hidden="true">↗</span>
-            </Link>
-          </Reveal>
+          <Scramble className="eyebrow eyebrow--accent" text={content.about.eyebrow} />
+          <Reveal mask><Text as="h2" variant="h1" id="about-title" className="about-hero__title">{content.about.title}</Text></Reveal>
+          <Reveal><Text variant="body-lg" style={{ color: "var(--graphite)" }}>{content.about.lead}</Text></Reveal>
+          <Reveal><Link href={`${prefix}/about`} className="link-arrow">{fr ? "Lire mon parcours" : "Read the full path"}<span className="arrow" aria-hidden="true">↗</span></Link></Reveal>
         </div>
-
-        <Reveal delay={200} className="about-facts">
-          <div className="about-fact">
-            <Icon name="map-pin" className="about-fact__icon" />
-            <span className="about-fact__label">{t.about.facts.basedIn}</span>
-            <span className="about-fact__value">{t.profile.location}</span>
-          </div>
-          <div className="about-fact">
-            <Icon name="briefcase" className="about-fact__icon" />
-            <span className="about-fact__label">{t.about.facts.working}</span>
-            <span className="about-fact__value">{t.about.facts.workingValue}</span>
-          </div>
-          <div className="about-fact">
-            <Icon name="globe" className="about-fact__icon" />
-            <span className="about-fact__label">{t.about.facts.languages}</span>
-            <div className="stack" style={{ gap: "var(--space-2)" }}>
-              {profile.languages.map((l) => (
-                <span className="lang-row" key={l.name}>
-                  <span className="about-fact__value">{t.languageNames[l.name] || l.name}</span>
-                  <span className="lang-row__level">{t.languageLevels[l.level] || l.level}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="about-fact">
-            <Icon name="award" className="about-fact__icon" />
-            <span className="about-fact__label">{t.about.facts.cert}</span>
-            <span className="about-fact__value">{t.about.facts.certValue}</span>
-          </div>
-          <div className="about-fact">
-            <Icon name="globe" className="about-fact__icon" />
-            <span className="about-fact__label">{t.about.facts.mobility}</span>
-            <span className="about-fact__value">{t.about.facts.mobilityValue}</span>
-          </div>
+        <Reveal className="about-facts">
+          <div className="about-fact"><span className="about-fact__label">{fr ? "Identité actuelle" : "Current identity"}</span><span className="about-fact__value">{content.identity.current}</span></div>
+          <div className="about-fact"><span className="about-fact__label">{fr ? "En développement" : "Building now"}</span><span className="about-fact__value">{content.identity.transition}</span></div>
+          <div className="about-fact"><span className="about-fact__label">Direction</span><span className="about-fact__value">{content.identity.target}</span></div>
         </Reveal>
       </section>
 
       <div className="container"><Divider /></div>
 
-      {/* ── 6 · Contact ──────────────────────────────────────── */}
-      <section className="container section" id="contact" data-label={t.labels.contact} aria-labelledby="contact-title">
+      <section className="container section" id="contact" data-label={labels.contact} aria-labelledby="contact-title">
         <div className="contact">
-          <div className="stack" style={{ gap: "var(--space-6)" }}>
-            <Scramble className="eyebrow eyebrow--accent" text={t.contact.eyebrow} />
-            <Reveal mask delay={60}>
-              <Text variant="h1" as="h2" id="contact-title" style={{ maxWidth: "16ch" }}>
-                {renderTitle(t.contact.heading)}
-              </Text>
-            </Reveal>
-            <Reveal delay={160}>
-              <Text variant="body" style={{ color: "var(--stone)", maxWidth: "46ch" }}>
-                {t.contact.body}
-              </Text>
-            </Reveal>
+          <div className="section-head">
+            <Scramble className="eyebrow eyebrow--accent" text={labels.contact} />
+            <Reveal mask><Text as="h2" variant="h1" id="contact-title">{fr ? "Rendons le travail complexe plus clair." : "Let’s make complex work feel clear."}</Text></Reveal>
+            <Reveal><Text variant="body">{content.identity.target} · {content.location}</Text></Reveal>
           </div>
-
-          <Reveal className="contact-list" delay={120}>
-            <a className="contact-row" href={`mailto:${profile.email}`}>
-              <Icon name="mail" className="contact-row__icon" />
-              <span className="contact-row__label">{t.contact.email}</span>
-              <span className="contact-row__value">{profile.email}</span>
-              <span className="arrow" aria-hidden="true">↗</span>
-            </a>
-            <div className="contact-row">
-              <Icon name="map-pin" className="contact-row__icon" />
-              <span className="contact-row__label">{t.contact.location}</span>
-              <span className="contact-row__value">{t.profile.location}</span>
-            </div>
-            <div className="contact-row">
-              <Icon name="clock" className="contact-row__icon" />
-              <span className="contact-row__label">{t.contact.localTime}</span>
-              <span className="contact-row__value">
-                <LocalTime timeZone={profile.timezone} />
-              </span>
-            </div>
+          <Reveal className="contact-list">
+            <a className="contact-row" href={`mailto:${content.links.email}`}><Icon name="mail" className="contact-row__icon" /><span className="contact-row__label">Email</span><span className="contact-row__value">{content.links.email}</span><span className="arrow" aria-hidden="true">↗</span></a>
+            <a className="contact-row" href={content.links.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="globe" className="contact-row__icon" /><span className="contact-row__label">LinkedIn</span><span className="contact-row__value">brenosampaio</span><span className="arrow" aria-hidden="true">↗</span></a>
+            <a className="contact-row" href={content.links.github} target="_blank" rel="noopener noreferrer"><Icon name="code" className="contact-row__icon" /><span className="contact-row__label">GitHub</span><span className="contact-row__value">brenosampaio-dev</span><span className="arrow" aria-hidden="true">↗</span></a>
+            <a className="contact-row" href={legacy.resume.href} download={legacy.resume.fileName}><Icon name="download" className="contact-row__icon" /><span className="contact-row__label">{fr ? "Résumé" : "Resume"}</span><span className="contact-row__value">PDF</span><span className="arrow" aria-hidden="true">↓</span></a>
+            <div className="contact-row"><Icon name="map-pin" className="contact-row__icon" /><span className="contact-row__label">{fr ? "Lieu" : "Location"}</span><span className="contact-row__value">{content.location}</span></div>
           </Reveal>
         </div>
       </section>

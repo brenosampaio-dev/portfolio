@@ -60,9 +60,13 @@ export function SmoothScroll() {
       if (!a) return;
       const el = resolveTarget(a.getAttribute("href"));
       if (!el) return; // cross-route hash → let next/link navigate, hash handled on load
-      // Capture phase: run before next/link so it never intercepts the hash.
+      // Capture phase: prevent route interception while allowing React's
+      // onClick handlers (for example the mobile menu close action) to run.
       e.preventDefault();
-      e.stopPropagation();
+      if (a.closest(".section-jump-nav")) {
+        el.tabIndex = -1;
+        el.focus({ preventScroll: true });
+      }
       scrollToEl(el);
       history.pushState(null, "", `#${el.id}`);
     };

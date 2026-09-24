@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 /*
- * Button — one primary action per view; Clay is the only tint.
+ * Button — one primary action per view; Indigo is the only tint.
  * DM Sans 500 at 15px, 6px radius (restrained, not rounded).
  * Renders as <button> or, when `href` is set, as <a> (so it can also be
  * dropped into next/link via asChild-style usage). Reconstructed from spec.
@@ -19,7 +19,7 @@ const base = {
   fontWeight: 500,
   lineHeight: 1,
   letterSpacing: "-0.01em",
-  height: "44px",
+  minHeight: "44px",
   padding: "0 22px",
   borderRadius: "var(--radius-sm)",
   border: "1px solid transparent",
@@ -32,7 +32,6 @@ const base = {
     "color var(--duration-sm) var(--ease)",
     "border-color var(--duration-sm) var(--ease)",
     "box-shadow var(--duration-sm) var(--ease)",
-    "transform var(--duration-sm) var(--ease)",
   ].join(", "),
 };
 
@@ -54,7 +53,7 @@ const variants = {
       background: "transparent",
       border: "none",
       padding: "0",
-      height: "auto",
+      minHeight: "auto",
       color: "var(--ink)",
       textDecoration: "underline",
       textUnderlineOffset: "3px",
@@ -73,30 +72,22 @@ export function Button({
   style,
   onMouseEnter,
   onMouseLeave,
-  onMouseDown,
-  onMouseUp,
   ...props
 }) {
   const [hover, setHover] = useState(false);
-  const [pressed, setPressed] = useState(false);
   const v = variants[variant] || variants.primary;
 
   const composed = {
     ...base,
     ...v.rest,
     ...(hover && !disabled ? v.hover : {}),
-    ...(pressed && !disabled && variant !== "link"
-      ? { transform: "scale(0.984)", boxShadow: "none" }
-      : {}),
     ...(disabled ? { opacity: 0.38, cursor: "not-allowed", pointerEvents: "none" } : {}),
     ...style,
   };
 
   const handlers = {
     onMouseEnter: (e) => { setHover(true); onMouseEnter?.(e); },
-    onMouseLeave: (e) => { setHover(false); setPressed(false); onMouseLeave?.(e); },
-    onMouseDown: (e) => { setPressed(true); onMouseDown?.(e); },
-    onMouseUp: (e) => { setPressed(false); onMouseUp?.(e); },
+    onMouseLeave: (e) => { setHover(false); onMouseLeave?.(e); },
   };
 
   if (href && !disabled) {

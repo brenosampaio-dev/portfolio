@@ -1,5 +1,5 @@
-// Robots policy — allow everything, point crawlers at the sitemap.
-// Domain mirrors metadataBase in layout.jsx.
+// Only the non-case v2 hubs are promoted by sitemap; preserved legacy routes
+// remain reachable while their eventual archive role is decided.
 export default function robots() {
   return {
     rules: {

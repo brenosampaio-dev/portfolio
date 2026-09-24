@@ -21,6 +21,14 @@
   --duration-md: 300ms; /* @kind other */
   --duration-lg: 480ms; /* @kind other */
   --duration-xl: 640ms; /* @kind other */
+
+  /* ── Semantic roles ─────────────────────────────────────── */
+  --duration-instant: var(--duration-xs);
+  --duration-micro: var(--duration-sm);
+  --duration-hover: 220ms;
+  --duration-morph: var(--duration-md);
+  --duration-reveal: var(--duration-lg);
+  --duration-illustrative: var(--duration-xl);
 }
 
 /* Reduced-motion override — always applied */

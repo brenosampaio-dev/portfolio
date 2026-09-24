@@ -1,0 +1,87 @@
+/* Portfolio signature layer: complexity underneath, clarity on the surface. */
+body {
+  position: relative;
+  isolation: isolate;
+}
+
+body::before { z-index: -2; }
+
+.code-veil {
+  --code-veil-size: 168px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: none;
+  width: var(--code-veil-size);
+  height: var(--code-veil-size);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-100%, -100%, 0);
+  border-radius: 50%;
+  contain: strict;
+  background-image: url("/images/code-veil.svg");
+  background-repeat: repeat;
+  background-size: 1440px 900px;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(circle, #000 0 43%, rgba(0, 0, 0, 0.82) 57%, transparent 76%);
+  mask-image: radial-gradient(circle, #000 0 43%, rgba(0, 0, 0, 0.82) 57%, transparent 76%);
+  transition: opacity 240ms var(--ease-out);
+}
+
+.code-veil[data-active="true"] {
+  opacity: 0.24;
+  transition-duration: 120ms;
+}
+
+[data-theme="dark"] .code-veil {
+  filter: brightness(1.8) saturate(0.7);
+  mix-blend-mode: screen;
+}
+
+[data-theme="dark"] .code-veil[data-active="true"] { opacity: 0.17; }
+
+/* The portrait supports the message instead of competing with it. */
+.hero__grid {
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.72fr);
+}
+
+.hero__media {
+  width: min(100%, 380px);
+  justify-self: end;
+}
+
+.portrait--photo {
+  width: min(100%, 320px);
+  justify-self: center;
+}
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .code-veil { display: block; }
+}
+
+@media (max-width: 900px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__media {
+    width: min(100%, 320px);
+    aspect-ratio: 4 / 5;
+    max-height: none;
+  }
+  .about-hero .portrait--photo { width: min(100%, 280px); }
+}
+
+@media (max-width: 600px) {
+  .hero__media { width: min(100%, 270px); }
+  .about-hero .portrait--photo { width: min(100%, 250px); justify-self: end; }
+}
+
+/* Preserve whole words at the effective 160px viewport used by 200% reflow. */
+@media (max-width: 240px) {
+  #hero-title {
+    font-size: clamp(21px, 14vw, 32px) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .code-veil { display: none !important; }
+}
