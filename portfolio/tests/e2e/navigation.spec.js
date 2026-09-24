@@ -7,6 +7,62 @@ test("current portfolio exposes core navigation and content", async ({ page }) =
   await expect(page.locator("#contact")).toBeAttached();
 });
 
+test("ultrawide layouts gain presence without widening regular desktop", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const regular = await page.locator("#contact").boundingBox();
+  expect(regular).not.toBeNull();
+  expect(regular.width).toBeLessThanOrEqual(1100);
+
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await page.reload();
+  const ultrawide = await page.locator("#contact").boundingBox();
+  expect(ultrawide).not.toBeNull();
+  expect(ultrawide.width).toBeGreaterThanOrEqual(1239);
+  expect(ultrawide.width).toBeLessThanOrEqual(1240);
+});
+
+test("contact form sends inside the page and confirms delivery", async ({ page }) => {
+  let submittedPayload;
+  await page.route("**/api/contact", async (route) => {
+    submittedPayload = route.request().postDataJSON();
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true }) });
+  });
+
+  await page.goto("/");
+  const form = page.getByRole("form", { name: "Contact form" });
+  await form.getByLabel("Name").fill("Alex Morgan");
+  await form.getByLabel("Email").fill("alex@example.com");
+  await form.getByLabel("Reason").selectOption("frontend-role");
+  await form.getByLabel("Message").fill("I would like to discuss an accessible frontend role.");
+  await form.getByRole("button", { name: "Send message" }).click();
+
+  await expect(form.getByRole("status")).toHaveText("Message sent. I’ll reply as soon as I can.");
+  expect(submittedPayload).toEqual({
+    name: "Alex Morgan",
+    email: "alex@example.com",
+    reason: "frontend-role",
+    message: "I would like to discuss an accessible frontend role.",
+    website: "",
+  });
+  await expect(form.getByLabel("Name")).toHaveValue("");
+});
+
+test("contact submit labels remain on one line at desktop widths", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+
+  for (const path of ["/", "/fr"]) {
+    await page.goto(path);
+    const button = page.locator(".contact-form__submit");
+    const metrics = await button.evaluate((element) => {
+      const label = element.querySelector("span");
+      const lineHeight = Number.parseFloat(getComputedStyle(label).lineHeight);
+      return { labelHeight: label.getBoundingClientRect().height, lineHeight };
+    });
+    expect(metrics.labelHeight).toBeLessThanOrEqual(metrics.lineHeight + 1);
+  }
+});
+
 test("hero portrait remains editorially secondary across responsive layouts", async ({ page }) => {
   for (const viewport of [
     { width: 1440, height: 900, maximumPortraitWidth: 380 },

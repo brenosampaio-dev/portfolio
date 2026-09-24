@@ -49,6 +49,7 @@
 
   /* ── Layout ─────────────────────────────────────────────── */
   --max-content: 1100px;
+  --max-content-wide: 1240px;
   --max-prose:    680px;
   --max-narrow:   480px;
 }
