@@ -14,23 +14,20 @@ export function CodeVeil() {
 
     const enabled = window.matchMedia(ENABLE_QUERY);
     const reduced = window.matchMedia(REDUCE_QUERY);
-    let frame = 0;
-    let x = 0;
-    let y = 0;
+    let radius = 0;
 
     const deactivate = () => {
       veil.dataset.active = "false";
       veil.style.removeProperty("will-change");
     };
 
-    const paint = () => {
-      frame = 0;
+    const paint = (x, y) => {
       if (!enabled.matches || reduced.matches) {
         deactivate();
         return;
       }
 
-      const radius = veil.offsetWidth / 2;
+      if (!radius) radius = veil.offsetWidth / 2;
       veil.style.transform = `translate3d(${x - radius}px, ${y - radius}px, 0)`;
       veil.style.backgroundPosition = `${radius - x}px ${radius - y}px`;
       veil.style.setProperty("will-change", "transform, opacity");
@@ -39,9 +36,7 @@ export function CodeVeil() {
 
     const onPointerMove = (event) => {
       if (!enabled.matches || reduced.matches) return;
-      x = event.clientX;
-      y = event.clientY;
-      if (!frame) frame = window.requestAnimationFrame(paint);
+      paint(event.clientX, event.clientY);
     };
 
     const onMediaChange = () => {
@@ -55,7 +50,6 @@ export function CodeVeil() {
     reduced.addEventListener("change", onMediaChange);
 
     return () => {
-      if (frame) window.cancelAnimationFrame(frame);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("blur", deactivate);
       document.documentElement.removeEventListener("pointerleave", deactivate);

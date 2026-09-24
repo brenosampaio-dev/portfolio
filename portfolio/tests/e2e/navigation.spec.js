@@ -47,6 +47,44 @@ test("desktop pointer reveals a decorative code layer without intercepting the p
   expect(Math.abs(box.y + box.height / 2 - 420)).toBeLessThanOrEqual(2);
 });
 
+test("desktop code reveal remains a compact accent around the pointer", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await page.mouse.move(620, 420);
+
+  const box = await page.locator(".code-veil").boundingBox();
+  expect(box).not.toBeNull();
+  expect(box.width).toBeLessThanOrEqual(180);
+  expect(box.height).toBeLessThanOrEqual(180);
+});
+
+test("desktop code reveal follows pointer coordinates in the same event", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const veil = page.locator(".code-veil");
+  let warmup = 0;
+  await expect.poll(async () => {
+    warmup += 1;
+    await page.mouse.move(620 + (warmup % 2), 420);
+    return veil.getAttribute("data-active");
+  }).toBe("true");
+
+  const center = await page.evaluate(() => {
+    const target = { x: 873, y: 517 };
+    window.dispatchEvent(new PointerEvent("pointermove", {
+      bubbles: true,
+      clientX: target.x,
+      clientY: target.y,
+      pointerType: "mouse",
+    }));
+    const rect = document.querySelector(".code-veil").getBoundingClientRect();
+    return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
+  });
+
+  expect(Math.abs(center.x - 873)).toBeLessThanOrEqual(1);
+  expect(Math.abs(center.y - 517)).toBeLessThanOrEqual(1);
+});
+
 test("decorative code reveal stays off for reduced motion and narrow layouts", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });

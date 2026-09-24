@@ -7,7 +7,7 @@ body {
 body::before { z-index: -2; }
 
 .code-veil {
-  --code-veil-size: 420px;
+  --code-veil-size: 168px;
   position: fixed;
   top: 0;
   left: 0;

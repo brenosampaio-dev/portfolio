@@ -61,9 +61,10 @@ Implemented and verified on 2026-09-24 on the protected rebuild branch:
 - Kept case selection explicitly paused. The Work page now defines the publication standard — scope, decisions, contribution and evidence — without implying that a case has already been approved.
 - Added the desktop-only Code Veil signature: a non-interactive abstract code layer revealed by fine-pointer movement. It is absent on touch/narrow layouts and disabled under `prefers-reduced-motion`.
 - Added dedicated light/dark visual evidence for the Code Veil and regression coverage for pointer behaviour, responsive portrait limits, localized hero navigation, dark-theme hydration and 200% reflow.
+- Refined the Code Veil after pointer review: its field was reduced from 420px to 168px, and pointer coordinates now update synchronously instead of waiting for the next animation frame.
 - Corrected the new headline at an effective 160px layout viewport so complete words remain visible without horizontal scrolling.
 
-Verification: lint passed with zero warnings; 5 unit files and 21 tests passed; the production build generated 19 routes; the production dependency audit found 0 vulnerabilities; 18 navigation tests, 13 accessibility tests and all 84 visual scenarios passed. Representative Home, Work, About, French mobile, light/dark Code Veil and 200% reflow captures were inspected manually.
+Verification: lint passed with zero warnings; 5 unit files and 21 tests passed; the production build generated 19 routes; the production dependency audit found 0 vulnerabilities; 20 navigation tests, 13 accessibility tests and all 84 visual scenarios passed. Representative Home, Work, About, French mobile, light/dark Code Veil and 200% reflow captures were inspected manually.
 
 ## Accepted framework warning
 
