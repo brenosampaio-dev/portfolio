@@ -17,7 +17,7 @@ export function LabsContent({ lang = "en" }) {
         <div className="section-head">
           <Status>{content.statusLabels[content.labs.currentStatus]}</Status>
           <Text as="h2" variant="h2" id="labs-current-title">{content.labs.current}</Text>
-          <Text variant="body">{fr ? "Travail en cours sur HTML, CSS, JavaScript, React, accessibilité et pratique Git." : "Active work across HTML, CSS, JavaScript, React, accessibility and Git practice."}</Text>
+          <Text variant="body">{fr ? "Priorités actuelles : HTML, CSS, JavaScript, React, accessibilité et Git." : "Current focus: HTML, CSS, JavaScript, React, accessibility and Git."}</Text>
         </div>
       </section>
 

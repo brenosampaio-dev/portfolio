@@ -1,8 +1,8 @@
 import { WorkContent } from "@/components/site/WorkContent";
 
 export const metadata = {
-  title: "Projets — Structure et preuves des études de cas",
-  description: "Une vue honnête de la structure du portfolio pendant la sélection des prochains projets design produit et frontend.",
+  title: "Projets — Portée, décisions et preuves",
+  description: "Une structure de portfolio pour le design produit et le frontend, avec une portée, des décisions, une contribution et des preuves explicites.",
   alternates: { canonical: "/fr/work", languages: { "en-CA": "/work", "fr-CA": "/fr/work" } },
 };
 

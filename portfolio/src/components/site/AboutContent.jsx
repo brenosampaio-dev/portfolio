@@ -19,7 +19,7 @@ export function AboutContent({ lang = "en" }) {
         <PageIntro eyebrow={content.about.eyebrow} title={content.about.title} lead={content.about.lead} actions={<Button href={legacy.resume.href} download={legacy.resume.fileName}>{fr ? "Télécharger le CV" : "Download resume"}</Button>} />
         <Reveal>
           <div className="portrait portrait--photo">
-            <Image src="/images/breno-portrait.png" alt="Breno Sampaio" fill sizes="(max-width: 980px) 90vw, 360px" style={{ objectFit: "cover" }} priority />
+            <Image src="/images/breno-portrait.png" alt="Breno Sampaio" fill sizes="(max-width: 600px) 250px, (max-width: 900px) 280px, 320px" style={{ objectFit: "cover" }} priority />
           </div>
         </Reveal>
         <Reveal className="about-facts">
@@ -38,7 +38,7 @@ export function AboutContent({ lang = "en" }) {
       </section>
 
       <section id="transferable-strengths" className="container section" data-label={fr ? "Forces transférables" : "Transferable strengths"} aria-labelledby="strengths-title">
-        <div className="section-head"><Text as="h2" variant="h2" id="strengths-title">{fr ? "Des forces éprouvées qui passent au produit." : "Proven strengths that transfer into product."}</Text></div>
+        <div className="section-head"><Text as="h2" variant="h2" id="strengths-title">{fr ? "Une expérience opérationnelle, appliquée au produit." : "Strengths proven in operations, carried into product."}</Text></div>
         <div className="capability-grid">
           {content.capabilities.slice(0, 2).map((group) => <CapabilityGroup key={group.id} title={group.title} status={content.statusLabels[group.status]} items={group.items} />)}
         </div>
@@ -46,7 +46,7 @@ export function AboutContent({ lang = "en" }) {
 
       <section id="current-learning" className="container section" data-label={fr ? "Apprentissage actuel" : "Current learning"} aria-labelledby="learning-title">
         <div className="section-head">
-          <Text as="h2" variant="h2" id="learning-title">{fr ? "Le code comme prolongement du design." : "Code as an extension of design."}</Text>
+          <Text as="h2" variant="h2" id="learning-title">{fr ? "Le code prolonge le design." : "Code extends the design."}</Text>
           <Text variant="body">{content.about.learning}</Text>
         </div>
         <CapabilityGroup title={content.capabilities[2].title} status={content.statusLabels[content.capabilities[2].status]} items={content.capabilities[2].items} />
@@ -54,7 +54,7 @@ export function AboutContent({ lang = "en" }) {
 
       <section id="timeline" className="container section" data-label={fr ? "Chronologie" : "Timeline"} aria-labelledby="timeline-title">
         <div className="experience-layout">
-          <div className="section-head"><Text as="h2" variant="h2" id="timeline-title">{fr ? "Expérience factuelle" : "Factual experience"}</Text></div>
+          <div className="section-head"><Text as="h2" variant="h2" id="timeline-title">{fr ? "L’expérience derrière la pratique." : "The experience behind the practice."}</Text></div>
           <div className="experience-list">
             {legacy.experience.items.map((item) => (
               <div className="experience-item" key={`${item.company}-${item.dates}`}>
@@ -77,7 +77,7 @@ export function AboutContent({ lang = "en" }) {
 
       <section id="about-actions" className="container section" data-label={fr ? "Prochaines étapes" : "Next actions"} aria-labelledby="about-actions-title">
         <div className="section-head">
-          <Text as="h2" variant="h2" id="about-actions-title">{fr ? "Voir le système, puis parlons." : "See the system, then let’s talk."}</Text>
+          <Text as="h2" variant="h2" id="about-actions-title">{fr ? "Voir le raisonnement, puis échanger." : "See the thinking. Then let’s talk."}</Text>
           <div className="page-intro__actions"><Button href={`${prefix}/work`}>{fr ? "Voir les projets" : "Explore work"}</Button><Button href={`${prefix}/labs`} variant="secondary">Labs</Button><Button href={`${prefix || "/"}#contact`} variant="link">Contact</Button></div>
         </div>
       </section>

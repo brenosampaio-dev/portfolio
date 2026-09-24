@@ -2,7 +2,7 @@
   "name": "breno-sampaio-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Breno Sampaio's multilingual IT and technical support portfolio.",
+  "description": "Breno Sampaio's multilingual product design and frontend portfolio.",
   "scripts": {
     "dev": "node node_modules/next/dist/bin/next dev",
     "build": "node node_modules/next/dist/bin/next build",

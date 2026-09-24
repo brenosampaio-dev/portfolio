@@ -32,6 +32,7 @@ test("@a11y section jump panel fits at 320px and 200% zoom", async ({ page }) =>
   await page.setViewportSize({ width: 160, height: 720 });
   await page.goto("/");
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+  await expect.poll(() => page.locator(".hero__title").evaluate((title) => title.scrollWidth <= title.clientWidth)).toBe(true);
 
   const headerReport = await page.locator(".site-header").evaluate((header) => {
     const controls = [...header.querySelectorAll("a, button")].filter((element) => {

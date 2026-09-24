@@ -52,6 +52,19 @@ The final independent code review found no critical issues and three important f
 
 Post-review verification on 2026-09-24: lint passed; 5 unit files and 21 tests passed; the production build passed with 19 generated routes; the production dependency audit found 0 vulnerabilities; 13 navigation tests, 13 accessibility tests, and all 83 visual scenarios passed.
 
+## Signature, portrait and editorial refinement
+
+Implemented and verified on 2026-09-24 on the protected rebuild branch:
+
+- Reduced the portrait to a supporting editorial role: no more than 380px on desktop, 320px on tablet, and 270px on mobile; the About portrait follows a separate 320/280/250px scale.
+- Rewrote the non-case English and French portfolio copy around one honest proposition: operational complexity becomes clear, accessible interfaces, with frontend practice presented as work in progress.
+- Kept case selection explicitly paused. The Work page now defines the publication standard — scope, decisions, contribution and evidence — without implying that a case has already been approved.
+- Added the desktop-only Code Veil signature: a non-interactive abstract code layer revealed by fine-pointer movement. It is absent on touch/narrow layouts and disabled under `prefers-reduced-motion`.
+- Added dedicated light/dark visual evidence for the Code Veil and regression coverage for pointer behaviour, responsive portrait limits, localized hero navigation, dark-theme hydration and 200% reflow.
+- Corrected the new headline at an effective 160px layout viewport so complete words remain visible without horizontal scrolling.
+
+Verification: lint passed with zero warnings; 5 unit files and 21 tests passed; the production build generated 19 routes; the production dependency audit found 0 vulnerabilities; 18 navigation tests, 13 accessibility tests and all 84 visual scenarios passed. Representative Home, Work, About, French mobile, light/dark Code Veil and 200% reflow captures were inspected manually.
+
 ## Accepted framework warning
 
 Next.js 16.3.4 emits one non-failing `metadataBase` warning while resolving the framework-level `/_not-found` social image under multiple locale root layouts. Every served non-case route provides its own `metadataBase`, canonical URL, reciprocal language alternatives, Open Graph data, and browser-tested metadata. Avoiding the warning would require experimental global-not-found behavior and is not justified for this protected foundation.

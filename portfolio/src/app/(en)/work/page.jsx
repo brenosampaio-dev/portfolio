@@ -1,8 +1,8 @@
 import { WorkContent } from "@/components/site/WorkContent";
 
 export const metadata = {
-  title: "Work — Case-study structure and evidence",
-  description: "An honest view of the portfolio structure while the next product design and frontend cases are selected.",
+  title: "Work — Scope, decisions and evidence",
+  description: "A portfolio structure for product design and frontend work, with scope, decisions, contribution and evidence made explicit.",
   alternates: { canonical: "/work", languages: { "en-CA": "/work", "fr-CA": "/fr/work" } },
 };
 

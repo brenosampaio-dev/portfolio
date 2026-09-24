@@ -80,6 +80,25 @@ test("capture desktop progress and reduced-motion states", async ({ page }) => {
   await page.screenshot({ path: "artifacts/visual/surface-reduced-motion.png" });
 });
 
+test("capture desktop code veil in light and dark themes", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await settleAndReveal(page);
+
+  const veil = page.locator(".code-veil");
+  await page.mouse.move(690, 600);
+  await expect(veil).toHaveAttribute("data-active", "true");
+  await page.screenshot({ path: "artifacts/visual/surface-code-veil-light.png" });
+
+  await page.getByRole("button", { name: "Switch to dark mode" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.reload();
+  await settleAndReveal(page);
+  await page.mouse.move(760, 600);
+  await expect(veil).toHaveAttribute("data-active", "true");
+  await page.screenshot({ path: "artifacts/visual/surface-code-veil-dark.png" });
+});
+
 test("capture effective 200-percent reflow", async ({ page }) => {
   await page.setViewportSize({ width: 160, height: 720 });
   await page.goto("/");

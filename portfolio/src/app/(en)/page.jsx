@@ -1,8 +1,8 @@
 import { HomeContent } from "@/components/site/HomeContent";
 
 export const metadata = {
-  title: "Breno Sampaio — Product Designer building accessible interfaces",
-  description: "Product designer building accessible interfaces in React, grounded in multilingual operations across Spain and France.",
+  title: "Breno Sampaio — Product Designer building with code",
+  description: "Product designer turning operational complexity into accessible interfaces and carrying that logic into React.",
   alternates: {
     canonical: "/",
     languages: { "en-CA": "/", "fr-CA": "/fr" },

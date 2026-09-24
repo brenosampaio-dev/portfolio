@@ -1,8 +1,10 @@
 import "../../../design-system/styles.css";
 import "../../app/globals.css";
+import "../../app/signature.css";
 
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
+import { CodeVeil } from "@/components/site/CodeVeil";
 import { LocaleMetadata } from "@/components/site/LocaleMetadata";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { SkipLink } from "@/components/site/SkipLink";
@@ -42,6 +44,7 @@ export function SiteDocument({ children, lang }) {
         <script id="js-flag" dangerouslySetInnerHTML={{ __html: `document.documentElement.classList.add('js')` }} />
         <Providers initialLang={lang}>
           <LocaleMetadata />
+          <CodeVeil />
           <SmoothScroll />
           <ScrollProgress />
           <SkipLink />

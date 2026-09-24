@@ -7,6 +7,72 @@ test("current portfolio exposes core navigation and content", async ({ page }) =
   await expect(page.locator("#contact")).toBeAttached();
 });
 
+test("hero portrait remains editorially secondary across responsive layouts", async ({ page }) => {
+  for (const viewport of [
+    { width: 1440, height: 900, maximumPortraitWidth: 380 },
+    { width: 768, height: 900, maximumPortraitWidth: 320 },
+    { width: 390, height: 844, maximumPortraitWidth: 270 },
+  ]) {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto("/");
+    const portrait = await page.locator(".hero__media--photo").boundingBox();
+    expect(portrait).not.toBeNull();
+    expect(portrait.width).toBeLessThanOrEqual(viewport.maximumPortraitWidth);
+  }
+});
+
+test("hero primary action reveals the working method in both languages", async ({ page }) => {
+  for (const path of ["/", "/fr"]) {
+    await page.goto(path);
+    const primaryAction = page.locator(".hero__actions a").first();
+    await expect(primaryAction).toHaveAttribute("href", "#approach");
+    await primaryAction.click();
+    await expect(page).toHaveURL(/#approach$/);
+    await expect(page.locator("#approach")).toBeInViewport();
+  }
+});
+
+test("desktop pointer reveals a decorative code layer without intercepting the page", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const veil = page.locator(".code-veil");
+  await expect(veil).toHaveAttribute("aria-hidden", "true");
+  await expect(veil).toHaveCSS("pointer-events", "none");
+
+  await page.mouse.move(620, 420);
+  await expect(veil).toHaveAttribute("data-active", "true");
+  const box = await veil.boundingBox();
+  expect(box).not.toBeNull();
+  expect(Math.abs(box.x + box.width / 2 - 620)).toBeLessThanOrEqual(2);
+  expect(Math.abs(box.y + box.height / 2 - 420)).toBeLessThanOrEqual(2);
+});
+
+test("decorative code reveal stays off for reduced motion and narrow layouts", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const veil = page.locator(".code-veil");
+  await page.mouse.move(620, 420);
+  await expect(veil).toHaveAttribute("data-active", "false");
+  await expect(veil).toHaveCSS("display", "none");
+
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.reload();
+  await page.mouse.move(180, 360);
+  await expect(veil).toHaveAttribute("data-active", "false");
+  await expect(veil).toHaveCSS("display", "none");
+});
+
+test("saved dark theme survives hydration", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("theme", "dark"));
+  await page.goto("/");
+  await page.waitForTimeout(1100);
+
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  expect(await page.evaluate(() => localStorage.getItem("theme"))).toBe("dark");
+});
+
 test("legacy case routes remain reachable", async ({ page }) => {
   for (const path of [
     "/work/access-restored",

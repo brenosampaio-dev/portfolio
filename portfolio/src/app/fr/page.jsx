@@ -1,8 +1,8 @@
 import { HomeContent } from "@/components/site/HomeContent";
 
 export const metadata = {
-  title: "Breno Sampaio — Designer produit développant des interfaces accessibles",
-  description: "Designer produit développant des interfaces accessibles en React, avec une expérience en opérations multilingues en Espagne et en France.",
+  title: "Breno Sampaio — Designer produit, du design au code",
+  description: "Designer produit transformant la complexité opérationnelle en interfaces accessibles et prolongeant cette logique en React.",
   alternates: { canonical: "/fr", languages: { "en-CA": "/", "fr-CA": "/fr" } },
 };
 

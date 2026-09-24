@@ -18,8 +18,8 @@ export function Footer() {
         <div className="stack" style={{ gap: "var(--space-3)" }}>
           <Text variant="small" style={{ color: "var(--ink)", maxWidth: "34ch" }}>
             {fr
-              ? "Designer produit développant des interfaces accessibles en React."
-              : "Product designer building accessible interfaces in React."}
+              ? "Designer produit transformant la complexité opérationnelle en interfaces accessibles."
+              : "Product designer turning operational complexity into accessible interfaces."}
           </Text>
           <Text variant="small">
             {fr

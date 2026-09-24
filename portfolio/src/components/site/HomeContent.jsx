@@ -31,25 +31,25 @@ export function HomeContent({ lang = "en" }) {
             <Reveal delay={140}><Text variant="body-lg" className="hero__lead" style={{ color: "var(--graphite)" }}>{content.hero.lead}</Text></Reveal>
             <Reveal delay={190}><Text variant="mono">{content.hero.targets}</Text></Reveal>
             <Reveal delay={220} className="hero__actions">
-              <Button href="#work">{content.hero.primaryAction}</Button>
+              <Button href="#approach">{content.hero.primaryAction}</Button>
               <Button href={content.links.github} variant="secondary" target="_blank" rel="noopener noreferrer">{content.hero.secondaryAction}</Button>
             </Reveal>
           </div>
           <Reveal delay={120} className="hero__media hero__media--photo" data-nav-dark>
-            <Image src="/images/breno-portrait.png" alt="Breno Sampaio" fill sizes="(max-width: 980px) 90vw, 460px" style={{ objectFit: "cover" }} priority />
+            <Image src="/images/breno-portrait.png" alt="Breno Sampaio" fill sizes="(max-width: 600px) 270px, (max-width: 900px) 320px, 380px" style={{ objectFit: "cover" }} priority />
           </Reveal>
         </div>
       </section>
 
       <section className="container section" id="work" data-label={labels.work} aria-labelledby="home-work-title">
         <WorkStatusPanel id="home-work-title" status={content.statusLabels[content.work.status]} heading={content.work.heading} body={content.work.body} />
-        <Reveal delay={120} className="section-actions"><Button href={`${prefix}/work`} variant="secondary">{fr ? "Voir la structure des projets" : "View the work structure"}</Button></Reveal>
+        <Reveal delay={120} className="section-actions"><Button href={`${prefix}/work`} variant="secondary">{fr ? "Voir les projets" : "View work"}</Button></Reveal>
       </section>
 
       <section className="container section" id="capabilities" data-label={labels.capabilities} aria-labelledby="capabilities-title">
         <div className="section-head">
           <Scramble className="eyebrow eyebrow--accent" text={labels.capabilities} />
-          <Reveal mask><Text as="h2" variant="h2" id="capabilities-title">{fr ? "Ce que j’apporte aujourd’hui — et ce que je développe." : "What I bring now — and what I am building."}</Text></Reveal>
+          <Reveal mask><Text as="h2" variant="h2" id="capabilities-title">{fr ? "Un regard produit. Une expérience opérationnelle. Une pratique frontend en développement." : "Product judgment. Operational depth. Frontend in progress."}</Text></Reveal>
         </div>
         <div className="capability-grid">
           {content.capabilities.map((group) => <CapabilityGroup key={group.id} title={group.title} status={content.statusLabels[group.status]} items={group.items} />)}
@@ -60,7 +60,7 @@ export function HomeContent({ lang = "en" }) {
         <div className="experience-layout">
           <div className="section-head">
             <Scramble className="eyebrow eyebrow--accent" text={labels.experience} />
-            <Reveal mask><Text as="h2" variant="h2" id="experience-title">{fr ? "Une expérience opérationnelle transférée au produit." : "Operational experience carried into product work."}</Text></Reveal>
+            <Reveal mask><Text as="h2" variant="h2" id="experience-title">{fr ? "Les opérations m’ont appris ce que les interfaces cachent." : "Operations taught me what interfaces tend to hide."}</Text></Reveal>
             <Reveal><Text variant="body">{content.about.lead}</Text></Reveal>
           </div>
           <Reveal className="experience-list">
@@ -82,7 +82,7 @@ export function HomeContent({ lang = "en" }) {
         <div className="process-head">
           <div className="section-head">
             <Scramble className="eyebrow eyebrow--accent" text={labels.approach} />
-            <Reveal mask><Text as="h2" variant="h2" id="approach-title">{fr ? "De l’ambiguïté à une interface validée." : "From ambiguity to a validated interface."}</Text></Reveal>
+            <Reveal mask><Text as="h2" variant="h2" id="approach-title">{fr ? "De l’ambiguïté à une interface qui résiste au réel." : "From ambiguity to an interface that holds up."}</Text></Reveal>
           </div>
         </div>
         <div className="process-grid process-grid--v2">
@@ -117,7 +117,7 @@ export function HomeContent({ lang = "en" }) {
         <div className="contact">
           <div className="section-head">
             <Scramble className="eyebrow eyebrow--accent" text={labels.contact} />
-            <Reveal mask><Text as="h2" variant="h1" id="contact-title">{fr ? "Concevons et développons des produits plus clairs." : "Let’s design and build clearer products."}</Text></Reveal>
+            <Reveal mask><Text as="h2" variant="h1" id="contact-title">{fr ? "Rendons le travail complexe plus clair." : "Let’s make complex work feel clear."}</Text></Reveal>
             <Reveal><Text variant="body">{content.identity.target} · {content.location}</Text></Reveal>
           </div>
           <Reveal className="contact-list">
