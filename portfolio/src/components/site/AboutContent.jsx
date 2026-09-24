@@ -78,7 +78,7 @@ export function AboutContent({ lang = "en" }) {
       <section id="about-actions" className="container section" data-label={fr ? "Prochaines étapes" : "Next actions"} aria-labelledby="about-actions-title">
         <div className="section-head">
           <Text as="h2" variant="h2" id="about-actions-title">{fr ? "Voir le système, puis parlons." : "See the system, then let’s talk."}</Text>
-          <div className="page-intro__actions"><Button href={`${prefix}/work`}>{fr ? "Voir les projets" : "Explore work"}</Button><Button href={`${prefix}/labs`} variant="secondary">Labs</Button><Button href={`${prefix}#contact`} variant="link">Contact</Button></div>
+          <div className="page-intro__actions"><Button href={`${prefix}/work`}>{fr ? "Voir les projets" : "Explore work"}</Button><Button href={`${prefix}/labs`} variant="secondary">Labs</Button><Button href={`${prefix || "/"}#contact`} variant="link">Contact</Button></div>
         </div>
       </section>
     </article>

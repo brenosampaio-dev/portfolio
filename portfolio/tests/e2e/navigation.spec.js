@@ -32,6 +32,23 @@ test("mobile More closes with Escape and restores focus", async ({ page }) => {
   await expect(trigger).toBeFocused();
 });
 
+test("mobile More closes after same-page Contact navigation in both languages", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+
+  for (const route of [
+    { path: "/", more: "More", hash: /\/#contact$/ },
+    { path: "/fr", more: "Plus", hash: /\/fr#contact$/ },
+  ]) {
+    await page.goto(route.path);
+    await page.getByRole("button", { name: route.more, exact: true }).click();
+    const moreNavigation = page.getByRole("navigation", { name: route.more, exact: true });
+    await moreNavigation.getByRole("link", { name: "Contact", exact: true }).click();
+    await expect(moreNavigation).toHaveCount(0);
+    await expect(page).toHaveURL(route.hash);
+    await expect(page.locator("#contact")).toBeInViewport();
+  }
+});
+
 const nonCaseRoutes = [
   { path: "/", lang: "en-CA", sectionIds: ["top", "work", "capabilities", "experience", "approach", "about", "contact"] },
   { path: "/work", lang: "en-CA", sectionIds: ["work-overview", "built-products", "design-systems", "operational-archive"] },
@@ -65,6 +82,16 @@ test("non-case pages have no broken internal links", async ({ page, request }) =
       const response = await request.get(href.split("#")[0]);
       expect(response.ok(), `${path} links to ${href}`).toBe(true);
     }
+  }
+});
+
+test("About contact actions return to the localized Home contact section", async ({ page }) => {
+  for (const route of [
+    { path: "/about", href: "/#contact" },
+    { path: "/fr/about", href: "/fr#contact" },
+  ]) {
+    await page.goto(route.path);
+    await expect(page.locator(`#about-actions a[href="${route.href}"]`)).toBeVisible();
   }
 });
 
@@ -146,4 +173,23 @@ test("localized 404 offers Home and Work recovery", async ({ page }) => {
     await expect(page.locator(`main a[href="${route.home}"]`)).toBeVisible();
     await expect(page.locator(`main a[href="${route.work}"]`)).toBeVisible();
   }
+});
+
+test("localized 404 is server-rendered and recoverable without JavaScript", async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+
+  for (const route of [
+    { path: "/missing-without-javascript", lang: "en-CA", home: "/", work: "/work" },
+    { path: "/fr/missing-without-javascript", lang: "fr-CA", home: "/fr", work: "/fr/work" },
+  ]) {
+    const response = await page.goto(route.path);
+    expect(response?.status()).toBe(404);
+    await expect(page.locator("html")).toHaveAttribute("lang", route.lang);
+    await expect(page.locator("main h1")).toBeVisible();
+    await expect(page.locator(`main a[href="${route.home}"]`)).toBeVisible();
+    await expect(page.locator(`main a[href="${route.work}"]`)).toBeVisible();
+  }
+
+  await context.close();
 });
