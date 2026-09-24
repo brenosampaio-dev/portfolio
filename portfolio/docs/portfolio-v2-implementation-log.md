@@ -66,8 +66,8 @@ Next.js 16.3.4 emits one non-failing `metadataBase` warning while resolving the 
 ## Non-case handoff
 
 - Production protection: still enabled; signed-out requests to both the current preview and public production alias return a `302` Vercel Authentication redirect.
-- Remote review: draft PR [#33](https://github.com/brenosampaio-dev/portfolio/pull/33) targets `main` from `portfolio-v2-protected-rebuild`; CI, CodeQL, and Vercel checks passed for the verified implementation commit `e057fb4`.
-- Protected preview: all eight English/French non-case routes and both resume PDFs returned `200` through authenticated access.
+- Remote review: draft PR [#33](https://github.com/brenosampaio-dev/portfolio/pull/33) targets `main` from `portfolio-v2-protected-rebuild`; CI, CodeQL, and Vercel checks passed for the final reviewed implementation commit `2c3d23a`.
+- Protected preview: signed-out access redirects to Vercel Authentication (`302`); authenticated Home and About requests return `200`, both localized unknown routes return `404` with their server-rendered language and recovery contract, and the corrected English About action renders `href="/#contact"`.
 - Deployed interaction smoke test: dark-theme toggle, French route switch, complete mobile More menu, seven-section touch dock, and localized document language passed; no application console errors or page exceptions were observed. Vercel's preview feedback script produced two platform-only CSP warnings and did not affect the application.
 - Production main: intentionally unchanged pending review; the verified v2 exists only on the protected preview branch.
 - Case selection: intentionally not started; legacy routes remain preserved but unpromoted.
