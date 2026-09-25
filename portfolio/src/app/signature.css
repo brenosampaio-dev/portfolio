@@ -34,6 +34,12 @@ body::before { z-index: -2; }
   transition-duration: 120ms;
 }
 
+/* Foreground content must remain visually clean, without a fade-out ghost. */
+.code-veil[data-blocked="true"] {
+  opacity: 0;
+  transition: none;
+}
+
 [data-theme="dark"] .code-veil {
   filter: brightness(1.8) saturate(0.7);
   mix-blend-mode: screen;

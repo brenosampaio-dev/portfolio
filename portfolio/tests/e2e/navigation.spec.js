@@ -1,5 +1,23 @@
 import { expect, test } from "@playwright/test";
 
+async function movePointerToCodeVeilBackground(page) {
+  const point = await page.evaluate(() => {
+    const backgroundTags = new Set(["BODY", "HTML", "MAIN", "SECTION"]);
+
+    for (let y = 140; y <= window.innerHeight - 100; y += 40) {
+      for (let x = 120; x <= window.innerWidth - 120; x += 40) {
+        const element = document.elementFromPoint(x, y);
+        if (element && backgroundTags.has(element.tagName)) return { x, y };
+      }
+    }
+
+    throw new Error("No unobstructed background point was found for the code-veil test.");
+  });
+
+  await page.mouse.move(1, 1);
+  await page.mouse.move(point.x, point.y);
+}
+
 test("current portfolio exposes core navigation and content", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("main h1")).toBeVisible();
@@ -112,6 +130,28 @@ test("desktop code reveal remains a compact accent around the pointer", async ({
   expect(box).not.toBeNull();
   expect(box.width).toBeLessThanOrEqual(180);
   expect(box.height).toBeLessThanOrEqual(180);
+});
+
+test("desktop code reveal stays hidden over foreground content", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const veil = page.locator(".code-veil");
+
+  for (const selector of [
+    ".hero__media--photo img",
+    "#contact-title",
+    ".contact-form select",
+    ".contact-form textarea",
+  ]) {
+    await page.goto("/");
+    const surface = page.locator(selector);
+    await surface.scrollIntoViewIfNeeded();
+    await movePointerToCodeVeilBackground(page);
+    await expect(veil).toHaveAttribute("data-active", "true");
+    await surface.hover();
+    await expect(veil).toHaveAttribute("data-active", "false");
+    expect(await veil.evaluate((element) => getComputedStyle(element).opacity)).toBe("0");
+  }
 });
 
 test("desktop code reveal follows pointer coordinates in the same event", async ({ page }) => {

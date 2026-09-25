@@ -20,6 +20,23 @@ async function settleAndReveal(page) {
   await page.waitForTimeout(900);
 }
 
+async function revealCodeVeilOnBackground(page) {
+  const point = await page.evaluate(() => {
+    const backgroundTags = new Set(["BODY", "HTML", "MAIN", "SECTION"]);
+
+    for (let y = 140; y <= window.innerHeight - 100; y += 40) {
+      for (let x = 120; x <= window.innerWidth - 120; x += 40) {
+        const element = document.elementFromPoint(x, y);
+        if (element && backgroundTags.has(element.tagName)) return { x, y };
+      }
+    }
+
+    throw new Error("No unobstructed background point was found for the code-veil capture.");
+  });
+
+  await page.mouse.move(point.x, point.y);
+}
+
 for (const route of routes) {
   for (const width of widths) {
     for (const theme of ["light", "dark"]) {
@@ -86,15 +103,24 @@ test("capture desktop code veil in light and dark themes", async ({ page }) => {
   await settleAndReveal(page);
 
   const veil = page.locator(".code-veil");
-  await page.mouse.move(690, 600);
+  await revealCodeVeilOnBackground(page);
   await expect(veil).toHaveAttribute("data-active", "true");
   await page.screenshot({ path: "artifacts/visual/surface-code-veil-light.png" });
+
+  const contactReason = page.locator(".contact-form select");
+  await contactReason.scrollIntoViewIfNeeded();
+  await revealCodeVeilOnBackground(page);
+  await expect(veil).toHaveAttribute("data-active", "true");
+  await contactReason.hover();
+  await expect(veil).toHaveAttribute("data-active", "false");
+  await expect(veil).toHaveCSS("opacity", "0");
+  await page.screenshot({ path: "artifacts/visual/surface-code-veil-contact-protected.png" });
 
   await page.getByRole("button", { name: "Switch to dark mode" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   await page.reload();
   await settleAndReveal(page);
-  await page.mouse.move(760, 600);
+  await revealCodeVeilOnBackground(page);
   await expect(veil).toHaveAttribute("data-active", "true");
   await page.screenshot({ path: "artifacts/visual/surface-code-veil-dark.png" });
 });
