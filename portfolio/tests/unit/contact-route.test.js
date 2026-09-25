@@ -1,7 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { POST } from "@/app/api/contact/route";
 
-const requestWith = (payload) => ({ json: async () => payload });
+const requestWith = (payload, headers = {}) => ({
+  json: async () => payload,
+  headers: new Headers(headers),
+});
 
 const validPayload = {
   name: "Alex Morgan",
@@ -54,7 +57,7 @@ describe("contact delivery route", () => {
     }));
     vi.stubGlobal("fetch", delivery);
 
-    const response = await POST(requestWith(validPayload));
+    const response = await POST(requestWith(validPayload, { "x-vercel-forwarded-for": "198.51.100.10" }));
 
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({ ok: true });
@@ -71,5 +74,23 @@ describe("contact delivery route", () => {
       _replyto: "alex@example.com",
       _subject: "Portfolio contact — Frontend / Design Engineer role — Alex Morgan",
     });
+  });
+
+  it("limits repeated valid submissions from the same client before delivery", async () => {
+    process.env.FORMSPREE_FORM_ID = "portfolio-form";
+    const delivery = vi.fn().mockResolvedValue(new Response(null, { status: 200 }));
+    vi.stubGlobal("fetch", delivery);
+    const headers = { "x-vercel-forwarded-for": "203.0.113.25" };
+
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      const response = await POST(requestWith(validPayload, headers));
+      expect(response.status).toBe(200);
+    }
+
+    const blocked = await POST(requestWith(validPayload, headers));
+    expect(blocked.status).toBe(429);
+    expect(blocked.headers.get("retry-after")).toBeTruthy();
+    expect(await blocked.json()).toEqual({ ok: false, error: "rate_limited" });
+    expect(delivery).toHaveBeenCalledTimes(3);
   });
 });
