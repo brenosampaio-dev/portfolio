@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button, Divider, Text } from "@/components/ds";
 import { CapabilityGroup } from "@/components/site/CapabilityGroup";
+import { ContactForm } from "@/components/site/ContactForm";
 import { Icon } from "@/components/site/Icon";
 import { LocationTime } from "@/components/site/LocationTime";
 import { ProcessReveal } from "@/components/site/ProcessReveal";
@@ -115,18 +116,17 @@ export function HomeContent({ lang = "en" }) {
 
       <section className="container section" id="contact" data-label={labels.contact} aria-labelledby="contact-title">
         <div className="contact">
-          <div className="section-head">
+          <div className="section-head contact__intro">
             <Scramble className="eyebrow eyebrow--accent" text={labels.contact} />
-            <Reveal mask><Text as="h2" variant="h1" id="contact-title">{fr ? "Rendons le travail complexe plus clair." : "Let’s make complex work feel clear."}</Text></Reveal>
-            <Reveal><Text variant="body">{content.identity.target} · {content.location}</Text></Reveal>
+            <Reveal mask><Text as="h2" variant="h1" id="contact-title">{fr ? "Commencez par le problème. Je répondrai avec clarté." : "Start with the problem. I’ll reply with clarity."}</Text></Reveal>
+            <Reveal><Text variant="body">{fr ? "Partagez le contexte, la contrainte ou le poste. Votre message arrive directement dans ma boîte mail." : "Share the context, constraint or role. Your message goes directly to my inbox."}</Text></Reveal>
+            <Reveal className="contact-channels">
+              <a href={`mailto:${content.links.email}`}><Icon name="mail" size={18} /><span>{content.links.email}</span><span aria-hidden="true">↗</span></a>
+              <a href={content.links.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="globe" size={18} /><span>LinkedIn</span><span aria-hidden="true">↗</span></a>
+              <a href={content.links.github} target="_blank" rel="noopener noreferrer"><Icon name="code" size={18} /><span>GitHub</span><span aria-hidden="true">↗</span></a>
+            </Reveal>
           </div>
-          <Reveal className="contact-list">
-            <a className="contact-row" href={`mailto:${content.links.email}`}><Icon name="mail" className="contact-row__icon" /><span className="contact-row__label">Email</span><span className="contact-row__value">{content.links.email}</span><span className="arrow" aria-hidden="true">↗</span></a>
-            <a className="contact-row" href={content.links.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="globe" className="contact-row__icon" /><span className="contact-row__label">LinkedIn</span><span className="contact-row__value">brenosampaio</span><span className="arrow" aria-hidden="true">↗</span></a>
-            <a className="contact-row" href={content.links.github} target="_blank" rel="noopener noreferrer"><Icon name="code" className="contact-row__icon" /><span className="contact-row__label">GitHub</span><span className="contact-row__value">brenosampaio-dev</span><span className="arrow" aria-hidden="true">↗</span></a>
-            <a className="contact-row" href={legacy.resume.href} download={legacy.resume.fileName}><Icon name="download" className="contact-row__icon" /><span className="contact-row__label">{fr ? "Résumé" : "Resume"}</span><span className="contact-row__value">PDF</span><span className="arrow" aria-hidden="true">↓</span></a>
-            <div className="contact-row"><Icon name="map-pin" className="contact-row__icon" /><span className="contact-row__label">{fr ? "Lieu" : "Location"}</span><span className="contact-row__value">{content.location}</span></div>
-          </Reveal>
+          <Reveal><ContactForm lang={lang} /></Reveal>
         </div>
       </section>
     </>

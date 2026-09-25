@@ -9,7 +9,7 @@ export const portfolioProfileFacts = Object.freeze({
   links: {
     github: "https://github.com/brenosampaio-dev",
     linkedin: "https://www.linkedin.com/in/brenosampaio",
-    email: "brenosampaio@outlook.com",
+    email: "sampayobreno@gmail.com",
   },
   location: "Valencia, Spain",
 });

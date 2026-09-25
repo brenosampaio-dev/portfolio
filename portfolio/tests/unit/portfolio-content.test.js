@@ -21,4 +21,9 @@ describe("portfolio v2 non-case content", () => {
     expect(work.items).toEqual([]);
     expect(work.liveUrl).toBeUndefined();
   });
+
+  it("uses the current Gmail address as the single contact destination", () => {
+    expect(getPortfolioV2("en").links.email).toBe("sampayobreno@gmail.com");
+    expect(getPortfolioV2("fr").links.email).toBe("sampayobreno@gmail.com");
+  });
 });
