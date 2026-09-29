@@ -2,6 +2,52 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 const nonCaseRoutes = ["/", "/work", "/labs", "/about", "/fr", "/fr/work", "/fr/labs", "/fr/about"];
+const microtypeRoutes = [
+  "/",
+  "/work/access-restored",
+  "/work/missing-reservation",
+  "/work/connectivity-broke",
+  "/work/service-operations",
+  "/work/triageai",
+];
+
+test("@a11y visible labels and evidence metadata stay at or above twelve pixels", async ({ page }) => {
+  const selectors = [
+    ".eyebrow",
+    ".tag",
+    ".status",
+    "[class*='label']",
+    "[class*='meta']",
+    "figcaption",
+    ".work-showcase__disclosure",
+    ".case-visual-cover__label",
+    ".treview-tag",
+    ".treview__draftlabel",
+  ].join(",");
+
+  for (const route of microtypeRoutes) {
+    await page.goto(route);
+    const undersized = await page.locator(selectors).evaluateAll((elements) => elements.flatMap((element) => {
+      const rect = element.getBoundingClientRect();
+      const style = getComputedStyle(element);
+      const text = element.textContent?.trim();
+      const hidden = !text
+        || style.display === "none"
+        || style.visibility === "hidden"
+        || Number(style.opacity) === 0
+        || rect.width === 0
+        || rect.height === 0
+        || element.closest(".sr-only");
+      if (hidden) return [];
+      const fontSize = Number.parseFloat(style.fontSize);
+      return fontSize < 12
+        ? [{ text: text.slice(0, 80), className: element.className, fontSize }]
+        : [];
+    }));
+
+    expect(undersized, `${route} undersized visible labels`).toEqual([]);
+  }
+});
 
 test("@a11y home has no serious or critical axe findings", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
