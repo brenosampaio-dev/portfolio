@@ -1195,7 +1195,7 @@ html {
 /* Shared focus-in duration for the sequential reveals (Approach, Principles,
    Process). Mirror of SEQ_BEAT's companion in lib/motion.js — keep in sync. */
 :root {
-  --reveal-dur: 700ms;
+  --reveal-dur: var(--duration-reveal);
 }
 
 /* Fluid type — scale the headline sizes down on small screens. Overrides the
@@ -3487,8 +3487,8 @@ html {
   color: var(--graphite);
   text-decoration: none;
   transition:
-    color var(--duration-md) var(--ease),
-    font-variation-settings var(--duration-md) var(--ease);
+    color var(--duration-hover) var(--ease),
+    font-variation-settings var(--duration-hover) var(--ease);
 }
 .nav a:hover {
   color: var(--ink);
@@ -3547,7 +3547,7 @@ html {
   font-weight: var(--weight-medium);
   color: var(--ink);
   text-decoration: none;
-  transition: color var(--duration-md) var(--ease);
+  transition: color var(--duration-hover) var(--ease);
 }
 .header-contact:hover { color: var(--clay); }
 
@@ -4257,8 +4257,8 @@ html {
   cursor: pointer;
   line-height: 1;
   transition:
-    color 180ms var(--ease),
-    transform 180ms var(--ease);
+    color var(--duration-hover) var(--ease),
+    transform var(--duration-hover) var(--ease);
 }
 .language-switcher__option:hover {
   color: var(--ink);
