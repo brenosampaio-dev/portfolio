@@ -24,11 +24,13 @@
 
   /* ── Semantic roles ─────────────────────────────────────── */
   --duration-instant: var(--duration-xs);
-  --duration-micro: var(--duration-sm);
-  --duration-hover: 220ms;
+  --duration-micro: 120ms;
+  --duration-hover: 160ms;
+  --duration-enter: 180ms;
   --duration-morph: var(--duration-md);
   --duration-reveal: var(--duration-lg);
   --duration-illustrative: var(--duration-xl);
+  --duration-rail: 1400ms;
 }
 
 /* Reduced-motion override — always applied */
