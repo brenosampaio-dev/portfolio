@@ -1,7 +1,15 @@
 import { expect, test } from "@playwright/test";
 
 const widths = [320, 390, 768, 1024, 1440];
-const routes = ["/", "/work", "/labs", "/about", "/fr", "/fr/work", "/fr/labs", "/fr/about"];
+const nonCaseRoutes = ["/", "/work", "/labs", "/about", "/fr", "/fr/work", "/fr/labs", "/fr/about"];
+const caseRoutes = [
+  "/work/access-restored",
+  "/work/missing-reservation",
+  "/work/connectivity-broke",
+  "/work/service-operations",
+  "/work/triageai",
+];
+const routes = [...nonCaseRoutes, ...caseRoutes];
 
 function routeName(route) {
   return route === "/" ? "home" : route.slice(1).replaceAll("/", "-");
@@ -95,6 +103,40 @@ test("capture desktop progress and reduced-motion states", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.reload();
   await page.screenshot({ path: "artifacts/visual/surface-reduced-motion.png" });
+
+  await page.goto("/work/access-restored");
+  await page.locator("#investigation").evaluate((element) => window.scrollTo(0, element.offsetTop - 110));
+  await page.screenshot({ path: "artifacts/visual/surface-case-reduced-motion.png" });
+});
+
+test("capture case disclosure, evidence and expanded-image states", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/work/access-restored");
+  await settleAndReveal(page);
+
+  const incident = page.locator("#incident");
+  await incident.evaluate((element) => window.scrollTo(0, element.offsetTop - 110));
+  await page.waitForTimeout(1100);
+  await page.screenshot({ path: "artifacts/visual/surface-case-section-expanded.png" });
+  const toggle = incident.locator(".collapsible__toggle");
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  await page.waitForTimeout(400);
+  await page.screenshot({ path: "artifacts/visual/surface-case-section-collapsed.png" });
+
+  const evidence = page.locator("#evidence");
+  await evidence.evaluate((element) => window.scrollTo(0, element.offsetTop - 110));
+  await page.waitForTimeout(1100);
+  await page.screenshot({ path: "artifacts/visual/surface-case-dense-evidence.png" });
+
+  const visualLink = page.locator(".case-visual__imageLink").first();
+  await visualLink.scrollIntoViewIfNeeded();
+  const popupPromise = page.waitForEvent("popup");
+  await visualLink.click();
+  const popup = await popupPromise;
+  await popup.waitForLoadState();
+  await popup.screenshot({ path: "artifacts/visual/surface-case-image-expanded.png" });
+  await popup.close();
 });
 
 test("capture desktop code veil in light and dark themes", async ({ page }) => {
