@@ -7,7 +7,7 @@
  * Serif reserved for pull quotes, openers, editorial moments only.
  *
  * Max line length: 75ch body / 60ch captions / never constrain headings.
- * Minimum size: 13px for any visible text. Never smaller.
+ * Minimum size: 12px for meaningful visible text. Never smaller.
  */
 :root {
   /* ── Families ─────────────────────────────────────────────── */

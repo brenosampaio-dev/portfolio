@@ -16,6 +16,7 @@ async function movePointerToCodeVeilBackground(page) {
 
   await page.mouse.move(1, 1);
   await page.mouse.move(point.x, point.y);
+  return point;
 }
 
 test("current portfolio exposes core navigation and content", async ({ page }) => {
@@ -113,12 +114,12 @@ test("desktop pointer reveals a decorative code layer without intercepting the p
   await expect(veil).toHaveAttribute("aria-hidden", "true");
   await expect(veil).toHaveCSS("pointer-events", "none");
 
-  await page.mouse.move(620, 420);
+  const point = await movePointerToCodeVeilBackground(page);
   await expect(veil).toHaveAttribute("data-active", "true");
   const box = await veil.boundingBox();
   expect(box).not.toBeNull();
-  expect(Math.abs(box.x + box.width / 2 - 620)).toBeLessThanOrEqual(2);
-  expect(Math.abs(box.y + box.height / 2 - 420)).toBeLessThanOrEqual(2);
+  expect(Math.abs(box.x + box.width / 2 - point.x)).toBeLessThanOrEqual(2);
+  expect(Math.abs(box.y + box.height / 2 - point.y)).toBeLessThanOrEqual(2);
 });
 
 test("desktop code reveal remains a compact accent around the pointer", async ({ page }) => {
@@ -321,6 +322,38 @@ test("keyboard section navigation reaches and focuses Contact", async ({ page })
   await expect(page).toHaveURL(/#contact$/);
 });
 
+test("desktop rail follows the current section after real scrolling", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await page.locator("#approach").evaluate((element) => {
+    window.scrollTo(0, element.offsetTop - window.innerHeight * 0.35);
+  });
+  await expect(page.locator(".rail__label")).toHaveText("Approach");
+  await expect(page.locator('.rail__dot.is-active[href="#approach"]')).toHaveCount(1);
+});
+
+test("mobile dock keeps current-section orientation with reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.locator("#experience").evaluate((element) => {
+    window.scrollTo(0, element.offsetTop - window.innerHeight * 0.35);
+  });
+  await expect(page.locator(".case-dock__name")).toHaveText("Experience");
+  await expect(page.locator('.case-dock__dot.is-active[href="#experience"]')).toHaveAttribute("aria-current", "true");
+});
+
+test("case collapsibles preserve stable section anchors while toggling", async ({ page }) => {
+  await page.goto("/work/access-restored");
+  const section = page.locator("main section#incident");
+  await expect(section).toHaveCount(1);
+  const toggle = section.locator(".collapsible__toggle");
+  const initial = await toggle.getAttribute("aria-expanded");
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-expanded", initial === "true" ? "false" : "true");
+  await expect(page.locator("main section#incident")).toHaveCount(1);
+});
+
 test("mobile dock advances one section only on horizontal swipe", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
@@ -360,6 +393,22 @@ test("non-case metadata is localized, reciprocal and truthful", async ({ page })
     expect(schema.jobTitle).toBe("Product Designer");
     expect(schema.sameAs).toContain("https://github.com/brenosampaio-dev");
     expect(schema.sameAs).toContain("https://www.linkedin.com/in/brenosampaio");
+  }
+});
+
+test("social metadata points to a public image response in both languages", async ({ page }) => {
+  for (const route of ["/", "/fr"]) {
+    await page.goto(route);
+
+    for (const selector of ['meta[property="og:image"]', 'meta[name="twitter:image"]']) {
+      const content = await page.locator(selector).getAttribute("content");
+      expect(content, `${route} ${selector}`).toBeTruthy();
+
+      const imageUrl = new URL(content);
+      const response = await page.request.get(`${imageUrl.pathname}${imageUrl.search}`);
+      expect(response.status(), `${route} ${selector} status`).toBe(200);
+      expect(response.headers()["content-type"]).toContain("image/png");
+    }
   }
 });
 

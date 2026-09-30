@@ -1,10 +1,11 @@
 import { ImageResponse } from "next/og";
 
-// Social share card (LinkedIn / WhatsApp / X). Same restraint as the site:
+// Social share card (LinkedIn / WhatsApp / X). A route handler keeps its public
+// URL stable for explicit English and French metadata. Same restraint as the site:
 // cold paper, charcoal ink, one slate accent in Cormorant italic. 1200×630.
-export const alt = "Breno Sampaio — Product Designer building accessible interfaces";
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+const size = { width: 1200, height: 630 };
+
+export const dynamic = "force-static";
 
 // Fetch a TrueType subset from Google Fonts (the &text= subset is served as
 // truetype, which Satori can rasterise — woff2 cannot be used here).
@@ -18,7 +19,7 @@ async function loadFont(family, text) {
   return res.arrayBuffer();
 }
 
-export default async function Image() {
+export async function GET() {
   const sans = "Product Designer. Designer produit. Frontend in progress. BRENO SAMPAIO brenosampaio.vercel.app · Valencia, Spain · Valence, Espagne";
 
   let fonts;

@@ -26,5 +26,35 @@ describe("portfolio v2 tokens", () => {
     expect(css).toContain("--section-standard: 80px");
     expect(css).toContain("--section-emphasis: 120px");
     expect(css).toContain("--radius-lg: 16px");
+    expect(css).not.toMatch(/--radius-xl:\s*(?:2[0-9]|3[0-2])px/);
+  });
+
+  it("uses the approved semantic motion cadence", () => {
+    const css = read("design-system/tokens/motion.css");
+    expect(css).toContain("--duration-hover: 160ms");
+    expect(css).toContain("--duration-reveal: var(--duration-lg)");
+  });
+
+  it("keeps the protected scramble inside the approved readable window", () => {
+    const source = read("src/components/site/Scramble.jsx");
+    expect(source).toContain("const resolvedDuration = Math.min(Math.max(duration, 0.8), 1)");
+    expect(source).toContain("duration: resolvedDuration");
+    expect(source).toContain("revealDelay: 0.18");
+    expect(source).toContain("Math.min(Math.max(delay, 0), 200)");
+  });
+
+  it("keeps dormant work showcase geometry within the approved bands", () => {
+    const css = read("src/components/site/WorkShowcase.css");
+    expect(css).toContain("border-radius: var(--radius-lg)");
+    expect(css).toContain("font-size: 12px");
+    expect(css).toContain("min-height: 96svh");
+    expect(css).toContain("min-height: 72svh");
+    expect(css).toContain("min-height: min(600px, calc(100svh - 152px))");
+    expect(css).not.toMatch(/border-radius:\s*clamp\(20px/);
+  });
+
+  it("keeps case visual disclosure labels at the microtype floor", () => {
+    const css = read("src/components/site/CaseVisual.css");
+    expect(css).toMatch(/\.case-visual-cover__label\s*\{[\s\S]*?font-size:\s*12px/);
   });
 });
