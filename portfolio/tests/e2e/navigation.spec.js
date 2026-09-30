@@ -396,6 +396,22 @@ test("non-case metadata is localized, reciprocal and truthful", async ({ page })
   }
 });
 
+test("social metadata points to a public image response in both languages", async ({ page }) => {
+  for (const route of ["/", "/fr"]) {
+    await page.goto(route);
+
+    for (const selector of ['meta[property="og:image"]', 'meta[name="twitter:image"]']) {
+      const content = await page.locator(selector).getAttribute("content");
+      expect(content, `${route} ${selector}`).toBeTruthy();
+
+      const imageUrl = new URL(content);
+      const response = await page.request.get(`${imageUrl.pathname}${imageUrl.search}`);
+      expect(response.status(), `${route} ${selector} status`).toBe(200);
+      expect(response.headers()["content-type"]).toContain("image/png");
+    }
+  }
+});
+
 test("localized 404 offers Home and Work recovery", async ({ page }) => {
   for (const route of [
     { path: "/missing-route", home: "/", work: "/work" },
