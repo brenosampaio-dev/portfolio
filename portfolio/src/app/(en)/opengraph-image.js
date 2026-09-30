@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og";
 
-// Social share card (LinkedIn / WhatsApp / X). Same restraint as the site:
+// Social share card (LinkedIn / WhatsApp / X). It lives in the English route
+// group so the root metadataBase also resolves this generated image route.
+// Same restraint as the site:
 // cold paper, charcoal ink, one slate accent in Cormorant italic. 1200×630.
 export const alt = "Breno Sampaio — Product Designer building accessible interfaces";
 export const size = { width: 1200, height: 630 };
