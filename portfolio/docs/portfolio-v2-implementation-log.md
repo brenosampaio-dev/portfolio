@@ -68,16 +68,16 @@ Verification: lint passed with zero warnings; 5 unit files and 21 tests passed; 
 
 ## Visual-system release validation
 
-Verified locally on 2026-09-30 at commit `ed7f01e`:
+Verified locally on 2026-09-30 through commit `dfedbc5`:
 
 - `npm run lint`: passed with zero warnings.
 - `npm run test:unit`: 6 files and 31 tests passed.
 - `npm run build`: production build passed and generated 20 application and metadata routes.
 - `npm audit --omit=dev`: 0 vulnerabilities.
-- `npm run test:e2e`: all 27 navigation, localization, metadata and protected-interaction tests passed.
+- `npm run test:e2e`: all 28 navigation, localization, metadata and protected-interaction tests passed.
 - `npm run test:a11y`: all 14 accessibility tests passed, including 12px minimum meaningful microtype, Axe, reduced motion, no-JavaScript content, 320px reflow and effective 200% zoom.
 - `npm run test:visual`: all 135 scenarios passed across 13 routes, five widths, light/dark themes and protected interaction states. This complete pass ran at `7f678b8`; the only following source change moved the unchanged Open Graph generator into a URL-neutral route group.
-- A clean rebuild after that route move removed the previous `metadataBase` warning while retaining the generated social image route.
+- A clean rebuild after the metadata correction removed the previous `metadataBase` warning and prerendered the social card at the stable `/opengraph-image` URL. Browser coverage verifies that both English and French Open Graph and Twitter metadata resolve to a public PNG response.
 
 Human review covered Home at 320px/light and 1440px/dark, Work, About, a long case in desktop/mobile and light/dark states, rail and dock tracking, 200% reflow, collapsed and expanded case sections, dense evidence and image expansion. The visual system now uses the approved palette, type scale, spacing, radii and motion cadence while preserving the glass header, section rail, mobile dock, Reveal, Scramble, ProcessReveal, CodeVeil, case collapsibles and image expansion.
 
@@ -85,7 +85,7 @@ Breno explicitly revised the earlier release stop on 2026-09-30: publish the ver
 
 ## Scope and release state
 
-- The three existing case-study routes remain preserved and directly reachable, but are not promoted in the new navigation or sitemap.
+- Existing direct case-study routes remain preserved and reachable, but are not promoted in the new navigation or sitemap.
 - Case selection and rewriting remain deliberately paused for a later phase.
 - Production remains behind Vercel Authentication until the verified commit reaches a Ready deployment and passes the protected production smoke test.
 - Breno explicitly authorized pushing `main`, removing production protection after the release gates pass, and publishing the portfolio publicly.
