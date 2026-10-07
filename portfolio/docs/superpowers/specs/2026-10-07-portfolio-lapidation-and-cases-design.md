@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-07
 
-**Status:** Design specification for review
+**Status:** Direction approved; implementation planning in progress
 
 **Product:** Breno Sampaio portfolio
 
@@ -10,7 +10,7 @@
 
 Refine the existing portfolio so it presents Breno first as a Product Designer who can simplify complex products, build coherent systems, and turn design decisions into working software.
 
-This initiative is a lapidation of the existing product, not a structural redesign. The current page architecture, typography, motion language, fluidity, light/dark behavior, responsive foundation, header, portrait, and overall editorial character remain the base.
+This initiative is a lapidation of the existing product, not a structural redesign. The current page architecture, motion language, fluidity, responsive foundation, header, portrait, card families, and overall editorial character remain the base. Color, typography, copy, grid calibration, spacing, and surfaces may change within that structure.
 
 The portfolio will be rebuilt around three new independent projects:
 
@@ -32,29 +32,26 @@ The work is successful when:
 - code, React, SQL, and AI appear as tools used to make product decisions tangible;
 - the portfolio no longer foregrounds Frontend, junior Design Engineer, Scrimba, or support simulations;
 - the site feels more rigorous, spacious, and editorial through grid, alignment, scale, density, imagery, and editing;
-- typography and motion are demonstrably unchanged;
+- the approved Swiss-inspired type system and lighter neutral palette are applied consistently;
+- motion, transitions, scroll behavior, and fluidity are demonstrably unchanged;
 - English and French surfaces remain coherent and accessible;
 - all published routes pass the existing unit, build, navigation, accessibility, and responsive checks.
 
 ## 3. Non-negotiable Constraints
 
-### 3.1 Typography is frozen
+### 3.1 Typography is intentionally changing
 
-Do not change font families, font loading, font sizes, line heights, tracking, text scales, or typographic component variants.
+The earlier typography freeze is explicitly superseded by the approved Swiss/Parloa-inspired direction. The implementation may change font families, font loading, scale, line height, tracking, and component mappings, provided the result remains legible, responsive, and consistent.
 
-Protected areas include:
+Approved roles:
 
-- `design-system/tokens/fonts.css`
-- `design-system/tokens/typography.css`
-- typography declarations in `design-system/tokens/base.css`
-- `src/components/ds/Text.jsx`
-- font loading in `src/components/site/SiteDocument.jsx`
-- typographic declarations in `src/app/globals.css`
-- typographic declarations in `src/components/site/WorkShowcase.css`
-- typographic declarations in `src/components/site/CaseVisual.css`
-- social-image typography in `src/app/opengraph-image/route.js`
+- `Geist` for body copy, interface text, navigation, and functional headings;
+- `Instrument Serif` for large editorial statements and primary page headings;
+- `Geist Mono` for compact labels, metadata, numbering, and technical evidence.
 
-If a new component needs typography, it must consume an existing `Text` variant or an existing token without changing that token.
+The fonts must be loaded through Next's build-time font system rather than duplicated remote CSS imports. Typography remains token-driven through `fonts.css`, `typography.css`, and `Text.jsx`; individual pages must not invent isolated font values.
+
+The intended hierarchy is editorial rather than ornamental: compact functional labels, readable body measure, restrained tracking, and large serif statements with tight but comfortable leading. Decorative all-caps and exaggerated mono tracking should be reduced.
 
 ### 3.2 Motion and fluidity are frozen
 
@@ -105,18 +102,17 @@ Build the core workflow for Case 01, integrate it into Home and Work, then build
 
 #### C. Redesign the portfolio shell first
 
-This creates visible movement quickly but solves the least urgent problem. It also conflicts with the user's request to preserve the current structure, typography, and motion.
+This creates visible movement quickly but solves the least urgent problem. It also conflicts with the user's request to preserve the current structure and motion.
 
 ### Selected sequence
 
-1. Correct the product definition and establish canonical content sources.
+1. Establish the Swiss-inspired visual foundation and correct the global positioning without changing the site structure or motion.
 2. Design, validate, and publish Case 01.
-3. Integrate Case 01 into Home and Work and correct the surrounding positioning.
+3. Integrate Case 01 into Home and Work.
 4. Build Case 02 from actual interface needs revealed by Case 01.
 5. Turn Labs into a small Systems Lab using implemented components.
 6. Design, build, and validate Case 03 using the system where appropriate.
-7. Complete the contemporary Swiss-inspired surface refinement.
-8. Finish metadata, localization, accessibility, performance, and release QA.
+7. Finish metadata, localization, accessibility, performance, and release QA.
 
 ## 5. Case 01 — Relay
 
@@ -211,7 +207,7 @@ Dense operational products accumulate duplicated values, inconsistent states, an
 - keyboard, focus, contrast, semantics, and screen-reader behavior;
 - contribution, documentation, versioning, and breaking-change process.
 
-Typography uses the existing portfolio families or aliases. No font change is part of Basis.
+Basis consumes the shared portfolio type roles—Geist, Instrument Serif, and Geist Mono—through system aliases and documented tokens rather than page-specific font declarations.
 
 ### Validation
 
@@ -371,7 +367,11 @@ The relevant qualities observed in the reference are:
 
 The portfolio must interpret these principles through its existing identity. It must not reproduce Parloa's orange palette, AI conversation motif, photography, component shapes, copy, or page composition.
 
-Typography remains technically frozen. Swiss typographic principles are applied through alignment, measure, whitespace, grouping, hierarchy, and the disciplined use of the existing serif, sans, and mono roles. Font families, sizes, line heights, tracking, and text tokens do not change.
+The typography is part of the approved refinement. The portfolio uses Instrument Serif for editorial hierarchy, Geist for interface clarity, and Geist Mono for metadata and modular labels. The type scale should feel closer to Parloa's disciplined contrast between large statements and compact utility text without copying its exact measurements or composition.
+
+The light theme becomes visibly lighter and more neutral than the current warm beige foundation. Approved light tokens are based on white `#FFFFFF`, soft neutral `#F3F2EE`, hairline `#DEDCD6`, secondary text `#5F5B56`, and ink `#1F1C1B`. The primary accent is a controlled burnt vermilion `#C74624`, with `#A93618` for hover and `#FFFFFF` on-accent. The dark theme uses near-black `#0F0F0E`, raised neutral `#191817`, light ink `#F8F6F1`, and accessible warm accent `#FF7A52`.
+
+The palette is not a copy of Parloa's brand orange. It is a restrained portfolio accent selected to meet contrast requirements and to replace the current indigo-heavy impression with a warmer, more decisive system.
 
 Allowed refinements:
 
@@ -407,7 +407,7 @@ Before implementation of each product UI:
 
 - create exactly three independent visual directions;
 - ground them in the existing portfolio palette and captured visual context;
-- preserve the portfolio's existing typography in any direction intended for implementation;
+- use the approved Geist, Instrument Serif, and Geist Mono roles in any direction intended for implementation;
 - select one direction before building the real interface.
 
 ### Asset kit per case
@@ -424,7 +424,7 @@ Before implementation of each product UI:
 - generated context imagery is disclosed when conceptual;
 - product UI is built and captured, not presented as a generated working product;
 - no fake clients, company marks, participant evidence, dashboards, or research artifacts;
-- the current paper, charcoal, and indigo palette remains the base, with strong color fields used only when they create hierarchy or distinguish case content;
+- the approved white, soft-neutral, near-black, and burnt-vermilion palette remains the base, with strong color fields used only when they create hierarchy or distinguish case content;
 - crisp grid relationships, controlled contrast, and asymmetric editorial composition;
 - photography or conceptual imagery must occupy intentional grid modules rather than behave as decoration;
 - no glossy AI-SaaS collage, neon gradient, floating glass card, generic Swiss-poster imitation, or device-mockup cliché.
@@ -463,7 +463,7 @@ Requirements:
 
 ## 14. Metadata and Discovery
 
-Update without changing social-image typography:
+Update metadata and social-image typography so they use the same approved type roles and positioning:
 
 - English and French layout metadata;
 - hub metadata;
@@ -491,13 +491,22 @@ Each release increment must pass:
 
 Before each commit, verify:
 
-- no protected typography file changed;
+- typography changes are intentional, token-driven, responsive, and covered by tests or visual inspection;
 - no protected motion file changed;
-- no font, size, line-height, tracking, transition, animation, easing, duration, or motion transform declaration changed;
+- no transition, animation, easing, duration, scroll behavior, or motion transform declaration changed;
 - existing unrelated and untracked files remain untouched;
 - only explicit `portfolio/**` paths are staged from the parent Git root.
 
 ## 16. Release Increments
+
+### Release 0 — Swiss foundation
+
+- lighter accessible palette and calibrated light/dark surfaces;
+- Geist, Instrument Serif, and Geist Mono implemented through the shared token system;
+- Product Designer positioning and bilingual copy corrected across the existing pages;
+- grid, spacing, hairlines, and surface density refined without replacing the existing structure;
+- outdated product definition and duplicated font-loading paths removed;
+- responsive, accessibility, and motion-regression checks completed.
 
 ### Release A — Product proof
 
@@ -514,19 +523,18 @@ Before each commit, verify:
 - About and Contact alignment;
 - first real components and accessibility documentation.
 
-### Release C — Build proof and final lapidation
+### Release C — Build proof and final integration
 
 - Case 03 Signalroom;
 - functional prototype and data disclosure;
-- final imagery;
-- contemporary Swiss-inspired grid and surface refinement;
+- final imagery and cross-case visual integration;
 - localization, metadata, performance, and full QA.
 
 ## 17. Explicit Non-goals
 
 - redesigning the portfolio shell;
-- changing typography;
 - changing motion, transitions, scrolling, or fluidity;
+- copying Parloa's brand, exact page composition, colors, imagery, components, or copy;
 - presenting support simulations as Product Design work;
 - presenting independent projects as client or production work;
 - building a complete ERP, analytics platform, or enterprise design-system organization;
@@ -553,7 +561,7 @@ Mitigation: extract its inventory from Relay first and exercise it in Signalroom
 
 ### Surface work damages the protected experience
 
-Mitigation: isolate new CSS, freeze protected files/declarations, and compare diffs before every commit.
+Mitigation: preserve structural components and all motion declarations, centralize intentional typography and palette changes in tokens, and compare diffs before every commit.
 
 ### Generated imagery weakens credibility
 
@@ -561,15 +569,14 @@ Mitigation: use image generation for visual direction and disclosed context asse
 
 ## 19. First Implementation Boundary
 
-The first implementation plan covers only Release A:
+The first implementation plan covers only Release 0:
 
-1. canonical content-model correction;
-2. Relay research and product brief;
-3. three visual directions for Relay;
-4. selected direction translated into a focused prototype;
-5. Relay case narrative and artifacts;
-6. Home and Work integration;
-7. copy alignment needed to remove the strongest positioning contradictions;
-8. Release A validation.
+1. product-definition and canonical global-copy correction;
+2. shared typography and font-loading migration;
+3. accessible light/dark palette and surface-token migration;
+4. Swiss-inspired spacing, grid, hairline, and density calibration inside the existing composition;
+5. Home, Work, Labs, About, and Contact copy alignment;
+6. metadata and social-image alignment needed for the new positioning;
+7. responsive, accessibility, visual, and motion-regression validation.
 
-Basis, Systems Lab expansion, Signalroom, and final surface refinement remain later plans. This boundary protects depth and prevents an all-at-once portfolio rewrite.
+Relay, Basis, Systems Lab expansion, Signalroom, and generated case assets remain separate implementation plans. This boundary establishes a coherent shell without turning the portfolio into another structural redesign.
