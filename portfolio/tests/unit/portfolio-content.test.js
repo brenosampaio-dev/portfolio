@@ -11,13 +11,35 @@ describe("portfolio v2 non-case content", () => {
     expect(content.links.github).toMatch(/^https:\/\/github\.com\/brenosampaio-dev/);
   });
 
-  it("does not claim Design Engineer as the current identity", () => {
-    expect(getPortfolioV2("en").identity.current).toBe("Product Designer");
-    expect(getPortfolioV2("en").identity.target).toContain("Design Engineer");
+  it.each([
+    ["en", "Product Designer", /Product Design/i],
+    ["fr", "Designer produit", /design produit/i],
+  ])("positions %s for Product Design roles", (lang, current, targetPattern) => {
+    const content = getPortfolioV2(lang);
+    expect(content.identity.current).toBe(current);
+    expect(content.identity.target).toMatch(targetPattern);
+    expect(content.identity.target).not.toMatch(/frontend|design engineer|support|assistance/i);
+  });
+
+  it.each([
+    ["en", "View selected work", "About my practice"],
+    ["fr", "Voir les projets", "Découvrir ma pratique"],
+  ])("uses recruiter-first hero actions in %s", (lang, primaryAction, secondaryAction) => {
+    const hero = getPortfolioV2(lang).hero;
+    expect(hero.primaryAction).toBe(primaryAction);
+    expect(hero.secondaryAction).toBe(secondaryAction);
+    expect(hero.secondaryAction).not.toMatch(/github/i);
+  });
+
+  it.each(["en", "fr"])("frames %s labs as system experiments", (lang) => {
+    const labs = getPortfolioV2(lang).labs;
+    expect(labs.current).toMatch(/systems lab|laboratoire de systèmes/i);
+    expect(`${labs.title} ${labs.lead}`).not.toMatch(/scrimba/i);
   });
 
   it("does not expose invented project evidence", () => {
     const work = getPortfolioV2("en").work;
+    expect(work.status).toBe(PROJECT_STATUSES.paused);
     expect(work.items).toEqual([]);
     expect(work.liveUrl).toBeUndefined();
   });

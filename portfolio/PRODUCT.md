@@ -2,31 +2,32 @@
 
 ## Register
 
-brand
+Product design portfolio
 
 ## Users
 
-Recruiters, hiring managers, and technical interviewers evaluating Breno for IT support, application support, service desk, and adjacent technical roles in Europe, Valencia, remote teams, and Canada. Most visits are fast scans on desktop or mobile, followed by deeper review of evidence, case studies, and the CV.
+Product Design recruiters, hiring managers, and product or engineering peers evaluating Breno for roles across Europe and remote teams. Most visits begin as a fast desktop or mobile scan, followed by a closer review of selected work, decisions, evidence, and the CV.
 
 ## Product Purpose
 
-Present Breno as a credible multilingual IT support candidate with practical troubleshooting habits, clear user communication, and UX/UI training as a supporting differentiator. Success means visitors can understand the positioning quickly, verify the evidence without inflated claims, and reach the CV or contact path with little friction.
+Present Breno as a Product Designer who can clarify complex workflows, design coherent interface systems, and make decisions tangible through working prototypes. Success means visitors understand the positioning in the first screen, can verify the reasoning without inflated claims, and can reach selected work, the CV, or contact with little friction.
 
 ## Brand Personality
 
-Precise, calm, and human. The portfolio should feel technically capable and thoughtfully designed without becoming theatrical, generic, or self-important.
+Precise, calm, editorial, and human. The portfolio should feel product-minded, technically credible, and carefully composed without becoming theatrical, generic, or self-important.
 
 ## Anti-references
 
-Avoid crowded desktop navigation compressed onto phones, generic SaaS templates, decorative tech jargon, novelty interactions that obscure content, exaggerated seniority, invented production metrics, and portfolio copy that prioritizes style over evidence.
+Avoid copied Parloa branding, generic AI-SaaS templates, decorative Swiss-poster tropes, novelty interactions that obscure content, exaggerated seniority, invented clients or business outcomes, and portfolio-theatre copy that prioritizes style over evidence.
 
 ## Design Principles
 
-1. Make the support thinking visible through evidence, decisions, and clear outcomes.
-2. Preserve honesty: simulations and learning projects must remain explicitly identified.
-3. Adapt hierarchy to the device instead of merely shrinking the desktop composition.
-4. Keep primary navigation and hiring actions easy to find in a fast recruiter scan.
-5. Use UX/UI craft to improve clarity and confidence, not to compete with the support positioning.
+1. Make complexity legible through explicit problems, decisions, states, and evidence.
+2. Prefer evidence and usable artifacts to decorative portfolio polish.
+3. Preserve honesty: independent products, prototypes, synthetic data, and validation limits must remain explicit.
+4. Adapt hierarchy to the device instead of merely shrinking the desktop composition.
+5. Treat accessibility and implementation as part of the design decision, not post-production checks.
+6. Keep primary navigation and hiring actions easy to find in a fast recruiter scan.
 
 ## Accessibility & Inclusion
 
