@@ -31,7 +31,7 @@ The work is successful when:
 - each case proves a distinct capability and can be defended without invented facts;
 - code, React, SQL, and AI appear as tools used to make product decisions tangible;
 - the portfolio no longer foregrounds Frontend, junior Design Engineer, Scrimba, or support simulations;
-- the site feels calmer and softer through spacing, surfaces, density, imagery, and editing;
+- the site feels more rigorous, spacious, and editorial through grid, alignment, scale, density, imagery, and editing;
 - typography and motion are demonstrably unchanged;
 - English and French surfaces remain coherent and accessible;
 - all published routes pass the existing unit, build, navigation, accessibility, and responsive checks.
@@ -115,7 +115,7 @@ This creates visible movement quickly but solves the least urgent problem. It al
 4. Build Case 02 from actual interface needs revealed by Case 01.
 5. Turn Labs into a small Systems Lab using implemented components.
 6. Design, build, and validate Case 03 using the system where appropriate.
-7. Complete the Japanese-inspired surface refinement.
+7. Complete the contemporary Swiss-inspired surface refinement.
 8. Finish metadata, localization, accessibility, performance, and release QA.
 
 ## 5. Case 01 — Relay
@@ -355,18 +355,30 @@ Do not expand the support-oriented `caseStudies.js` or revive the large legacy p
 
 ## 10. Visual Direction
 
-The design language is Japanese-inspired calm, not Japanese decoration.
+The design language is contemporary Swiss-inspired editorial design, grounded by the current [Parloa website](https://www.parloa.com/) as a reference for principles rather than a source to copy.
 
-Use:
+The relevant qualities observed in the reference are:
 
-- **ma:** meaningful negative space and fewer repeated messages;
-- **kanso:** fewer competing surfaces, badges, and labels;
-- **shibui:** restrained color, material quietness, and detail that rewards attention.
+- a rigorous modular grid with clearly aligned edges;
+- generous negative space used to establish hierarchy;
+- large editorial statements balanced by compact functional labels;
+- predominantly left-aligned composition;
+- numbered modules and explicit section logic;
+- image and interface artifacts treated as deliberate grid blocks;
+- controlled alternation between white space, neutral surfaces, and strong color fields;
+- restrained navigation and clear primary actions;
+- dense information grouped into legible systems instead of decorative card collections.
+
+The portfolio must interpret these principles through its existing identity. It must not reproduce Parloa's orange palette, AI conversation motif, photography, component shapes, copy, or page composition.
+
+Typography remains technically frozen. Swiss typographic principles are applied through alignment, measure, whitespace, grouping, hierarchy, and the disciplined use of the existing serif, sans, and mono roles. Font families, sizes, line heights, tracking, and text tokens do not change.
 
 Allowed refinements:
 
-- margins, padding, gaps, widths, and grouping;
+- grid columns, alignment, margins, padding, gaps, widths, and grouping;
+- content measure and the relationship between text and artifacts;
 - borders, hairlines, radius, shadows, and surface colors;
+- modular numbering and functional labels using existing text variants;
 - density and content reduction;
 - case imagery and artifact placement;
 - light/dark surface calibration;
@@ -374,14 +386,16 @@ Allowed refinements:
 
 Priority refinements after content exists:
 
-1. Replace empty Work surfaces with case evidence.
-2. Simplify the dock's liquid-glass surface while preserving geometry and motion.
-3. Reduce the global grid's visual contrast without removing it.
-4. Reduce heavy card washes in capability and Work surfaces.
-5. Use editorial hairlines and whitespace instead of nested cards.
-6. Remove repeated copy across Home, Capabilities, Experience, and About.
+1. Replace empty Work surfaces with case evidence organized on a clear modular grid.
+2. Give every section a deliberate alignment relationship instead of centering content by habit.
+3. Use large negative-space intervals to separate arguments and artifacts.
+4. Simplify the dock's liquid-glass surface while preserving geometry and motion.
+5. Reduce the global grid's visual contrast while making the layout grid more legible through alignment.
+6. Reduce heavy card washes in capability and Work surfaces.
+7. Prefer editorial hairlines, numbered blocks, and whitespace to nested cards.
+8. Remove repeated copy across Home, Capabilities, Experience, and About.
 
-Do not add Japanese motifs, calligraphy, decorative kanji, faux paper textures, or ornamental minimalism.
+Do not add Swiss flags, red-cross motifs, fake International Typographic Style posters, Bauhaus pastiche, gratuitous Helvetica imitation, or rigid decoration that harms usability.
 
 ## 11. Image and Artifact Strategy
 
@@ -410,9 +424,10 @@ Before implementation of each product UI:
 - generated context imagery is disclosed when conceptual;
 - product UI is built and captured, not presented as a generated working product;
 - no fake clients, company marks, participant evidence, dashboards, or research artifacts;
-- warm paper, natural grays, restrained indigo, and vermilion only for error or critical state;
-- diffuse light and asymmetric editorial composition;
-- no glossy AI-SaaS collage, neon gradient, floating glass card, or device-mockup cliché.
+- the current paper, charcoal, and indigo palette remains the base, with strong color fields used only when they create hierarchy or distinguish case content;
+- crisp grid relationships, controlled contrast, and asymmetric editorial composition;
+- photography or conceptual imagery must occupy intentional grid modules rather than behave as decoration;
+- no glossy AI-SaaS collage, neon gradient, floating glass card, generic Swiss-poster imitation, or device-mockup cliché.
 
 ## 12. Accessibility
 
@@ -504,7 +519,7 @@ Before each commit, verify:
 - Case 03 Signalroom;
 - functional prototype and data disclosure;
 - final imagery;
-- Japanese-inspired surface refinement;
+- contemporary Swiss-inspired grid and surface refinement;
 - localization, metadata, performance, and full QA.
 
 ## 17. Explicit Non-goals
