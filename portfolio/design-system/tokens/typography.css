@@ -1,32 +1,27 @@
 /*
- * Typography — DM Sans (sans) + Cormorant Garamond (serif accent).
+ * Typography — Instrument Serif hierarchy + Geist interface clarity.
  *
  * Hierarchy from scale, weight, and space — almost never colour.
  * Tracking tightens as type grows (editorial discipline).
- * Light weight (300) at display sizes — restraint at scale.
- * Serif reserved for pull quotes, openers, editorial moments only.
+ * Editorial statements use Instrument Serif at its native 400 weight.
+ * Functional headings, UI, and body copy remain in Geist.
  *
  * Max line length: 75ch body / 60ch captions / never constrain headings.
  * Minimum size: 12px for meaningful visible text. Never smaller.
  */
 :root {
-  /* ── Families ─────────────────────────────────────────────── */
-  --font-sans:  'DM Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-mono:  ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
-
   /* ── Scale ────────────────────────────────────────────────── */
-  --text-display:      72px;   /* Display title — DM Sans 300 */
-  --text-h1:           52px;   /* Hero / case study title */
-  --text-h2:           36px;   /* Section heading */
-  --text-h3:           24px;   /* Subsection */
-  --text-body-lg:      19px;   /* Lead paragraph */
-  --text-body:         16px;   /* Body */
-  --text-small:        14px;   /* Captions, metadata */
-  --text-micro: 12px;          /* Labels, chips */
-  --text-mono: 12px;           /* Technical labels, eyebrows */
-  --text-serif-disp:   60px;   /* Cormorant display accent */
-  --text-serif-quote:  26px;   /* Cormorant pull quote */
+  --text-display: clamp(3.5rem, 5.625vw, 4.5rem);
+  --text-h1: clamp(2.75rem, 4.22vw, 3.375rem);
+  --text-h2: clamp(2.25rem, 3.75vw, 3rem);
+  --text-h3: 1.25rem;
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-micro: 0.75rem;
+  --text-mono: 0.75rem;
+  --text-serif-disp: clamp(3rem, 5vw, 4rem);
+  --text-serif-quote: 1.75rem;
 
   /* ── Weight ──────────────────────────────────────────────── */
   --weight-light:    300;   /* Display, editorial, restrained headers */
@@ -36,24 +31,24 @@
   /* Note: bold (700) is intentionally absent — semibold is the ceiling */
 
   /* ── Leading ─────────────────────────────────────────────── */
-  --leading-display:  0.95;   /* Tight at display, editorial discipline */
-  --leading-heading:  1.08;
-  --leading-tight:    1.2;
-  --leading-body:     1.68;
-  --leading-relaxed:  1.8;    /* Long-form prose */
+  --leading-display: 1.02;
+  --leading-heading: 1.05;
+  --leading-tight: 1.25;
+  --leading-body: 1.6;
+  --leading-relaxed: 1.72;
 
   /* ── Tracking — tightens as type grows ──────────────────── */
-  --tracking-display: -0.04em;
-  --tracking-h1:      -0.03em;
-  --tracking-h2:      -0.025em;
-  --tracking-h3:      -0.018em;
+  --tracking-display: -0.02em;
+  --tracking-h1: -0.015em;
+  --tracking-h2: -0.012em;
+  --tracking-h3: -0.01em;
   --tracking-body-lg: -0.005em;
-  --tracking-body:     0em;
-  --tracking-mono:     0.07em;
-  --tracking-eyebrow:  0.12em;
-  --tracking-serif:   -0.01em;
+  --tracking-body: 0;
+  --tracking-mono: 0.02em;
+  --tracking-eyebrow: 0.02em;
+  --tracking-serif: -0.012em;
 
   /* ── Max widths ──────────────────────────────────────────── */
-  --prose-width:    68ch;   /* Optimal reading: 60–75ch */
-  --caption-width:  52ch;
+  --prose-width: 66ch;
+  --caption-width: 52ch;
 }

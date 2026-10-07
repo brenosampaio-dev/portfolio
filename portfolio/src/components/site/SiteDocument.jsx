@@ -12,6 +12,7 @@ import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { ToTop } from "@/components/site/ToTop";
 import { Providers } from "@/context/AppContext";
 import { profile } from "@/lib/content";
+import { geistMono, geistSans, instrumentSerif } from "@/lib/fonts";
 import { getPortfolioV2 } from "@/lib/portfolioV2";
 
 export function SiteDocument({ children, lang }) {
@@ -19,14 +20,16 @@ export function SiteDocument({ children, lang }) {
   const content = getPortfolioV2(lang);
 
   return (
-    <html lang={htmlLang} data-lang={lang} suppressHydrationWarning>
+    <html
+      lang={htmlLang}
+      data-lang={lang}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
+      suppressHydrationWarning
+    >
       {/* The two locale root layouts delegate their complete document shell here. */}
       {/* eslint-disable-next-line @next/next/no-head-element */}
       <head>
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var d=document.documentElement;var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme:dark)').matches;d.setAttribute('data-theme',s||(p?'dark':'light'));}catch(e){}})();` }} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" />
       </head>
       <body>
         <script id="person-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
