@@ -7,10 +7,10 @@ const read = (file) => readFileSync(resolve(process.cwd(), file), "utf8");
 describe("portfolio v2 tokens", () => {
   it("defines the approved light and dark canvases and accent", () => {
     const css = read("design-system/tokens/colors.css");
-    expect(css).toContain("--paper: #F8F6F1");
-    expect(css).toContain("--indigo: #3D4B66");
-    expect(css).toContain("--paper: #0E1118");
-    expect(css).toContain("--indigo: #8399C4");
+    expect(css).toContain("--paper: #FFFFFF");
+    expect(css).toContain("--vermilion: #C74624");
+    expect(css).toContain("--paper: #0F0F0E");
+    expect(css).toContain("--vermilion: #FF7A52");
   });
 
   it("keeps meaningful microtype at twelve pixels or above", () => {
@@ -22,9 +22,9 @@ describe("portfolio v2 tokens", () => {
 
   it("defines semantic section rhythm and restrained radii", () => {
     const css = read("design-system/tokens/spacing.css");
-    expect(css).toContain("--section-compact: 64px");
-    expect(css).toContain("--section-standard: 80px");
-    expect(css).toContain("--section-emphasis: 120px");
+    expect(css).toContain("--section-compact: clamp(3.5rem, 5vw, 4rem)");
+    expect(css).toContain("--section-standard: clamp(4.5rem, 7vw, 6rem)");
+    expect(css).toContain("--section-emphasis: clamp(6rem, 9vw, 7.5rem)");
     expect(css).toContain("--radius-lg: 16px");
     expect(css).not.toMatch(/--radius-xl:\s*(?:2[0-9]|3[0-2])px/);
   });
