@@ -32,8 +32,8 @@ export function HomeContent({ lang = "en" }) {
             <Reveal delay={140}><Text variant="body-lg" className="hero__lead" style={{ color: "var(--graphite)" }}>{content.hero.lead}</Text></Reveal>
             <Reveal delay={190}><Text variant="mono">{content.hero.targets}</Text></Reveal>
             <Reveal delay={220} className="hero__actions">
-              <Button href="#approach">{content.hero.primaryAction}</Button>
-              <Button href={content.links.github} variant="secondary" target="_blank" rel="noopener noreferrer">{content.hero.secondaryAction}</Button>
+              <Button href={`${prefix}/work`}>{content.hero.primaryAction}</Button>
+              <Button href={`${prefix}/about`} variant="secondary">{content.hero.secondaryAction}</Button>
             </Reveal>
           </div>
           <Reveal delay={120} className="hero__media hero__media--photo" data-nav-dark>
@@ -50,7 +50,7 @@ export function HomeContent({ lang = "en" }) {
       <section className="container section" id="capabilities" data-label={labels.capabilities} aria-labelledby="capabilities-title">
         <div className="section-head">
           <Scramble className="eyebrow eyebrow--accent" text={labels.capabilities} />
-          <Reveal mask><Text as="h2" variant="h2" id="capabilities-title">{fr ? "Un regard produit. Une expérience opérationnelle. Une pratique frontend en développement." : "Product judgment. Operational depth. Frontend in progress."}</Text></Reveal>
+          <Reveal mask><Text as="h2" variant="h2" id="capabilities-title">{fr ? "Un regard produit. Une expérience opérationnelle. Des prototypes qui rendent les décisions tangibles." : "Product judgment. Operational depth. Prototypes that make decisions tangible."}</Text></Reveal>
         </div>
         <div className="capability-grid">
           {content.capabilities.map((group) => <CapabilityGroup key={group.id} title={group.title} status={content.statusLabels[group.status]} items={group.items} />)}
@@ -61,7 +61,7 @@ export function HomeContent({ lang = "en" }) {
         <div className="experience-layout">
           <div className="section-head">
             <Scramble className="eyebrow eyebrow--accent" text={labels.experience} />
-            <Reveal mask><Text as="h2" variant="h2" id="experience-title">{fr ? "Les opérations m’ont appris ce que les interfaces cachent." : "Operations taught me what interfaces tend to hide."}</Text></Reveal>
+            <Reveal mask><Text as="h2" variant="h2" id="experience-title">{fr ? "Les opérations m’ont appris où les produits se fragilisent." : "Operations trained me to see where products break."}</Text></Reveal>
             <Reveal><Text variant="body">{content.about.lead}</Text></Reveal>
           </div>
           <Reveal className="experience-list">
@@ -119,7 +119,7 @@ export function HomeContent({ lang = "en" }) {
           <div className="section-head contact__intro">
             <Scramble className="eyebrow eyebrow--accent" text={labels.contact} />
             <Reveal mask><Text as="h2" variant="h1" id="contact-title">{fr ? "Commencez par le problème. Je répondrai avec clarté." : "Start with the problem. I’ll reply with clarity."}</Text></Reveal>
-            <Reveal><Text variant="body">{fr ? "Partagez le contexte, la contrainte ou le poste. Votre message arrive directement dans ma boîte mail." : "Share the context, constraint or role. Your message goes directly to my inbox."}</Text></Reveal>
+            <Reveal><Text variant="body">{fr ? "Partagez le contexte produit, la contrainte ou le poste. Votre message arrive directement dans ma boîte mail." : "Share the product context, constraint or role. Your message goes directly to my inbox."}</Text></Reveal>
             <Reveal className="contact-channels">
               <a href={`mailto:${content.links.email}`}><Icon name="mail" size={18} /><span>{content.links.email}</span><span aria-hidden="true">↗</span></a>
               <a href={content.links.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="globe" size={18} /><span>LinkedIn</span><span aria-hidden="true">↗</span></a>

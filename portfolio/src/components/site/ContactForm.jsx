@@ -14,7 +14,7 @@ const COPY = {
     reasonPlaceholder: "Choose a reason",
     reasons: [
       ["product-design", "Product design"],
-      ["frontend-role", "Frontend / Design Engineer role"],
+      ["product-design-role", "Product Design role"],
       ["collaboration", "Collaboration"],
       ["other", "Something else"],
     ],
@@ -37,7 +37,7 @@ const COPY = {
     reasonPlaceholder: "Choisir un motif",
     reasons: [
       ["product-design", "Design produit"],
-      ["frontend-role", "Poste frontend / Design Engineer"],
+      ["product-design-role", "Poste en design produit"],
       ["collaboration", "Collaboration"],
       ["other", "Autre sujet"],
     ],

@@ -22,7 +22,7 @@ const en = {
     strong: "Strong now",
     building: "Building now",
     next: "Next",
-    paused: "Case selection paused",
+    paused: "Cases in development",
   },
   identity: {
     current: "Product Designer",
@@ -96,7 +96,7 @@ const fr = {
     strong: "Solide aujourd’hui",
     building: "En développement",
     next: "Prochaine étape",
-    paused: "Sélection des études de cas en pause",
+    paused: "Projets en développement",
   },
   identity: {
     current: "Designer produit",

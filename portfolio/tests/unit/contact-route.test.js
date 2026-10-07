@@ -9,8 +9,8 @@ const requestWith = (payload, headers = {}) => ({
 const validPayload = {
   name: "Alex Morgan",
   email: "alex@example.com",
-  reason: "frontend-role",
-  message: "I would like to discuss an accessible frontend role.",
+  reason: "product-design-role",
+  message: "I would like to discuss a product design role.",
   website: "",
 };
 
@@ -69,10 +69,10 @@ describe("contact delivery route", () => {
     expect(Object.fromEntries(options.body.entries())).toEqual({
       name: "Alex Morgan",
       email: "alex@example.com",
-      reason: "Frontend / Design Engineer role",
-      message: "I would like to discuss an accessible frontend role.",
+      reason: "Product Design role",
+      message: "I would like to discuss a product design role.",
       _replyto: "alex@example.com",
-      _subject: "Portfolio contact — Frontend / Design Engineer role — Alex Morgan",
+      _subject: "Portfolio contact — Product Design role — Alex Morgan",
     });
   });
 

@@ -11,8 +11,8 @@ export function WorkContent({ lang = "en" }) {
     <article>
       <section id="work-overview" className="container section--emphasis" data-label={fr ? "Aperçu des projets" : "Work overview"} aria-labelledby="work-page-title">
         <PageIntro
-          eyebrow={fr ? "Projets · sélection en pause" : "Work · selection paused"}
-          title={fr ? "Des projets avec leur contexte, leurs décisions et leurs preuves." : "Work with scope, decisions and evidence."}
+          eyebrow={fr ? "Projets indépendants · En développement" : "Independent work · In development"}
+          title={fr ? "Produit, système et build — chacun avec ses propres preuves." : "Product, system and build — each with its own proof."}
           lead={content.work.body}
           actions={<Button href={lang === "fr" ? "/fr#contact" : "/#contact"}>{fr ? "Échanger" : "Start a conversation"}</Button>}
         />
@@ -24,7 +24,7 @@ export function WorkContent({ lang = "en" }) {
           id="built-products-title"
           status={content.statusLabels[content.work.status]}
           heading={content.work.heading}
-          body={fr ? "Chaque projet sélectionné précisera sa portée, les décisions, ma contribution et les preuves disponibles." : "Every selected case will state its scope, decisions, contribution and available evidence."}
+          body={content.work.body}
         />
       </section>
 
@@ -32,13 +32,13 @@ export function WorkContent({ lang = "en" }) {
         <div className="section-head">
           <Status>{content.statusLabels.next}</Status>
           <Text as="h2" variant="h2" id="design-systems-title">{content.work.systemsHeading}</Text>
-          <Text variant="body">{fr ? "Les composants apparaîtront avec leurs décisions, variantes, états et critères d’accessibilité — pas comme une simple galerie d’écrans." : "Components will appear with their decisions, variants, states and accessibility criteria — not as a gallery of polished screens."}</Text>
+          <Text variant="body">{fr ? "Basis sera extrait des besoins réels de Relay : composants, variantes, états et critères d’accessibilité documentés, pas une galerie d’écrans." : "Basis will be extracted from Relay’s real interface needs: documented components, variants, states and accessibility criteria, not a screen gallery."}</Text>
         </div>
       </section>
 
       <section id="operational-archive" className="container section" data-label={content.work.archiveHeading} aria-labelledby="operational-archive-title">
         <div className="section-head">
-          <Status>{content.statusLabels.paused}</Status>
+          <Status>{fr ? "Référence uniquement" : "Reference only"}</Status>
           <Text as="h2" variant="h2" id="operational-archive-title">{content.work.archiveHeading}</Text>
           <Text variant="body">{content.work.archiveBody}</Text>
         </div>
