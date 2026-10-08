@@ -1,21 +1,17 @@
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 
-export const geistSans = Geist({
+export const dmSans = DM_Sans({
   subsets: ["latin"],
-  display: "swap",
-  variable: "--font-geist-sans",
-});
-
-export const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-geist-mono",
-});
-
-export const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
+  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
-  variable: "--font-instrument-serif",
+  variable: "--font-dm-sans",
+});
+
+export const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-cormorant",
 });

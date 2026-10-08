@@ -12,7 +12,7 @@ import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { ToTop } from "@/components/site/ToTop";
 import { Providers } from "@/context/AppContext";
 import { profile } from "@/lib/content";
-import { geistMono, geistSans, instrumentSerif } from "@/lib/fonts";
+import { cormorant, dmSans } from "@/lib/fonts";
 import { getPortfolioV2 } from "@/lib/portfolioV2";
 
 export function SiteDocument({ children, lang }) {
@@ -23,7 +23,7 @@ export function SiteDocument({ children, lang }) {
     <html
       lang={htmlLang}
       data-lang={lang}
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
+      className={`${dmSans.variable} ${cormorant.variable}`}
       suppressHydrationWarning
     >
       {/* The two locale root layouts delegate their complete document shell here. */}

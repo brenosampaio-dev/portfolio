@@ -1,6 +1,6 @@
 /*
  * Text — the full type scale as a component.
- * Instrument Serif for editorial hierarchy; Geist for interface clarity.
+ * DM Sans for all text; Cormorant Garamond for editorial serif moments.
  * Hierarchy from scale, weight, and space — almost never colour.
  * Reconstructed from the design-system spec (components/core/Text.jsx).
  */
@@ -9,9 +9,9 @@ const scale = {
   display: {
     tag: "h1",
     style: {
-      fontFamily: "var(--font-serif)",
+      fontFamily: "var(--font-sans)",
       fontSize: "var(--text-display)",
-      fontWeight: "var(--weight-regular)",
+      fontWeight: "var(--weight-light)",
       lineHeight: "var(--leading-display)",
       letterSpacing: "var(--tracking-display)",
       color: "var(--ink)",
@@ -20,9 +20,9 @@ const scale = {
   h1: {
     tag: "h1",
     style: {
-      fontFamily: "var(--font-serif)",
+      fontFamily: "var(--font-sans)",
       fontSize: "var(--text-h1)",
-      fontWeight: "var(--weight-regular)",
+      fontWeight: "var(--weight-medium)",
       lineHeight: "var(--leading-heading)",
       letterSpacing: "var(--tracking-h1)",
       color: "var(--ink)",
@@ -31,9 +31,9 @@ const scale = {
   h2: {
     tag: "h2",
     style: {
-      fontFamily: "var(--font-serif)",
+      fontFamily: "var(--font-sans)",
       fontSize: "var(--text-h2)",
-      fontWeight: "var(--weight-regular)",
+      fontWeight: "var(--weight-medium)",
       lineHeight: "var(--leading-tight)",
       letterSpacing: "var(--tracking-h2)",
       color: "var(--ink)",
@@ -108,16 +108,17 @@ const scale = {
       fontSize: "var(--text-mono)",
       fontWeight: "var(--weight-regular)",
       letterSpacing: "var(--tracking-eyebrow)",
+      textTransform: "uppercase",
       color: "var(--stone)",
     },
   },
-  /* Instrument Serif — editorial moments only */
+  /* Cormorant Garamond — editorial moments only */
   "serif-display": {
     tag: "h2",
     style: {
       fontFamily: "var(--font-serif)",
       fontSize: "var(--text-serif-disp)",
-      fontWeight: 400,
+      fontWeight: 300,
       fontStyle: "italic",
       lineHeight: 1.1,
       letterSpacing: "var(--tracking-serif)",

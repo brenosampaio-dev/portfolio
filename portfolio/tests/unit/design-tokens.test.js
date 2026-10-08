@@ -15,9 +15,9 @@ describe("portfolio v2 tokens", () => {
 
   it("keeps meaningful microtype at twelve pixels or above", () => {
     const css = read("design-system/tokens/typography.css");
-    expect(css).toContain("--text-micro: 0.75rem");
-    expect(css).toContain("--text-mono: 0.75rem");
-    expect(css).not.toMatch(/--text-(?:micro|mono):\s*(?:0\.[1-6][0-9]|0\.7[0-4])rem/);
+    expect(css).toContain("--text-micro: 12px");
+    expect(css).toContain("--text-mono: 12px");
+    expect(css).not.toMatch(/--text-(?:micro|mono):\s*(?:10|11)px/);
   });
 
   it("defines semantic section rhythm and restrained radii", () => {
