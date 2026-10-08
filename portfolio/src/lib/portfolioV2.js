@@ -1,3 +1,5 @@
+import { getPortfolioCases } from "@/lib/portfolioCases";
+
 export const PROJECT_STATUSES = Object.freeze({
   strong: "strong",
   building: "building",
@@ -38,10 +40,10 @@ const en = {
     secondaryAction: "About my practice",
   },
   work: {
-    status: PROJECT_STATUSES.paused,
-    heading: "Three independent cases. Each built to prove a different product capability.",
-    body: "Relay, Basis and Signalroom are being created from scratch. They will be published only when their scope, decisions, artifacts and validation are explicit.",
-    items: [],
+    status: PROJECT_STATUSES.building,
+    heading: "One product proof, followed by the system and build it makes possible.",
+    body: "Relay is published as a research prototype grounded in public sources and synthetic data. Basis and Signalroom remain explicit future work until their implementation and validation exist.",
+    items: getPortfolioCases("en"),
     builtHeading: "Product → System → Build",
     systemsHeading: "Systems behind the interface",
     archiveHeading: "Previous operational studies",
@@ -112,10 +114,10 @@ const fr = {
     secondaryAction: "Découvrir ma pratique",
   },
   work: {
-    status: PROJECT_STATUSES.paused,
-    heading: "Trois projets indépendants. Chacun démontre une capacité produit différente.",
-    body: "Relay, Basis et Signalroom sont créés à partir de zéro. Ils ne seront publiés que lorsque leur portée, leurs décisions, leurs artefacts et leur validation seront explicites.",
-    items: [],
+    status: PROJECT_STATUSES.building,
+    heading: "Une preuve produit, suivie du système et du build qu’elle rend possibles.",
+    body: "Relay est publié comme prototype de recherche fondé sur des sources publiques et des données synthétiques. Basis et Signalroom restent des projets futurs explicites tant que leur implémentation et leur validation n’existent pas.",
+    items: getPortfolioCases("fr"),
     builtHeading: "Produit → Système → Build",
     systemsHeading: "Les systèmes derrière l’interface",
     archiveHeading: "Études opérationnelles précédentes",

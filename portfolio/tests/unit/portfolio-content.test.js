@@ -7,7 +7,8 @@ describe("portfolio v2 non-case content", () => {
     expect(content.hero.title).toBeTruthy();
     expect(content.capabilities).toHaveLength(3);
     expect(content.process).toHaveLength(5);
-    expect(content.work.status).toBe(PROJECT_STATUSES.paused);
+    expect(content.work.status).toBe(PROJECT_STATUSES.building);
+    expect(content.work.items.map(({ slug }) => slug)).toEqual(["relay", "basis", "signalroom"]);
     expect(content.links.github).toMatch(/^https:\/\/github\.com\/brenosampaio-dev/);
   });
 
@@ -37,10 +38,16 @@ describe("portfolio v2 non-case content", () => {
     expect(`${labs.title} ${labs.lead}`).not.toMatch(/scrimba/i);
   });
 
-  it("does not expose invented project evidence", () => {
+  it("publishes only Relay while keeping future cases non-clickable", () => {
     const work = getPortfolioV2("en").work;
-    expect(work.status).toBe(PROJECT_STATUSES.paused);
-    expect(work.items).toEqual([]);
+    expect(work.status).toBe(PROJECT_STATUSES.building);
+    expect(work.items[0]).toEqual(expect.objectContaining({
+      slug: "relay",
+      href: "/work/relay",
+      status: "research-prototype",
+    }));
+    expect(work.items.slice(1).every(({ href }) => href === null)).toBe(true);
+    expect(work.items.every((item) => item.client === undefined && item.impact === undefined)).toBe(true);
     expect(work.liveUrl).toBeUndefined();
   });
 
