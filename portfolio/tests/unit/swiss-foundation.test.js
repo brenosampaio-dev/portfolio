@@ -137,4 +137,26 @@ describe("Swiss portfolio foundation", () => {
     expect(globalStyles).toMatch(/\.section,\s*\n\.section--standard\s*\{\s*padding-block:\s*var\(--section-standard\)/);
     expect(globalStyles).toMatch(/\.section--emphasis\s*\{\s*padding-block:\s*var\(--section-emphasis\)/);
   });
+
+  it("aligns localized discovery metadata and social sharing with Product Design", () => {
+    const english = read("src/app/(en)/layout.jsx");
+    const french = read("src/app/fr/layout.jsx");
+    const social = read("src/app/opengraph-image/route.js");
+    const document = read("src/components/site/SiteDocument.jsx");
+
+    expect(english).toContain("Product Designer for complex products");
+    expect(french).toContain("Designer produit · Produits complexes");
+    expect(`${english}\n${french}`).not.toMatch(/building with code|Frontend|support/i);
+    expect(english).toContain('themeColor: "#FFFFFF"');
+    expect(french).toContain('themeColor: "#FFFFFF"');
+
+    expect(social).toContain("Complex products, made clear.");
+    expect(social).toContain('backgroundColor: "#FFFFFF"');
+    expect(social).toContain('color: "#1F1C1B"');
+    expect(social).toContain('color: "#C74624"');
+    expect(social).not.toMatch(/fonts\.googleapis\.com|loadFont\(|await fetch\(/);
+
+    expect(document).toContain('jobTitle: "Product Designer"');
+    expect(document).toContain("description: content.hero.lead");
+  });
 });

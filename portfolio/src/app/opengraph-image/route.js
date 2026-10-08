@@ -1,43 +1,13 @@
 import { ImageResponse } from "next/og";
 
-// Social share card (LinkedIn / WhatsApp / X). A route handler keeps its public
-// URL stable for explicit English and French metadata. Same restraint as the site:
-// cold paper, charcoal ink, one slate accent in Cormorant italic. 1200×630.
+// Stable bilingual social card. ImageResponse uses its deterministic fallback
+// instead of fetching typography at request time; the public URL stays fixed.
 const size = { width: 1200, height: 630 };
+const headline = "Complex products, made clear.";
 
 export const dynamic = "force-static";
 
-// Fetch a TrueType subset from Google Fonts (the &text= subset is served as
-// truetype, which Satori can rasterise — woff2 cannot be used here).
-async function loadFont(family, text) {
-  const url = `https://fonts.googleapis.com/css2?family=${family}&text=${encodeURIComponent(text)}`;
-  const css = await (await fetch(url)).text();
-  const src = css.match(/src: url\((.+?)\) format\('(?:opentype|truetype)'\)/);
-  if (!src) throw new Error(`font parse failed: ${family}`);
-  const res = await fetch(src[1]);
-  if (res.status !== 200) throw new Error(`font fetch failed: ${family}`);
-  return res.arrayBuffer();
-}
-
-export async function GET() {
-  const sans = "Product Designer. Designer produit. Frontend in progress. BRENO SAMPAIO brenosampaio.vercel.app · Valencia, Spain · Valence, Espagne";
-
-  let fonts;
-  try {
-    const [dm400, dm500, serif] = await Promise.all([
-      loadFont("DM+Sans:wght@400", sans),
-      loadFont("DM+Sans:wght@500", sans),
-      loadFont("Cormorant+Garamond:ital,wght@1,500", "Interfaces accessibles"),
-    ]);
-    fonts = [
-      { name: "DM Sans", data: dm400, weight: 400, style: "normal" },
-      { name: "DM Sans", data: dm500, weight: 500, style: "normal" },
-      { name: "Cormorant", data: serif, weight: 500, style: "italic" },
-    ];
-  } catch {
-    fonts = undefined; // degrade to Satori's default font rather than fail the build
-  }
-
+export function GET() {
   return new ImageResponse(
     (
       <div
@@ -47,33 +17,34 @@ export async function GET() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#FAFAFA",
-          padding: "84px",
-          fontFamily: "DM Sans",
+          backgroundColor: "#FFFFFF",
+          color: "#1F1C1B",
+          padding: "76px 84px",
+          fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <div style={{ width: 28, height: 2, backgroundColor: "#3C4A63", marginRight: 18 }} />
-          <div style={{ display: "flex", fontSize: 24, fontWeight: 500, letterSpacing: 8, color: "#3C4A63" }}>
-            BRENO SAMPAIO
+        <div style={{ display: "flex", alignItems: "center", color: "#C74624" }}>
+          <div style={{ width: 32, height: 2, backgroundColor: "#C74624", marginRight: 18 }} />
+          <div style={{ display: "flex", fontSize: 20, fontWeight: 500, letterSpacing: 5 }}>
+            BRENO SAMPAIO · PRODUCT DESIGNER
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", color: "#1C1A18", letterSpacing: -2 }}>
-          <div style={{ display: "flex", fontSize: 72, lineHeight: 1.04 }}>Product Designer</div>
-          <div style={{ display: "flex", alignItems: "baseline", fontSize: 78, lineHeight: 1.04 }}>
-            <span style={{ fontFamily: "Cormorant", fontStyle: "italic", fontWeight: 500, color: "#3C4A63" }}>
-            Building accessible interfaces
-            </span>
+        <div style={{ display: "flex", flexDirection: "column", maxWidth: 930 }}>
+          <div style={{ display: "flex", fontSize: 86, lineHeight: 1.02, letterSpacing: -4 }}>
+            {headline}
+          </div>
+          <div style={{ display: "flex", marginTop: 28, fontSize: 25, lineHeight: 1.35, color: "#5F5B56" }}>
+            Product strategy · Interaction design · Design systems
           </div>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 26, color: "#857F79" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 22, color: "#5F5B56" }}>
           <div style={{ display: "flex" }}>brenosampaio.vercel.app</div>
-          <div style={{ display: "flex" }}>Valencia, Spain · Valence, Espagne</div>
+          <div style={{ display: "flex" }}>Valencia, Spain · Available across Europe</div>
         </div>
       </div>
     ),
-    { ...size, ...(fonts ? { fonts } : {}) }
+    size,
   );
 }
