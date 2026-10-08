@@ -43,7 +43,7 @@ export function Providers({ children, initialLang = "en" }) {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = theme === "dark" ? "#0D1017" : "#FAFAFA";
+    if (meta) meta.content = theme === "dark" ? "#0F0F0E" : "#FFFFFF";
   }, [theme]);
 
   useEffect(() => {

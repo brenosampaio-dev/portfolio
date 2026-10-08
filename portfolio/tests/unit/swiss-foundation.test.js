@@ -141,16 +141,26 @@ describe("Swiss portfolio foundation", () => {
   it("aligns localized discovery metadata and social sharing with Product Design", () => {
     const english = read("src/app/(en)/layout.jsx");
     const french = read("src/app/fr/layout.jsx");
+    const englishPages = ["page.jsx", "work/page.jsx", "labs/page.jsx", "about/page.jsx"]
+      .map((file) => read(`src/app/(en)/${file}`)).join("\n");
+    const frenchPages = ["page.jsx", "work/page.jsx", "labs/page.jsx", "about/page.jsx"]
+      .map((file) => read(`src/app/fr/${file}`)).join("\n");
     const social = read("src/app/opengraph-image/route.js");
     const document = read("src/components/site/SiteDocument.jsx");
+    const providers = read("src/context/AppContext.jsx");
 
     expect(english).toContain("Product Designer for complex products");
     expect(french).toContain("Designer produit · Produits complexes");
-    expect(`${english}\n${french}`).not.toMatch(/building with code|Frontend|support/i);
+    expect(`${english}\n${french}\n${englishPages}\n${frenchPages}`).not.toMatch(/building with code|frontend learning|apprentissage frontend|product design and frontend|design produit et le frontend|design produit et frontend/i);
+    expect(englishPages).toContain("Systems Lab — Product interface experiments");
+    expect(frenchPages).toContain("Systems Lab — Expériences d’interface produit");
     expect(english).toContain('themeColor: "#FFFFFF"');
     expect(french).toContain('themeColor: "#FFFFFF"');
+    expect(providers).toContain('theme === "dark" ? "#0F0F0E" : "#FFFFFF"');
 
     expect(social).toContain("Complex products, made clear.");
+    expect(social).toContain("Des produits complexes, rendus clairs.");
+    expect(social).toContain("PRODUCT DESIGNER · DESIGNER PRODUIT");
     expect(social).toContain('backgroundColor: "#FFFFFF"');
     expect(social).toContain('color: "#1F1C1B"');
     expect(social).toContain('color: "#C74624"');

@@ -4,6 +4,7 @@ import { ImageResponse } from "next/og";
 // instead of fetching typography at request time; the public URL stays fixed.
 const size = { width: 1200, height: 630 };
 const headline = "Complex products, made clear.";
+const headlineFr = "Des produits complexes, rendus clairs.";
 
 export const dynamic = "force-static";
 
@@ -26,16 +27,19 @@ export function GET() {
         <div style={{ display: "flex", alignItems: "center", color: "#C74624" }}>
           <div style={{ width: 32, height: 2, backgroundColor: "#C74624", marginRight: 18 }} />
           <div style={{ display: "flex", fontSize: 20, fontWeight: 500, letterSpacing: 5 }}>
-            BRENO SAMPAIO · PRODUCT DESIGNER
+            BRENO SAMPAIO · PRODUCT DESIGNER · DESIGNER PRODUIT
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 930 }}>
-          <div style={{ display: "flex", fontSize: 86, lineHeight: 1.02, letterSpacing: -4 }}>
+          <div style={{ display: "flex", fontSize: 76, lineHeight: 1.02, letterSpacing: -4 }}>
             {headline}
           </div>
-          <div style={{ display: "flex", marginTop: 28, fontSize: 25, lineHeight: 1.35, color: "#5F5B56" }}>
-            Product strategy · Interaction design · Design systems
+          <div style={{ display: "flex", marginTop: 12, fontSize: 46, lineHeight: 1.08, letterSpacing: -2, color: "#C74624" }}>
+            {headlineFr}
+          </div>
+          <div style={{ display: "flex", marginTop: 24, fontSize: 23, lineHeight: 1.35, color: "#5F5B56" }}>
+            Product strategy · Interaction design · Design systems / Stratégie · Interaction · Systèmes
           </div>
         </div>
 

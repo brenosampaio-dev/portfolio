@@ -1,8 +1,8 @@
 import { HomeContent } from "@/components/site/HomeContent";
 
 export const metadata = {
-  title: "Breno Sampaio — Designer produit, du design au code",
-  description: "Designer produit transformant la complexité opérationnelle en interfaces accessibles et prolongeant cette logique en React.",
+  title: "Breno Sampaio — Designer produit · Produits complexes",
+  description: "Designer produit transformant des processus complexes en produits accessibles, du cadrage et du design d’interaction aux systèmes et prototypes fonctionnels.",
   alternates: { canonical: "/fr", languages: { "en-CA": "/", "fr-CA": "/fr" } },
 };
 
