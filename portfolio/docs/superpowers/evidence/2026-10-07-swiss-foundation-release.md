@@ -5,8 +5,8 @@ Completed on 2026-10-08 in the existing SSD checkout. This release is a surface-
 ## Commit range
 
 - Baseline: `d8df144adb3d86732b6979fcd0c3ef5fbdff93cf`
-- Verified implementation head: `0ceb19f628a32d054f094f0076db6fb5137a8d7e`
-- Range: `d8df144..0ceb19f`
+- Verified implementation head: `03bc233aa6d0face897a092c412721dfbb4f0038`
+- Range: `d8df144..03bc233`
 
 Implementation commits:
 
@@ -16,6 +16,7 @@ Implementation commits:
 4. `4cbd19c` — align every hub with Product Design
 5. `29fed01` — refine the Swiss grid and surfaces
 6. `0ceb19f` — align discovery with Product Design
+7. `03bc233` — close discovery and theme gaps found in independent review
 
 ## What changed
 
@@ -41,6 +42,8 @@ The final gate was run sequentially from the portfolio directory after the imple
 | `npm run test:visual` | PASS — 85 capture scenarios |
 | `git diff --check` | PASS |
 
+After the independent review fix, the affected surface was verified again: 43/43 unit tests, lint, production build, 28/28 navigation tests, three representative dark-mode visual captures and `git diff --check` all passed.
+
 The visual matrix covered Home, Work, Labs and About in EN and FR, light and dark, at `360×800`, `601×900`, `768×1024`, `1280×900` and `1440×1000`. Each route asserted zero horizontal overflow. Additional captures covered the mobile header, dock/rail states, contact protection, reduced motion, case disclosure/evidence, code veil and effective 200% reflow.
 
 ## Manual visual review
@@ -61,6 +64,10 @@ Keyboard focus, CTA destinations, locale retention, contact validation, header c
 The protected motion files were compared with the baseline commit and produced no changed paths. A zero-context diff of `globals.css` and `signature.css` was also filtered for animation, transition, transform, scroll-behavior, duration and easing declarations and produced no matches.
 
 Therefore the existing reveal, scramble, smooth scroll, progress, code veil, dock/rail and reduced-motion implementations were not changed by Release 0.
+
+## Independent review
+
+A read-only reviewer found no critical issues and identified three important gaps: page-level metadata overriding the new positioning, stale runtime theme colors and an English-only shared social card. Commit `03bc233` corrected all three and added regression coverage. The reviewer otherwise confirmed that motion, routes, architecture, cards, portrait, case honesty and unrelated directories remained protected.
 
 ## Explicitly deferred
 
