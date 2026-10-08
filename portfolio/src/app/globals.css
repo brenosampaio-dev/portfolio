@@ -6,12 +6,11 @@
  */
 
 /*
- * Figma-style canvas grid — a faint dot grid behind the whole site, fading
- * out at the edges (radial mask) so the borders stay clean. Fixed to the
- * viewport so it reads as a calm canvas. Purely decorative (behind content).
+ * Quiet reference grid — a faint dot field behind the whole site, fading at
+ * the edges so the borders stay clean. Fixed to the viewport and decorative.
  */
 :root {
-  --grid-dot: color-mix(in srgb, var(--ink) 4%, transparent);
+  --grid-dot: color-mix(in srgb, var(--ink) 2%, transparent);
 }
 html {
   background: var(--paper); /* paper base so the grid layer can sit above it */
@@ -422,7 +421,7 @@ html {
   width: 100%;
   max-width: var(--max-content);
   margin-inline: auto;
-  padding-inline: var(--space-8);
+  padding-inline: clamp(var(--space-5), 4vw, var(--space-12));
 }
 
 /* Semantic vertical rhythm — choose by narrative weight, not page type. */
@@ -447,7 +446,6 @@ html {
   font-family: var(--font-mono);
   font-size: var(--text-mono);
   letter-spacing: var(--tracking-eyebrow);
-  text-transform: uppercase;
   color: var(--stone);
 }
 .eyebrow--accent {
@@ -636,8 +634,9 @@ html {
 .section-head {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: var(--space-4);
-  max-width: 720px;
+  max-width: 48rem;
 }
 .section-head__row {
   display: flex;
@@ -657,12 +656,12 @@ html {
 
 /* ── Hero — two-column: copy left, editorial media right ───── */
 .hero {
-  padding-block: var(--space-24) var(--space-16);
+  padding-block: var(--section-emphasis) var(--section-standard);
 }
 .hero__grid {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
-  gap: var(--space-16);
+  gap: clamp(var(--space-10), 6vw, var(--space-20));
   align-items: center;
   min-height: 70vh;
 }
@@ -677,9 +676,9 @@ html {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-  max-width: 920px;
+  max-width: 55rem;
 }
-.page-intro > h1 { max-width: 18ch; }
+.page-intro > h1 { max-width: 16ch; }
 .page-intro__actions,
 .section-actions {
   display: flex;
@@ -693,11 +692,11 @@ html {
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-5);
-  max-width: 780px;
-  padding: var(--space-10);
+  max-width: 48rem;
+  padding: clamp(var(--space-6), 4vw, var(--space-10));
   border: 1px solid var(--mist);
-  border-radius: var(--radius-md);
-  background: var(--silk);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--silk) 72%, var(--paper));
 }
 .capability-grid {
   display: grid;
@@ -709,7 +708,7 @@ html {
   min-width: 0;
   padding: var(--space-6);
   border-top: 1px solid var(--mist);
-  background: color-mix(in srgb, var(--silk) 54%, transparent);
+  background: color-mix(in srgb, var(--silk) 28%, transparent);
 }
 .capability-group__head {
   display: flex;
@@ -1353,7 +1352,7 @@ html {
 .process-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-8);
+  gap: var(--space-6);
 }
 .process-col {
   display: flex;
@@ -4140,7 +4139,7 @@ html {
 
 /* ── Dark mode ─────────────────────────────────────────────── */
 [data-theme="dark"] {
-  --grid-dot: color-mix(in srgb, var(--ink) 2.5%, transparent);
+  --grid-dot: color-mix(in srgb, var(--ink) 2%, transparent);
 }
 
 /* Dock — dark-glass base in dark mode */

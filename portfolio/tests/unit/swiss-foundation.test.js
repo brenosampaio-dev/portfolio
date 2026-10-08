@@ -129,4 +129,12 @@ describe("Swiss portfolio foundation", () => {
       expect(contrastRatio(foreground, background)).toBeGreaterThanOrEqual(4.5);
     }
   });
+
+  it("keeps the global grid quiet and section rhythm token-driven", () => {
+    const globalStyles = read("src/app/globals.css");
+    expect(globalStyles).toContain("--grid-dot: color-mix(in srgb, var(--ink) 2%, transparent)");
+    expect(globalStyles).toMatch(/\.container\s*\{[\s\S]*?max-width:\s*var\(--max-content\)/);
+    expect(globalStyles).toMatch(/\.section,\s*\n\.section--standard\s*\{\s*padding-block:\s*var\(--section-standard\)/);
+    expect(globalStyles).toMatch(/\.section--emphasis\s*\{\s*padding-block:\s*var\(--section-emphasis\)/);
+  });
 });
