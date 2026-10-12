@@ -1,24 +1,25 @@
 import { SiteDocument } from "@/components/site/SiteDocument";
 
-const description = "Designer produit transformant la complexité opérationnelle en interfaces accessibles et prolongeant cette logique en React.";
+const title = "Breno Sampaio — Designer produit · Produits complexes";
+const description = "Designer produit transformant des processus complexes en produits accessibles, du cadrage et du design d’interaction aux systèmes et prototypes fonctionnels.";
 
 export const metadata = {
   metadataBase: new URL("https://brenosampaio.vercel.app"),
-  title: { default: "Breno Sampaio — Designer produit, du design au code", template: "%s — Breno Sampaio" },
+  title: { default: title, template: "%s — Breno Sampaio" },
   description,
   openGraph: {
-    title: "Breno Sampaio — Designer produit, du design au code",
+    title,
     description,
     url: "https://brenosampaio.vercel.app/fr",
     siteName: "Breno Sampaio",
     locale: "fr_CA",
     type: "website",
-    images: [{ url: "https://brenosampaio.vercel.app/opengraph-image", width: 1200, height: 630, alt: "Breno Sampaio — Designer produit, du design au code" }],
+    images: [{ url: "https://brenosampaio.vercel.app/opengraph-image", width: 1200, height: 630, alt: title }],
   },
-  twitter: { card: "summary_large_image", title: "Breno Sampaio — Designer produit, du design au code", description, images: ["https://brenosampaio.vercel.app/opengraph-image"] },
+  twitter: { card: "summary_large_image", title, description, images: ["https://brenosampaio.vercel.app/opengraph-image"] },
 };
 
-export const viewport = { themeColor: "#F8F6F1", width: "device-width", initialScale: 1 };
+export const viewport = { themeColor: "#F8F6F0", width: "device-width", initialScale: 1 };
 
 export default function FrenchRootLayout({ children }) {
   return <SiteDocument lang="fr">{children}</SiteDocument>;

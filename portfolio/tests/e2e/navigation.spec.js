@@ -52,16 +52,16 @@ test("contact form sends inside the page and confirms delivery", async ({ page }
   const form = page.getByRole("form", { name: "Contact form" });
   await form.getByLabel("Name").fill("Alex Morgan");
   await form.getByLabel("Email").fill("alex@example.com");
-  await form.getByLabel("Reason").selectOption("frontend-role");
-  await form.getByLabel("Message").fill("I would like to discuss an accessible frontend role.");
+  await form.getByLabel("Reason").selectOption("product-design-role");
+  await form.getByLabel("Message").fill("I would like to discuss a product design role.");
   await form.getByRole("button", { name: "Send message" }).click();
 
   await expect(form.getByRole("status")).toHaveText("Message sent. I’ll reply as soon as I can.");
   expect(submittedPayload).toEqual({
     name: "Alex Morgan",
     email: "alex@example.com",
-    reason: "frontend-role",
-    message: "I would like to discuss an accessible frontend role.",
+    reason: "product-design-role",
+    message: "I would like to discuss a product design role.",
     website: "",
   });
   await expect(form.getByLabel("Name")).toHaveValue("");
@@ -96,14 +96,19 @@ test("hero portrait remains editorially secondary across responsive layouts", as
   }
 });
 
-test("hero primary action reveals the working method in both languages", async ({ page }) => {
-  for (const path of ["/", "/fr"]) {
+test("hero actions lead to selected work and the design practice", async ({ page }) => {
+  for (const { path, work, about } of [
+    { path: "/", work: "/work", about: "/about" },
+    { path: "/fr", work: "/fr/work", about: "/fr/about" },
+  ]) {
     await page.goto(path);
     const primaryAction = page.locator(".hero__actions a").first();
-    await expect(primaryAction).toHaveAttribute("href", "#approach");
+    const secondaryAction = page.locator(".hero__actions a").nth(1);
+    await expect(primaryAction).toHaveAttribute("href", work);
+    await expect(secondaryAction).toHaveAttribute("href", about);
     await primaryAction.click();
-    await expect(page).toHaveURL(/#approach$/);
-    await expect(page.locator("#approach")).toBeInViewport();
+    await expect(page).toHaveURL(new RegExp(`${work}$`));
+    await expect(page.locator("main h1")).toBeVisible();
   }
 });
 

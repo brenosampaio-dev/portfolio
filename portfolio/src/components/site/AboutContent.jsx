@@ -30,10 +30,10 @@ export function AboutContent({ lang = "en" }) {
       </section>
 
       <section id="about-path" className="container section about-body" data-label={fr ? "Parcours" : "The path"} aria-labelledby="about-path-title">
-        <Text as="h2" variant="h2" id="about-path-title">{fr ? "Opérations → Produit → Code" : "Operations → Product → Code"}</Text>
+        <Text as="h2" variant="h2" id="about-path-title">{fr ? "Opérations → Design produit → Prototypes" : "Operations → Product Design → Prototypes"}</Text>
         <div className="prose">
           <p>{content.about.lead}</p>
-          <p className="muted">{fr ? "Le fil conducteur est la clarté : comprendre ce qui bloque une personne, rendre les contraintes visibles, puis transformer ce raisonnement en parcours et en composants utilisables." : "The connecting thread is clarity: understand what blocks a person, make constraints visible, then carry that reasoning into usable flows and components."}</p>
+          <p className="muted">{fr ? "Le fil conducteur est la clarté : comprendre ce qui rend une décision difficile, rendre les contraintes visibles, puis transformer ce raisonnement en parcours et composants utilisables." : "The connecting thread is clarity: understand what makes a decision difficult, expose the constraints, then carry that reasoning into usable flows and components."}</p>
         </div>
       </section>
 
@@ -46,7 +46,7 @@ export function AboutContent({ lang = "en" }) {
 
       <section id="current-learning" className="container section" data-label={fr ? "Apprentissage actuel" : "Current learning"} aria-labelledby="learning-title">
         <div className="section-head">
-          <Text as="h2" variant="h2" id="learning-title">{fr ? "Le code prolonge le design." : "Code extends the design."}</Text>
+          <Text as="h2" variant="h2" id="learning-title">{fr ? "Les prototypes fonctionnels affinent le design." : "Working prototypes sharpen the design."}</Text>
           <Text variant="body">{content.about.learning}</Text>
         </div>
         <CapabilityGroup title={content.capabilities[2].title} status={content.statusLabels[content.capabilities[2].status]} items={content.capabilities[2].items} />

@@ -2,7 +2,7 @@ import { createHmac, randomBytes } from "node:crypto";
 
 const REASON_LABELS = Object.freeze({
   "product-design": "Product design",
-  "frontend-role": "Frontend / Design Engineer role",
+  "product-design-role": "Product Design role",
   collaboration: "Collaboration",
   other: "Something else",
 });

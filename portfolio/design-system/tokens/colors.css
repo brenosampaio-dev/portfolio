@@ -1,57 +1,65 @@
 /*
- * Colour — warm paper, charcoal ink, one restrained indigo accent.
+ * Colour — warm paper canvas, near-black ink, restrained humanist accents.
  *
  * Primitive names describe material; semantic aliases describe purpose.
- * Indigo replaces the former app-level Clay override as the single accent.
+ * Compatibility aliases keep existing components stable while every role
+ * resolves to the new semantic system.
  */
 :root {
   /* Light primitives */
-  --paper: #F8F6F1;
-  --silk: #EFEAE2;
-  --mist: #D8D2C9;
-  --pebble: #6D675F;
-  --stone: #69635C;
-  --graphite: #3F3B36;
-  --ink: #1B1A18;
+  --paper: #F8F6F0;
+  --silk: #FFFEFB;
+  --ivory-alt: #EDE9E0;
+  --mist: #CDC8BE;
+  --pebble: #767870;
+  --stone: #5E6059;
+  --graphite: #383A35;
+  --ink: #222320;
 
   /* Accent and exception */
-  --indigo: #3D4B66;
-  --indigo-dark: #2E3950;
-  --indigo-light: #8794AE;
-  --alert: #B4452D;
+  --vermilion: #B45235;
+  --vermilion-dark: #8F3D27;
+  --vermilion-light: #DA805F;
+  --link: #315C8F;
+  --art-blue: #7799C8;
+  --art-lilac: #A99BC9;
+  --art-sage: #8DA494;
+  --alert: #9E352F;
 
   /* Semantic roles */
-  --accent: var(--indigo);
-  --accent-hover: var(--indigo-dark);
-  --focus: var(--indigo);
+  --accent: var(--vermilion);
+  --accent-hover: var(--vermilion-dark);
+  --focus: var(--link);
   --bg-page: var(--paper);
   --surface-card: var(--silk);
   --text-primary: var(--ink);
   --text-secondary: var(--stone);
   --text-disabled: var(--pebble);
   --border: var(--mist);
-  --on-accent: var(--paper);
+  --on-accent: #FFFEFB;
 
   /* Derived translucent roles */
-  --accent-ring: color-mix(in srgb, var(--indigo) 16%, transparent);
-  --accent-wash: color-mix(in srgb, var(--indigo) 6%, transparent);
+  --accent-ring: color-mix(in srgb, var(--vermilion) 18%, transparent);
+  --accent-wash: color-mix(in srgb, var(--vermilion) 7%, transparent);
   --alert-wash: color-mix(in srgb, var(--alert) 6%, transparent);
   --alert-border: color-mix(in srgb, var(--alert) 20%, transparent);
 
   /* Transitional compatibility aliases */
-  --clay: var(--indigo);
-  --clay-dark: var(--indigo-dark);
-  --clay-light: var(--indigo-light);
+  --indigo: var(--vermilion);
+  --indigo-dark: var(--vermilion-dark);
+  --indigo-light: var(--vermilion-light);
+  --clay: var(--vermilion);
+  --clay-dark: var(--vermilion-dark);
+  --clay-light: var(--vermilion-light);
   --clay-ring: var(--accent-ring);
   --clay-wash: var(--accent-wash);
   --charcoal: var(--graphite);
   --ivory: var(--silk);
   --warm-grey: var(--stone);
   --muted-grey: var(--pebble);
-  --moss: var(--indigo);
-  --moss-dark: var(--indigo-dark);
-  --moss-mid: var(--indigo-light);
-  --vermilion: var(--alert);
+  --moss: var(--vermilion);
+  --moss-dark: var(--vermilion-dark);
+  --moss-mid: var(--vermilion-light);
   --ring-moss: var(--accent-ring);
   --moss-wash: var(--accent-wash);
   --vermilion-wash: var(--alert-wash);
@@ -59,15 +67,17 @@
 }
 
 [data-theme="dark"] {
-  --paper: #0E1118;
-  --silk: #171B25;
-  --mist: #252B39;
-  --pebble: #8E96AA;
-  --stone: #A3A9B9;
-  --graphite: #C3C8D4;
-  --ink: #F0F2F7;
-  --indigo: #8399C4;
-  --indigo-dark: #A0B0D3;
-  --indigo-light: #A0B0D3;
-  --alert: #F07A61;
+  --paper: #0F0F0E;
+  --silk: #191817;
+  --mist: #302E2A;
+  --pebble: #A39E96;
+  --stone: #B9B4AC;
+  --graphite: #D8D4CD;
+  --ink: #F8F6F1;
+  --vermilion: #FF7A52;
+  --vermilion-dark: #FF9474;
+  --vermilion-light: #FFB199;
+  --alert: #FF8A8F;
+  --link: #9DBDE5;
+  --on-accent: #1F1C1B;
 }

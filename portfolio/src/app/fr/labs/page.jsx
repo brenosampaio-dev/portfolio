@@ -1,8 +1,8 @@
 import { LabsContent } from "@/components/site/LabsContent";
 
 export const metadata = {
-  title: "Labs — Apprentissage frontend et expériences",
-  description: "Des expériences frontend sélectionnées avec adaptations, décisions de design et réflexion technique.",
+  title: "Systems Lab — Expériences d’interface produit",
+  description: "Des expériences de systèmes d’interface autour des produits denses, de l’accessibilité et de l’implémentation.",
   alternates: { canonical: "/fr/labs", languages: { "en-CA": "/labs", "fr-CA": "/fr/labs" } },
 };
 

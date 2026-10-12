@@ -1,8 +1,8 @@
 import { LabsContent } from "@/components/site/LabsContent";
 
 export const metadata = {
-  title: "Labs — Frontend learning and experiments",
-  description: "Selected frontend experiments with adaptations, design decisions and technical reflection.",
+  title: "Systems Lab — Product interface experiments",
+  description: "Interface-system experiments exploring dense product patterns, accessibility and implementation.",
   alternates: { canonical: "/labs", languages: { "en-CA": "/labs", "fr-CA": "/fr/labs" } },
 };
 

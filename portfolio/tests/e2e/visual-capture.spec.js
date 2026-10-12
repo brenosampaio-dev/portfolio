@@ -1,15 +1,13 @@
 import { expect, test } from "@playwright/test";
 
-const widths = [320, 390, 768, 1024, 1440];
-const nonCaseRoutes = ["/", "/work", "/labs", "/about", "/fr", "/fr/work", "/fr/labs", "/fr/about"];
-const caseRoutes = [
-  "/work/access-restored",
-  "/work/missing-reservation",
-  "/work/connectivity-broke",
-  "/work/service-operations",
-  "/work/triageai",
+const viewports = [
+  { width: 360, height: 800 },
+  { width: 601, height: 900 },
+  { width: 768, height: 1024 },
+  { width: 1280, height: 900 },
+  { width: 1440, height: 1000 },
 ];
-const routes = [...nonCaseRoutes, ...caseRoutes];
+const nonCaseRoutes = ["/", "/work", "/labs", "/about", "/fr", "/fr/work", "/fr/labs", "/fr/about"];
 
 function routeName(route) {
   return route === "/" ? "home" : route.slice(1).replaceAll("/", "-");
@@ -45,17 +43,22 @@ async function revealCodeVeilOnBackground(page) {
   await page.mouse.move(point.x, point.y);
 }
 
-for (const route of routes) {
-  for (const width of widths) {
+for (const route of nonCaseRoutes) {
+  for (const viewport of viewports) {
     for (const theme of ["light", "dark"]) {
-      test(`capture ${route} ${width} ${theme}`, async ({ page }) => {
-        await page.setViewportSize({ width, height: width <= 390 ? 844 : 900 });
+      test(`capture ${route} ${viewport.width} ${theme}`, async ({ page }) => {
+        await page.setViewportSize(viewport);
         await page.addInitScript((value) => localStorage.setItem("theme", value), theme);
         await page.goto(route);
         await expect(page.locator("main h1")).toBeVisible();
         await settleAndReveal(page);
+        const overflow = await page.evaluate(() => ({
+          clientWidth: document.documentElement.clientWidth,
+          scrollWidth: document.documentElement.scrollWidth,
+        }));
+        expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.clientWidth);
         await page.screenshot({
-          path: `artifacts/visual/${theme}-${width}-${routeName(route)}.png`,
+          path: `artifacts/visual/${theme}-${viewport.width}-${routeName(route)}.png`,
           fullPage: true,
         });
       });

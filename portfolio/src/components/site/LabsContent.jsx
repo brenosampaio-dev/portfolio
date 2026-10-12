@@ -8,23 +8,23 @@ export function LabsContent({ lang = "en" }) {
 
   return (
     <article>
-      <section id="labs-overview" className="container section--emphasis" data-label="Labs" aria-labelledby="labs-page-title">
+      <section id="labs-overview" className="container section--emphasis" data-label={fr ? "Laboratoire de systèmes" : "Systems Lab"} aria-labelledby="labs-page-title">
         <PageIntro eyebrow={content.labs.eyebrow} title={content.labs.title} lead={content.labs.lead} />
         <span id="labs-page-title" className="sr-only">Labs</span>
       </section>
 
-      <section id="current-learning" className="container section" data-label={fr ? "Apprentissage actuel" : "Current learning"} aria-labelledby="labs-current-title">
+      <section id="current-learning" className="container section" data-label={fr ? "Expériences système" : "System experiments"} aria-labelledby="labs-current-title">
         <div className="section-head">
           <Status>{content.statusLabels[content.labs.currentStatus]}</Status>
           <Text as="h2" variant="h2" id="labs-current-title">{content.labs.current}</Text>
-          <Text variant="body">{fr ? "Priorités actuelles : HTML, CSS, JavaScript, React, accessibilité et Git." : "Current focus: HTML, CSS, JavaScript, React, accessibility and Git."}</Text>
+          <Text variant="body">{fr ? "Premiers modules prévus : tableau de données, combobox accessible et parcours de révision ou d’approbation." : "First planned modules: a data table, an accessible combobox and a review or approval flow."}</Text>
         </div>
       </section>
 
       <section id="publishing-standard" className="container section" data-label={fr ? "Critère de publication" : "Publishing standard"} aria-labelledby="publishing-standard-title">
         <div className="section-head">
-          <Text as="h2" variant="h2" id="publishing-standard-title">{fr ? "Ce qui mérite d’être publié" : "What earns a place here"}</Text>
-          <Text variant="body">{fr ? "Un exercice de cours non modifié n’est pas une preuve de portfolio. Chaque expérience publiée devra montrer la question testée, l’adaptation, les décisions et ce qui a été appris." : "Unmodified tutorial work is not portfolio evidence. Every published experiment must show the question tested, the adaptation, the decisions and what was learned."}</Text>
+          <Text as="h2" variant="h2" id="publishing-standard-title">{fr ? "Une expérience devient une preuve lorsqu’elle explique ses décisions." : "An experiment becomes evidence when it explains its decisions."}</Text>
+          <Text variant="body">{fr ? "Chaque module publié montrera le comportement étudié, les variantes, les cas limites, les critères d’accessibilité et ce que l’implémentation a révélé." : "Every published module will show the behavior examined, variants, edge cases, accessibility criteria and what implementation revealed."}</Text>
         </div>
       </section>
     </article>

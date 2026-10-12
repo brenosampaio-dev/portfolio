@@ -3,10 +3,8 @@
  *
  * 8px base — every space is a multiple of 8 (or 4 for micro).
  * Sections use compact, standard, and emphasis rhythm by narrative weight.
- * Radius: 6px controls, 10px standard cards, 16px major surfaces.
+ * Radius: 8–10px controls, 12px standard cards, 16px major surfaces.
  * Elevation: hairlines before shadows. Shadow only on genuine lift.
- *
- * kanso (簡素) — nothing unnecessary; nothing missing.
  */
 :root {
   /* ── Spacing scale ──────────────────────────────────────── */
@@ -23,11 +21,13 @@
   --space-20: 80px;
   --space-24: 96px;
   --space-30: 120px;
+  --space-32: 128px;
+  --space-36: 144px;
 
   /* ── Semantic spacing ───────────────────────────────────── */
-  --section-compact: 64px;
-  --section-standard: 80px;
-  --section-emphasis: 120px;
+  --section-compact: clamp(3.5rem, 5vw, 4rem);
+  --section-standard: clamp(4.5rem, 7vw, 6rem);
+  --section-emphasis: clamp(6rem, 9vw, 7.5rem);
   --gap-section:  var(--section-standard); /* default section rhythm */
   --gap-content:  var(--space-12);   /* 48px between content blocks */
   --gap-card:     var(--space-8);   /* 32px between cards */
@@ -36,20 +36,24 @@
 
   /* ── Radius ─────────────────────────────────────────────── */
   --radius-xs:   2px;    /* hairline rounding, editorial frames */
-  --radius-sm:   6px;    /* buttons, inputs, chips */
-  --radius-md:   10px;   /* cards */
+  --radius-sm:   8px;    /* compact controls and chips */
+  --radius-control: 10px;
+  --radius-md:   12px;   /* cards */
+  --radius-card: var(--radius-md);
   --radius-lg: 16px;     /* major project surfaces */
+  --radius-feature: var(--radius-lg);
   --radius-xl:   var(--radius-lg); /* compatibility alias; no larger default */
   --radius-full: 999px;  /* pills, tags */
 
   /* ── Elevation — hairline first ─────────────────────────── */
-  --shadow-subtle: 0 1px 4px rgba(28, 26, 24, 0.05);
-  --shadow-card:   0 4px 24px rgba(28, 26, 24, 0.07), 0 1px 3px rgba(28, 26, 24, 0.04);
-  --shadow-lift:   0 12px 48px rgba(28, 26, 24, 0.10), 0 2px 8px rgba(28, 26, 24, 0.05);
+  --shadow-subtle: 0 1px 3px rgba(31, 28, 27, 0.04);
+  --shadow-card: 0 4px 20px rgba(31, 28, 27, 0.05), 0 1px 2px rgba(31, 28, 27, 0.03);
+  --shadow-lift: 0 12px 42px rgba(31, 28, 27, 0.08), 0 2px 6px rgba(31, 28, 27, 0.04);
 
   /* ── Layout ─────────────────────────────────────────────── */
   --max-content: 1100px;
   --max-content-wide: 1240px;
-  --max-prose:    680px;
+  --max-prose:    68ch;
   --max-narrow:   480px;
+  --page-gutter: clamp(1.25rem, 4.3vw, 4rem);
 }
