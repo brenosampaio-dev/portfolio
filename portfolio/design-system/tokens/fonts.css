@@ -1,12 +1,13 @@
 /*
- * Fonts — DM Sans (primary) + Cormorant Garamond (editorial accent).
+ * Fonts — IBM Plex Sans + Newsreader + IBM Plex Mono.
  *
- * DM Sans: all UI, headings, body, and labels.
- * Cormorant Garamond: pull quotes and select editorial accents only.
- * Both web families are loaded once through next/font.
+ * IBM Plex Sans: body, UI, navigation, and functional headings.
+ * Newsreader: one strong editorial display or short expressive moment.
+ * IBM Plex Mono: metadata, labels, and technical annotations.
+ * All web families are loaded once through next/font.
  */
 :root {
-  --font-sans: var(--font-dm-sans), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-  --font-serif: var(--font-cormorant), Georgia, 'Times New Roman', serif;
-  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --font-sans: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, 'Times New Roman', serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }

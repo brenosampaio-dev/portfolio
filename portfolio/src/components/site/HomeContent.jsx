@@ -28,7 +28,7 @@ export function HomeContent({ lang = "en" }) {
           <div className="hero__copy">
             <Reveal className="hero__status-row"><LocationTime /></Reveal>
             <Scramble className="eyebrow eyebrow--accent hero__eyebrow" text={content.hero.eyebrow} delay={80} />
-            <Reveal mask delay={50}><Text variant="display" id="hero-title" className="hero__title">{content.hero.title}</Text></Reveal>
+            <Reveal mask delay={50}><Text variant="hero-display" id="hero-title" className="hero__title">{content.hero.title}</Text></Reveal>
             <Reveal delay={140}><Text variant="body-lg" className="hero__lead" style={{ color: "var(--graphite)" }}>{content.hero.lead}</Text></Reveal>
             <Reveal delay={190}><Text variant="mono">{content.hero.targets}</Text></Reveal>
             <Reveal delay={220} className="hero__actions">

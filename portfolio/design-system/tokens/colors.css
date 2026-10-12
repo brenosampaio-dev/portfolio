@@ -1,5 +1,5 @@
 /*
- * Colour — clear white canvas, warm-neutral structure, burnt vermilion accent.
+ * Colour — warm paper canvas, near-black ink, restrained humanist accents.
  *
  * Primitive names describe material; semantic aliases describe purpose.
  * Compatibility aliases keep existing components stable while every role
@@ -7,31 +7,36 @@
  */
 :root {
   /* Light primitives */
-  --paper: #FFFFFF;
-  --silk: #F3F2EE;
-  --mist: #DEDCD6;
-  --pebble: #77736D;
-  --stone: #5F5B56;
-  --graphite: #36322F;
-  --ink: #1F1C1B;
+  --paper: #F8F6F0;
+  --silk: #FFFEFB;
+  --ivory-alt: #EDE9E0;
+  --mist: #CDC8BE;
+  --pebble: #767870;
+  --stone: #5E6059;
+  --graphite: #383A35;
+  --ink: #222320;
 
   /* Accent and exception */
-  --vermilion: #C74624;
-  --vermilion-dark: #A93618;
-  --vermilion-light: #EF9E84;
-  --alert: #B4232C;
+  --vermilion: #B45235;
+  --vermilion-dark: #8F3D27;
+  --vermilion-light: #DA805F;
+  --link: #315C8F;
+  --art-blue: #7799C8;
+  --art-lilac: #A99BC9;
+  --art-sage: #8DA494;
+  --alert: #9E352F;
 
   /* Semantic roles */
   --accent: var(--vermilion);
   --accent-hover: var(--vermilion-dark);
-  --focus: var(--vermilion);
+  --focus: var(--link);
   --bg-page: var(--paper);
   --surface-card: var(--silk);
   --text-primary: var(--ink);
   --text-secondary: var(--stone);
   --text-disabled: var(--pebble);
   --border: var(--mist);
-  --on-accent: #FFFFFF;
+  --on-accent: #FFFEFB;
 
   /* Derived translucent roles */
   --accent-ring: color-mix(in srgb, var(--vermilion) 18%, transparent);
@@ -73,5 +78,6 @@
   --vermilion-dark: #FF9474;
   --vermilion-light: #FFB199;
   --alert: #FF8A8F;
+  --link: #9DBDE5;
   --on-accent: #1F1C1B;
 }

@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 /*
- * Button — one primary action per view; Indigo is the only tint.
- * DM Sans 500 at 15px, 6px radius (restrained, not rounded).
+ * Button — one primary action per view; ink carries the strongest action.
+ * IBM Plex Sans 500 at 15px with a restrained 10px control radius.
  * Renders as <button> or, when `href` is set, as <a> (so it can also be
  * dropped into next/link via asChild-style usage). Reconstructed from spec.
  */
@@ -21,7 +21,7 @@ const base = {
   letterSpacing: "-0.01em",
   minHeight: "44px",
   padding: "0 22px",
-  borderRadius: "var(--radius-sm)",
+  borderRadius: "var(--radius-control)",
   border: "1px solid transparent",
   cursor: "pointer",
   userSelect: "none",
@@ -37,8 +37,8 @@ const base = {
 
 const variants = {
   primary: {
-    rest: { background: "var(--clay)", color: "var(--on-accent)", borderColor: "transparent" },
-    hover: { background: "var(--clay-dark)", boxShadow: "var(--shadow-card)" },
+    rest: { background: "var(--ink)", color: "var(--paper)", borderColor: "transparent" },
+    hover: { background: "var(--graphite)", boxShadow: "var(--shadow-card)" },
   },
   secondary: {
     rest: { background: "var(--silk)", color: "var(--ink)", borderColor: "var(--mist)" },

@@ -25,13 +25,13 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1.5px);
-  background-size: 26px 26px;
+  background-size: 32px 32px;
   background-position: center;
   -webkit-mask-image: radial-gradient(ellipse 72% 64% at 50% 42%, #000 22%, transparent 82%);
   mask-image: radial-gradient(ellipse 72% 64% at 50% 42%, #000 22%, transparent 82%);
 }
 @media (max-width: 600px) {
-  body::before { background-size: 22px 22px; }
+  body::before { background-size: 28px 28px; }
 }
 
 /* Anchor scrolling lands the section title below the sticky header */
@@ -421,7 +421,7 @@ html {
   width: 100%;
   max-width: var(--max-content);
   margin-inline: auto;
-  padding-inline: clamp(var(--space-5), 4vw, var(--space-12));
+  padding-inline: var(--page-gutter);
 }
 
 /* Semantic vertical rhythm — choose by narrative weight, not page type. */
@@ -646,7 +646,7 @@ html {
   flex-wrap: wrap;
 }
 
-/* Editorial italic accent — Cormorant, inline inside DM Sans headings */
+/* Editorial accent — Newsreader, inline inside IBM Plex headings */
 .accent {
   font-family: var(--font-serif);
   font-style: italic;
@@ -4003,6 +4003,7 @@ html {
   .experience-layout > *,
   .approach > *,
   .about-teaser > *,
+  .about-hero > *,
   .contact > * { min-width: 0; }
   .locus {
     align-items: flex-start;
