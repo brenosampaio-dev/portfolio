@@ -1,3 +1,5 @@
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   CASE_STATUSES,
@@ -7,6 +9,18 @@ import {
 import { relayResearchSources } from "@/lib/relayResearch";
 
 describe("canonical portfolio case contract", () => {
+  it("exposes Relay from the work hub through localized public routes", () => {
+    const workHub = readFileSync(resolve(process.cwd(), "src/components/site/WorkContent.jsx"), "utf8");
+    const englishRoute = resolve(process.cwd(), "src/app/(en)/work/relay/page.jsx");
+    const frenchRoute = resolve(process.cwd(), "src/app/fr/work/relay/page.jsx");
+
+    expect(workHub).toContain("content.work.items");
+    expect(existsSync(englishRoute)).toBe(true);
+    expect(existsSync(frenchRoute)).toBe(true);
+    expect(readFileSync(englishRoute, "utf8")).toContain('lang="en"');
+    expect(readFileSync(frenchRoute, "utf8")).toContain('lang="fr"');
+  });
+
   it.each([
     ["en", "/work/relay", "Research prototype", "Planned validation"],
     ["fr", "/fr/work/relay", "Prototype de recherche", "Validation prévue"],

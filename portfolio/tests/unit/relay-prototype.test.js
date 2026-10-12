@@ -99,6 +99,26 @@ describe("Relay synthetic exception model", () => {
     }));
   });
 
+  it("rejects only a blocked resolution that is waiting for manager approval", () => {
+    const openException = relaySyntheticCases.find(({ state }) => state === RELAY_STATES.open);
+    const blocked = applyRelayAction(
+      openException,
+      { type: "propose-resolution", resolution: "refund", sensitive: true },
+      specialist,
+    );
+
+    expect(() => applyRelayAction(openException, { type: "reject" }, manager)).toThrow(
+      /no blocked resolution/i,
+    );
+    expect(applyRelayAction(blocked, { type: "reject", reason: "Evidence is incomplete" }, manager)).toEqual(
+      expect.objectContaining({
+        state: RELAY_STATES.assigned,
+        pendingResolution: null,
+        blockedReason: null,
+      }),
+    );
+  });
+
   it("resolves an ordinary permitted action directly and closes it with an audit record", () => {
     const original = relaySyntheticCases.find(({ state }) => state === RELAY_STATES.open);
     const resolved = applyRelayAction(

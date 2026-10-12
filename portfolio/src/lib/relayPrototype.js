@@ -192,6 +192,9 @@ export function applyRelayAction(exception, action, actor) {
       };
     case "reject":
       requireManager(actor);
+      if (exception.state !== RELAY_STATES.blocked || !exception.pendingResolution) {
+        throw new Error("No blocked resolution is waiting for rejection");
+      }
       return {
         ...exception,
         state: RELAY_STATES.assigned,

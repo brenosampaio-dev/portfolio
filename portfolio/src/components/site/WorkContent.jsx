@@ -1,4 +1,4 @@
-import { Button, Status, Text } from "@/components/ds";
+import { Button, ProjectCard, Status, Text } from "@/components/ds";
 import { PageIntro } from "@/components/site/PageIntro";
 import { WorkStatusPanel } from "@/components/site/WorkStatusPanel";
 import { getPortfolioV2 } from "@/lib/portfolioV2";
@@ -26,6 +26,21 @@ export function WorkContent({ lang = "en" }) {
           heading={content.work.heading}
           body={content.work.body}
         />
+        <div className="grid grid--3 work-grid" style={{ marginTop: "var(--space-12)" }}>
+          {content.work.items.map((item) => (
+            <ProjectCard
+              key={item.slug}
+              category={item.projectType}
+              title={item.title}
+              problem={item.summary}
+              role={item.role || item.statusLabel}
+              year="2026"
+              href={item.href}
+              status={item.statusLabel}
+              upcoming={!item.href}
+            />
+          ))}
+        </div>
       </section>
 
       <section id="design-systems" className="container section" data-label={content.work.systemsHeading} aria-labelledby="design-systems-title">
