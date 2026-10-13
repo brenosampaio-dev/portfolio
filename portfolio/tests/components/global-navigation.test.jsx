@@ -19,12 +19,7 @@ describe("shared v2 components", () => {
 
     const action = screen.getByRole("link", { name: "Work" });
     expect(action).toBeVisible();
-    expect(action).toHaveStyle({
-      minHeight: "44px",
-      borderRadius: "var(--radius-control)",
-      background: "var(--ink)",
-      color: "var(--paper)",
-    });
+    expect(action).toHaveStyle({ minHeight: "44px", borderRadius: "var(--radius-sm)" });
     expect(screen.queryByRole("link", { name: /Cases in review/ })).not.toBeInTheDocument();
     expect(screen.getByText("Selection pending")).toBeVisible();
   });

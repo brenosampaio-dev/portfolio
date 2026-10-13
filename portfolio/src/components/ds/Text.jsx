@@ -1,28 +1,17 @@
 /*
  * Text — the full type scale as a component.
- * IBM Plex Sans for functional text; Newsreader for editorial display.
+ * DM Sans for all text; Cormorant Garamond for editorial serif moments.
  * Hierarchy from scale, weight, and space — almost never colour.
  * Reconstructed from the design-system spec (components/core/Text.jsx).
  */
 
 const scale = {
-  "hero-display": {
-    tag: "h1",
-    style: {
-      fontFamily: "var(--font-serif)",
-      fontSize: "var(--text-display)",
-      fontWeight: "var(--weight-regular)",
-      lineHeight: "var(--leading-display)",
-      letterSpacing: "var(--tracking-display)",
-      color: "var(--ink)",
-    },
-  },
   display: {
     tag: "h1",
     style: {
       fontFamily: "var(--font-sans)",
       fontSize: "var(--text-display)",
-      fontWeight: "var(--weight-medium)",
+      fontWeight: "var(--weight-light)",
       lineHeight: "var(--leading-display)",
       letterSpacing: "var(--tracking-display)",
       color: "var(--ink)",
@@ -123,14 +112,14 @@ const scale = {
       color: "var(--stone)",
     },
   },
-  /* Newsreader — editorial moments only */
+  /* Cormorant Garamond — editorial moments only */
   "serif-display": {
     tag: "h2",
     style: {
       fontFamily: "var(--font-serif)",
       fontSize: "var(--text-serif-disp)",
-      fontWeight: 400,
-      fontStyle: "normal",
+      fontWeight: 300,
+      fontStyle: "italic",
       lineHeight: 1.1,
       letterSpacing: "var(--tracking-serif)",
       color: "var(--graphite)",

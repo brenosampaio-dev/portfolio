@@ -18,14 +18,14 @@ export function GET() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#F8F6F0",
-          color: "#222320",
+          backgroundColor: "#FFFFFF",
+          color: "#1F1C1B",
           padding: "76px 84px",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", color: "#B45235" }}>
-          <div style={{ width: 32, height: 2, backgroundColor: "#B45235", marginRight: 18 }} />
+        <div style={{ display: "flex", alignItems: "center", color: "#C74624" }}>
+          <div style={{ width: 32, height: 2, backgroundColor: "#C74624", marginRight: 18 }} />
           <div style={{ display: "flex", fontSize: 20, fontWeight: 500, letterSpacing: 5 }}>
             BRENO SAMPAIO · PRODUCT DESIGNER · DESIGNER PRODUIT
           </div>
@@ -35,10 +35,10 @@ export function GET() {
           <div style={{ display: "flex", fontSize: 76, lineHeight: 1.02, letterSpacing: -4 }}>
             {headline}
           </div>
-          <div style={{ display: "flex", marginTop: 12, fontSize: 46, lineHeight: 1.08, letterSpacing: -2, color: "#B45235" }}>
+          <div style={{ display: "flex", marginTop: 12, fontSize: 46, lineHeight: 1.08, letterSpacing: -2, color: "#C74624" }}>
             {headlineFr}
           </div>
-          <div style={{ display: "flex", marginTop: 24, fontSize: 23, lineHeight: 1.35, color: "#5E6059" }}>
+          <div style={{ display: "flex", marginTop: 24, fontSize: 23, lineHeight: 1.35, color: "#5F5B56" }}>
             Product strategy · Interaction design · Design systems / Stratégie · Interaction · Systèmes
           </div>
         </div>
