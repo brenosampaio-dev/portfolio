@@ -30,21 +30,18 @@ function contrastRatio(foreground, background) {
 }
 
 describe("portfolio visual foundation", () => {
-  it("loads the approved IBM Plex and Newsreader families at the document boundary", () => {
+  it("loads the original DM Sans and Cormorant families at the document boundary", () => {
     const fontsPath = pathFor("src/lib/fonts.js");
     expect(existsSync(fontsPath)).toBe(true);
 
     const loader = read("src/lib/fonts.js");
     const document = read("src/components/site/SiteDocument.jsx");
-    expect(loader).toContain("IBM_Plex_Sans");
-    expect(loader).toContain("IBM_Plex_Mono");
-    expect(loader).toContain("Newsreader");
-    expect(loader).toContain("--font-ibm-plex-sans");
-    expect(loader).toContain("--font-ibm-plex-mono");
-    expect(loader).toContain("--font-newsreader");
-    expect(document).toContain("ibmPlexSans.variable");
-    expect(document).toContain("ibmPlexMono.variable");
-    expect(document).toContain("newsreader.variable");
+    expect(loader).toContain("DM_Sans");
+    expect(loader).toContain("Cormorant_Garamond");
+    expect(loader).toContain("--font-dm-sans");
+    expect(loader).toContain("--font-cormorant");
+    expect(document).toContain("dmSans.variable");
+    expect(document).toContain("cormorant.variable");
   });
 
   it("does not duplicate font loading through remote stylesheets", () => {
@@ -53,13 +50,11 @@ describe("portfolio visual foundation", () => {
     const fontSurface = `${fontTokens}\n${document}`;
 
     expect(fontSurface).not.toMatch(/fonts\.googleapis\.com|@import\s+url/i);
-    expect(fontSurface).toMatch(/IBM Plex Sans/i);
-    expect(fontSurface).toMatch(/IBM Plex Mono/i);
-    expect(fontSurface).toMatch(/Newsreader/i);
+    expect(fontSurface).toMatch(/DM Sans|Cormorant Garamond/i);
   });
 
-  it("uses Newsreader for editorial display and IBM Plex for functional text", () => {
-    const variants = ["hero-display", "display", "h1", "h2", "h3", "body", "mono", "eyebrow", "serif-display"];
+  it("restores sans headings and reserves serif for editorial accents", () => {
+    const variants = ["display", "h1", "h2", "h3", "body", "mono", "eyebrow", "serif-display"];
     render(createElement("div", null, variants.map((variant) => createElement(
       Text,
       { variant, key: variant, "data-testid": variant },
@@ -72,20 +67,17 @@ describe("portfolio visual foundation", () => {
     for (const variant of ["mono", "eyebrow"]) {
       expect(screen.getByTestId(variant)).toHaveStyle({ fontFamily: "var(--font-mono)" });
     }
-    for (const variant of ["hero-display", "serif-display"]) {
-      expect(screen.getByTestId(variant)).toHaveStyle({ fontFamily: "var(--font-serif)" });
-    }
+    expect(screen.getByTestId("serif-display")).toHaveStyle({ fontFamily: "var(--font-serif)" });
   });
 
-  it("uses the approved fluid humanist type scale and reading rhythm", () => {
+  it("restores the original type scale and rhythm", () => {
     const typography = read("design-system/tokens/typography.css");
-    expect(typography).toContain("--text-display: clamp(3.25rem, 6vw, 5.5rem)");
-    expect(typography).toContain("--text-h1: clamp(2.4rem, 4.2vw, 4.2rem)");
-    expect(typography).toContain("--text-h2: clamp(1.8rem, 2.8vw, 2.75rem)");
-    expect(typography).toContain("--text-body: 1.0625rem");
-    expect(typography).toContain("--leading-display: 1.04");
-    expect(typography).toContain("--leading-body: 1.65");
-    expect(typography).toContain("--tracking-display: -0.035em");
+    expect(typography).toContain("--text-display:      72px");
+    expect(typography).toContain("--text-h1:           52px");
+    expect(typography).toContain("--text-h2:           36px");
+    expect(typography).toContain("--leading-display:  0.95");
+    expect(typography).toContain("--leading-body:     1.68");
+    expect(typography).toContain("--tracking-display: -0.04em");
   });
 
   it("defines the approved light and dark semantic palette", () => {
@@ -103,14 +95,14 @@ describe("portfolio visual foundation", () => {
       accentHover: cssVariable(light, "vermilion-dark"),
       onAccent: cssVariable(light, "on-accent"),
     }).toEqual({
-      page: "#F8F6F0",
-      surface: "#FFFEFB",
-      border: "#CDC8BE",
-      secondary: "#5E6059",
-      ink: "#222320",
-      accent: "#B45235",
-      accentHover: "#8F3D27",
-      onAccent: "#FFFEFB",
+      page: "#FFFFFF",
+      surface: "#F3F2EE",
+      border: "#DEDCD6",
+      secondary: "#5F5B56",
+      ink: "#1F1C1B",
+      accent: "#C74624",
+      accentHover: "#A93618",
+      onAccent: "#FFFFFF",
     });
 
     expect({
@@ -132,10 +124,9 @@ describe("portfolio visual foundation", () => {
 
   it("keeps every normal-text palette combination at WCAG AA contrast", () => {
     const combinations = [
-      ["#222320", "#F8F6F0"],
-      ["#5E6059", "#F8F6F0"],
-      ["#FFFEFB", "#B45235"],
-      ["#315C8F", "#F8F6F0"],
+      ["#1F1C1B", "#FFFFFF"],
+      ["#5F5B56", "#FFFFFF"],
+      ["#FFFFFF", "#C74624"],
       ["#F8F6F1", "#0F0F0E"],
       ["#1F1C1B", "#FF7A52"],
     ];
@@ -169,16 +160,16 @@ describe("portfolio visual foundation", () => {
     expect(`${english}\n${french}\n${englishPages}\n${frenchPages}`).not.toMatch(/building with code|frontend learning|apprentissage frontend|product design and frontend|design produit et le frontend|design produit et frontend/i);
     expect(englishPages).toContain("Systems Lab — Product interface experiments");
     expect(frenchPages).toContain("Systems Lab — Expériences d’interface produit");
-    expect(english).toContain('themeColor: "#F8F6F0"');
-    expect(french).toContain('themeColor: "#F8F6F0"');
-    expect(providers).toContain('theme === "dark" ? "#0F0F0E" : "#F8F6F0"');
+    expect(english).toContain('themeColor: "#FFFFFF"');
+    expect(french).toContain('themeColor: "#FFFFFF"');
+    expect(providers).toContain('theme === "dark" ? "#0F0F0E" : "#FFFFFF"');
 
     expect(social).toContain("Complex products, made clear.");
     expect(social).toContain("Des produits complexes, rendus clairs.");
     expect(social).toContain("PRODUCT DESIGNER · DESIGNER PRODUIT");
-    expect(social).toContain('backgroundColor: "#F8F6F0"');
-    expect(social).toContain('color: "#222320"');
-    expect(social).toContain('color: "#B45235"');
+    expect(social).toContain('backgroundColor: "#FFFFFF"');
+    expect(social).toContain('color: "#1F1C1B"');
+    expect(social).toContain('color: "#C74624"');
     expect(social).not.toMatch(/fonts\.googleapis\.com|loadFont\(|await fetch\(/);
 
     expect(document).toContain('jobTitle: "Product Designer"');

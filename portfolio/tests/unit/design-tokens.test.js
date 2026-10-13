@@ -5,20 +5,18 @@ import { describe, expect, it } from "vitest";
 const read = (file) => readFileSync(resolve(process.cwd(), file), "utf8");
 
 describe("portfolio v2 tokens", () => {
-  it("defines the approved humanist light canvas and preserved dark theme", () => {
+  it("defines the approved light and dark canvases and accent", () => {
     const css = read("design-system/tokens/colors.css");
-    expect(css).toContain("--paper: #F8F6F0");
-    expect(css).toContain("--silk: #FFFEFB");
-    expect(css).toContain("--vermilion: #B45235");
-    expect(css).toContain("--link: #315C8F");
+    expect(css).toContain("--paper: #FFFFFF");
+    expect(css).toContain("--vermilion: #C74624");
     expect(css).toContain("--paper: #0F0F0E");
     expect(css).toContain("--vermilion: #FF7A52");
   });
 
   it("keeps meaningful microtype at twelve pixels or above", () => {
     const css = read("design-system/tokens/typography.css");
-    expect(css).toContain("--text-micro: 0.8125rem");
-    expect(css).toContain("--text-mono: 0.8125rem");
+    expect(css).toContain("--text-micro: 12px");
+    expect(css).toContain("--text-mono: 12px");
     expect(css).not.toMatch(/--text-(?:micro|mono):\s*(?:10|11)px/);
   });
 
