@@ -278,6 +278,17 @@
   letter-spacing: -0.042em;
   color: var(--ink);
   max-width: none;
+  animation: heroTitleFadeUp 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes heroTitleFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .heroTitle span {
   display: block;
@@ -2224,15 +2235,33 @@
     opacity 680ms cubic-bezier(0.16, 1, 0.3, 1),
     transform 680ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Guarantee above-the-fold titles (Hero and Page Intro) are never clipped or delayed */
+.shell .hero :global(.reveal--mask),
+.shell .pageIntro :global(.reveal--mask),
+.shell .workHeader :global(.reveal--mask) {
+  overflow: visible !important;
+}
+.shell .hero :global(.reveal__inner),
+.shell .pageIntro :global(.reveal__inner),
+.shell .workHeader :global(.reveal__inner) {
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* Masked headings below the fold */
 :global(.js) .shell :global(.reveal--mask) {
   overflow: hidden;
+  padding-bottom: 0.12em;
 }
-:global(.js) .shell :global(.reveal--mask .reveal__inner):not(:global(.is-in)) {
-  transform: translateY(105%);
-}
-:global(.js) .shell :global(.reveal--mask .reveal__inner.is-in) {
-  transform: translateY(0);
+:global(.js) .shell :global(.reveal--mask .reveal__inner) {
+  display: block;
+  transform: translateY(112%);
   transition: transform 820ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+:global(.js) .shell :global(.reveal--mask.is-in .reveal__inner) {
+  transform: translateY(0) !important;
 }
 
 
