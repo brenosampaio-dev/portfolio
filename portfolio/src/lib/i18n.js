@@ -1,4 +1,4 @@
-﻿// ── Translations ─────────────────────────────────────────────────────────
+// ── Translations ─────────────────────────────────────────────────────────
 // *word* inside a string = <span className="accent"> (italic serif).
 // Canadian English and Canadian French. Every user-facing string — including
 // interface specimens, accessibility labels and client-side metadata — lives
@@ -9,7 +9,7 @@ const en = {
   resume: {
     href: "/breno-sampaio-resume-en.pdf",
     fileName: "Breno_Sampaio_Resume_EN.pdf",
-    downloadAria: "Download résumé in English (PDF)",
+    downloadAria: "Download Resume in English (PDF)",
   },
   profile: {
     location: "Valencia, Spain",
@@ -18,8 +18,8 @@ const en = {
     group: "Language",
     active: "Canadian English selected",
     options: {
-      en: "Use Canadian English",
-      fr: "Passer au français canadien",
+      en: "EN — Use Canadian English",
+      fr: "FR — Passer au français canadien",
     },
   },
   a11y: {
@@ -691,7 +691,7 @@ const fr = {
   resume: {
     href: "/breno-sampaio-resume-fr.pdf",
     fileName: "Breno_Sampaio_Resume_FR.pdf",
-    downloadAria: "Télécharger le résumé en français (PDF)",
+    downloadAria: "Télécharger le Résumé en français (PDF)",
   },
   profile: {
     location: "Valence, Espagne",
@@ -700,8 +700,8 @@ const fr = {
     group: "Langue",
     active: "Français canadien sélectionné",
     options: {
-      en: "Switch to Canadian English",
-      fr: "Utiliser le français canadien",
+      en: "EN — Switch to Canadian English",
+      fr: "FR — Utiliser le français canadien",
     },
   },
   a11y: {

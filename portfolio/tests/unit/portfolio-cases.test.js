@@ -9,12 +9,13 @@ import {
 import { relayResearchSources } from "@/lib/relayResearch";
 
 describe("canonical portfolio case contract", () => {
-  it("exposes Relay from the work hub through localized public routes", () => {
+  it("preserves existing case routes without promoting them in the new work hub", () => {
     const workHub = readFileSync(resolve(process.cwd(), "src/components/site/WorkContent.jsx"), "utf8");
     const englishRoute = resolve(process.cwd(), "src/app/(en)/work/relay/page.jsx");
     const frenchRoute = resolve(process.cwd(), "src/app/fr/work/relay/page.jsx");
 
-    expect(workHub).toContain("content.work.items");
+    expect(workHub).not.toContain("content.work.items");
+    expect(workHub).not.toContain("/work/relay");
     expect(existsSync(englishRoute)).toBe(true);
     expect(existsSync(frenchRoute)).toBe(true);
     expect(readFileSync(englishRoute, "utf8")).toContain('lang="en"');

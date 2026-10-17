@@ -1,62 +1,64 @@
-import { Button, ProjectCard, Status, Text } from "@/components/ds";
-import { PageIntro } from "@/components/site/PageIntro";
-import { WorkStatusPanel } from "@/components/site/WorkStatusPanel";
-import { getPortfolioV2 } from "@/lib/portfolioV2";
+import Link from "next/link";
+import { Reveal } from "@/components/site/Reveal";
+import { Scramble } from "@/components/site/Scramble";
+import { WorkSelection } from "@/components/site/WorkSelection";
+import { getPortfolioEditorial } from "@/lib/portfolioEditorial";
+import styles from "./EditorialShell.module.css";
 
 export function WorkContent({ lang = "en" }) {
-  const content = getPortfolioV2(lang);
-  const fr = lang === "fr";
+  const c = getPortfolioEditorial(lang);
+  const prefix = lang === "fr" ? "/fr" : "";
 
   return (
-    <article>
-      <section id="work-overview" className="container section--emphasis" data-label={fr ? "Aperçu des projets" : "Work overview"} aria-labelledby="work-page-title">
-        <PageIntro
-          eyebrow={fr ? "Projets indépendants · En développement" : "Independent work · In development"}
-          title={fr ? "Produit, système et build — chacun avec ses propres preuves." : "Product, system and build — each with its own proof."}
-          lead={content.work.body}
-          actions={<Button href={lang === "fr" ? "/fr#contact" : "/#contact"}>{fr ? "Échanger" : "Start a conversation"}</Button>}
-        />
-        <span id="work-page-title" className="sr-only">{fr ? "Projets" : "Work"}</span>
-      </section>
-
-      <section id="built-products" className="container section" data-label={content.work.builtHeading} aria-labelledby="built-products-title">
-        <WorkStatusPanel
-          id="built-products-title"
-          status={content.statusLabels[content.work.status]}
-          heading={content.work.heading}
-          body={content.work.body}
-        />
-        <div className="grid grid--3 work-grid" style={{ marginTop: "var(--space-12)" }}>
-          {content.work.items.map((item) => (
-            <ProjectCard
-              key={item.slug}
-              category={item.projectType}
-              title={item.title}
-              problem={item.summary}
-              role={item.role || item.statusLabel}
-              year="2026"
-              href={item.href}
-              status={item.statusLabel}
-              upcoming={!item.href}
-            />
-          ))}
+    <article className={styles.shell}>
+      <section className={`container ${styles.pageIntro}`} id="work-overview" data-label={c.labels.work} aria-labelledby="work-page-title">
+        <div className={styles.workHeader}>
+          <div>
+            <p className={styles.eyebrow}><Scramble text={c.work.label} /></p>
+            <Reveal mask>
+              <h1 id="work-page-title" className={styles.pageTitle}>{c.work.title}</h1>
+            </Reveal>
+          </div>
+          <p className={styles.sectionCaption}>{c.work.caption}</p>
         </div>
-      </section>
 
-      <section id="design-systems" className="container section" data-label={content.work.systemsHeading} aria-labelledby="design-systems-title">
-        <div className="section-head">
-          <Status>{content.statusLabels.next}</Status>
-          <Text as="h2" variant="h2" id="design-systems-title">{content.work.systemsHeading}</Text>
-          <Text variant="body">{fr ? "Basis sera extrait des besoins réels de Relay : composants, variantes, états et critères d’accessibilité documentés, pas une galerie d’écrans." : "Basis will be extracted from Relay’s real interface needs: documented components, variants, states and accessibility criteria, not a screen gallery."}</Text>
-        </div>
-      </section>
+        <Reveal delay={80}>
+          <WorkSelection copy={c.work} lang={lang} />
+        </Reveal>
 
-      <section id="operational-archive" className="container section" data-label={content.work.archiveHeading} aria-labelledby="operational-archive-title">
-        <div className="section-head">
-          <Status>{fr ? "Référence uniquement" : "Reference only"}</Status>
-          <Text as="h2" variant="h2" id="operational-archive-title">{content.work.archiveHeading}</Text>
-          <Text variant="body">{content.work.archiveBody}</Text>
-        </div>
+        <Reveal className={styles.catalogPreview} delay={140}>
+          <div className={styles.sectionHeading} style={{ marginBottom: "1.5rem" }}>
+            <div>
+              <p className={styles.eyebrow}>{c.work.catalogEyebrow}</p>
+              <h2 className={styles.serifH2}>{c.work.catalogTitle}</h2>
+            </div>
+          </div>
+
+          <article className={styles.compactCard} aria-label={c.work.compactMeta}>
+            <div className={styles.compactThumb} aria-hidden="true">
+              <div className={styles.compactThumbBar} />
+              <div className={styles.compactThumbLines}>
+                <span style={{ width: "85%" }} />
+                <span style={{ width: "65%" }} />
+                <span style={{ width: "75%" }} />
+              </div>
+            </div>
+            <div className={styles.compactInfo}>
+              <p className={styles.projectMeta} style={{ marginBottom: "0.25rem" }}>{c.work.compactMeta}</p>
+              <h3>{c.work.compactTitle}</h3>
+              <p>{c.work.compactBody}</p>
+              <div className={styles.compactTags}>
+                <span><strong>{c.work.compactContributionLabel}</strong> {c.work.compactContributionValue}</span>
+                <span><strong>{c.work.compactStatusLabel}</strong> {c.work.compactStatusValue}</span>
+              </div>
+            </div>
+            <div>
+              <Link href={`${prefix || "/"}#contact`} className={styles.textLink}>
+                {c.aboutPage.contact} <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+          </article>
+        </Reveal>
       </section>
     </article>
   );

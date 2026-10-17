@@ -3,35 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { useLang, useTheme } from "@/context/AppContext";
+import { useLang } from "@/context/AppContext";
 import { getT } from "@/lib/i18n";
 import { GITHUB_URL, navigationFor } from "@/lib/siteNavigation";
+import { ThemePicker } from "./ThemePicker";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Wordmark } from "./Wordmark";
-
-function SunIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
-      <circle cx="8" cy="8" r="2.8" />
-      <line x1="8" y1="1" x2="8" y2="2.6" />
-      <line x1="8" y1="13.4" x2="8" y2="15" />
-      <line x1="1" y1="8" x2="2.6" y2="8" />
-      <line x1="13.4" y1="8" x2="15" y2="8" />
-      <line x1="3.2" y1="3.2" x2="4.3" y2="4.3" />
-      <line x1="11.7" y1="11.7" x2="12.8" y2="12.8" />
-      <line x1="12.8" y1="3.2" x2="11.7" y2="4.3" />
-      <line x1="4.3" y1="11.7" x2="3.2" y2="12.8" />
-    </svg>
-  );
-}
-
-function MoonIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12.5 10A6 6 0 1 1 6 3.5a4.5 4.5 0 0 0 6.5 6.5z" />
-    </svg>
-  );
-}
+import styles from "./EditorialShell.module.css";
 
 function ToolsIcon() {
   return (
@@ -49,7 +27,6 @@ export function Header() {
   const toolsTriggerRef = useRef(null);
   const [toolsOpen, setToolsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
-  const { theme, toggle } = useTheme();
   const pathname = usePathname() || "/";
   const { lang } = useLang();
   const t = getT(lang);
@@ -60,24 +37,35 @@ export function Header() {
   useEffect(() => {
     const header = headerRef.current;
     if (!header) return undefined;
-
-    const darkElements = document.querySelectorAll("[data-nav-dark]");
-    if (!darkElements.length) return undefined;
-
-    const intersecting = new Set();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) intersecting.add(entry.target);
-          else intersecting.delete(entry.target);
-        });
-        header.classList.toggle("site-header--dark", intersecting.size > 0);
-      },
-      { rootMargin: "-24px 0px -88% 0px", threshold: 0 },
-    );
-
-    darkElements.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
+    let frame;
+    const update = () => {
+      frame = undefined;
+      const box = header.querySelector(".dock").getBoundingClientRect();
+      let surface = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+      let largest = 0;
+      document.querySelectorAll("[data-header-tone], [data-nav-dark]").forEach(element => {
+        const rect = element.getBoundingClientRect();
+        const overlap = Math.max(0, Math.min(box.right, rect.right) - Math.max(box.left, rect.left)) * Math.max(0, Math.min(box.bottom, rect.bottom) - Math.max(box.top, rect.top));
+        if (overlap > largest && overlap > box.width * box.height * .28) {
+          largest = overlap;
+          surface = element.dataset.headerTone || "dark";
+        }
+      });
+      header.dataset.surface = surface;
+      header.classList.toggle("site-header--dark", surface === "dark");
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const observer = new MutationObserver(schedule);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    update();
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
   }, [pathname]);
 
   useEffect(() => {
@@ -86,7 +74,7 @@ export function Header() {
       return undefined;
     }
 
-    const sections = ["work", "capabilities", "experience", "approach", "about", "contact"]
+    const sections = ["work", "capabilities", "approach", "about", "contact"]
       .map((id) => ({ id, element: document.getElementById(id) }))
       .filter(({ element }) => element);
 
@@ -133,7 +121,7 @@ export function Header() {
     }
 
     function closeOnEscape(event) {
-      if (event.key !== "Escape") return;
+      if (event.key !== "Escape" || event.target.closest("details")) return;
       setToolsOpen(false);
       window.requestAnimationFrame(() => toolsTriggerRef.current?.focus());
     }
@@ -148,27 +136,26 @@ export function Header() {
   }, [toolsOpen]);
 
   const currentFor = ({ id, href }) => {
-    if (id === "work" && (pathname === href || pathname.startsWith("/work/"))) return "page";
+    if (id === "work" && (pathname === href || pathname.startsWith(`${href}/`))) return "page";
     if (id === "labs" && pathname === href) return "page";
     if (id === "about" && pathname === href) return "page";
     if (pathname === homePath && activeSection === id) return "location";
     return undefined;
   };
 
-  const [work, labs, about, contact] = navigation;
 
   return (
-    <header className="site-header" ref={headerRef}>
+    <header className={`site-header ${["/", "/fr", "/work", "/fr/work", "/about", "/fr/about"].includes(pathname) ? styles.editorialHeader : ""}`} ref={headerRef}>
       <div className="dock">
         <Wordmark />
         <div className="dock__divider" aria-hidden="true" />
 
         <nav className="nav" aria-label={t.a11y.primaryNavigation}>
-          {[work, labs, about, contact].map((item) => (
+          {navigation.map((item) => (
             <Link
               key={item.id}
               href={item.href}
-              className={item.id === "labs" || item.id === "contact" ? "nav-hide-mobile" : undefined}
+              className={item.id === "contact" ? "nav-hide-mobile" : undefined}
               aria-current={currentFor(item)}
             >
               {item.label}
@@ -193,14 +180,7 @@ export function Header() {
             <span className="header-cv__arrow" aria-hidden="true">↓</span>
           </a>
           <LanguageSwitcher />
-          <button
-            type="button"
-            className="theme-btn"
-            onClick={toggle}
-            aria-label={theme === "dark" ? t.a11y.switchToLight : t.a11y.switchToDark}
-          >
-            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-          </button>
+          <ThemePicker lang={lang} />
         </div>
 
         <button
@@ -237,14 +217,7 @@ export function Header() {
           </nav>
           <div className="mobile-tools__preferences">
             <LanguageSwitcher />
-            <button
-              type="button"
-              className="theme-btn mobile-tools__theme"
-              onClick={toggle}
-              aria-label={theme === "dark" ? t.a11y.switchToLight : t.a11y.switchToDark}
-            >
-              {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-            </button>
+            <ThemePicker lang={lang} />
           </div>
         </div>
       )}

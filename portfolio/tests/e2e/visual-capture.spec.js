@@ -78,7 +78,7 @@ test("capture protected interaction surfaces", async ({ browser }) => {
   await page.screenshot({ path: "artifacts/visual/surface-mobile-header-open.png" });
   await page.keyboard.press("Escape");
 
-  await page.locator(".hero__media").evaluate((element) => window.scrollTo(0, element.offsetTop - 500));
+  await page.locator(".hero__media--art").evaluate((element) => window.scrollTo(0, element.offsetTop - 500));
   await page.waitForTimeout(800);
   await page.screenshot({ path: "artifacts/visual/surface-mobile-dock-dark-region.png" });
 
