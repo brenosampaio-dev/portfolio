@@ -27,11 +27,9 @@ export function HomeContent({ lang = "en" }) {
             <p className={styles.eyebrow}>
               <Scramble text={c.hero.eyebrow} />
             </p>
-            <Reveal mask>
-              <h1 className={`hero__title ${styles.heroTitle}`} id="hero-title">
-                {c.hero.title} <span>{c.hero.emphasis}</span>
-              </h1>
-            </Reveal>
+            <h1 className={`hero__title ${styles.heroTitle}`} id="hero-title">
+              {c.hero.title} <span>{c.hero.emphasis}</span>
+            </h1>
             <Reveal delay={90}>
               <div className={`hero__actions ${styles.actions}`}>
                 <Link className={styles.primary} href={`${prefix}/work`}>

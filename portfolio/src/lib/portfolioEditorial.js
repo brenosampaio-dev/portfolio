@@ -9,7 +9,7 @@ const en = {
     contact: "Contact",
   },
   hero: {
-    eyebrow: "Product Designer · Valencia, Spain",
+    eyebrow: "Breno Sampaio · Product Designer · Valencia, Spain",
     title: "I make complex work",
     emphasis: "easier to navigate.",
     lead: "I’m Breno. My background in multilingual operations informs how I approach information, decisions and the handovers between people.",
@@ -217,7 +217,7 @@ const fr = {
     contact: "Contact",
   },
   hero: {
-    eyebrow: "Designer produit · Valence, Espagne",
+    eyebrow: "Breno Sampaio · Designer produit · Valence, Espagne",
     title: "Rendre les parcours complexes",
     emphasis: "plus faciles à comprendre.",
     lead: "Je suis Breno. Mon expérience des opérations multilingues nourrit ma façon d’aborder l’information, les décisions et les relais entre les personnes.",
