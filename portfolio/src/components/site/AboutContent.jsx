@@ -1,84 +1,144 @@
 import Image from "next/image";
-import { Button, Text } from "@/components/ds";
-import { CapabilityGroup } from "@/components/site/CapabilityGroup";
-import { PageIntro } from "@/components/site/PageIntro";
+import Link from "next/link";
 import { Reveal } from "@/components/site/Reveal";
+import { Scramble } from "@/components/site/Scramble";
 import { profile } from "@/lib/content";
 import { getT } from "@/lib/i18n";
-import { getPortfolioV2 } from "@/lib/portfolioV2";
+import { getPortfolioEditorial } from "@/lib/portfolioEditorial";
+import styles from "./EditorialShell.module.css";
 
 export function AboutContent({ lang = "en" }) {
-  const content = getPortfolioV2(lang);
-  const legacy = getT(lang);
-  const fr = lang === "fr";
-  const prefix = fr ? "/fr" : "";
+  const c = getPortfolioEditorial(lang);
+  const a = c.aboutPage;
+  const t = getT(lang);
+  const prefix = lang === "fr" ? "/fr" : "";
 
   return (
-    <article>
-      <section id="about-overview" className="container about-hero" data-label={fr ? "Profil" : "About"} aria-label={fr ? "Présentation" : "Positioning"}>
-        <PageIntro eyebrow={content.about.eyebrow} title={content.about.title} lead={content.about.lead} actions={<Button href={legacy.resume.href} download={legacy.resume.fileName}>{fr ? "Télécharger le CV" : "Download resume"}</Button>} />
-        <Reveal>
-          <div className="portrait portrait--photo">
-            <Image src="/images/breno-portrait.png" alt="Breno Sampaio" fill sizes="(max-width: 600px) 250px, (max-width: 900px) 280px, 320px" style={{ objectFit: "cover" }} priority />
+    <article className={styles.shell}>
+      {/* 01 · Personal thesis + Portrait card */}
+      <section className={`container ${styles.pageIntro}`} id="about-overview" data-label={a.eyebrow} aria-labelledby="about-page-title">
+        <div className={styles.aboutIntro}>
+          <div>
+            <p className={styles.eyebrow}><Scramble text={a.eyebrow} /></p>
+            <Reveal mask>
+              <h1 id="about-page-title" className={styles.pageTitle}>
+                {a.title} <span>{a.emphasis}</span>
+              </h1>
+            </Reveal>
+            <Reveal delay={80}>
+              <p className={styles.lead}>{a.intro}</p>
+              <p className={styles.subLead}>{a.introSub}</p>
+            </Reveal>
           </div>
-        </Reveal>
-        <Reveal className="about-facts">
-          <div className="about-fact"><span className="about-fact__label">{fr ? "Identité actuelle" : "Current identity"}</span><span className="about-fact__value">{content.identity.current}</span></div>
-          <div className="about-fact"><span className="about-fact__label">{fr ? "En développement" : "Building now"}</span><span className="about-fact__value">{content.identity.transition}</span></div>
-          <div className="about-fact"><span className="about-fact__label">{fr ? "Mobilité" : "Mobility"}</span><span className="about-fact__value">{fr ? "Espagne · Europe · Canada selon le processus employeur" : "Spain · Europe · Canada with the right employer process"}</span></div>
-        </Reveal>
-      </section>
 
-      <section id="about-path" className="container section about-body" data-label={fr ? "Parcours" : "The path"} aria-labelledby="about-path-title">
-        <Text as="h2" variant="h2" id="about-path-title">{fr ? "Opérations → Design produit → Prototypes" : "Operations → Product Design → Prototypes"}</Text>
-        <div className="prose">
-          <p>{content.about.lead}</p>
-          <p className="muted">{fr ? "Le fil conducteur est la clarté : comprendre ce qui rend une décision difficile, rendre les contraintes visibles, puis transformer ce raisonnement en parcours et composants utilisables." : "The connecting thread is clarity: understand what makes a decision difficult, expose the constraints, then carry that reasoning into usable flows and components."}</p>
+          <Reveal as="aside" className={styles.portraitCardPage} delay={120} aria-label={c.about.caption}>
+            <div data-header-tone="dark">
+              <Image
+                src="/images/breno-portrait.png"
+                alt="Breno Sampaio"
+                width={600}
+                height={750}
+                sizes="(max-width: 700px) 260px, 320px"
+                priority
+                className={styles.portraitCardImg}
+              />
+            </div>
+            <dl className={styles.portraitCardMeta}>
+              <div><dt>{a.metaBaseLabel}</dt><dd>{a.metaBaseValue}</dd></div>
+              <div><dt>{a.metaRoleLabel}</dt><dd>{a.metaRoleValue}</dd></div>
+              <div><dt>{a.metaLangsLabel}</dt><dd>{a.metaLangsValue}</dd></div>
+            </dl>
+          </Reveal>
         </div>
       </section>
 
-      <section id="transferable-strengths" className="container section" data-label={fr ? "Forces transférables" : "Transferable strengths"} aria-labelledby="strengths-title">
-        <div className="section-head"><Text as="h2" variant="h2" id="strengths-title">{fr ? "Une expérience opérationnelle, appliquée au produit." : "Strengths proven in operations, carried into product."}</Text></div>
-        <div className="capability-grid">
-          {content.capabilities.slice(0, 2).map((group) => <CapabilityGroup key={group.id} title={group.title} status={content.statusLabels[group.status]} items={group.items} />)}
-        </div>
-      </section>
+      {/* 02 · Product Perspective & Collaboration */}
+      <section className={`container ${styles.section} ${styles.chapterSection}`} id="perspective" data-label={lang === "fr" ? "Perspective" : "Perspective"} aria-labelledby="perspective-title">
+        <div className={styles.chapterGrid}>
+          <Reveal className={styles.chapterHead}>
+            <p className={styles.eyebrow}>{a.perspectiveEyebrow}</p>
+            <h2 id="perspective-title" className={styles.serifH2}>{a.perspective}</h2>
+          </Reveal>
+          <Reveal className={styles.chapterBody} delay={80}>
+            <p className={styles.chapterLead}>{a.perspectiveBody}</p>
+            <div className={styles.pillarsGrid}>
+              {a.pillars.map((pillar) => (
+                <div key={pillar.title} className={styles.pillarBox}>
+                  <h3>{pillar.title}</h3>
+                  <p>{pillar.body}</p>
+                </div>
+              ))}
+            </div>
 
-      <section id="current-learning" className="container section" data-label={fr ? "Apprentissage actuel" : "Current learning"} aria-labelledby="learning-title">
-        <div className="section-head">
-          <Text as="h2" variant="h2" id="learning-title">{fr ? "Les prototypes fonctionnels affinent le design." : "Working prototypes sharpen the design."}</Text>
-          <Text variant="body">{content.about.learning}</Text>
-        </div>
-        <CapabilityGroup title={content.capabilities[2].title} status={content.statusLabels[content.capabilities[2].status]} items={content.capabilities[2].items} />
-      </section>
-
-      <section id="timeline" className="container section" data-label={fr ? "Chronologie" : "Timeline"} aria-labelledby="timeline-title">
-        <div className="experience-layout">
-          <div className="section-head"><Text as="h2" variant="h2" id="timeline-title">{fr ? "L’expérience derrière la pratique." : "The experience behind the practice."}</Text></div>
-          <div className="experience-list">
-            {legacy.experience.items.map((item) => (
-              <div className="experience-item" key={`${item.company}-${item.dates}`}>
-                <span className="experience-item__dates">{item.dates}</span>
-                <div><Text as="h3" variant="h3" className="experience-item__role">{item.role}</Text><span className="experience-item__company">{item.company} · {item.location}</span><p className="experience-item__detail">{item.detail}</p></div>
+            <div className={styles.editorialRows}>
+              <div className={styles.edRow}>
+                <div className={styles.edLabel}>{a.collaborationLabel}</div>
+                <div className={styles.edContent}>
+                  <h3>{a.collaboration}</h3>
+                  <p>{a.collaborationBody}</p>
+                </div>
               </div>
+              <div className={styles.edRow}>
+                <div className={styles.edLabel}>{a.frontendLabel}</div>
+                <div className={styles.edContent}>
+                  <h3>{a.frontend}</h3>
+                  <p>{a.frontendBody}</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 03 · Synthesized Trajectory */}
+      <section className={`container ${styles.section} ${styles.chapterSection}`} id="timeline" data-label={lang === "fr" ? "Parcours" : "Experience"} aria-labelledby="timeline-title">
+        <div className={styles.chapterGrid}>
+          <Reveal className={styles.chapterHead}>
+            <p className={styles.eyebrow}>{a.experienceEyebrow}</p>
+            <h2 id="timeline-title" className={styles.serifH2}>{a.experience}</h2>
+          </Reveal>
+          <div className={styles.editorialRows}>
+            {a.trajectoryRows.map((row, idx) => (
+              <Reveal key={row.title} className={styles.edRow} delay={idx * 80}>
+                <div className={styles.edLabel}>{row.label}</div>
+                <div className={styles.edContent}>
+                  <h3>{row.title}</h3>
+                  <p>{row.body}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="languages-location" className="container section" data-label={fr ? "Langues et lieu" : "Languages and location"} aria-labelledby="languages-title">
-        <div className="about-body">
-          <div className="section-head"><Text as="h2" variant="h2" id="languages-title">{content.location}</Text><Text variant="body">{fr ? "Disponible pour des modalités hybrides, à distance et une mobilité adaptée au poste." : "Available for hybrid, remote and role-appropriate relocation arrangements."}</Text></div>
-          <div className="about-facts">
-            {profile.languages.map((language) => <div className="about-fact" key={language.name}><span className="about-fact__label">{legacy.languageNames[language.name] || language.name}</span><span className="about-fact__value">{legacy.languageLevels[language.level] || language.level}</span></div>)}
-          </div>
-        </div>
-      </section>
-
-      <section id="about-actions" className="container section" data-label={fr ? "Prochaines étapes" : "Next actions"} aria-labelledby="about-actions-title">
-        <div className="section-head">
-          <Text as="h2" variant="h2" id="about-actions-title">{fr ? "Voir le raisonnement, puis échanger." : "See the thinking. Then let’s talk."}</Text>
-          <div className="page-intro__actions"><Button href={`${prefix}/work`}>{fr ? "Voir les projets" : "Explore work"}</Button><Button href={`${prefix}/labs`} variant="secondary">Labs</Button><Button href={`${prefix || "/"}#contact`} variant="link">Contact</Button></div>
+      {/* 04 · Languages, Location & Direct Closing Action */}
+      <section className={`container ${styles.section}`} id="languages-location" data-label={a.languages} aria-labelledby="languages-title">
+        <div className={styles.chapterGrid}>
+          <Reveal className={styles.chapterHead}>
+            <p className={styles.eyebrow}>{a.languages}</p>
+            <h2 id="languages-title" className={styles.serifH2}>{a.location}</h2>
+          </Reveal>
+          <Reveal delay={80}>
+            <dl className={styles.languages}>
+              {profile.languages.map((language) => (
+                <div key={language.name}>
+                  <dt>{t.languageNames[language.name] || language.name}</dt>
+                  <dd>{t.languageLevels[language.level] || language.level}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className={`page-intro__actions ${styles.actions}`} style={{ marginTop: "2.5rem" }}>
+              <Link className={styles.primary} href={`${prefix || "/"}#contact`}>
+                {a.contact} <span aria-hidden="true">→</span>
+              </Link>
+              <a className={styles.textLink} href={t.resume.href} download={t.resume.fileName}>
+                {c.contact.resume} <span aria-hidden="true">↓</span>
+              </a>
+              <Link className={styles.textLink} href={`${prefix}/work`}>
+                {a.work} <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
     </article>

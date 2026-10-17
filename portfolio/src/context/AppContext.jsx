@@ -15,13 +15,25 @@ export function Providers({ children, initialLang = "en" }) {
   const pathname = usePathname() || "/";
   const router = useRouter();
   const [theme, setTheme] = useState("light");
+  const [themePreference, setThemePreference] = useState("system");
   const [lang, setLang] = useState(() => initialLang || languageFromPath(pathname));
 
   useLayoutEffect(() => {
-    const saved      = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setTheme(saved || (prefersDark ? "dark" : "light"));
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    let saved;
+    try { saved = localStorage.getItem("theme"); } catch {}
+    const preference = ["light", "dark"].includes(saved) ? saved : "system";
+    setThemePreference(preference);
+    setTheme(preference === "system" ? (media.matches ? "dark" : "light") : preference);
   }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const update = () => setTheme(themePreference === "system" ? (media.matches ? "dark" : "light") : themePreference);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, [themePreference]);
 
   useLayoutEffect(() => {
     if (isLocalizedHub(pathname) || languageFromPath(pathname) === "fr") return;
@@ -41,7 +53,7 @@ export function Providers({ children, initialLang = "en" }) {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.content = theme === "dark" ? "#0F0F0E" : "#FFFFFF";
   }, [theme]);
@@ -52,7 +64,12 @@ export function Providers({ children, initialLang = "en" }) {
     localStorage.setItem("lang", lang);
   }, [lang]);
 
-  const toggle = () => setTheme(t => (t === "light" ? "dark" : "light"));
+  const chooseTheme = useCallback((preference) => {
+    if (!["light", "dark", "system"].includes(preference)) return;
+    setThemePreference(preference);
+    try { localStorage.setItem("theme", preference); } catch {}
+  }, []);
+  const toggle = () => chooseTheme(theme === "light" ? "dark" : "light");
   const setLangWithTransition = useCallback((nextLang) => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reduceMotion && document.startViewTransition) {
@@ -72,7 +89,7 @@ export function Providers({ children, initialLang = "en" }) {
   }, [pathname, router, setLangWithTransition]);
 
   return (
-    <ThemeCtx.Provider value={{ theme, toggle }}>
+    <ThemeCtx.Provider value={{ theme, toggle, themePreference, chooseTheme }}>
       <LangCtx.Provider value={{ lang, setLang: changeLang }}>
         {children}
       </LangCtx.Provider>

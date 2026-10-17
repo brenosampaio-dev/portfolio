@@ -82,17 +82,14 @@ test("contact submit labels remain on one line at desktop widths", async ({ page
   }
 });
 
-test("hero portrait remains editorially secondary across responsive layouts", async ({ page }) => {
-  for (const viewport of [
-    { width: 1440, height: 900, maximumPortraitWidth: 380 },
-    { width: 768, height: 900, maximumPortraitWidth: 320 },
-    { width: 390, height: 844, maximumPortraitWidth: 270 },
-  ]) {
-    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+test("hero presents identity and real destinations without a decorative image band", async ({ page }) => {
+  for (const width of [1440, 768, 390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
     await page.goto("/");
-    const portrait = await page.locator(".hero__media--photo").boundingBox();
-    expect(portrait).not.toBeNull();
-    expect(portrait.width).toBeLessThanOrEqual(viewport.maximumPortraitWidth);
+    await expect(page.locator("#top h1")).toBeVisible();
+    await expect(page.locator("#top img")).toHaveCount(0);
+    await expect(page.locator(".hero__actions a").first()).toHaveAttribute("href", "/work");
+    await expect(page.locator(".hero__actions a").nth(1)).toHaveAttribute("href", "/about");
   }
 });
 
@@ -144,7 +141,7 @@ test("desktop code reveal stays hidden over foreground content", async ({ page }
   const veil = page.locator(".code-veil");
 
   for (const selector of [
-    ".hero__media--photo img",
+    ".hero__media--art svg",
     "#contact-title",
     ".contact-form select",
     ".contact-form textarea",
@@ -164,10 +161,8 @@ test("desktop code reveal follows pointer coordinates in the same event", async 
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/");
   const veil = page.locator(".code-veil");
-  let warmup = 0;
   await expect.poll(async () => {
-    warmup += 1;
-    await page.mouse.move(620 + (warmup % 2), 420);
+    await movePointerToCodeVeilBackground(page);
     return veil.getAttribute("data-active");
   }).toBe("true");
 
@@ -233,7 +228,7 @@ test("mobile More closes with Escape and restores focus", async ({ page }) => {
 
   const trigger = page.getByRole("button", { name: /more|tools|menu/i });
   await trigger.click();
-  await expect(page.getByRole("navigation", { name: "More" }).getByRole("link", { name: "Labs", exact: true })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "More" }).getByRole("link", { name: "Labs", exact: true })).toHaveCount(0);
   await page.keyboard.press("Escape");
   await expect(trigger).toBeFocused();
 });
@@ -256,14 +251,14 @@ test("mobile More closes after same-page Contact navigation in both languages", 
 });
 
 const nonCaseRoutes = [
-  { path: "/", lang: "en-CA", sectionIds: ["top", "work", "capabilities", "experience", "approach", "about", "contact"] },
-  { path: "/work", lang: "en-CA", sectionIds: ["work-overview", "built-products", "design-systems", "operational-archive"] },
+  { path: "/", lang: "en-CA", sectionIds: ["top", "work", "capabilities", "approach", "about", "contact"] },
+  { path: "/work", lang: "en-CA", sectionIds: ["work-overview"] },
   { path: "/labs", lang: "en-CA", sectionIds: ["labs-overview", "current-learning", "publishing-standard"] },
-  { path: "/about", lang: "en-CA", sectionIds: ["about-overview", "about-path", "transferable-strengths", "current-learning", "timeline", "languages-location", "about-actions"] },
-  { path: "/fr", lang: "fr-CA", sectionIds: ["top", "work", "capabilities", "experience", "approach", "about", "contact"] },
-  { path: "/fr/work", lang: "fr-CA", sectionIds: ["work-overview", "built-products", "design-systems", "operational-archive"] },
+  { path: "/about", lang: "en-CA", sectionIds: ["about-overview", "perspective", "timeline", "languages-location"] },
+  { path: "/fr", lang: "fr-CA", sectionIds: ["top", "work", "capabilities", "approach", "about", "contact"] },
+  { path: "/fr/work", lang: "fr-CA", sectionIds: ["work-overview"] },
   { path: "/fr/labs", lang: "fr-CA", sectionIds: ["labs-overview", "current-learning", "publishing-standard"] },
-  { path: "/fr/about", lang: "fr-CA", sectionIds: ["about-overview", "about-path", "transferable-strengths", "current-learning", "timeline", "languages-location", "about-actions"] },
+  { path: "/fr/about", lang: "fr-CA", sectionIds: ["about-overview", "perspective", "timeline", "languages-location"] },
 ];
 
 test("every exposed non-case route has one localized H1 and stable sections", async ({ page }) => {
@@ -271,10 +266,18 @@ test("every exposed non-case route has one localized H1 and stable sections", as
     await page.goto(path);
     await expect(page.locator("main h1:visible")).toHaveCount(1);
     await expect(page.locator("html")).toHaveAttribute("lang", lang);
-    for (const id of sectionIds) {
-      await expect(page.locator(`main section#${id}`)).toBeAttached();
-    }
+    expect(await page.locator("main section[id]").evaluateAll((sections) => sections.map((section) => section.id))).toEqual(sectionIds);
     await expect(page.getByText(/^(?:Built|Shipped)$/i)).toHaveCount(0);
+  }
+});
+
+
+test("new presentation excludes previous projects and keeps Labs out of primary navigation", async ({ page }) => {
+  for (const path of ["/", "/work", "/about", "/fr", "/fr/work", "/fr/about"]) {
+    await page.goto(path);
+    await expect(page.locator("main")).not.toContainText(/Relay|Basis|Signalroom/);
+    await expect(page.locator('main a[href*="/work/"]')).toHaveCount(0);
+    await expect(page.locator('.site-header a[href$="/labs"], .site-footer a[href$="/labs"]')).toHaveCount(0);
   }
 });
 
@@ -297,7 +300,7 @@ test("About contact actions return to the localized Home contact section", async
     { path: "/fr/about", href: "/fr#contact" },
   ]) {
     await page.goto(route.path);
-    await expect(page.locator(`#about-actions a[href="${route.href}"]`)).toBeVisible();
+    await expect(page.locator(`#languages-location a[href="${route.href}"]`)).toBeVisible();
   }
 });
 
@@ -333,7 +336,7 @@ test("desktop rail follows the current section after real scrolling", async ({ p
   await page.locator("#approach").evaluate((element) => {
     window.scrollTo(0, element.offsetTop - window.innerHeight * 0.35);
   });
-  await expect(page.locator(".rail__label")).toHaveText("Approach");
+  await expect(page.locator(".rail__label")).toHaveText("How I work");
   await expect(page.locator('.rail__dot.is-active[href="#approach"]')).toHaveCount(1);
 });
 
@@ -341,11 +344,11 @@ test("mobile dock keeps current-section orientation with reduced motion", async 
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
-  await page.locator("#experience").evaluate((element) => {
+  await page.locator("#about").evaluate((element) => {
     window.scrollTo(0, element.offsetTop - window.innerHeight * 0.35);
   });
-  await expect(page.locator(".case-dock__name")).toHaveText("Experience");
-  await expect(page.locator('.case-dock__dot.is-active[href="#experience"]')).toHaveAttribute("aria-current", "true");
+  await expect(page.locator(".case-dock__name")).toHaveText("About");
+  await expect(page.locator('.case-dock__dot.is-active[href="#about"]')).toHaveAttribute("aria-current", "true");
 });
 
 test("case collapsibles preserve stable section anchors while toggling", async ({ page }) => {

@@ -128,7 +128,7 @@ test("@a11y reduced motion keeps every jump label visible and navigates immediat
   const nav = page.locator(".section-jump-nav");
   await expect(nav).toHaveAttribute("aria-label", "Page sections");
   await nav.getByRole("link").first().focus();
-  await expect(nav.getByRole("link")).toHaveCount(7);
+  await expect(nav.getByRole("link")).toHaveCount(6);
   for (const link of await nav.getByRole("link").all()) await expect(link).toBeVisible();
   await nav.getByRole("link", { name: "Contact", exact: true }).press("Enter");
   await expect(page.locator("#contact")).toBeFocused();

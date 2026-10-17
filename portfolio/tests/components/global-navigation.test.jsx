@@ -40,13 +40,11 @@ describe("global navigation data", () => {
   it("keeps English and French destinations shareable", () => {
     expect(navigationFor("en").map(({ href }) => href)).toEqual([
       "/work",
-      "/labs",
       "/about",
       "/#contact",
     ]);
     expect(navigationFor("fr").map(({ href }) => href)).toEqual([
       "/fr/work",
-      "/fr/labs",
       "/fr/about",
       "/fr#contact",
     ]);
