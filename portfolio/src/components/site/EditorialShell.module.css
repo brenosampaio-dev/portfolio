@@ -1,6 +1,6 @@
 /* Approved six-block Home + About + Work shell with full motion & responsive support */
 .shell {
-  --section-space: clamp(3.75rem, 7.5vw, 6.5rem);
+  --section-space: clamp(5.25rem, 8.5vw, 7.75rem);
   --radius-control: 999px;
   --radius-surface: 18px;
   --clay: var(--ink);
@@ -52,17 +52,16 @@
   background: #1c1c1a;
 }
 
+/* Align left reading rail with the new editorial Hero top clearance */
+:global(body):has(.shell) :global(.rail) {
+  top: 19vh;
+  height: 66vh;
+}
+
 .shell * {
   min-width: 0;
 }
-.shell h1,
-.shell h2,
-.shell h3,
-.shell h4,
-.shell p,
-.shell figure,
-.shell dl,
-.shell dd {
+.shell :where(h1, h2, h3, h4, p, figure, dl, dd) {
   margin: 0;
 }
 
@@ -75,14 +74,14 @@
 }
 
 .sansH2 {
-  font: 500 clamp(2rem, 3.6vw, 3rem)/1.1 var(--font-sans);
-  letter-spacing: -0.045em;
+  font: 500 clamp(2rem, 3.6vw, 3rem)/1.08 var(--font-sans);
+  letter-spacing: -0.042em;
   color: var(--ink);
   max-width: 24ch;
   text-wrap: balance;
 }
 
-.shell h3 {
+.shell :where(h3) {
   font-size: 1.0625rem;
   font-weight: 500;
   line-height: 1.4;
@@ -90,7 +89,7 @@
   color: var(--ink);
 }
 
-.shell p {
+.shell :where(p) {
   color: var(--muted);
   font-size: 0.9375rem;
   line-height: 1.68;
@@ -101,16 +100,16 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 1rem;
+  margin-bottom: 1.125rem;
   line-height: 1.6;
 }
 
 .shell .lead {
   font-size: 1.0625rem;
-  line-height: 1.65;
+  line-height: 1.68;
   color: var(--ink);
   max-width: 52ch;
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .shell .subLead {
@@ -123,7 +122,8 @@
 
 .section {
   padding-block: var(--section-space);
-  scroll-margin-top: 7rem;
+  border-top: 1px solid color-mix(in srgb, var(--rule) 72%, transparent);
+  scroll-margin-top: 7.5rem;
   position: relative;
 }
 
@@ -142,13 +142,13 @@
 
 /* ── 01 · HERO (Option 1: Mineral Pigment & Gesture Line) ────────────────── */
 .hero {
-  padding-block: 4rem 3.5rem;
-  scroll-margin-top: 7rem;
+  padding-block: clamp(5.75rem, 9vw, 8rem) clamp(5rem, 8vw, 7rem);
+  scroll-margin-top: 7.5rem;
 }
 .heroGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.98fr);
-  gap: 3.5rem;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(3rem, 5vw, 4.5rem);
   align-items: start;
 }
 .shell .heroTitle {
@@ -156,7 +156,7 @@
   font-size: clamp(2.625rem, 4.8vw, 3.875rem);
   font-weight: 500;
   line-height: 1.04;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.042em;
   color: var(--ink);
   max-width: none;
 }
@@ -167,14 +167,14 @@
   font-weight: 400;
   letter-spacing: -0.025em;
   line-height: 1.05;
-  margin-top: 0.04em;
+  margin-top: 0.06em;
 }
 .actions {
   display: flex;
-  gap: 1.25rem;
+  gap: 1.375rem;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 .primary,
 .textLink {
@@ -190,7 +190,7 @@
 }
 .primary {
   min-height: 48px;
-  padding: 0.75rem 1.375rem;
+  padding: 0.75rem 1.5rem;
   background: var(--ink);
   color: var(--paper);
   border-radius: var(--radius-control);
@@ -225,9 +225,10 @@
 }
 .mineralCanvas {
   background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--rule) 62%, transparent);
   border-radius: var(--radius-surface);
-  padding: 1.125rem;
-  margin-bottom: 1.5rem;
+  padding: 1.375rem;
+  margin-bottom: 1.75rem;
   overflow: hidden;
 }
 .artSvg {
@@ -269,49 +270,53 @@
 .shell .heroLead {
   font-size: 1rem;
   color: var(--ink);
-  max-width: 42ch;
-  line-height: 1.65;
+  max-width: 40ch;
+  line-height: 1.66;
 }
 .shell .practice {
-  margin-top: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--rule) 72%, transparent);
   font-size: 0.8125rem;
+  line-height: 1.55;
   color: var(--muted);
 }
 .location {
-  margin-top: 0.875rem;
+  margin-top: 0.5rem;
   font-size: 0.75rem;
   color: var(--muted);
 }
 
 /* ── 02 · SELECTED WORK (Product Stage Card) ─────────────────────────────── */
 .sectionHeading {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 7.5fr) minmax(0, 4.5fr);
+  gap: clamp(2rem, 3.5vw, 3rem);
   align-items: end;
-  gap: 2rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 .sectionCaption {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   line-height: 1.65;
   color: var(--muted);
-  padding-bottom: 2px;
-  max-width: 28ch;
+  padding-bottom: 0.125rem;
+  max-width: 34ch;
 }
 .projectCard {
   display: grid;
-  grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 7.5fr) minmax(0, 4.5fr);
   background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--rule) 65%, transparent);
   border-radius: var(--radius-surface);
   min-width: 0;
-  min-height: 440px;
+  min-height: 460px;
 }
 .projectMedia {
   min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2.5rem 1.5rem 1.5rem 2rem;
+  padding: 2.5rem 1.75rem 1.75rem 2.5rem;
 }
 .interfaceStage {
   position: relative;
@@ -700,33 +705,37 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2.5rem 2.25rem 2.5rem 1.5rem;
+  padding: 2.5rem 2.5rem 2.5rem 2rem;
+  border-left: 1px solid color-mix(in srgb, var(--rule) 55%, transparent);
   min-width: 0;
 }
 .projectMeta {
   font-size: 0.75rem;
   line-height: 1.6;
+  letter-spacing: 0.04em;
   color: var(--muted);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 .shell .projectHeading {
-  font: 400 clamp(2rem, 3.2vw, 2.75rem)/0.98 var(--font-serif);
+  font: 400 clamp(2rem, 3.2vw, 2.75rem)/1.02 var(--font-serif);
   letter-spacing: -0.025em;
-  margin-bottom: 1.125rem;
+  margin-bottom: 1rem;
   color: var(--ink);
 }
 .projectDescription {
   font-size: 0.9375rem;
-  line-height: 1.65;
+  line-height: 1.66;
   color: var(--muted);
-  max-width: 30ch;
+  max-width: 34ch;
 }
 .projectFacts {
   display: grid;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
+  padding-top: 1.375rem;
+  border-top: 1px solid color-mix(in srgb, var(--rule) 75%, transparent);
   font-size: 0.8125rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 .projectFacts dt {
   font-weight: 500;
@@ -743,7 +752,7 @@
   gap: 1rem;
   min-height: 48px;
   width: 100%;
-  padding: 0.5rem 0;
+  padding: 0.625rem 0;
   background: transparent;
   border: 0;
   border-top: 1px solid var(--rule);
@@ -762,43 +771,44 @@
   color: var(--muted);
   font-size: 0.75rem;
   line-height: 1.6;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 /* ── 03 · FOCUS & CAPABILITIES (Interactive 3-Tab Explorer) ──────────────── */
 .capHeading {
-  margin-bottom: 2.75rem;
+  margin-bottom: 3.25rem;
+  max-width: 44rem;
 }
 .capIntro {
   margin-top: 1.25rem;
   font-size: 1.0625rem;
-  line-height: 1.65;
+  line-height: 1.66;
   color: var(--muted);
-  max-width: 66ch;
+  max-width: 58ch;
 }
 .capExplorer {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2.05fr);
-  gap: 3.25rem;
+  grid-template-columns: minmax(0, 4.5fr) minmax(0, 7.5fr);
+  gap: clamp(2.5rem, 4vw, 3.75rem);
   align-items: center;
 }
 .capRail {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.625rem;
 }
 .capTab {
   text-align: left;
   position: relative;
   min-height: 118px;
   width: 100%;
-  border: 0;
-  border-radius: 12px;
+  border: 1px solid transparent;
+  border-radius: 14px;
   background: transparent;
   padding: 1.375rem 1.5rem;
   color: var(--muted);
   cursor: pointer;
-  transition: background 180ms ease, color 180ms ease;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 .capTabTop {
   display: flex;
@@ -821,11 +831,12 @@
   margin-top: 0.625rem;
   font-size: 0.875rem;
   line-height: 1.55;
-  max-width: 28ch;
+  max-width: 30ch;
 }
 .capTab[aria-selected="true"] {
   color: var(--ink);
   background: var(--surface);
+  border-color: color-mix(in srgb, var(--rule) 65%, transparent);
 }
 .capTab[aria-selected="true"] .capArrow {
   opacity: 1;
@@ -845,10 +856,11 @@
 .artifact {
   position: relative;
   isolation: isolate;
-  min-height: 380px;
+  min-height: 390px;
   border-radius: 16px;
   background: var(--surface);
-  padding: 1.75rem 2rem 2rem;
+  border: 1px solid color-mix(in srgb, var(--rule) 65%, transparent);
+  padding: 2rem 2.25rem 2.25rem;
   animation: panelEnter 260ms cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 .artifact::before {
@@ -922,13 +934,14 @@
 .contextGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
+  gap: 0.875rem;
   margin-top: 1.75rem;
 }
 .contextNote {
   background: var(--screen);
-  padding: 1.125rem 1rem;
+  padding: 1.125rem 1.0625rem;
   border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--rule) 50%, transparent);
   box-shadow: 0 4px 12px -9px #0004;
 }
 .noteMarker {
@@ -956,7 +969,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
   font-size: 0.75rem;
   color: var(--muted);
 }
@@ -969,7 +982,7 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: 1.125rem;
+  margin-top: 1.25rem;
   font-size: 0.75rem;
   color: var(--muted);
 }
@@ -980,7 +993,7 @@
 .flowGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
+  gap: 0.875rem;
   margin-top: 1.75rem;
 }
 .flowItemWrap {
@@ -990,8 +1003,9 @@
 }
 .flowNode {
   flex: 1;
-  padding: 1rem 0.875rem;
+  padding: 1.0625rem 0.9375rem;
   border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--rule) 50%, transparent);
   background: var(--screen);
 }
 .flowIndex {
@@ -1008,7 +1022,7 @@
 }
 .flowNode p {
   font-size: 0.75rem;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--muted);
 }
 .flowArrow {
@@ -1017,9 +1031,9 @@
 }
 .stateStrip {
   display: flex;
-  gap: 1rem;
+  gap: 1.125rem;
   flex-wrap: wrap;
-  margin-top: 1.5rem;
+  margin-top: 1.625rem;
   font-size: 0.75rem;
   color: var(--muted);
 }
@@ -1038,9 +1052,10 @@
 }
 
 .prototypeDemo {
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem;
+  margin-top: 1.625rem;
+  padding: 1.375rem 1.5rem;
   border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--rule) 50%, transparent);
   background: var(--screen);
 }
 .demoContext {
@@ -1088,7 +1103,7 @@
   color: var(--muted);
 }
 .demoFootnote {
-  margin-top: 0.875rem;
+  margin-top: 1rem;
   font-size: 0.75rem;
   color: var(--muted);
 }
@@ -1099,8 +1114,8 @@
 }
 .approachGrid {
   display: grid;
-  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.32fr);
-  gap: 4.5rem;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(3rem, 5vw, 4.75rem);
   align-items: start;
 }
 .questions {
@@ -1109,7 +1124,7 @@
 .questions article {
   position: relative;
   counter-increment: decision;
-  padding: 1.5rem 0 1.75rem 2.75rem;
+  padding: 1.75rem 0 1.875rem 3rem;
   border-top: 1px solid var(--rule);
 }
 .questions article:first-child {
@@ -1123,47 +1138,48 @@
   content: "0" counter(decision);
   position: absolute;
   left: 0;
-  top: 1.6875rem;
+  top: 1.9375rem;
   font-size: 0.75rem;
   line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
 .questions p {
-  margin-top: 0.5rem;
-  max-width: 50ch;
+  margin-top: 0.625rem;
+  max-width: 52ch;
 }
 
 /* ── 05 · ABOUT & BACKGROUND (Option 3 Responsive Two-Columns) ───────────── */
 .anchor {
   position: absolute;
   top: 0;
-  scroll-margin-top: 7rem;
+  scroll-margin-top: 7.5rem;
 }
 .aboutOpt3Grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.65fr);
-  gap: 3.5rem;
+  grid-template-columns: minmax(0, 8fr) minmax(260px, 4fr);
+  gap: clamp(3rem, 5vw, 4.5rem);
   align-items: start;
 }
 .aboutSubCols {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
+  gap: 2.25rem;
+  margin-top: 2.25rem;
+  padding-top: 1.75rem;
   border-top: 1px solid var(--rule);
 }
 .aboutSubCols h3 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.625rem;
 }
 .openPortraitCard {
   background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--rule) 65%, transparent);
   border-radius: var(--radius-surface);
-  padding: 1rem;
+  padding: 1.125rem;
   justify-self: end;
   width: 100%;
-  max-width: 310px;
+  max-width: 316px;
 }
 .openPortraitImgWrap {
   border-radius: 12px;
@@ -1178,7 +1194,7 @@
   display: block;
 }
 .openPortraitMeta {
-  padding: 0.875rem 0.25rem 0.25rem;
+  padding: 1rem 0.25rem 0.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -1193,27 +1209,27 @@
   color: var(--muted);
 }
 .openPortraitLangs {
-  margin-top: 0.25rem;
-  padding-top: 0.5rem;
+  margin-top: 0.375rem;
+  padding-top: 0.625rem;
   border-top: 1px solid var(--rule);
 }
 
 /* ── 06 · CONTACT (Option 2: Direct Facts + Open Form Card) ──────────────── */
 .contactSection {
   border-top: 1px solid var(--rule);
-  padding-block: 4.5rem;
+  padding-block: var(--section-space);
 }
 .contactGrid {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.25fr);
-  gap: 4rem;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(3rem, 5vw, 4.5rem);
   align-items: start;
 }
 .contactFacts {
   display: grid;
-  gap: 1.25rem;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
+  gap: 1.375rem;
+  margin-top: 2.25rem;
+  padding-top: 1.75rem;
   border-top: 1px solid var(--rule);
 }
 .contactFacts dt {
@@ -1245,12 +1261,13 @@
   gap: 0.5rem 1.25rem;
 }
 .formPanel {
-  padding: 2rem;
+  padding: clamp(1.75rem, 3vw, 2.375rem);
   background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--rule) 65%, transparent);
   border-radius: var(--radius-surface);
 }
 .formPanel > h3 {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 .formPanel :global(.contact-form__grid) {
   grid-template-columns: 1fr 1fr;
@@ -1265,14 +1282,14 @@
 
 /* ── ABOUT & WORK INDEPENDENT PAGES ──────────────────────────────────────── */
 .pageIntro {
-  padding-block: 4rem 3.5rem;
+  padding-block: clamp(5.75rem, 9vw, 8rem) clamp(4.25rem, 7vw, 6rem);
 }
 .shell .pageTitle {
   font-family: var(--font-sans);
   font-size: clamp(2.625rem, 4.8vw, 3.875rem);
   font-weight: 500;
-  line-height: 1.05;
-  letter-spacing: -0.045em;
+  line-height: 1.04;
+  letter-spacing: -0.042em;
   max-width: 20ch;
 }
 .pageTitle span {
@@ -1285,15 +1302,16 @@
 }
 .aboutIntro {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.65fr);
-  gap: 3.5rem;
+  grid-template-columns: minmax(0, 8fr) minmax(260px, 4fr);
+  gap: clamp(3rem, 5vw, 4.5rem);
   align-items: start;
 }
 .portraitCardPage {
   background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--rule) 65%, transparent);
   border-radius: var(--radius-surface);
-  padding: 1rem;
-  max-width: 310px;
+  padding: 1.125rem;
+  max-width: 316px;
   justify-self: end;
   width: 100%;
 }
@@ -1307,16 +1325,16 @@
   border-radius: 12px;
 }
 .portraitCardMeta {
-  padding: 0.875rem 0.25rem 0.125rem;
+  padding: 1rem 0.25rem 0.125rem;
   display: grid;
-  gap: 0.5rem;
+  gap: 0.625rem;
   font-size: 0.75rem;
 }
 .portraitCardMeta div {
   display: flex;
   justify-content: space-between;
   gap: 0.75rem;
-  padding-top: 0.5rem;
+  padding-top: 0.625rem;
   border-top: 1px solid var(--rule);
 }
 .portraitCardMeta div:first-child {
@@ -1337,13 +1355,13 @@
 }
 .chapterGrid {
   display: grid;
-  grid-template-columns: minmax(220px, 0.78fr) minmax(0, 1.22fr);
-  gap: 3.5rem;
+  grid-template-columns: minmax(220px, 4.5fr) minmax(0, 7.5fr);
+  gap: clamp(2.5rem, 4.5vw, 4rem);
   align-items: start;
 }
 .chapterBody {
   display: grid;
-  gap: 2rem;
+  gap: 2.25rem;
 }
 .chapterLead {
   font-size: 1.0625rem;
@@ -1354,12 +1372,13 @@
 .pillarsGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 .pillarBox {
   background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--rule) 65%, transparent);
   border-radius: 14px;
-  padding: 1.5rem;
+  padding: 1.625rem;
 }
 .pillarBox h3 {
   margin-bottom: 0.5rem;
@@ -1369,9 +1388,9 @@
 }
 .edRow {
   display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 1.5rem;
-  padding-block: 1.375rem;
+  grid-template-columns: 176px 1fr;
+  gap: 2rem;
+  padding-block: 1.625rem;
   border-top: 1px solid var(--rule);
 }
 .edRow:first-child {
@@ -1389,7 +1408,7 @@
 .languages {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem 2rem;
+  gap: 1.25rem 2.5rem;
 }
 .languages > div {
   border-top: 1px solid var(--rule);
@@ -1407,45 +1426,48 @@
 
 /* Work Page */
 .workHeader {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 7.5fr) minmax(0, 4.5fr);
+  gap: clamp(2rem, 3.5vw, 3rem);
   align-items: end;
-  gap: 2rem;
-  padding-bottom: 2.5rem;
+  padding-bottom: 2.75rem;
   border-bottom: 1px solid var(--rule);
-  margin-bottom: 2.5rem;
+  margin-bottom: 3.25rem;
 }
 .pausedBanner {
   background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--rule) 65%, transparent);
   border-radius: var(--radius-surface);
-  padding: 2.25rem;
+  padding: clamp(2rem, 3.5vw, 2.75rem);
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
-  gap: 2rem;
+  grid-template-columns: minmax(0, 7.5fr) minmax(0, 4.5fr);
+  gap: clamp(2rem, 3.5vw, 3rem);
   align-items: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 4rem;
 }
 .pausedBody {
-  margin-top: 0.875rem;
-  max-width: 50ch;
+  margin-top: 1rem;
+  max-width: 52ch;
 }
 .pausedArt {
   background: var(--paper);
+  border: 1px solid color-mix(in srgb, var(--rule) 50%, transparent);
   border-radius: 14px;
-  padding: 1.125rem;
+  padding: 1.25rem;
 }
 .catalogPreview {
-  padding-top: 2.5rem;
+  padding-top: 3.25rem;
   border-top: 1px solid var(--rule);
 }
 .compactCard {
   display: grid;
   grid-template-columns: 220px 1fr auto;
-  gap: 1.75rem;
+  gap: 2rem;
   align-items: center;
   background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--rule) 65%, transparent);
   border-radius: 16px;
-  padding: 1.25rem 1.75rem 1.25rem 1.25rem;
+  padding: 1.5rem 2rem 1.5rem 1.5rem;
 }
 .compactThumb {
   background: var(--screen);
@@ -1620,9 +1642,15 @@
   .shell :global(.container) {
     width: calc(100% - 64px);
   }
-  .heroGrid {
-    gap: 2rem;
+  .hero,
+  .pageIntro {
+    padding-block: 4.5rem 3.75rem;
   }
+  .heroGrid {
+    gap: 2.25rem;
+  }
+  .sectionHeading,
+  .workHeader,
   .projectCard {
     grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
   }
@@ -1658,8 +1686,9 @@
   .shell :global(.container) {
     width: calc(100% - 40px);
   }
-  .hero {
-    padding-block: 2.25rem 2rem;
+  .hero,
+  .pageIntro {
+    padding-block: 3.25rem 2.5rem;
   }
   .heroGrid,
   .projectCard,
@@ -1676,8 +1705,8 @@
     gap: 1.5rem;
   }
   .mineralCanvas {
-    padding: 0.75rem;
-    margin-bottom: 1rem;
+    padding: 0.875rem;
+    margin-bottom: 1.25rem;
     border-radius: 14px;
   }
   .artSvg {
@@ -1686,7 +1715,7 @@
   .sectionHeading,
   .workHeader {
     display: block;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
   }
   .sectionCaption {
     margin-top: 0.625rem;
@@ -1695,9 +1724,10 @@
   .projectCard {
     min-height: 0;
     border-radius: 16px;
+    gap: 0;
   }
   .projectMedia {
-    padding: 1.25rem 1rem 0;
+    padding: 1.375rem 1rem 1rem;
   }
   .interfaceStage {
     aspect-ratio: 1.32;
@@ -1715,6 +1745,8 @@
   }
   .projectCopy {
     padding: 1.5rem 1.25rem 1.375rem;
+    border-left: 0;
+    border-top: 1px solid color-mix(in srgb, var(--rule) 55%, transparent);
   }
   .capExplorer {
     display: block;
