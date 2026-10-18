@@ -14,7 +14,25 @@ const RATE_LIMIT_MAX_CLIENTS = 5000;
 const RATE_LIMIT_SALT = randomBytes(32);
 const rateLimitBuckets = new Map();
 
-const clean = (value, maximum) => String(value || "").trim().slice(0, maximum);
+const cleanHeader = (value, maximum) => String(value || "").replace(/[\r\n]/g, " ").trim().slice(0, maximum);
+const cleanBody = (value, maximum) => String(value || "").trim().slice(0, maximum);
+
+function isAllowedOrigin(request) {
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+  try {
+    const url = new URL(origin);
+    const host = url.hostname;
+    return (
+      host === "brenosampaio.vercel.app" ||
+      host.endsWith(".vercel.app") ||
+      host === "localhost" ||
+      host === "127.0.0.1"
+    );
+  } catch {
+    return false;
+  }
+}
 
 function clientFingerprint(request) {
   const address = request.headers.get("x-vercel-forwarded-for")
@@ -67,6 +85,10 @@ function validPayload(payload) {
 }
 
 export async function POST(request) {
+  if (!isAllowedOrigin(request)) {
+    return Response.json({ ok: false, error: "forbidden" }, { status: 403 });
+  }
+
   let raw;
   try {
     raw = await request.json();
@@ -79,11 +101,11 @@ export async function POST(request) {
   }
 
   const payload = {
-    name: clean(raw.name, 81),
-    email: clean(raw.email, 255),
-    reason: clean(raw.reason, 64),
-    message: clean(raw.message, 3001),
-    website: clean(raw.website, 200),
+    name: cleanHeader(raw.name, 81),
+    email: cleanHeader(raw.email, 255),
+    reason: cleanHeader(raw.reason, 64),
+    message: cleanBody(raw.message, 3001),
+    website: cleanHeader(raw.website, 200),
   };
 
   if (payload.website) return Response.json({ ok: true });
@@ -123,4 +145,20 @@ export async function POST(request) {
   } catch {
     return Response.json({ ok: false, error: "delivery" }, { status: 502 });
   }
+}
+
+export function GET() {
+  return Response.json({ ok: false, error: "method_not_allowed" }, { status: 405, headers: { Allow: "POST" } });
+}
+
+export function PUT() {
+  return Response.json({ ok: false, error: "method_not_allowed" }, { status: 405, headers: { Allow: "POST" } });
+}
+
+export function DELETE() {
+  return Response.json({ ok: false, error: "method_not_allowed" }, { status: 405, headers: { Allow: "POST" } });
+}
+
+export function PATCH() {
+  return Response.json({ ok: false, error: "method_not_allowed" }, { status: 405, headers: { Allow: "POST" } });
 }
