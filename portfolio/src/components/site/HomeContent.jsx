@@ -208,6 +208,7 @@ export function HomeContent({ lang = "en" }) {
           <div className={styles.questions}>
             {c.approach.items.map((item, idx) => (
               <Reveal as="article" key={item.title} delay={idx * 90}>
+                <span className={styles.approachNum} aria-hidden="true">0{idx + 1}</span>
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
               </Reveal>
