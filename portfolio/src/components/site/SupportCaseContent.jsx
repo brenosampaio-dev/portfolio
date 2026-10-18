@@ -167,7 +167,7 @@ function ReferenceList({ items }) {
     <ul className="reference-list">
       {items.map(([label, href]) => (
         <li key={href}>
-          <a href={href} target="_blank" rel="noreferrer">{label}<span aria-hidden="true">↗</span></a>
+          <a href={href} target="_blank" rel="noopener noreferrer">{label}<span aria-hidden="true">↗</span></a>
         </li>
       ))}
     </ul>

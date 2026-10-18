@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { POST } from "@/app/api/contact/route";
+import { DELETE, GET, PATCH, POST, PUT } from "@/app/api/contact/route";
 
 const requestWith = (payload, headers = {}) => ({
   json: async () => payload,
@@ -92,5 +92,66 @@ describe("contact delivery route", () => {
     expect(blocked.headers.get("retry-after")).toBeTruthy();
     expect(await blocked.json()).toEqual({ ok: false, error: "rate_limited" });
     expect(delivery).toHaveBeenCalledTimes(3);
+  });
+
+  it("blocks requests originating from unauthorized external origins", async () => {
+    const response = await POST(requestWith(validPayload, { origin: "https://malicious-site.example" }));
+
+    expect(response.status).toBe(403);
+    expect(await response.json()).toEqual({ ok: false, error: "forbidden" });
+  });
+
+  it("permits submissions from authorized production and preview domains", async () => {
+    process.env.FORMSPREE_FORM_ID = "portfolio-form";
+    const delivery = vi.fn().mockResolvedValue(new Response(JSON.stringify({ ok: true }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    }));
+    vi.stubGlobal("fetch", delivery);
+
+    const response = await POST(requestWith(validPayload, {
+      origin: "https://brenosampaio.vercel.app",
+      "x-vercel-forwarded-for": "198.51.100.42",
+    }));
+
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ ok: true });
+  });
+
+  it("sanitizes newline characters from header fields to prevent email header injection", async () => {
+    process.env.FORMSPREE_FORM_ID = "portfolio-form";
+    const delivery = vi.fn().mockResolvedValue(new Response(JSON.stringify({ ok: true }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    }));
+    vi.stubGlobal("fetch", delivery);
+
+    const injectedPayload = {
+      ...validPayload,
+      name: "Attacker\r\nBcc: evil@example.com",
+      email: "clean@example.com\r\n",
+    };
+
+    const response = await POST(requestWith(injectedPayload, { "x-vercel-forwarded-for": "198.51.100.99" }));
+    expect(response.status).toBe(200);
+
+    const [, options] = delivery.mock.calls[0];
+    const body = Object.fromEntries(options.body.entries());
+    expect(body.name).toBe("Attacker  Bcc: evil@example.com");
+    expect(body.email).toBe("clean@example.com");
+    expect(body._replyto).toBe("clean@example.com");
+    expect(body._subject).toContain("Attacker  Bcc: evil@example.com");
+    expect(body._subject).not.toMatch(/[\r\n]/);
+  });
+
+  it("returns 405 Method Not Allowed with Allow header on unsupported methods", async () => {
+    const methods = [GET, PUT, DELETE, PATCH];
+
+    for (const method of methods) {
+      const response = await method();
+      expect(response.status).toBe(405);
+      expect(response.headers.get("Allow")).toBe("POST");
+      expect(await response.json()).toEqual({ ok: false, error: "method_not_allowed" });
+    }
   });
 });

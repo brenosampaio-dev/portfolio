@@ -13,7 +13,7 @@ export function CaseVisual({ slug, phase, lang, eager = false }) {
         className="case-visual__imageLink"
         href={visual.src}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         aria-label={`${labels.enlarge}: ${visual.title} (${labels.newTab})`}
       >
         <Image

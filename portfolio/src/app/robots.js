@@ -5,6 +5,7 @@ export default function robots() {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/api/"],
     },
     sitemap: "https://brenosampaio.vercel.app/sitemap.xml",
     host: "https://brenosampaio.vercel.app",
