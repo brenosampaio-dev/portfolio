@@ -3341,7 +3341,7 @@ html {
   backdrop-filter: blur(20px) saturate(210%) brightness(108%);
 
   /* Pill */
-  border-radius: 100px;
+  border-radius: var(--radius-full);
 
   /*
    * Border: subtle on sides, very bright on top edge.
