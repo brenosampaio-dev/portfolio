@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CapabilitiesExplorer } from "@/components/site/CapabilitiesExplorer";
 import { ContactForm } from "@/components/site/ContactForm";
+import { HeroSkills } from "@/components/site/HeroSkills";
 import { LocationTime } from "@/components/site/LocationTime";
 import { Reveal } from "@/components/site/Reveal";
 import { Scramble } from "@/components/site/Scramble";
@@ -39,6 +40,9 @@ export function HomeContent({ lang = "en" }) {
                   {c.hero.secondary} <span aria-hidden="true">→</span>
                 </Link>
               </div>
+            </Reveal>
+            <Reveal delay={120}>
+              <HeroSkills skills={c.hero.skills} lang={lang} />
             </Reveal>
           </div>
 
