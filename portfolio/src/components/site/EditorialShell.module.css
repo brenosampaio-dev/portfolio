@@ -1099,51 +1099,49 @@
   font-size: 1.18em;
   letter-spacing: -0.025em;
 }
-.contextGrid {
+.pureFlowGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.875rem;
+  gap: 1.75rem;
   margin-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--rule);
 }
-.contextNote {
-  background: var(--screen);
-  padding: 1.125rem 1.0625rem;
-  border-radius: var(--radius-subcard);
-  border: 1px solid var(--subcard-border);
-  box-shadow: 0 4px 12px -9px #0004;
-  transition:
-    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 280ms ease,
-    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
+.pureFlowCol {
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
-.noteMarker {
-  display: block;
-  width: 18px;
-  height: 4px;
-  border-radius: 3px;
-  margin-bottom: 1rem;
+.pureFlowNum {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--clay);
+  line-height: 1;
+  margin-bottom: 0.5rem;
 }
-.noteMarker1 { background: #c2c4b7; }
-.noteMarker2 { background: #c69a82; }
-.noteMarker3 { background: #a1b0b1; }
-.contextNote h4 {
-  font-size: 0.875rem;
+.pureFlowCol h4 {
+  font-size: 1.0625rem;
   font-weight: 500;
+  letter-spacing: -0.015em;
   color: var(--ink);
+  margin-bottom: 0.35rem;
 }
-.contextNote p {
-  font-size: 0.75rem;
-  line-height: 1.55;
+.pureFlowCol p {
+  font-size: 0.8125rem;
+  line-height: 1.6;
   color: var(--muted);
-  margin-top: 0.5rem;
 }
 .artifactFooter {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-top: 1.75rem;
-  font-size: 0.75rem;
+  margin-top: 1.25rem;
+  font-size: 0.6875rem;
+  font-family: var(--font-mono), monospace;
   color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 .footerConnector {
   height: 1px;
@@ -1161,74 +1159,54 @@
 .panelCaption > span:last-child {
   color: var(--ink);
 }
-
-.flowGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.875rem;
-  margin-top: 1.75rem;
-}
-.flowItemWrap {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.flowNode {
-  flex: 1;
-  padding: 1.0625rem 0.9375rem;
-  border-radius: var(--radius-subcard);
-  border: 1px solid var(--subcard-border);
-  background: var(--screen);
-}
-.flowIndex {
-  display: block;
-  font-size: 1.125rem;
-  color: var(--accent);
-  margin-bottom: 0.625rem;
-}
-.flowNode h4 {
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin-bottom: 0.375rem;
-  color: var(--ink);
-}
-.flowNode p {
-  font-size: 0.75rem;
-  line-height: 1.55;
-  color: var(--muted);
-}
-.flowArrow {
-  font-size: 0.875rem;
-  color: var(--muted);
-}
 .stateStrip {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 1.125rem;
   flex-wrap: wrap;
-  margin-top: 1.625rem;
-  font-size: 0.75rem;
+  margin-top: 1.25rem;
+  font-size: 0.6875rem;
+  font-family: var(--font-mono), monospace;
   color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
-.stateStrip span::before {
+.stateLabel {
+  color: var(--pebble);
+  font-weight: 600;
+}
+.stateItems {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.stateItems span::before {
   content: "";
   display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--rule);
+  width: 5px;
+  height: 5px;
+  background: var(--pebble);
   border-radius: 50%;
-  margin-right: 7px;
+  margin-right: 6px;
   vertical-align: middle;
 }
-.stateAccent::before {
-  background: var(--accent) !important;
+.stateAccent {
+  color: var(--ink);
+  font-weight: 500;
 }
-
+.stateAccent::before {
+  background: var(--clay) !important;
+}
 .prototypeDemo {
   margin-top: 1.625rem;
-  padding: 1.375rem 1.5rem;
-  border-radius: var(--radius-subcard);
-  border: 1px solid var(--subcard-border);
-  background: var(--screen);
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--rule);
+  background: transparent;
+  border-radius: 0;
+  border-inline: none;
+  border-bottom: none;
 }
 .demoContext {
   display: flex;
@@ -1777,8 +1755,6 @@
   .artifact:hover::after {
     transform: translateY(-4px);
   }
-  .contextNote:hover,
-  .flowNode:hover,
   .pillarBox:hover {
     transform: translateY(-2px);
     border-color: color-mix(in srgb, var(--ink) 18%, transparent);
@@ -2050,28 +2026,11 @@
     padding: 1.25rem 1rem;
     border-radius: 14px;
   }
-  .contextGrid,
-  .flowGrid {
+  .pureFlowGrid {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
-    margin-top: 1.125rem;
-  }
-  .contextNote,
-  .flowNode {
-    display: grid;
-    grid-template-columns: 96px 1fr;
-    gap: 0.75rem;
-    align-items: baseline;
-    padding: 0.75rem 0.875rem;
-  }
-  .noteMarker,
-  .flowIndex,
-  .flowArrow {
-    display: none;
-  }
-  .contextNote p,
-  .flowNode p {
-    margin-top: 0;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+    padding-bottom: 1.25rem;
   }
   /* Mobile About Option 3: Compact horizontal portrait card without distortion */
   .openPortraitCard {

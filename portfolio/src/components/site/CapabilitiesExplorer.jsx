@@ -89,10 +89,10 @@ export function CapabilitiesExplorer({ copy }) {
 
                 {tab.id === "context" && (
                   <>
-                    <div className={styles.contextGrid}>
+                    <div className={styles.pureFlowGrid}>
                       {tab.notes.map((note, i) => (
-                        <div key={note.title} className={styles.contextNote}>
-                          <span className={`${styles.noteMarker} ${styles[`noteMarker${i + 1}`]}`} aria-hidden="true" />
+                        <div key={note.title} className={styles.pureFlowCol}>
+                          <span className={styles.pureFlowNum} aria-hidden="true">0{i + 1}</span>
                           <h4>{note.title}</h4>
                           <p>{note.body}</p>
                         </div>
@@ -108,24 +108,22 @@ export function CapabilitiesExplorer({ copy }) {
 
                 {tab.id === "interaction" && (
                   <>
-                    <div className={styles.flowGrid}>
+                    <div className={styles.pureFlowGrid}>
                       {tab.nodes.map((node, i) => (
-                        <div key={node.title} className={styles.flowItemWrap}>
-                          <div className={styles.flowNode}>
-                            <span className={styles.flowIndex} aria-hidden="true">{node.index}</span>
-                            <h4>{node.title}</h4>
-                            <p>{node.body}</p>
-                          </div>
-                          {i < tab.nodes.length - 1 && (
-                            <span className={styles.flowArrow} aria-hidden="true">→</span>
-                          )}
+                        <div key={node.title} className={styles.pureFlowCol}>
+                          <span className={styles.pureFlowNum} aria-hidden="true">0{i + 1}</span>
+                          <h4>{node.title}</h4>
+                          <p>{node.body}</p>
                         </div>
                       ))}
                     </div>
                     <div className={styles.stateStrip}>
-                      {tab.states.map((st, i) => (
-                        <span key={st} className={i === 2 ? styles.stateAccent : undefined}>{st}</span>
-                      ))}
+                      <span className={styles.stateLabel}>Handled states</span>
+                      <div className={styles.stateItems}>
+                        {tab.states.map((st, i) => (
+                          <span key={st} className={i === 2 ? styles.stateAccent : undefined}>{st}</span>
+                        ))}
+                      </div>
                     </div>
                   </>
                 )}
